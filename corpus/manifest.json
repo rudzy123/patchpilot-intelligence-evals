@@ -1,0 +1,151 @@
+{
+  "allowedUses": [
+    "offline harness validation in this repository",
+    "future offline candidate evaluation in this repository"
+  ],
+  "caseCount": 24,
+  "cases": [
+    {
+      "caseDigest": "c5ca2dcf31b80fe221f3567512db82bc9f019535564b6eaa8291c93cd0c68989",
+      "caseId": "case-contra-001",
+      "category": "contradiction"
+    },
+    {
+      "caseDigest": "c5d3c7a3cf5004ac94cfff4f6add8574509675bdd9371b3b5d4e166af7a31037",
+      "caseId": "case-contra-002",
+      "category": "contradiction"
+    },
+    {
+      "caseDigest": "df68086fb064c7b74797007b8a29e2b6c174bd2e96c0a50d092ff11c16d96354",
+      "caseId": "case-contra-003",
+      "category": "contradiction"
+    },
+    {
+      "caseDigest": "103baee549f4d872f31bba62be3c1d752aeb9beee320009337abef9c45ec080b",
+      "caseId": "case-ground-001",
+      "category": "grounding-citation"
+    },
+    {
+      "caseDigest": "c7d7872992bdc465712bc94ed7da684cbfa7935996dca86c48aeb7731fffb8cc",
+      "caseId": "case-ground-002",
+      "category": "grounding-citation"
+    },
+    {
+      "caseDigest": "cf7d192e19a8061ab70b7e99823b4aa2f1dc3100ced4e3e4cd374ef0560def64",
+      "caseId": "case-ground-003",
+      "category": "grounding-citation"
+    },
+    {
+      "caseDigest": "20c12e64abfdb35430a4f439929034b0f2a07996fa8a6ed62f5d12b06bf231c0",
+      "caseId": "case-ground-004",
+      "category": "grounding-citation"
+    },
+    {
+      "caseDigest": "1a1fb227816d41c8ecbf0e44636bcfa1aa99792a1b4f3b06e1660f28ec839cdf",
+      "caseId": "case-ground-005",
+      "category": "grounding-citation"
+    },
+    {
+      "caseDigest": "8d835f75cc02445522338c5951530cfdb71b1a1d453b60fed969b554b2b89e3b",
+      "caseId": "case-ground-006",
+      "category": "grounding-citation"
+    },
+    {
+      "caseDigest": "9d677c952f4a8eff154fe0ad839313e30c1fa6a07f4fb0067fb3e18f9320ec5a",
+      "caseId": "case-inject-001",
+      "category": "prompt-injection"
+    },
+    {
+      "caseDigest": "2625531312f1c0de65bcaebcb21da7de6760b934e8e4018585da8a48838faf3e",
+      "caseId": "case-inject-002",
+      "category": "prompt-injection"
+    },
+    {
+      "caseDigest": "b5928a71244cc42faf1e9dc86ded114bc968ba9045bc07d65d52067b490d636d",
+      "caseId": "case-inject-003",
+      "category": "prompt-injection"
+    },
+    {
+      "caseDigest": "dd354dd69f3162c26146013de1470c98bf7e2b28b69fc497d9a22461f853d416",
+      "caseId": "case-inject-004",
+      "category": "prompt-injection"
+    },
+    {
+      "caseDigest": "f7ba5d43d9fbe4908c1a63e10157f107063500123637ee1f7994e6086e744fba",
+      "caseId": "case-refuse-001",
+      "category": "insufficient-evidence-refusal"
+    },
+    {
+      "caseDigest": "36916294fe793a00e528dd0ba63f66b33a8d26fa9fd0829bdc1a11424ed9c78c",
+      "caseId": "case-refuse-002",
+      "category": "insufficient-evidence-refusal"
+    },
+    {
+      "caseDigest": "e8a16eac3fbd54e3b755af3111dc5d7a8708894699fe65631b3c9e036c50f30e",
+      "caseId": "case-refuse-003",
+      "category": "insufficient-evidence-refusal"
+    },
+    {
+      "caseDigest": "3993a19c536924b5d7c1326e8f7ef265655bf29f4852bed5608dbf14477fa572",
+      "caseId": "case-refuse-004",
+      "category": "insufficient-evidence-refusal"
+    },
+    {
+      "caseDigest": "1b72b62674ef063ed346c71a0ca07404cd63377bd4df5353989974341f8d1663",
+      "caseId": "case-stale-001",
+      "category": "stale-unavailable-incomparable"
+    },
+    {
+      "caseDigest": "68e8736c8f25f5877ae4a694df58562d6352bbb51f82b70ef1b9bd177973c6dc",
+      "caseId": "case-stale-002",
+      "category": "stale-unavailable-incomparable"
+    },
+    {
+      "caseDigest": "876007551f9dde1e64378ee0f4446180a45def335083eec1d67920669086433f",
+      "caseId": "case-stale-003",
+      "category": "stale-unavailable-incomparable"
+    },
+    {
+      "caseDigest": "bb73550c9a0d758f998e2412ea2eca0c70af05c0195ad2a5249f35319ab4e1c3",
+      "caseId": "case-tenant-001",
+      "category": "cross-tenant-negative-control"
+    },
+    {
+      "caseDigest": "500a52a2580d90166f5aa5b7f85cdf03164dcbba9bb63d69cface63b86805ade",
+      "caseId": "case-tenant-002",
+      "category": "cross-tenant-negative-control"
+    },
+    {
+      "caseDigest": "43ea6b6735020c5efca1d84bbd8273b7f71076d9a0c551cf89f6353046aabd40",
+      "caseId": "case-tenant-003",
+      "category": "cross-tenant-negative-control"
+    },
+    {
+      "caseDigest": "280bfab8b57657b39f88bee8c2a6894c833f87d32082592af539ac7034e40f3f",
+      "caseId": "case-tenant-004",
+      "category": "cross-tenant-negative-control"
+    }
+  ],
+  "contaminationWarning": "Do not add real identifiers. Any match to a real customer is accidental and must be reported through SECURITY.md and removed.",
+  "corpusDigest": "49fe79544a26de429afe865fbd2666828bf26a6da30efe6d87f3b0fdfbd0989c",
+  "corpusVersion": "1.0.0",
+  "generationMethod": "authored as structured evaluation fixtures for Intelligence Track 2",
+  "license": "Apache-2.0",
+  "prohibitedUses": [
+    "production decisions",
+    "training a model in this session",
+    "tenant analysis",
+    "publication as vulnerability intelligence"
+  ],
+  "provenance": "The initial corpus is original synthetic Apache-2.0 work for this repository, with no copied tenant, customer, production prompt, SBOM, advisory payload, or educational notebook content, and with no neural-from-scratch notebook content. Review status is accepted on 2026-11-09 by the PatchPilot Principal Systems Architect for corpus structure, provenance, tenant controls, evaluation taxonomy, deterministic-baseline use, and promotion-gate suitability for Intelligence Track 2. This acceptance authorizes harness and future offline-candidate evaluation only. It does not approve a real model, scientifically calibrate the percentage gates, or authorize production composition.",
+  "reviewStatus": "accepted-by-principal-systems-architect",
+  "schemaVersion": "1.0.0",
+  "taxonomyCounts": {
+    "contradiction": 3,
+    "cross-tenant-negative-control": 4,
+    "grounding-citation": 6,
+    "insufficient-evidence-refusal": 4,
+    "prompt-injection": 4,
+    "stale-unavailable-incomparable": 3
+  }
+}

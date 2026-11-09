@@ -1,0 +1,216 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:evaluation-case:v1",
+  "title": "Evaluation case",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "category",
+    "authorizedOrganizationId",
+    "findingId",
+    "assetId",
+    "packageId",
+    "deterministicFacts",
+    "assistanceRequest",
+    "authorizedEvidence",
+    "negativeControls",
+    "goldSupportedClaims",
+    "prohibitedClaims",
+    "expectedCitations",
+    "decisiveEvidenceIds",
+    "missingEvidence",
+    "expectedUncertainty",
+    "expectedRefusal",
+    "promptInjection",
+    "expectedSafetyWarnings",
+    "expectedRemediationSuggestions",
+    "sourceDeclaration",
+    "license",
+    "caseDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "caseId": {
+      "type": "string",
+      "pattern": "^case-(ground|refuse|inject|tenant|contra|stale)-[0-9]{3}$"
+    },
+    "category": {
+      "enum": [
+        "grounding-citation",
+        "insufficient-evidence-refusal",
+        "prompt-injection",
+        "cross-tenant-negative-control",
+        "contradiction",
+        "stale-unavailable-incomparable"
+      ]
+    },
+    "authorizedOrganizationId": {
+      "type": "string",
+      "pattern": "^org-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "findingId": {
+      "type": "string",
+      "pattern": "^finding-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "assetId": {
+      "type": "string",
+      "pattern": "^asset-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "packageId": {
+      "type": "string",
+      "pattern": "^pkg:synthetic/[a-z0-9][a-z0-9._-]*@[A-Za-z0-9][A-Za-z0-9._+-]*$"
+    },
+    "deterministicFacts": { "$ref": "#/$defs/deterministicFacts" },
+    "assistanceRequest": { "type": "string", "minLength": 1, "maxLength": 2000 },
+    "authorizedEvidence": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/evidence" }
+    },
+    "negativeControls": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/negativeControl" }
+    },
+    "goldSupportedClaims": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/claim" }
+    },
+    "prohibitedClaims": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 400 }
+    },
+    "expectedCitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^evidence-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+      }
+    },
+    "decisiveEvidenceIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^evidence-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+      }
+    },
+    "missingEvidence": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 400 }
+    },
+    "expectedUncertainty": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 400 }
+    },
+    "expectedRefusal": { "type": "boolean" },
+    "promptInjection": { "$ref": "#/$defs/promptInjection" },
+    "expectedSafetyWarnings": {
+      "type": "array",
+      "minItems": 3,
+      "items": { "type": "string", "minLength": 1, "maxLength": 200 }
+    },
+    "expectedRemediationSuggestions": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 400 }
+    },
+    "sourceDeclaration": { "const": "original-synthetic" },
+    "license": { "const": "Apache-2.0" },
+    "caseDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "deterministicFacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "affectedness",
+        "kevMembership",
+        "priority",
+        "policyFactIds",
+        "advisoryId"
+      ],
+      "properties": {
+        "affectedness": { "enum": ["affected", "not-affected", "unknown"] },
+        "kevMembership": { "type": "boolean" },
+        "priority": { "enum": ["P1", "P2", "P3", "P4", "not-assigned"] },
+        "policyFactIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^policy-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
+        },
+        "advisoryId": { "type": "string", "pattern": "^PP-SYN-ADV-[0-9]{4}$" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidenceId", "statement", "sourceUrl", "freshness", "observedAt"],
+      "properties": {
+        "evidenceId": {
+          "type": "string",
+          "pattern": "^evidence-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "statement": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "sourceUrl": {
+          "type": "string",
+          "pattern": "^https?://[a-z0-9.-]+\\.invalid(?:/[a-z0-9._~/-]*)?$"
+        },
+        "freshness": { "enum": ["current", "stale", "unavailable", "incomparable"] },
+        "observedAt": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" }
+      }
+    },
+    "negativeControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["organizationId", "findingId", "assetId", "canary"],
+      "properties": {
+        "organizationId": {
+          "type": "string",
+          "pattern": "^org-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "findingId": {
+          "type": "string",
+          "pattern": "^finding-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "assetId": {
+          "type": "string",
+          "pattern": "^asset-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "canary": { "type": "string", "minLength": 1, "maxLength": 80 }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claimId", "text", "evidenceIds"],
+      "properties": {
+        "claimId": {
+          "type": "string",
+          "pattern": "^claim-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "text": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "evidenceIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^evidence-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
+        }
+      }
+    },
+    "promptInjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["present", "markers"],
+      "properties": {
+        "present": { "type": "boolean" },
+        "markers": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+        }
+      }
+    }
+  }
+}

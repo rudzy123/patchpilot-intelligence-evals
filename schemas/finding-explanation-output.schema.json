@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:finding-explanation-output:v1",
+  "title": "Finding explanation output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "candidate",
+    "authorizedOrganizationId",
+    "findingId",
+    "refused",
+    "refusalReason",
+    "preservedDeterministicFacts",
+    "sourceFacts",
+    "supportedClaims",
+    "remediationSuggestions",
+    "missingEvidence",
+    "uncertainty",
+    "citations",
+    "safetyWarnings",
+    "explanationLabel",
+    "explanationText",
+    "nonAuthoritative"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "candidate": { "$ref": "#/$defs/candidate" },
+    "authorizedOrganizationId": {
+      "type": "string",
+      "pattern": "^org-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "findingId": {
+      "type": "string",
+      "pattern": "^finding-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "refused": { "type": "boolean" },
+    "refusalReason": { "type": "string", "maxLength": 400 },
+    "preservedDeterministicFacts": { "$ref": "#/$defs/deterministicFacts" },
+    "sourceFacts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/sourceFact" }
+    },
+    "supportedClaims": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/claim" }
+    },
+    "remediationSuggestions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/remediationSuggestion" }
+    },
+    "missingEvidence": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 400 }
+    },
+    "uncertainty": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 400 }
+    },
+    "citations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/citation" }
+    },
+    "safetyWarnings": {
+      "type": "array",
+      "minItems": 3,
+      "items": { "type": "string", "minLength": 1, "maxLength": 200 }
+    },
+    "explanationLabel": {
+      "enum": ["deterministic-baseline-assistance", "generated-explanation"]
+    },
+    "explanationText": { "type": "string", "minLength": 1, "maxLength": 400 },
+    "nonAuthoritative": { "const": true }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "refused": { "const": true } },
+        "required": ["refused"]
+      },
+      "then": {
+        "properties": {
+          "refusalReason": { "minLength": 1 },
+          "supportedClaims": { "maxItems": 0 },
+          "citations": { "maxItems": 0 },
+          "remediationSuggestions": { "maxItems": 0 }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "refused": { "const": false } },
+        "required": ["refused"]
+      },
+      "then": {
+        "properties": { "refusalReason": { "const": "" } }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "candidate": {
+            "properties": { "kind": { "const": "deterministic-baseline" } },
+            "required": ["kind"]
+          }
+        },
+        "required": ["candidate"]
+      },
+      "then": {
+        "properties": {
+          "explanationLabel": { "const": "deterministic-baseline-assistance" }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "name", "version"],
+      "properties": {
+        "kind": { "enum": ["deterministic-baseline", "future-candidate"] },
+        "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "version": { "type": "string", "minLength": 1, "maxLength": 40 }
+      }
+    },
+    "deterministicFacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "affectedness",
+        "kevMembership",
+        "priority",
+        "policyFactIds",
+        "advisoryId"
+      ],
+      "properties": {
+        "affectedness": { "enum": ["affected", "not-affected", "unknown"] },
+        "kevMembership": { "type": "boolean" },
+        "priority": { "enum": ["P1", "P2", "P3", "P4", "not-assigned"] },
+        "policyFactIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^policy-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
+        },
+        "advisoryId": { "type": "string", "pattern": "^PP-SYN-ADV-[0-9]{4}$" }
+      }
+    },
+    "sourceFact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidenceId", "statement"],
+      "properties": {
+        "evidenceId": {
+          "type": "string",
+          "pattern": "^evidence-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "statement": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claimId", "text", "evidenceIds"],
+      "properties": {
+        "claimId": {
+          "type": "string",
+          "pattern": "^claim-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "text": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "evidenceIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^evidence-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
+        }
+      }
+    },
+    "remediationSuggestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "nonAuthoritative"],
+      "properties": {
+        "text": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "nonAuthoritative": { "const": true }
+      }
+    },
+    "citation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidenceId"],
+      "properties": {
+        "evidenceId": {
+          "type": "string",
+          "pattern": "^evidence-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+        }
+      }
+    }
+  }
+}
