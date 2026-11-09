@@ -1,0 +1,235 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:evaluation-result:v1",
+  "title": "Evaluation result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "purpose",
+    "productionReady",
+    "resultDistinctions",
+    "repositoryCommit",
+    "corpusVersion",
+    "corpusDigest",
+    "candidate",
+    "softwareVersions",
+    "executedAt",
+    "deterministicSettings",
+    "promptIdentity",
+    "experimentId",
+    "perCase",
+    "byCategory",
+    "global",
+    "gates"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "purpose": {
+      "enum": ["harness-validation", "baseline-performance", "candidate-performance"]
+    },
+    "productionReady": { "const": false },
+    "resultDistinctions": { "$ref": "#/$defs/resultDistinctions" },
+    "repositoryCommit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$|^unknown$"
+    },
+    "corpusVersion": { "const": "1.0.0" },
+    "corpusDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "name", "version"],
+      "properties": {
+        "kind": { "enum": ["deterministic-baseline", "future-candidate"] },
+        "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "version": { "type": "string", "minLength": 1, "maxLength": 40 }
+      }
+    },
+    "softwareVersions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["python", "package", "jsonschema"],
+      "properties": {
+        "python": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "package": { "const": "0.0.0" },
+        "jsonschema": { "type": "string", "minLength": 1, "maxLength": 40 }
+      }
+    },
+    "executedAt": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+    },
+    "deterministicSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonicalJson"],
+      "properties": {
+        "canonicalJson": { "const": "sort_keys_separators_utf8_no_newline" }
+      }
+    },
+    "promptIdentity": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "experimentId": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "perCase": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/caseResult" }
+    },
+    "byCategory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "grounding-citation",
+        "insufficient-evidence-refusal",
+        "prompt-injection",
+        "cross-tenant-negative-control",
+        "contradiction",
+        "stale-unavailable-incomparable"
+      ],
+      "properties": {
+        "grounding-citation": { "$ref": "#/$defs/metricBlock" },
+        "insufficient-evidence-refusal": { "$ref": "#/$defs/metricBlock" },
+        "prompt-injection": { "$ref": "#/$defs/metricBlock" },
+        "cross-tenant-negative-control": { "$ref": "#/$defs/metricBlock" },
+        "contradiction": { "$ref": "#/$defs/metricBlock" },
+        "stale-unavailable-incomparable": { "$ref": "#/$defs/metricBlock" }
+      }
+    },
+    "global": { "$ref": "#/$defs/metricBlock" },
+    "gates": { "$ref": "#/$defs/gates" }
+  },
+  "$defs": {
+    "resultDistinctions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "harnessCorrectness",
+        "baselinePerformance",
+        "candidatePerformance",
+        "promotionGateStatus",
+        "unavailableEvidence",
+        "incompleteMetrics"
+      ],
+      "properties": {
+        "harnessCorrectness": { "const": "reported" },
+        "baselinePerformance": {
+          "enum": ["reported-as-harness-validation-only", "not-this-run"]
+        },
+        "candidatePerformance": { "enum": ["not-measured", "reported"] },
+        "promotionGateStatus": { "const": "reported" },
+        "unavailableEvidence": { "const": "reported-per-case" },
+        "incompleteMetrics": { "const": "distinguished-by-unmeasured-status" }
+      }
+    },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["numerator", "denominator", "status", "value"],
+      "properties": {
+        "numerator": { "type": "integer", "minimum": 0 },
+        "denominator": { "type": "integer", "minimum": 0 },
+        "status": { "enum": ["measured", "unmeasured"] },
+        "value": { "type": ["number", "null"] }
+      }
+    },
+    "metricBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outputSchemaValidity",
+        "citationValidity",
+        "evidenceAttributionAccuracy",
+        "unsupportedFactualClaims",
+        "decisiveEvidenceOmission",
+        "correctUncertainty",
+        "correctRefusal",
+        "promptInjectionResistance",
+        "crossTenantDisclosure",
+        "unauthorizedStateMutation",
+        "affectednessOrPriorityChange",
+        "secretDisclosure",
+        "deterministicReplayConsistency",
+        "latency",
+        "peakProcessMemory"
+      ],
+      "properties": {
+        "outputSchemaValidity": { "$ref": "#/$defs/metric" },
+        "citationValidity": { "$ref": "#/$defs/metric" },
+        "evidenceAttributionAccuracy": { "$ref": "#/$defs/metric" },
+        "unsupportedFactualClaims": { "$ref": "#/$defs/metric" },
+        "decisiveEvidenceOmission": { "$ref": "#/$defs/metric" },
+        "correctUncertainty": { "$ref": "#/$defs/metric" },
+        "correctRefusal": { "$ref": "#/$defs/metric" },
+        "promptInjectionResistance": { "$ref": "#/$defs/metric" },
+        "crossTenantDisclosure": { "$ref": "#/$defs/metric" },
+        "unauthorizedStateMutation": { "$ref": "#/$defs/metric" },
+        "affectednessOrPriorityChange": { "$ref": "#/$defs/metric" },
+        "secretDisclosure": { "$ref": "#/$defs/metric" },
+        "deterministicReplayConsistency": { "$ref": "#/$defs/metric" },
+        "latency": { "$ref": "#/$defs/metric" },
+        "peakProcessMemory": { "$ref": "#/$defs/metric" }
+      }
+    },
+    "caseResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["caseId", "category", "outputDigest", "metrics"],
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "pattern": "^case-(ground|refuse|inject|tenant|contra|stale)-[0-9]{3}$"
+        },
+        "category": {
+          "enum": [
+            "grounding-citation",
+            "insufficient-evidence-refusal",
+            "prompt-injection",
+            "cross-tenant-negative-control",
+            "contradiction",
+            "stale-unavailable-incomparable"
+          ]
+        },
+        "outputDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "metrics": { "$ref": "#/$defs/metricBlock" }
+      }
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "status", "numerator", "denominator"],
+      "properties": {
+        "kind": { "enum": ["invariant", "proposed-percentage"] },
+        "status": { "enum": ["pass", "fail", "unmeasured"] },
+        "numerator": { "type": "integer", "minimum": 0 },
+        "denominator": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "crossTenantDisclosure",
+        "unauthorizedStateMutation",
+        "affectednessOrPriorityChange",
+        "secretDisclosure",
+        "outputSchemaValidity",
+        "citationValidity",
+        "evidenceAttributionAccuracy",
+        "unsupportedFactualClaims",
+        "correctRefusal",
+        "promptInjectionResistance"
+      ],
+      "properties": {
+        "crossTenantDisclosure": { "$ref": "#/$defs/gate" },
+        "unauthorizedStateMutation": { "$ref": "#/$defs/gate" },
+        "affectednessOrPriorityChange": { "$ref": "#/$defs/gate" },
+        "secretDisclosure": { "$ref": "#/$defs/gate" },
+        "outputSchemaValidity": { "$ref": "#/$defs/gate" },
+        "citationValidity": { "$ref": "#/$defs/gate" },
+        "evidenceAttributionAccuracy": { "$ref": "#/$defs/gate" },
+        "unsupportedFactualClaims": { "$ref": "#/$defs/gate" },
+        "correctRefusal": { "$ref": "#/$defs/gate" },
+        "promptInjectionResistance": { "$ref": "#/$defs/gate" }
+      }
+    }
+  }
+}

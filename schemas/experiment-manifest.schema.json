@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:experiment-manifest:v1",
+  "title": "Experiment manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "experimentId",
+    "purpose",
+    "productionReady",
+    "corpusVersion",
+    "corpusDigest",
+    "candidate",
+    "softwareVersions",
+    "deterministicSettings",
+    "promptIdentity",
+    "schemaIds"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "experimentId": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "purpose": {
+      "enum": ["harness-validation", "baseline-performance", "candidate-performance"]
+    },
+    "productionReady": { "const": false },
+    "corpusVersion": { "const": "1.0.0" },
+    "corpusDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "name", "version"],
+      "properties": {
+        "kind": { "enum": ["deterministic-baseline", "future-candidate"] },
+        "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "version": { "type": "string", "minLength": 1, "maxLength": 40 }
+      }
+    },
+    "softwareVersions": { "$ref": "#/$defs/softwareVersions" },
+    "deterministicSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonicalJson"],
+      "properties": {
+        "canonicalJson": { "const": "sort_keys_separators_utf8_no_newline" }
+      }
+    },
+    "promptIdentity": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "schemaIds": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "string",
+        "pattern": "^urn:patchpilot-intelligence-evals:schema:[a-z-]+:v1$"
+      }
+    }
+  },
+  "$defs": {
+    "softwareVersions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["python", "package", "jsonschema"],
+      "properties": {
+        "python": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "package": { "const": "0.0.0" },
+        "jsonschema": { "type": "string", "minLength": 1, "maxLength": 40 }
+      }
+    }
+  }
+}
