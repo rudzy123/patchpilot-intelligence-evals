@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:candidate-acquisition-manifest:v1",
+  "title": "Candidate acquisition manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "selectionOutcome",
+    "authorizationState",
+    "acquisitionStatus",
+    "executionStatus",
+    "approvedModelId",
+    "immutableRevision",
+    "approvedSourceUrl",
+    "expectedFiles",
+    "observedFiles",
+    "locallyObservedArtifactDigests",
+    "redistributionAuthorized",
+    "networkFallback",
+    "controls"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "enum": ["no-selection", "selected"] },
+    "authorizationState": { "enum": ["not-authorized", "authorized"] },
+    "acquisitionStatus": { "enum": ["not-acquired", "acquired"] },
+    "executionStatus": { "enum": ["not-executed", "executed"] },
+    "approvedModelId": {
+      "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 1, "maxLength": 160 }]
+    },
+    "immutableRevision": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+      ]
+    },
+    "approvedSourceUrl": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^https://\\S+$", "maxLength": 300 }
+      ]
+    },
+    "expectedFiles": { "$ref": "#/$defs/fileList" },
+    "observedFiles": { "$ref": "#/$defs/fileList" },
+    "locallyObservedArtifactDigests": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+    },
+    "redistributionAuthorized": { "const": false },
+    "networkFallback": { "const": "prohibited" },
+    "controls": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["controlId", "requirement"],
+        "properties": {
+          "controlId": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "maxLength": 80
+          },
+          "requirement": { "type": "string", "minLength": 1, "maxLength": 400 }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "acquisitionStatus": { "const": "not-acquired" } },
+        "required": ["acquisitionStatus"]
+      },
+      "then": {
+        "properties": {
+          "observedFiles": { "maxItems": 0 },
+          "locallyObservedArtifactDigests": { "maxItems": 0 },
+          "executionStatus": { "const": "not-executed" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "selectionOutcome": { "const": "no-selection" } },
+        "required": ["selectionOutcome"]
+      },
+      "then": {
+        "properties": {
+          "authorizationState": { "const": "not-authorized" },
+          "acquisitionStatus": { "const": "not-acquired" },
+          "approvedModelId": { "type": "null" },
+          "immutableRevision": { "type": "null" },
+          "approvedSourceUrl": { "type": "null" },
+          "expectedFiles": { "maxItems": 0 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "fileList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["fileName", "byteCount", "sha256"],
+        "properties": {
+          "fileName": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "byteCount": { "type": "integer", "minimum": 0 },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+        }
+      }
+    }
+  }
+}

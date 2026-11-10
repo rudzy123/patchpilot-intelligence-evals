@@ -1,0 +1,9 @@
+# Real candidate isolation
+
+The current child boundary is the one in [subprocess-isolation.md](subprocess-isolation.md). It is an in-process control. It is not an operating-system sandbox. The child receives one canonical request, runs from a temporary directory that contains the copied Python fixture files, and is limited to a 15-second timeout, 64 KiB of standard output, and 16 KiB of standard error. The path hook denies an external weight cache. Track 4 leaves that boundary in place.
+
+The hardware profile records a non-sensitive view of the evaluation machine on 2026-11-10: Linux, Ubuntu 26.04.1 LTS, kernel 7.0.0-43-generic, x86_64, 16 logical CPUs, 31487340 KiB of memory, and a root filesystem with 1964601909248 bytes of capacity and 1403456720896 bytes available. GPU compute is unavailable. The recorded instruction sets are AVX2, AVX-512F, and AVX-512 BF16. CPython 3.12 is available inside the repository pin. llama.cpp is not installed. The profile omits processor product names, microcode, host names, user names, addresses, and filesystem paths that contain a user name.
+
+The resource envelope is an artifact at or below 8 GiB, calculated peak process memory at or below 12 GiB, context at or below 8192 tokens, explanation text at or below 400 characters, one process, a 15-second timeout, no GPU requirement, and free storage of at least twice the artifact size. No quantization is approved. Cold-start latency for every shortlisted checkpoint is unknown. Memory and file-size estimates that fall inside the envelope do not by themselves make a checkpoint compatible with the current child boundary.
+
+No runtime is authorized. A later runtime assessment would need an explicit license, disabled telemetry, local files only, and `trust_remote_code` prohibited. Selection criteria are in [real-candidate-selection.md](real-candidate-selection.md). The acquisition template is in [real-candidate-acquisition.md](real-candidate-acquisition.md).

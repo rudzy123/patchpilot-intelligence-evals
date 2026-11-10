@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "selectionOutcome": "no-selection",
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed",
+  "locallyObservedArtifactDigests": [],
+  "approvedModelId": null,
+  "immutableRevision": null,
+  "officialSourceUrl": null,
+  "modelCardUrl": null,
+  "licenseUrl": null,
+  "tokenizerSource": null,
+  "approvedRuntime": null,
+  "approvedQuantization": null,
+  "reviewStatus": "accepted-by-principal-systems-architect",
+  "reviewDate": "2026-11-10",
+  "reviewAuthority": "PatchPilot Principal Systems Architect",
+  "decision": "no candidate authorized",
+  "approvalReasons": [
+    "The current candidate protocol authorizes deterministic test doubles but does not yet represent or stage real-model artifacts.",
+    "The current runner denies the required external weight-cache boundary.",
+    "The current 15-second limit has not been justified for real-model startup.",
+    "Every reviewed candidate has at least one independent mandatory licensing, provenance, model-card, tokenizer, digest, commercial-use, or remote-control blocker."
+  ],
+  "authorizedScope": "This approval authorizes the no-selection record only.",
+  "notAuthorized": [
+    "any candidate",
+    "model or tokenizer acquisition",
+    "a runtime dependency",
+    "quantization",
+    "real-model execution",
+    "changes to current evaluation gates",
+    "shadow mode",
+    "PatchPilot production composition"
+  ],
+  "prohibitedUses": [
+    "production decisions",
+    "tenant, customer, or production data",
+    "finding, priority, queue, or remediation authority",
+    "weight redistribution",
+    "trust_remote_code",
+    "hosted inference"
+  ],
+  "track5StopConditions": [
+    "Do not acquire model, tokenizer, or configuration artifacts.",
+    "Do not execute a model or contact a hosted inference provider.",
+    "Do not add a runtime or model-framework dependency.",
+    "Do not change metric definitions, the corpus taxonomy, invariant gates, or percentage thresholds.",
+    "Do not treat this record as production approval.",
+    "Stop until a later track changes manifest identity, weight-cache denial, and the 15-second ceiling.",
+    "Stop if weight license, tokenizer provenance, limitations, or an agreed digest remains unresolved."
+  ],
+  "blockers": [
+    "Every shortlisted checkpoint fails at least one mandatory criterion.",
+    "The candidate manifest accepts only a deterministic test double.",
+    "The child path boundary denies an external weight cache.",
+    "This track cannot raise the 15-second timeout ceiling.",
+    "No runtime is authorized."
+  ],
+  "nextDecisions": [
+    "Decide whether a later track may revise manifest identity, Python-only staging, weight-cache denial, and the 15-second ceiling.",
+    "Decide whether a later track may assess one named runtime, including its license, telemetry disablement, and remote-code prohibition.",
+    "Require a limitations statement for both Qwen2.5 instruct checkpoints before either is scored.",
+    "Require a LICENSE file and a tokenizer license for SmolLM2-1.7B-Instruct and OLMo-2-0425-1B-Instruct before either is scored.",
+    "Require tokenizer terms, one agreed digest, and an offline grant for gemma-3-1b-it before it is scored.",
+    "Require one agreed digest for the complete Qwen2.5-3B-Instruct weight set before it is scored."
+  ]
+}

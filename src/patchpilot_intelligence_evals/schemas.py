@@ -33,6 +33,17 @@ CANDIDATE_SCHEMA_NAMES: tuple[str, ...] = (
     "calibration-record",
 )
 
+# Track 4 authorization documents. They stay out of SCHEMA_IDS and out of the
+# candidate protocol identifiers so Track 2 manifests and Track 3 fixtures
+# keep their closed vocabularies.
+AUTHORIZATION_SCHEMA_NAMES: tuple[str, ...] = (
+    "candidate-shortlist",
+    "real-candidate-authorization",
+    "evaluation-hardware-profile",
+    "candidate-acquisition-manifest",
+    "real-candidate-experiment-plan",
+)
+
 
 class SchemaValidationError(Exception):
     """A document failed a closed schema. The message omits document values."""
@@ -47,7 +58,8 @@ def repo_root() -> Path:
 
 
 def schema_path(schema_name: str) -> Path:
-    if schema_name not in SCHEMA_NAMES and schema_name not in CANDIDATE_SCHEMA_NAMES:
+    known = SCHEMA_NAMES + CANDIDATE_SCHEMA_NAMES + AUTHORIZATION_SCHEMA_NAMES
+    if schema_name not in known:
         raise KeyError(schema_name)
     return repo_root() / "schemas" / f"{schema_name}.schema.json"
 
@@ -78,7 +90,8 @@ def validate(schema_name: str, instance: object) -> None:
 
 
 def assert_schemas_closed() -> None:
-    for name in SCHEMA_NAMES + CANDIDATE_SCHEMA_NAMES:
+    names = SCHEMA_NAMES + CANDIDATE_SCHEMA_NAMES + AUTHORIZATION_SCHEMA_NAMES
+    for name in names:
         document = load_schema(name)
         if document.get("additionalProperties") is not False:
             raise SchemaError(f"{name} is not closed")

@@ -49,8 +49,14 @@ _DOCUMENTS = (
     "docs/architecture/subprocess-isolation.md",
     "docs/architecture/calibration-protocol.md",
     "docs/architecture/result-retention.md",
+    "docs/architecture/real-candidate-selection.md",
+    "docs/architecture/real-candidate-acquisition.md",
+    "docs/architecture/real-candidate-isolation.md",
+    "docs/architecture/real-candidate-evaluation-plan.md",
     "docs/provenance/initial-corpus-provenance.md",
     "docs/provenance/candidate-fixtures.md",
+    "docs/provenance/candidate-shortlist.md",
+    "docs/provenance/selected-candidate-authorization.md",
 )
 
 
