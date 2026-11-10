@@ -110,7 +110,9 @@ def test_changed_root_is_rejected(tmp_path: Path) -> None:
 
     def _replace() -> None:
         root.rmdir()
-        root.mkdir()
+        replacement = root.parent / "replacement"
+        replacement.mkdir()
+        root.symlink_to(replacement, target_is_directory=True)
 
     with pytest.raises(CacheError) as caught:
         validate_cache_root(root, probe=_replace)
