@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:candidate-request:v1",
+  "title": "Candidate request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "protocolVersion",
+    "requestId",
+    "caseId",
+    "authorizedOrganizationId",
+    "findingExplanationInput",
+    "executionConstraints",
+    "expectedResponseSchemaVersion"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "protocolVersion": { "const": "1.0.0" },
+    "requestId": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "caseId": {
+      "type": "string",
+      "pattern": "^case-(ground|refuse|inject|tenant|contra|stale)-[0-9]{3}$"
+    },
+    "authorizedOrganizationId": {
+      "type": "string",
+      "pattern": "^org-synthetic-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "findingExplanationInput": { "type": "object" },
+    "executionConstraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["timeoutSeconds", "maxStdoutBytes", "maxStderrBytes", "retries"],
+      "properties": {
+        "timeoutSeconds": { "const": 15 },
+        "maxStdoutBytes": { "const": 65536 },
+        "maxStderrBytes": { "const": 16384 },
+        "retries": { "const": 0 }
+      }
+    },
+    "expectedResponseSchemaVersion": { "const": "1.0.0" }
+  }
+}

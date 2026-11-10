@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:comparison-result:v1",
+  "title": "Comparison result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "protocolVersion",
+    "productionReady",
+    "status",
+    "reason",
+    "winner",
+    "left",
+    "right",
+    "gateComparison"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "protocolVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "status": { "enum": ["comparable", "incomparable", "missing-result"] },
+    "reason": { "type": "string", "maxLength": 80 },
+    "winner": { "const": null },
+    "left": { "$ref": "#/$defs/side" },
+    "right": { "$ref": "#/$defs/side" },
+    "gateComparison": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/gateComparison" }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "status": { "const": "comparable" } },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": { "reason": { "const": "" } }
+      }
+    },
+    {
+      "if": {
+        "properties": { "status": { "enum": ["incomparable", "missing-result"] } },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "reason": { "minLength": 1, "pattern": "^[a-z0-9-]+$" },
+          "gateComparison": { "maxItems": 0 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "gateName": {
+      "enum": [
+        "crossTenantDisclosure",
+        "unauthorizedStateMutation",
+        "affectednessOrPriorityChange",
+        "secretDisclosure",
+        "outputSchemaValidity",
+        "citationValidity",
+        "evidenceAttributionAccuracy",
+        "unsupportedFactualClaims",
+        "correctRefusal",
+        "promptInjectionResistance"
+      ]
+    },
+    "gateStatus": { "enum": ["pass", "fail", "unmeasured", "missing"] },
+    "gateComparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gate", "leftStatus", "rightStatus"],
+      "properties": {
+        "gate": { "$ref": "#/$defs/gateName" },
+        "leftStatus": { "$ref": "#/$defs/gateStatus" },
+        "rightStatus": { "$ref": "#/$defs/gateStatus" }
+      }
+    },
+    "side": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "present",
+        "candidateId",
+        "candidateVersion",
+        "candidateManifestDigest",
+        "corpusDigest",
+        "corpusVersion",
+        "protocolVersion",
+        "experimentId"
+      ],
+      "properties": {
+        "present": { "type": "boolean" },
+        "candidateId": { "type": "string", "maxLength": 80 },
+        "candidateVersion": { "type": "string", "maxLength": 40 },
+        "candidateManifestDigest": { "type": "string", "maxLength": 64 },
+        "corpusDigest": { "type": "string", "maxLength": 64 },
+        "corpusVersion": { "type": "string", "maxLength": 16 },
+        "protocolVersion": { "type": "string", "maxLength": 16 },
+        "experimentId": { "type": "string", "maxLength": 64 }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "present": { "const": true } },
+            "required": ["present"]
+          },
+          "then": {
+            "properties": {
+              "candidateId": {
+                "minLength": 1,
+                "pattern": "^fixture-[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "candidateVersion": { "minLength": 1 },
+              "candidateManifestDigest": { "pattern": "^[0-9a-f]{64}$" },
+              "corpusDigest": { "pattern": "^[0-9a-f]{64}$" },
+              "corpusVersion": { "const": "1.0.0" },
+              "protocolVersion": { "const": "1.0.0" },
+              "experimentId": { "pattern": "^[0-9a-f]{64}$" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "present": { "const": false } },
+            "required": ["present"]
+          },
+          "then": {
+            "properties": {
+              "candidateId": { "const": "" },
+              "candidateVersion": { "const": "" },
+              "candidateManifestDigest": { "const": "" },
+              "corpusDigest": { "const": "" },
+              "corpusVersion": { "const": "" },
+              "protocolVersion": { "const": "" },
+              "experimentId": { "const": "" }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

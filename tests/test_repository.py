@@ -6,12 +6,20 @@ import json
 import re
 from contextlib import redirect_stdout
 from io import StringIO
+from pathlib import Path
 
 import pytest
 
+from patchpilot_intelligence_evals.candidate_manifest import load_manifest
 from patchpilot_intelligence_evals.cli import main
 from patchpilot_intelligence_evals.provenance import PROVENANCE_SENTENCE
-from patchpilot_intelligence_evals.schemas import repo_root
+from patchpilot_intelligence_evals.schemas import (
+    CANDIDATE_SCHEMA_NAMES,
+    SCHEMA_NAMES,
+    load_schema,
+    repo_root,
+    validate,
+)
 
 _LINK = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
 _FORBIDDEN = (
@@ -37,7 +45,12 @@ _DOCUMENTS = (
     "docs/architecture/corpus-policy.md",
     "docs/architecture/metric-definitions.md",
     "docs/architecture/promotion-gates.md",
+    "docs/architecture/candidate-protocol.md",
+    "docs/architecture/subprocess-isolation.md",
+    "docs/architecture/calibration-protocol.md",
+    "docs/architecture/result-retention.md",
     "docs/provenance/initial-corpus-provenance.md",
+    "docs/provenance/candidate-fixtures.md",
 )
 
 
@@ -88,6 +101,13 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run pytest",
         "uv run patchpilot-evals corpus-validation",
         "uv run patchpilot-evals baseline-evaluation",
+        "uv run patchpilot-evals candidate-manifest-validation --manifest",
+        "uv run patchpilot-evals candidate-evaluation --manifest",
+        "uv run patchpilot-evals candidate-execution --manifest",
+        "uv run patchpilot-evals result-validation --result",
+        "uv run patchpilot-evals comparison-validation --result",
+        "uv run patchpilot-evals calibration-validation --result",
+        "uv run patchpilot-evals calibration --output-dir",
     ):
         assert command in text
     uses = re.findall(r"uses: (\S+)", text)
@@ -107,9 +127,43 @@ def test_help_lists_commands() -> None:
     text = buffer.getvalue()
     assert "corpus-validation" in text
     assert "baseline-evaluation" in text
+    assert "candidate-manifest-validation" in text
+    assert "candidate-evaluation" in text
+    assert "candidate-comparison" in text
+    assert "comparison-validation" in text
+    assert "calibration-validation" in text
+    assert "calibration" in text
 
 
-def test_cli_validation_and_optional_output() -> None:
+def test_committed_json_files_validate() -> None:
+    root = repo_root()
+    for name in SCHEMA_NAMES + CANDIDATE_SCHEMA_NAMES:
+        document = load_schema(name)
+        assert document["additionalProperties"] is False
+    for path in sorted((root / "corpus" / "cases").glob("*.json")):
+        validate("evaluation-case", json.loads(path.read_text(encoding="utf-8")))
+    for path in sorted((root / "candidates" / "fixtures").glob("*/manifest.json")):
+        relative = path.relative_to(root).as_posix()
+        manifest = load_manifest(relative)
+        assert manifest["manifestDigest"]
+        validate("candidate-manifest", manifest)
+    buffer = StringIO()
+    with redirect_stdout(buffer):
+        code = main(
+            [
+                "candidate-manifest-validation",
+                "--manifest",
+                "candidates/fixtures/conforming/manifest.json",
+            ]
+        )
+    assert code == 0
+    summary = json.loads(buffer.getvalue())
+    assert summary["status"] == "ok"
+    assert summary["candidateId"] == "fixture-conforming"
+    assert summary["productionReady"] is False
+
+
+def test_cli_validation_and_optional_output(tmp_path: Path) -> None:
     buffer = StringIO()
     with redirect_stdout(buffer):
         code = main(["corpus-validation"])
@@ -120,17 +174,15 @@ def test_cli_validation_and_optional_output() -> None:
     with redirect_stdout(buffer):
         code = main(["baseline-evaluation", "--output", "../patchpilot/leak.json"])
     assert code == 1
-    relative = "build/baseline-result.json"
-    destination = repo_root() / relative
+    destination_name = "baseline-result.json"
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr("patchpilot_intelligence_evals.cli.repo_root", lambda: tmp_path)
     try:
-        code = main(["baseline-evaluation", "--output", relative])
+        code = main(["baseline-evaluation", "--output", destination_name])
         assert code == 0
+        destination = tmp_path / destination_name
         assert destination.is_file()
         payload = json.loads(destination.read_text(encoding="utf-8"))
         assert payload["productionReady"] is False
     finally:
-        if destination.exists():
-            destination.unlink()
-        build_dir = repo_root() / "build"
-        if build_dir.exists():
-            build_dir.rmdir()
+        monkeypatch.undo()

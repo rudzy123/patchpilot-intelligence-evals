@@ -22,6 +22,17 @@ SCHEMA_IDS: tuple[str, ...] = tuple(
     f"urn:patchpilot-intelligence-evals:schema:{name}:v1" for name in SCHEMA_NAMES
 )
 
+# Track 3 documents. They stay out of SCHEMA_IDS so baseline manifests remain the five
+# Track 2 identifiers.
+CANDIDATE_SCHEMA_NAMES: tuple[str, ...] = (
+    "candidate-manifest",
+    "candidate-request",
+    "candidate-response",
+    "candidate-execution-result",
+    "comparison-result",
+    "calibration-record",
+)
+
 
 class SchemaValidationError(Exception):
     """A document failed a closed schema. The message omits document values."""
@@ -36,7 +47,7 @@ def repo_root() -> Path:
 
 
 def schema_path(schema_name: str) -> Path:
-    if schema_name not in SCHEMA_NAMES:
+    if schema_name not in SCHEMA_NAMES and schema_name not in CANDIDATE_SCHEMA_NAMES:
         raise KeyError(schema_name)
     return repo_root() / "schemas" / f"{schema_name}.schema.json"
 
@@ -67,7 +78,7 @@ def validate(schema_name: str, instance: object) -> None:
 
 
 def assert_schemas_closed() -> None:
-    for name in SCHEMA_NAMES:
+    for name in SCHEMA_NAMES + CANDIDATE_SCHEMA_NAMES:
         document = load_schema(name)
         if document.get("additionalProperties") is not False:
             raise SchemaError(f"{name} is not closed")
