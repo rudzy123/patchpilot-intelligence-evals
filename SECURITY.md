@@ -28,6 +28,14 @@ The harness enforces an argument array with `shell=False`, a temporary working d
 
 The harness does not enforce process namespaces, seccomp, containers, cgroups, filesystem mount isolation, user namespaces, or operating-system outbound network policy. Symlinks, raw system calls, file descriptors opened before the hook, and a nested executable are outside the Python hook.
 
+## Real-candidate boundary
+
+Track 5 does not acquire a model or execute one. The cache policy stores rules only. A caller passes a repository-external root, and quarantine cannot execute, load a tokenizer, or load a model.
+
+Artifact verification compares expected and observed names, sizes, and SHA-256 values. Executable detection is limited to mode bits, a shebang, and ELF magic. That check is not malware detection.
+
+The real-candidate profile can set `RLIMIT_CPU`, `RLIMIT_AS`, `RLIMIT_FSIZE`, `RLIMIT_NOFILE`, and `RLIMIT_NPROC` on a child. `RLIMIT_AS` limits address space, not resident memory. `RLIMIT_NPROC` is a per-user limit. Read-only mounts, hidden home and credential files, and operating-system network denial are deferred acquisition blockers. Those limits and the Python hooks are not an operating-system sandbox.
+
 ## Supported use
 
 Offline harness checks and future offline candidate runs inside this repository. Do not use these fixtures for production decisions.

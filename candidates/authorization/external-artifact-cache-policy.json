@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "cacheLocation": "repository-external",
+  "states": ["quarantine", "verified", "rejected"],
+  "executionFromQuarantine": "prohibited",
+  "executionFromRejected": "prohibited",
+  "tokenizerLoadingFromQuarantine": "prohibited",
+  "modelLoadingFromQuarantine": "prohibited",
+  "networkFallback": "prohibited",
+  "gitTracking": "prohibited",
+  "ciUpload": "prohibited",
+  "tenantData": "prohibited",
+  "rootRequirements": [
+    "explicit-root",
+    "outside-git-repository",
+    "outside-sibling-repositories",
+    "reject-traversal",
+    "reject-symlink-escape",
+    "reject-repository-contained-root",
+    "stable-root-during-validation"
+  ],
+  "siblingRepositoryNames": ["neural-from-scratch", "patchpilot"],
+  "approvedFormats": ["safetensors"],
+  "cleanup": "delete-attempt-payload-retain-reason-codes",
+  "promotionRequiresCompleteVerification": true,
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed"
+}

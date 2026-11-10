@@ -1,0 +1,573 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "retrievedOn": "2026-11-10",
+  "selectionOutcome": "no-selection",
+  "selectedModelId": null,
+  "scoringApplied": false,
+  "qualifyingCandidateCount": 0,
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed",
+  "locallyObservedArtifactDigests": [],
+  "candidates": [
+    {
+      "modelId": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "previousDisqualifiers": [
+        "bounded-subprocess-compatibility",
+        "documented-limitations"
+      ],
+      "gaps": [
+        {
+          "gapId": "documented-limitations",
+          "previousBlocker": "The pinned card does not contain a limitations section.",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The pinned README and the technical report do not add a limitations section for this revision. The criterion stays fail."
+        }
+      ],
+      "mandatoryCriteria": {
+        "explicit-weight-use-license": "pass",
+        "clear-commercial-use-position": "pass",
+        "clear-redistribution-position": "pass",
+        "immutable-official-revision": "pass",
+        "no-remote-code-requirement": "pass",
+        "fully-offline-runtime-support": "pass",
+        "tokenizer-provenance": "pass",
+        "artifact-digest-capability": "pass",
+        "local-resource-fit": "pass",
+        "bounded-subprocess-compatibility": "fail",
+        "no-mandatory-telemetry": "pass",
+        "no-tenant-data-requirement": "pass",
+        "official-model-card": "pass",
+        "documented-limitations": "fail",
+        "no-production-dependency": "pass"
+      },
+      "conflicts": [
+        {
+          "topic": "published context length",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The series prose says 128K context. The checkpoint line says 32768 tokens. Use 32768, and keep the evaluation cap at 8192."
+        },
+        {
+          "topic": "tokenizer filenames",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The LICENSE file in this revision does not enumerate tokenizer filenames. The tokenizer files are in the licensed revision, so tokenizer-provenance stays pass. This residual is not a tokenizer grant by filename."
+        }
+      ],
+      "evidence": [
+        {
+          "sourceName": "Qwen2.5-1.5B-Instruct model card",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "The pinned card describes an instruction-tuned 1.54B checkpoint with 32768 tokens of context and does not contain a limitations section.",
+          "locator": {
+            "kind": "url",
+            "url": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct/blob/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/README.md"
+          }
+        },
+        {
+          "sourceName": "Qwen2.5-1.5B-Instruct license file",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "The pinned revision contains an Apache-2.0 LICENSE file. Tokenizer files are in that same revision. The LICENSE text does not list tokenizer filenames.",
+          "locator": {
+            "kind": "url",
+            "url": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct/blob/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/LICENSE"
+          }
+        },
+        {
+          "sourceName": "Qwen2.5-1.5B-Instruct file listing",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "The listing reports model.safetensors at 3087467144 bytes with upstream SHA-256 dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee. That digest is not a local observation.",
+          "locator": {
+            "kind": "url",
+            "url": "https://huggingface.co/api/models/Qwen/Qwen2.5-1.5B-Instruct"
+          }
+        }
+      ],
+      "publisherArtifact": {
+        "format": "safetensors",
+        "byteCount": 3087467144,
+        "digestDisposition": "agreed",
+        "upstreamSha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+        "shards": [
+          {
+            "fileName": "model.safetensors",
+            "byteCount": 3087467144,
+            "sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+          }
+        ]
+      },
+      "mandatoryStatus": "fail",
+      "disqualifiers": [
+        "bounded-subprocess-compatibility",
+        "documented-limitations"
+      ],
+      "weightedScore": null,
+      "locallyObservedArtifactDigests": []
+    },
+    {
+      "modelId": "Qwen/Qwen2.5-3B-Instruct",
+      "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "previousDisqualifiers": [
+        "artifact-digest-capability",
+        "bounded-subprocess-compatibility",
+        "documented-limitations"
+      ],
+      "gaps": [
+        {
+          "gapId": "artifact-digest-capability",
+          "previousBlocker": "Retrievals disagreed on the second shard SHA-256, so no weight-set digest was accepted.",
+          "status": "resolved",
+          "restrictiveInterpretation": "The pinned revision API lists one lfs.sha256 per shard. No concatenated digest is published. Those two identities are the weight set."
+        },
+        {
+          "gapId": "documented-limitations",
+          "previousBlocker": "The pinned card does not contain a limitations section.",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The pinned README still has no limitations section for this revision. The criterion stays fail."
+        }
+      ],
+      "mandatoryCriteria": {
+        "explicit-weight-use-license": "pass",
+        "clear-commercial-use-position": "pass",
+        "clear-redistribution-position": "pass",
+        "immutable-official-revision": "pass",
+        "no-remote-code-requirement": "pass",
+        "fully-offline-runtime-support": "pass",
+        "tokenizer-provenance": "pass",
+        "artifact-digest-capability": "pass",
+        "local-resource-fit": "pass",
+        "bounded-subprocess-compatibility": "fail",
+        "no-mandatory-telemetry": "pass",
+        "no-tenant-data-requirement": "pass",
+        "official-model-card": "pass",
+        "documented-limitations": "fail",
+        "no-production-dependency": "pass"
+      },
+      "conflicts": [
+        {
+          "topic": "shard digest",
+          "status": "resolved",
+          "restrictiveInterpretation": "The pinned revision API lists one lfs.sha256 per shard. No concatenated digest is published. The two shard identities are the weight set."
+        },
+        {
+          "topic": "family license statement",
+          "status": "unresolved",
+          "restrictiveInterpretation": "A family README describes open weights as Apache-2.0. The LICENSE file in this revision controls: commercial use is prohibited without a separate Alibaba license. That clear restriction is not acquisition authorization."
+        },
+        {
+          "topic": "tokenizer filenames",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The LICENSE file in this revision does not enumerate tokenizer filenames. The tokenizer files are in the licensed revision, so tokenizer-provenance stays pass. This residual is not a tokenizer grant by filename."
+        }
+      ],
+      "evidence": [
+        {
+          "sourceName": "Qwen2.5-3B-Instruct model card",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "The pinned card states 3.09B parameters and 32768 tokens of context. It does not contain a limitations section.",
+          "locator": {
+            "kind": "url",
+            "url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/blob/aa8e72537993ba99e69dfaafa59ed015b17504d1/README.md"
+          }
+        },
+        {
+          "sourceName": "Qwen2.5-3B-Instruct license file",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "The pinned LICENSE is the Qwen Research License. Commercial use requires a separate Alibaba license. Tokenizer files are in this revision. The LICENSE text does not list their filenames.",
+          "locator": {
+            "kind": "url",
+            "url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/blob/aa8e72537993ba99e69dfaafa59ed015b17504d1/LICENSE"
+          }
+        },
+        {
+          "sourceName": "Qwen2.5-3B-Instruct revision API",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "The pinned revision API lists model-00001-of-00002.safetensors SHA-256 67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2 at 3968658944 bytes and model-00002-of-00002.safetensors SHA-256 a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d at 2203268048 bytes. These are upstream identities, not local observations.",
+          "locator": {
+            "kind": "url",
+            "url": "https://huggingface.co/api/models/Qwen/Qwen2.5-3B-Instruct/revision/aa8e72537993ba99e69dfaafa59ed015b17504d1?blobs=true"
+          }
+        }
+      ],
+      "publisherArtifact": {
+        "format": "safetensors",
+        "byteCount": 6171926992,
+        "digestDisposition": "agreed",
+        "upstreamSha256": null,
+        "shards": [
+          {
+            "fileName": "model-00001-of-00002.safetensors",
+            "byteCount": 3968658944,
+            "sha256": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2"
+          },
+          {
+            "fileName": "model-00002-of-00002.safetensors",
+            "byteCount": 2203268048,
+            "sha256": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d"
+          }
+        ]
+      },
+      "mandatoryStatus": "fail",
+      "disqualifiers": [
+        "bounded-subprocess-compatibility",
+        "documented-limitations"
+      ],
+      "weightedScore": null,
+      "locallyObservedArtifactDigests": []
+    },
+    {
+      "modelId": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "previousDisqualifiers": [
+        "explicit-weight-use-license",
+        "tokenizer-provenance",
+        "bounded-subprocess-compatibility"
+      ],
+      "gaps": [
+        {
+          "gapId": "explicit-weight-use-license",
+          "previousBlocker": "The card says Apache-2.0, and the pinned tree has no LICENSE file.",
+          "status": "unresolved",
+          "restrictiveInterpretation": "A model card is not the weight license. The pinned tree still has no LICENSE file. The weight-use license stays unresolved."
+        },
+        {
+          "gapId": "tokenizer-provenance",
+          "previousBlocker": "The named tokenizer is unpinned and its card has no license.",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The training configuration names HuggingFaceTB/cosmo2-tokenizer without a revision. That card has no license file. Tokenizer provenance stays unresolved."
+        }
+      ],
+      "mandatoryCriteria": {
+        "explicit-weight-use-license": "fail",
+        "clear-commercial-use-position": "pass",
+        "clear-redistribution-position": "pass",
+        "immutable-official-revision": "pass",
+        "no-remote-code-requirement": "pass",
+        "fully-offline-runtime-support": "pass",
+        "tokenizer-provenance": "fail",
+        "artifact-digest-capability": "pass",
+        "local-resource-fit": "pass",
+        "bounded-subprocess-compatibility": "fail",
+        "no-mandatory-telemetry": "pass",
+        "no-tenant-data-requirement": "pass",
+        "official-model-card": "pass",
+        "documented-limitations": "pass",
+        "no-production-dependency": "pass"
+      },
+      "conflicts": [
+        {
+          "topic": "weight license instrument",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The card says Apache-2.0, and the pinned tree has no LICENSE file. A model card is not the weight license. The weight-use license stays unresolved."
+        },
+        {
+          "topic": "tokenizer license",
+          "status": "unresolved",
+          "restrictiveInterpretation": "cosmo2-tokenizer is not pinned to a revision and its card has no license. A related model does not close this tokenizer gap."
+        }
+      ],
+      "evidence": [
+        {
+          "sourceName": "SmolLM2-1.7B-Instruct model card",
+          "publisher": "Hugging Face",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "The pinned card documents factual, logical, and bias limits and states Apache-2.0. The Apache sentence is not a LICENSE file.",
+          "locator": {
+            "kind": "url",
+            "url": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct/blob/31b70e2e869a7173562077fd711b654946d38674/README.md"
+          }
+        },
+        {
+          "sourceName": "SmolLM2-1.7B-Instruct file listing",
+          "publisher": "Hugging Face",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "The pinned tree has no LICENSE file. model.safetensors is listed at 3422777952 bytes with upstream SHA-256 f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8. That digest is not a local observation.",
+          "locator": {
+            "kind": "url",
+            "url": "https://huggingface.co/api/models/HuggingFaceTB/SmolLM2-1.7B-Instruct"
+          }
+        },
+        {
+          "sourceName": "cosmo2 tokenizer card",
+          "publisher": "Hugging Face",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "The cosmo2 tokenizer card has no license name and no license file. Tokenizer provenance stays unresolved.",
+          "locator": {
+            "kind": "url",
+            "url": "https://huggingface.co/HuggingFaceTB/cosmo2-tokenizer"
+          }
+        }
+      ],
+      "publisherArtifact": {
+        "format": "safetensors",
+        "byteCount": 3422777952,
+        "digestDisposition": "agreed",
+        "upstreamSha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+        "shards": [
+          {
+            "fileName": "model.safetensors",
+            "byteCount": 3422777952,
+            "sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+          }
+        ]
+      },
+      "mandatoryStatus": "fail",
+      "disqualifiers": [
+        "explicit-weight-use-license",
+        "tokenizer-provenance",
+        "bounded-subprocess-compatibility"
+      ],
+      "weightedScore": null,
+      "locallyObservedArtifactDigests": []
+    },
+    {
+      "modelId": "allenai/OLMo-2-0425-1B-Instruct",
+      "revision": "48d788eca847d4d7548f375ad03d3c9312f6139e",
+      "previousDisqualifiers": [
+        "explicit-weight-use-license",
+        "tokenizer-provenance",
+        "bounded-subprocess-compatibility"
+      ],
+      "gaps": [
+        {
+          "gapId": "explicit-weight-use-license",
+          "previousBlocker": "The cards say Apache-2.0, and the pinned instruct tree has no LICENSE file.",
+          "status": "unresolved",
+          "restrictiveInterpretation": "A model card is not the weight license. The pinned instruct tree still has no LICENSE file. The weight-use license stays unresolved."
+        },
+        {
+          "gapId": "tokenizer-provenance",
+          "previousBlocker": "The dolma2 tokenizer card has no license field and its file size does not match this revision.",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The instruct card does not state a tokenizer license. A related tokenizer card does not close this gap. Tokenizer provenance stays unresolved."
+        }
+      ],
+      "mandatoryCriteria": {
+        "explicit-weight-use-license": "fail",
+        "clear-commercial-use-position": "pass",
+        "clear-redistribution-position": "pass",
+        "immutable-official-revision": "pass",
+        "no-remote-code-requirement": "pass",
+        "fully-offline-runtime-support": "pass",
+        "tokenizer-provenance": "fail",
+        "artifact-digest-capability": "pass",
+        "local-resource-fit": "pass",
+        "bounded-subprocess-compatibility": "fail",
+        "no-mandatory-telemetry": "pass",
+        "no-tenant-data-requirement": "pass",
+        "official-model-card": "pass",
+        "documented-limitations": "pass",
+        "no-production-dependency": "pass"
+      },
+      "conflicts": [
+        {
+          "topic": "weight license instrument",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The cards say the model is Apache-2.0, and the pinned instruct tree has no LICENSE file. A model card is not the weight license. The weight-use license stays unresolved."
+        },
+        {
+          "topic": "use policy",
+          "status": "unresolved",
+          "restrictiveInterpretation": "Apache-2.0 states no field-of-use limit. The Responsible Use Guidelines are more restrictive for non-research use. The guidelines control the use position and do not supply a LICENSE file."
+        },
+        {
+          "topic": "tokenizer license",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The dolma2 tokenizer card has no license field. Its tokenizer.json size does not match this revision. Tokenizer provenance stays unresolved."
+        }
+      ],
+      "evidence": [
+        {
+          "sourceName": "OLMo-2-0425-1B-Instruct model card",
+          "publisher": "Allen Institute for AI",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "The pinned card says the model is for research and educational use, states Apache-2.0, and says safety training is limited. The tree contains no LICENSE file.",
+          "locator": {
+            "kind": "url",
+            "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-Instruct/blob/48d788eca847d4d7548f375ad03d3c9312f6139e/README.md"
+          }
+        },
+        {
+          "sourceName": "Ai2 Responsible Use Guidelines",
+          "publisher": "Allen Institute for AI",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "The guidelines waive the disallowed-use list only for use whose sole purpose is scientific research. They do not supply the missing LICENSE file.",
+          "locator": {
+            "kind": "url",
+            "url": "https://allenai.org/responsible-use"
+          }
+        },
+        {
+          "sourceName": "dolma2 tokenizer card",
+          "publisher": "Allen Institute for AI",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "The dolma2 tokenizer card has no license field. The instruct card does not state a tokenizer license. Tokenizer provenance stays unresolved.",
+          "locator": {
+            "kind": "url",
+            "url": "https://huggingface.co/allenai/dolma2-tokenizer"
+          }
+        }
+      ],
+      "publisherArtifact": {
+        "format": "safetensors",
+        "byteCount": 2969854224,
+        "digestDisposition": "agreed",
+        "upstreamSha256": "36d044c73655bb904f822915e6294ba3dae8e6e1af5e703e9d452f2d6a3a294f",
+        "shards": [
+          {
+            "fileName": "model.safetensors",
+            "byteCount": 2969854224,
+            "sha256": "36d044c73655bb904f822915e6294ba3dae8e6e1af5e703e9d452f2d6a3a294f"
+          }
+        ]
+      },
+      "mandatoryStatus": "fail",
+      "disqualifiers": [
+        "explicit-weight-use-license",
+        "tokenizer-provenance",
+        "bounded-subprocess-compatibility"
+      ],
+      "weightedScore": null,
+      "locallyObservedArtifactDigests": []
+    },
+    {
+      "modelId": "google/gemma-3-1b-it",
+      "revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+      "previousDisqualifiers": [
+        "fully-offline-runtime-support",
+        "tokenizer-provenance",
+        "artifact-digest-capability",
+        "bounded-subprocess-compatibility"
+      ],
+      "gaps": [
+        {
+          "gapId": "tokenizer-provenance",
+          "previousBlocker": "The Gemma terms define licensed materials as trained weights and parameters and do not name the tokenizer.",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The terms still do not name the tokenizer. A model card or a related checkpoint does not close this grant. Tokenizer provenance stays unresolved."
+        },
+        {
+          "gapId": "artifact-digest-capability",
+          "previousBlocker": "One listing redacted the safetensors digest and another stated a hash.",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The published digest still conflicts. No stated hash is accepted. Artifact identity stays unresolved."
+        },
+        {
+          "gapId": "fully-offline-runtime-support",
+          "previousBlocker": "The Gemma terms reserve a right for Google to restrict use, including remotely.",
+          "status": "unresolved",
+          "restrictiveInterpretation": "Section 3.2 still reserves a remote restriction. Offline use without that reservation is unresolved. The criterion stays fail."
+        }
+      ],
+      "mandatoryCriteria": {
+        "explicit-weight-use-license": "pass",
+        "clear-commercial-use-position": "pass",
+        "clear-redistribution-position": "pass",
+        "immutable-official-revision": "pass",
+        "no-remote-code-requirement": "pass",
+        "fully-offline-runtime-support": "fail",
+        "tokenizer-provenance": "fail",
+        "artifact-digest-capability": "fail",
+        "local-resource-fit": "pass",
+        "bounded-subprocess-compatibility": "fail",
+        "no-mandatory-telemetry": "pass",
+        "no-tenant-data-requirement": "pass",
+        "official-model-card": "pass",
+        "documented-limitations": "pass",
+        "no-production-dependency": "pass"
+      },
+      "conflicts": [
+        {
+          "topic": "tokenizer grant",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The Gemma terms define the licensed materials as trained weights and parameters. They do not name the tokenizer. The tokenizer license stays unresolved."
+        },
+        {
+          "topic": "upstream digest",
+          "status": "unresolved",
+          "restrictiveInterpretation": "One listing redacted the safetensors digest and another stated a hash. No upstream digest is accepted."
+        },
+        {
+          "topic": "remote restriction",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The terms reserve a right to restrict usage remotely. That reservation keeps fully-offline-runtime-support failed."
+        }
+      ],
+      "evidence": [
+        {
+          "sourceName": "Gemma terms of use",
+          "publisher": "Google",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "The terms cover trained weights and parameters, allow use and redistribution when their notice duties are met, and reserve a right for Google to restrict use, including remotely. They do not name a tokenizer.",
+          "locator": {
+            "kind": "url",
+            "url": "https://ai.google.dev/gemma/terms"
+          }
+        },
+        {
+          "sourceName": "Gemma 3 model card",
+          "publisher": "Google",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "The model card documents limitations, including factual error, bias, and weak common-sense reasoning. It does not supply a tokenizer grant or a single accepted weight digest.",
+          "locator": {
+            "kind": "url",
+            "url": "https://ai.google.dev/gemma/docs/core/model_card_3"
+          }
+        },
+        {
+          "sourceName": "gemma-3-1b-it file listing",
+          "publisher": "Google",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "unresolved",
+          "claim": "The listing reports revision dcc83ea841ab6100d6b47a070329e1ba4cf78752 and model.safetensors at 1999811208 bytes. The published digest conflicts across retrievals, so no digest is accepted.",
+          "locator": {
+            "kind": "url",
+            "url": "https://huggingface.co/api/models/google/gemma-3-1b-it"
+          }
+        }
+      ],
+      "publisherArtifact": {
+        "format": "safetensors",
+        "byteCount": 1999811208,
+        "digestDisposition": "conflicting",
+        "upstreamSha256": null,
+        "shards": [
+          {
+            "fileName": "model.safetensors",
+            "byteCount": 1999811208,
+            "sha256": null
+          }
+        ]
+      },
+      "mandatoryStatus": "fail",
+      "disqualifiers": [
+        "fully-offline-runtime-support",
+        "tokenizer-provenance",
+        "artifact-digest-capability",
+        "bounded-subprocess-compatibility"
+      ],
+      "weightedScore": null,
+      "locallyObservedArtifactDigests": []
+    }
+  ]
+}

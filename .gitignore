@@ -7,3 +7,13 @@ __pycache__/
 build/
 dist/
 *.egg-info/
+artifact-cache/
+*.safetensors
+*.gguf
+*.onnx
+*.pt
+*.pth
+*.ckpt
+tokenizer.json
+tokenizer.model
+tokenizer_config.json

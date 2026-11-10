@@ -30,6 +30,14 @@ uv run patchpilot-evals calibration --output-dir build/calibration
 uv run patchpilot-evals result-validation --result build/conforming/*/*/candidate-execution-result.json
 uv run patchpilot-evals comparison-validation --result build/comparison/comparison-*.json
 uv run patchpilot-evals calibration-validation --result build/calibration/*/*/calibration-record.json
+uv run patchpilot-evals real-candidate-manifest-validation --manifest candidates/templates/offline-local-model-manifest.json
+uv run patchpilot-evals artifact-cache-policy-validation
+uv run patchpilot-evals artifact-verification-validation --manifest candidates/templates/model-artifact-verification-template.json
+uv run patchpilot-evals runtime-assessment-validation
+uv run patchpilot-evals runtime-authorization-validation
+uv run patchpilot-evals isolation-profile-validation
+uv run patchpilot-evals evidence-closure-validation
+uv run patchpilot-evals track6-authorization-validation
 ```
 
 `baseline-evaluation` writes a file only when `--output` is a path inside this repository. The result record includes a timestamp, so it is not committed.
@@ -65,3 +73,12 @@ Intelligence Track 4 records an accepted no-selection. Review status is `accepte
 - [docs/architecture/real-candidate-evaluation-plan.md](docs/architecture/real-candidate-evaluation-plan.md)
 - [docs/provenance/candidate-shortlist.md](docs/provenance/candidate-shortlist.md)
 - [docs/provenance/selected-candidate-authorization.md](docs/provenance/selected-candidate-authorization.md)
+
+Intelligence Track 5 adds the real-candidate boundary. It does not authorize acquisition. Fixture manifests stay deterministic test doubles, with a 15-second timeout, 64 KiB of standard output, and 16 KiB of standard error. The offline-local-model file is an illustration: acquisition stays `not-acquired` and execution stays `not-executed`. Cache roots stay outside this repository. Executable sniffing is not malware detection. Linux resource limits and the Python hooks are not an operating-system sandbox. The runtime decision is no-runtime. The evidence closure keeps no-selection. Track 6 is `not-authorized`. `productionReady` stays false.
+
+- [docs/architecture/real-candidate-boundary.md](docs/architecture/real-candidate-boundary.md)
+- [docs/architecture/external-artifact-cache.md](docs/architecture/external-artifact-cache.md)
+- [docs/architecture/model-artifact-verification.md](docs/architecture/model-artifact-verification.md)
+- [docs/architecture/runtime-selection.md](docs/architecture/runtime-selection.md)
+- [docs/provenance/candidate-evidence-closure.md](docs/provenance/candidate-evidence-closure.md)
+- [docs/architecture/track6-acquisition-boundary.md](docs/architecture/track6-acquisition-boundary.md)

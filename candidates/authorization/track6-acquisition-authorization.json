@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "retrievedOn": "2026-11-10",
+  "authorizationOutcome": "not-authorized",
+  "selectionOutcome": "no-selection",
+  "selectedModelId": null,
+  "runtimeId": null,
+  "immutableRevision": null,
+  "prerequisites": [
+    {
+      "prerequisiteId": "one-qualifying-candidate",
+      "status": "fail"
+    },
+    {
+      "prerequisiteId": "one-authorized-runtime",
+      "status": "fail"
+    },
+    {
+      "prerequisiteId": "cache-and-verification",
+      "status": "pass"
+    },
+    {
+      "prerequisiteId": "isolation-without-acquisition-blocker",
+      "status": "fail"
+    },
+    {
+      "prerequisiteId": "hardware-fit",
+      "status": "pass"
+    },
+    {
+      "prerequisiteId": "immutable-revision-and-source",
+      "status": "fail"
+    },
+    {
+      "prerequisiteId": "tokenizer-provenance",
+      "status": "fail"
+    },
+    {
+      "prerequisiteId": "weight-license-and-commercial-use",
+      "status": "fail"
+    },
+    {
+      "prerequisiteId": "redistribution-unnecessary",
+      "status": "fail"
+    },
+    {
+      "prerequisiteId": "no-gate-change",
+      "status": "pass"
+    }
+  ],
+  "blockers": [
+    {
+      "prerequisiteId": "one-qualifying-candidate",
+      "statement": "No pinned candidate passes every mandatory criterion."
+    },
+    {
+      "prerequisiteId": "one-authorized-runtime",
+      "statement": "The runtime decision is no-runtime."
+    },
+    {
+      "prerequisiteId": "isolation-without-acquisition-blocker",
+      "statement": "The isolation profile still has an acquisition blocker."
+    },
+    {
+      "prerequisiteId": "immutable-revision-and-source",
+      "statement": "No qualifying candidate has an immutable revision and official source."
+    },
+    {
+      "prerequisiteId": "tokenizer-provenance",
+      "statement": "Tokenizer provenance is not resolved for a qualifying candidate."
+    },
+    {
+      "prerequisiteId": "weight-license-and-commercial-use",
+      "statement": "Weight license and commercial use are not both resolved for a qualifying candidate."
+    },
+    {
+      "prerequisiteId": "redistribution-unnecessary",
+      "statement": "A qualifying candidate has not shown that redistribution is unnecessary."
+    }
+  ],
+  "gatesChanged": false,
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed",
+  "locallyObservedArtifactDigests": []
+}

@@ -6,6 +6,7 @@ These rules bind automated edits in this repository.
 - Treat schema field names, metric formulas, and the deterministic baseline as implementation recommendations for harness validation. Do not describe the baseline as a model. Deterministic candidate fixtures are test doubles, not models.
 - Do not read or modify the local `patchpilot` or `neural-from-scratch` repositories.
 - Do not download a model or add a provider credential.
+- Track 5 does not authorize model acquisition, tokenizer acquisition, runtime installation, provider contact, or real-model execution. `acquisitionStatus` stays `not-acquired`, `executionStatus` stays `not-executed`, and `productionReady` stays false.
 - Keep corpus records synthetic and Apache-2.0. The provenance sentence in [docs/provenance/initial-corpus-provenance.md](docs/provenance/initial-corpus-provenance.md) stays identical to the corpus manifest.
 - Do not log assistance-request text or explanation bodies.
 - Do not claim the in-process network hook or the candidate subprocess is an operating-system sandbox.

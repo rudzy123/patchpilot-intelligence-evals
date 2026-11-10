@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track6-acquisition-authorization:v1",
+  "title": "Track 6 acquisition authorization",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "retrievedOn",
+    "authorizationOutcome",
+    "selectionOutcome",
+    "selectedModelId",
+    "runtimeId",
+    "immutableRevision",
+    "prerequisites",
+    "blockers",
+    "gatesChanged",
+    "acquisitionStatus",
+    "executionStatus",
+    "locallyObservedArtifactDigests"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "retrievedOn": { "const": "2026-11-10" },
+    "authorizationOutcome": { "enum": ["authorized", "not-authorized"] },
+    "selectionOutcome": { "enum": ["no-selection", "selected"] },
+    "selectedModelId": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,80}/[A-Za-z0-9][A-Za-z0-9._-]{0,80}$"
+        }
+      ]
+    },
+    "runtimeId": {
+      "oneOf": [
+        { "type": "null" },
+        { "enum": ["llama-cpp", "onnxruntime", "transformers"] }
+      ]
+    },
+    "immutableRevision": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+      ]
+    },
+    "prerequisites": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": { "$ref": "#/$defs/prerequisite" }
+    },
+    "blockers": {
+      "type": "array",
+      "maxItems": 10,
+      "items": { "$ref": "#/$defs/blocker" }
+    },
+    "gatesChanged": { "type": "boolean" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" },
+    "locallyObservedArtifactDigests": {
+      "type": "array",
+      "maxItems": 0,
+      "items": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "authorizationOutcome": { "const": "not-authorized" } },
+        "required": ["authorizationOutcome"]
+      },
+      "then": {
+        "properties": {
+          "selectionOutcome": { "const": "no-selection" },
+          "selectedModelId": { "type": "null" },
+          "runtimeId": { "type": "null" },
+          "immutableRevision": { "type": "null" },
+          "blockers": { "minItems": 1 }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "authorizationOutcome": { "const": "authorized" } },
+        "required": ["authorizationOutcome"]
+      },
+      "then": {
+        "properties": {
+          "selectionOutcome": { "const": "selected" },
+          "runtimeId": { "enum": ["llama-cpp", "onnxruntime", "transformers"] },
+          "immutableRevision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+          "blockers": { "maxItems": 0 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "prerequisiteId": {
+      "enum": [
+        "one-qualifying-candidate",
+        "one-authorized-runtime",
+        "cache-and-verification",
+        "isolation-without-acquisition-blocker",
+        "hardware-fit",
+        "immutable-revision-and-source",
+        "tokenizer-provenance",
+        "weight-license-and-commercial-use",
+        "redistribution-unnecessary",
+        "no-gate-change"
+      ]
+    },
+    "prerequisite": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prerequisiteId", "status"],
+      "properties": {
+        "prerequisiteId": { "$ref": "#/$defs/prerequisiteId" },
+        "status": { "enum": ["pass", "fail"] }
+      }
+    },
+    "blocker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prerequisiteId", "statement"],
+      "properties": {
+        "prerequisiteId": { "$ref": "#/$defs/prerequisiteId" },
+        "statement": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    }
+  }
+}

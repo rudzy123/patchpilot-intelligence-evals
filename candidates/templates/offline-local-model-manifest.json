@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "protocolVersion": "1.0.0",
+  "candidateId": "offline-not-authorized-illustration",
+  "candidateVersion": "0",
+  "candidateKind": "offline-local-model",
+  "officialModelId": "illustration/not-selected",
+  "immutableRevision": "0000000000000000000000000000000000000000",
+  "modelOwner": "not-selected",
+  "officialSourceUrl": "https://example.invalid/offline-local-model",
+  "modelCardUrl": "https://example.invalid/offline-local-model/model-card",
+  "weightLicenseUrl": "https://example.invalid/offline-local-model/weight-license",
+  "sourceCodeLicenseApplies": false,
+  "sourceCodeLicenseUrl": null,
+  "tokenizerSourceUrl": "https://example.invalid/offline-local-model/tokenizer",
+  "tokenizerLicenseUrl": "https://example.invalid/offline-local-model/tokenizer-license",
+  "configurationSource": {
+    "url": "https://example.invalid/offline-local-model/config",
+    "revision": "0000000000000000000000000000000000000000"
+  },
+  "expectedArtifacts": [
+    {
+      "fileName": "illustration.safetensors",
+      "expectedBytes": 1,
+      "upstreamSha256": null
+    }
+  ],
+  "observedArtifacts": [],
+  "locallyVerifiedArtifactIdentities": [],
+  "runtimeId": "none",
+  "runtimeVersionRequirement": "not-authorized",
+  "modelFormat": "safetensors",
+  "quantization": "none",
+  "contextLimitTokens": 8192,
+  "generationLimitTokens": 1024,
+  "peakMemoryBudgetBytes": 12884901888,
+  "startupTimeoutSeconds": 180,
+  "warmPerCaseTimeoutSeconds": 120,
+  "networkPolicy": "prohibited",
+  "remoteCodePolicy": "prohibited",
+  "telemetryPolicy": "disabled",
+  "permittedUses": [
+    "offline-harness-evaluation"
+  ],
+  "prohibitedUses": [
+    "hosted-inference",
+    "model-training",
+    "production-decision",
+    "provider-execution",
+    "state-mutation",
+    "tenant-analysis",
+    "trust-remote-code",
+    "weight-redistribution"
+  ],
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed",
+  "reviewStatus": "not-authorized",
+  "productionReady": false,
+  "manifestDigest": "4e274f570db908baf97e4fdf2afd9ce82cee4394438cf53a8bfff3b49269b0c2"
+}

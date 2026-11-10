@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "retrievedOn": "2026-11-10",
+  "authorizationOutcome": "no-runtime",
+  "runtimeId": null,
+  "versionTag": null,
+  "immutableRevision": null,
+  "assessedRuntimeIds": [
+    "llama-cpp",
+    "onnxruntime",
+    "transformers"
+  ],
+  "disqualifiers": [
+    {
+      "runtimeId": "llama-cpp",
+      "criteria": [
+        "approved-format-support",
+        "cpu-support",
+        "maintainable-security-posture"
+      ]
+    },
+    {
+      "runtimeId": "onnxruntime",
+      "criteria": [
+        "approved-format-support",
+        "bounded-context-and-output"
+      ]
+    },
+    {
+      "runtimeId": "transformers",
+      "criteria": [
+        "cpu-support",
+        "maintainable-security-posture",
+        "no-trust-remote-code"
+      ]
+    }
+  ],
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed",
+  "locallyObservedArtifactDigests": [],
+  "installedDuringSession": false
+}

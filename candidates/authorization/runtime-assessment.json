@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "retrievedOn": "2026-11-10",
+  "approvedFormat": "safetensors",
+  "quantizationApproved": false,
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed",
+  "installedDuringSession": false,
+  "runtimes": [
+    {
+      "runtimeId": "llama-cpp",
+      "projectUrl": "https://github.com/ggml-org/llama.cpp",
+      "sourceUrl": "https://github.com/ggml-org/llama.cpp",
+      "licenseName": "MIT",
+      "licenseUrl": "https://github.com/ggml-org/llama.cpp/blob/v0.9.0/LICENSE",
+      "versionTag": "v0.9.0",
+      "immutableRevision": "cd959bae99ff4bed22bef2604f45241c09bbb8c8",
+      "criteria": {
+        "approved-format-support": "fail",
+        "bounded-context-and-output": "pass",
+        "cpu-support": "fail",
+        "deterministic-controls": "pass",
+        "documented-artifact-loading": "pass",
+        "explicit-open-source-license": "pass",
+        "explicit-telemetry-disablement": "pass",
+        "immutable-version": "pass",
+        "local-artifact-paths": "pass",
+        "maintainable-security-posture": "fail",
+        "no-mandatory-cloud": "pass",
+        "no-mandatory-telemetry": "pass",
+        "no-production-dependency": "pass",
+        "no-trust-remote-code": "pass",
+        "offline-local-loading": "pass",
+        "subprocess-compatibility": "pass"
+      },
+      "disqualifiers": [
+        "approved-format-support",
+        "cpu-support",
+        "maintainable-security-posture"
+      ],
+      "advisoryIds": [
+        "GHSA-5998-89hj-xhfc",
+        "GHSA-fhv7-8956-mv3h",
+        "GHSA-w4wv-vq5v-xp26"
+      ],
+      "evidence": [
+        {
+          "sourceName": "llama.cpp v0.9.0 commit",
+          "publisher": "ggml-org",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "Tag v0.9.0 resolves to commit cd959bae99ff4bed22bef2604f45241c09bbb8c8. The pinned LICENSE file is the MIT license.",
+          "url": "https://github.com/ggml-org/llama.cpp/commit/cd959bae99ff4bed22bef2604f45241c09bbb8c8"
+        },
+        {
+          "sourceName": "llama.cpp model formats",
+          "publisher": "ggml-org",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "Inference at this tag consumes GGUF. Other checkpoint formats go through conversion scripts, so publisher safetensors are not an approved no-conversion input.",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/v0.9.0/docs/models.md"
+        },
+        {
+          "sourceName": "llama.cpp GGUF advisories",
+          "publisher": "GitHub Advisory Database",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "unresolved",
+          "claim": "GHSA-5998-89hj-xhfc, GHSA-fhv7-8956-mv3h, and GHSA-w4wv-vq5v-xp26 describe GGUF parsing flaws whose patched versions were not identified. Security posture stays unresolved.",
+          "url": "https://github.com/advisories/GHSA-5998-89hj-xhfc"
+        }
+      ]
+    },
+    {
+      "runtimeId": "onnxruntime",
+      "projectUrl": "https://onnxruntime.ai",
+      "sourceUrl": "https://github.com/microsoft/onnxruntime",
+      "licenseName": "MIT",
+      "licenseUrl": "https://github.com/microsoft/onnxruntime/blob/v1.31.1/LICENSE",
+      "versionTag": "v1.31.1",
+      "immutableRevision": "6af1a932e2286d5c58166085d24c68783033edee",
+      "criteria": {
+        "approved-format-support": "fail",
+        "bounded-context-and-output": "fail",
+        "cpu-support": "pass",
+        "deterministic-controls": "pass",
+        "documented-artifact-loading": "pass",
+        "explicit-open-source-license": "pass",
+        "explicit-telemetry-disablement": "pass",
+        "immutable-version": "pass",
+        "local-artifact-paths": "pass",
+        "maintainable-security-posture": "pass",
+        "no-mandatory-cloud": "pass",
+        "no-mandatory-telemetry": "pass",
+        "no-production-dependency": "pass",
+        "no-trust-remote-code": "pass",
+        "offline-local-loading": "pass",
+        "subprocess-compatibility": "pass"
+      },
+      "disqualifiers": [
+        "approved-format-support",
+        "bounded-context-and-output"
+      ],
+      "advisoryIds": [],
+      "evidence": [
+        {
+          "sourceName": "ONNX Runtime v1.31.1 commit",
+          "publisher": "Microsoft",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "Tag v1.31.1 resolves to commit 6af1a932e2286d5c58166085d24c68783033edee. The pinned LICENSE file is the MIT license.",
+          "url": "https://github.com/microsoft/onnxruntime/commit/6af1a932e2286d5c58166085d24c68783033edee"
+        },
+        {
+          "sourceName": "ONNX Runtime session API",
+          "publisher": "Microsoft",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "InferenceSession loads ONNX or ORT graphs. It does not load publisher safetensors, and the retrieved API does not document token context or generation limits.",
+          "url": "https://onnxruntime.ai/docs/api/python/api_summary"
+        },
+        {
+          "sourceName": "ONNX Runtime CPU provider",
+          "publisher": "Microsoft",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "CPUExecutionProvider is the documented CPU path. Telemetry disablement is an explicit API, and no pip advisory for this package was returned.",
+          "url": "https://onnxruntime.ai/docs/get-started/with-c.html"
+        }
+      ]
+    },
+    {
+      "runtimeId": "transformers",
+      "projectUrl": "https://github.com/huggingface/transformers",
+      "sourceUrl": "https://github.com/huggingface/transformers",
+      "licenseName": "Apache-2.0",
+      "licenseUrl": "https://github.com/huggingface/transformers/blob/v5.22.2/LICENSE",
+      "versionTag": "v5.22.2",
+      "immutableRevision": "6d195c6262a0ac2ef44f7b9a308617562286ff45",
+      "criteria": {
+        "approved-format-support": "pass",
+        "bounded-context-and-output": "pass",
+        "cpu-support": "fail",
+        "deterministic-controls": "pass",
+        "documented-artifact-loading": "pass",
+        "explicit-open-source-license": "pass",
+        "explicit-telemetry-disablement": "pass",
+        "immutable-version": "pass",
+        "local-artifact-paths": "pass",
+        "maintainable-security-posture": "fail",
+        "no-mandatory-cloud": "pass",
+        "no-mandatory-telemetry": "pass",
+        "no-production-dependency": "pass",
+        "no-trust-remote-code": "fail",
+        "offline-local-loading": "pass",
+        "subprocess-compatibility": "pass"
+      },
+      "disqualifiers": [
+        "cpu-support",
+        "maintainable-security-posture",
+        "no-trust-remote-code"
+      ],
+      "advisoryIds": [
+        "GHSA-8jfx-5878-hv4v",
+        "GHSA-9qm5-hqg9-j2fx",
+        "GHSA-hv5j-58mm-f6v9"
+      ],
+      "evidence": [
+        {
+          "sourceName": "Transformers v5.22.2 commit",
+          "publisher": "Hugging Face",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "Tag v5.22.2 resolves to commit 6d195c6262a0ac2ef44f7b9a308617562286ff45. The pinned LICENSE file is Apache-2.0.",
+          "url": "https://github.com/huggingface/transformers/commit/6d195c6262a0ac2ef44f7b9a308617562286ff45"
+        },
+        {
+          "sourceName": "Transformers loading documentation",
+          "publisher": "Hugging Face",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "from_pretrained can load local safetensors. The same documentation loads custom modeling code when trust_remote_code is true, so the no-remote-code criterion fails.",
+          "url": "https://huggingface.co/docs/transformers/main_classes/model"
+        },
+        {
+          "sourceName": "Transformers advisory coverage",
+          "publisher": "GitHub Advisory Database",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "unresolved",
+          "claim": "GHSA-9qm5-hqg9-j2fx, GHSA-hv5j-58mm-f6v9, and GHSA-8jfx-5878-hv4v name local deserialization with unknown affected ranges. Security posture stays unresolved.",
+          "url": "https://github.com/advisories/GHSA-9qm5-hqg9-j2fx"
+        }
+      ]
+    }
+  ]
+}

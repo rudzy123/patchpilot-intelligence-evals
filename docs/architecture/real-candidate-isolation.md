@@ -7,3 +7,11 @@ The hardware profile records a non-sensitive view of the evaluation machine on 2
 The resource envelope is an artifact at or below 8 GiB, calculated peak process memory at or below 12 GiB, context at or below 8192 tokens, explanation text at or below 400 characters, one process, a 15-second timeout, no GPU requirement, and free storage of at least twice the artifact size. No quantization is approved. Cold-start latency for every shortlisted checkpoint is unknown. Memory and file-size estimates that fall inside the envelope do not by themselves make a checkpoint compatible with the current child boundary.
 
 No runtime is authorized. A later runtime assessment would need an explicit license, disabled telemetry, local files only, and `trust_remote_code` prohibited. Selection criteria are in [real-candidate-selection.md](real-candidate-selection.md). The acquisition template is in [real-candidate-acquisition.md](real-candidate-acquisition.md).
+
+## Track 5 profile
+
+The Track 5 record is [real-candidate-isolation-profile.json](../../candidates/authorization/real-candidate-isolation-profile.json). It does not change the fixture runner. Fixture wall clock stays 15 seconds, standard output stays 64 KiB, and standard error stays 16 KiB. Real-candidate planning ceilings are separate: 60 seconds for artifact verification, 180 seconds for startup and load, 120 seconds for a warm case, 90 minutes for one 24-case repetition, 30 seconds for cleanup, 64 KiB of standard output, and 64 KiB of standard error. One candidate process and one real-candidate evaluation may be considered. Retries stay at zero.
+
+Linux `RLIMIT_CPU`, `RLIMIT_AS`, `RLIMIT_FSIZE`, `RLIMIT_NOFILE`, and `RLIMIT_NPROC` can be set on a harmless child. `RLIMIT_AS` limits address space, not resident memory. `RLIMIT_NPROC` is a per-user limit. Those probes do not execute a model.
+
+Read-only artifact and configuration mounts, hiding gold labels, prior results, sibling trees, the home directory, SSH configuration, and cloud-credential files, and an operating-system network denial require a namespace or container. They are deferred blockers. `acquisitionBlocked` is true. This profile is not an operating-system sandbox.
