@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "selectionOutcome": "no-selection",
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed",
+  "readiness": "ready",
+  "verdict": "TRACK 6B HARDENED ACQUISITION READY WITH DOCUMENTED RESIDUALS",
+  "profileId": "linux-bwrap-systemd-v1",
+  "profileVersion": "1.0.0",
+  "runtimeAuthorizationOutcome": "authorized",
+  "runtimeId": "onnxruntime",
+  "blockers": [],
+  "residualIds": [
+    "sandbox-local-loopback",
+    "seccomp-unsupported",
+    "unshare-failed",
+    "podman-unavailable",
+    "docker-unavailable",
+    "direct-cgroup-delegation-failed",
+    "single-uid-user-namespace",
+    "numeric-uid-in-mount-options",
+    "candidate-format-gap",
+    "rlimit-nproc-not-private",
+    "acquisition-remains-not-authorized"
+  ],
+  "localModelArtifactDigests": [],
+  "candidateSelected": false,
+  "installationAuthorized": false
+}

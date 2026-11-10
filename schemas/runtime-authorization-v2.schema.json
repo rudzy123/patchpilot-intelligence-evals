@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:runtime-authorization-v2:v1",
+  "title": "Runtime authorization v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "retrievedOn",
+    "authorizationOutcome",
+    "runtimeId",
+    "versionTag",
+    "immutableRevision",
+    "artifactFormat",
+    "approvedCandidateFormat",
+    "candidateFormatGap",
+    "assessedRuntimeIds",
+    "disqualifiers",
+    "acquisitionStatus",
+    "executionStatus",
+    "locallyObservedArtifactDigests",
+    "installedDuringSession",
+    "installationAuthorized",
+    "candidateSelected"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "retrievedOn": { "const": "2026-11-10" },
+    "authorizationOutcome": { "enum": ["authorized", "no-runtime"] },
+    "runtimeId": {
+      "oneOf": [{ "type": "null" }, { "enum": ["llama-cpp", "onnxruntime", "transformers"] }]
+    },
+    "versionTag": {
+      "oneOf": [{ "type": "null" }, { "type": "string", "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$" }]
+    },
+    "immutableRevision": {
+      "oneOf": [{ "type": "null" }, { "type": "string", "pattern": "^[0-9a-f]{40}$" }]
+    },
+    "artifactFormat": {
+      "oneOf": [{ "type": "null" }, { "enum": ["gguf", "onnx", "safetensors"] }]
+    },
+    "approvedCandidateFormat": { "const": "safetensors" },
+    "candidateFormatGap": { "type": "boolean" },
+    "assessedRuntimeIds": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "uniqueItems": true,
+      "items": { "enum": ["llama-cpp", "onnxruntime", "transformers"] }
+    },
+    "disqualifiers": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["runtimeId", "criteria"],
+        "properties": {
+          "runtimeId": { "enum": ["llama-cpp", "onnxruntime", "transformers"] },
+          "criteria": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "explicit-license",
+                "immutable-version",
+                "official-source",
+                "clear-artifact-format",
+                "cpu-only",
+                "offline-loading",
+                "local-artifact-paths",
+                "no-remote-code-required",
+                "no-mandatory-telemetry",
+                "telemetry-can-be-disabled",
+                "deterministic-settings",
+                "advisories-reviewed",
+                "subprocess-integration",
+                "independent-acquisition-verification",
+                "not-production-dependency"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "installedDuringSession": { "const": false },
+    "installationAuthorized": { "const": false },
+    "candidateSelected": { "const": false }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "authorizationOutcome": { "const": "no-runtime" } },
+        "required": ["authorizationOutcome"]
+      },
+      "then": {
+        "properties": {
+          "runtimeId": { "type": "null" },
+          "versionTag": { "type": "null" },
+          "immutableRevision": { "type": "null" },
+          "artifactFormat": { "type": "null" },
+          "disqualifiers": { "minItems": 1 }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "authorizationOutcome": { "const": "authorized" } },
+        "required": ["authorizationOutcome"]
+      },
+      "then": {
+        "properties": {
+          "runtimeId": { "type": "string" },
+          "versionTag": { "type": "string" },
+          "immutableRevision": { "type": "string" },
+          "artifactFormat": { "type": "string" }
+        }
+      }
+    }
+  ]
+}

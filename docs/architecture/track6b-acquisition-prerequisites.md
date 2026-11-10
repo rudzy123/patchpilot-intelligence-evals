@@ -1,0 +1,13 @@
+# Track 6B acquisition prerequisites
+
+Track 6B readiness is a pure function of the hardened profile and runtime authorization v2. The record is [track6b-readiness.json](../../candidates/authorization/track6b-readiness.json). The existing Track 6 decision in [track6-acquisition-authorization.json](../../candidates/authorization/track6-acquisition-authorization.json) stays `not-authorized`. Track 5 isolation, runtime, evidence, and review records are unchanged.
+
+Readiness is `ready` only when every required control is `enforced` and runtime authorization v2 is `authorized`. The required controls are unprivileged execution, a minimal environment, read-only artifacts and configuration, isolated writable results, hiding of gold labels, prior results, sibling repositories, the home directory, SSH configuration, and cloud credentials, operating-system denial of outbound network, host loopback, DNS, IPv4, IPv6, and external Unix sockets, process count, CPU time, cgroup memory, address space, wall clock, file size, open files, standard output, standard error, process-tree cleanup, no shell, and an explicit working directory.
+
+Any missing required control or a `no-runtime` authorization yields `not-ready` and names the blockers. Sandbox-local loopback denial, seccomp, and a private `RLIMIT_NPROC` are unsupported and are not required. Podman and Docker are unavailable. `unshare` and direct cgroup delegation are failed. Those gaps are residuals, not enforcement.
+
+The committed readiness is `ready`. The verdict is `TRACK 6B HARDENED ACQUISITION READY WITH DOCUMENTED RESIDUALS`. Blockers are empty. Residuals are `sandbox-local-loopback`, `seccomp-unsupported`, `unshare-failed`, `podman-unavailable`, `docker-unavailable`, `direct-cgroup-delegation-failed`, `single-uid-user-namespace`, `numeric-uid-in-mount-options`, `candidate-format-gap`, `rlimit-nproc-not-private`, and `acquisition-remains-not-authorized`.
+
+The record keeps `selectionOutcome` `no-selection`, `acquisitionStatus` `not-acquired`, `executionStatus` `not-executed`, `productionReady` false, `candidateSelected` false, `installationAuthorized` false, and an empty model-artifact digest list.
+
+Track 6B readiness means only that the hardened execution boundary is ready for the next controlled architectural Session. It does not authorize runtime installation, model or tokenizer acquisition, model conversion, candidate selection, real inference, evaluation-gate changes, shadow mode, or PatchPilot production composition. The acceptance record is [track6a-implementation-review.md](../provenance/track6a-implementation-review.md).

@@ -22,6 +22,19 @@ from patchpilot_intelligence_evals.comparison import compare_results
 from patchpilot_intelligence_evals.corpus import CorpusError, canonical_dumps, validate_corpus
 from patchpilot_intelligence_evals.evaluator import evaluate_baseline
 from patchpilot_intelligence_evals.evidence_closure import EvidenceError, load_closure
+from patchpilot_intelligence_evals.execution_attestation import (
+    AttestationError,
+    load_attestation,
+    load_readiness,
+    validate_attestation,
+)
+from patchpilot_intelligence_evals.execution_attestation import (
+    load_profile as load_hardened_profile,
+)
+from patchpilot_intelligence_evals.hardened_execution import (
+    HardenedExecutionError,
+    visibility_summary,
+)
 from patchpilot_intelligence_evals.implementation_review import ReviewError, load_review
 from patchpilot_intelligence_evals.isolation_profile import IsolationError, load_profile
 from patchpilot_intelligence_evals.network_guard import (
@@ -42,7 +55,22 @@ from patchpilot_intelligence_evals.runtime_authorization import (
     load_assessment,
     load_authorization,
 )
+from patchpilot_intelligence_evals.runtime_security import (
+    RuntimeSecurityError,
+)
+from patchpilot_intelligence_evals.runtime_security import (
+    load_assessment as load_runtime_security_assessment,
+)
+from patchpilot_intelligence_evals.runtime_security import (
+    load_authorization as load_runtime_authorization_v2,
+)
+from patchpilot_intelligence_evals.sandbox_capabilities import (
+    SandboxCapabilityError,
+    load_capability_report,
+)
 from patchpilot_intelligence_evals.schemas import SchemaValidationError, repo_root
+from patchpilot_intelligence_evals.track6a_review import Track6AReviewError
+from patchpilot_intelligence_evals.track6a_review import load_review as load_track6a_review
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -64,6 +92,15 @@ def _parser() -> argparse.ArgumentParser:
     commands.add_parser("evidence-closure-validation")
     commands.add_parser("track6-authorization-validation")
     commands.add_parser("track5-review-validation")
+    commands.add_parser("sandbox-capability-validation")
+    commands.add_parser("hardened-execution-profile-validation")
+    commands.add_parser("hardened-fixture-execution")
+    attestation = commands.add_parser("execution-attestation-validation")
+    attestation.add_argument("--attestation", default=None)
+    commands.add_parser("runtime-security-assessment-validation")
+    commands.add_parser("runtime-authorization-v2-validation")
+    commands.add_parser("track6b-readiness-validation")
+    commands.add_parser("track6a-review-validation")
     one_case = commands.add_parser("candidate-execution")
     one_case.add_argument("--manifest", required=True)
     one_case.add_argument("--case-id", required=True)
@@ -121,6 +158,13 @@ def main(argv: list[str] | None = None) -> int:
     parser = _parser()
     args = parser.parse_args(argv)
     try:
+        # The parent opens a host listener to prove network-namespace denial.
+        # The in-process socket hook would hide that proof, so this command
+        # stays outside it. The child still runs in the network namespace.
+        if args.command == "hardened-fixture-execution":
+            summary = visibility_summary()
+            _summary(dict(summary))
+            return 0 if summary["status"] == "ok" else 1
         with network_guard():
             if args.command == "corpus-validation":
                 return _summary(validate_corpus())
@@ -239,6 +283,118 @@ def main(argv: list[str] | None = None) -> int:
                         "productionReady": False,
                     }
                 )
+            if args.command == "sandbox-capability-validation":
+                report = load_capability_report()
+                enforced = [
+                    item["probeId"]
+                    for item in report["probes"]
+                    if item["disposition"] == "enforced"
+                ]
+                return _summary(
+                    {
+                        "status": "ok",
+                        "operatingSystemFamily": report["operatingSystemFamily"],
+                        "architecture": report["architecture"],
+                        "enforcedCount": len(enforced),
+                        "realModelExecuted": False,
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "hardened-execution-profile-validation":
+                profile = load_hardened_profile()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "profileId": profile["profileId"],
+                        "mechanism": profile["mechanism"],
+                        "memoryMechanism": profile["memoryMechanism"],
+                        "addressSpaceMechanism": profile["addressSpaceMechanism"],
+                        "realModelExecuted": False,
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "execution-attestation-validation":
+                if args.attestation is None:
+                    attested = load_attestation()
+                else:
+                    _checked_relative(str(args.attestation))
+                    loaded = json.loads(
+                        (repo_root() / str(args.attestation)).read_text(encoding="utf-8")
+                    )
+                    if not isinstance(loaded, dict):
+                        raise AttestationError("record-type")
+                    attested = validate_attestation(loaded)
+                return _summary(
+                    {
+                        "status": "ok",
+                        "exitClassification": attested["exitClassification"],
+                        "runtimeAuthorizationId": attested["runtimeAuthorizationId"],
+                        "realModelExecuted": False,
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "runtime-security-assessment-validation":
+                assessed = load_runtime_security_assessment()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "runtimeCount": len(assessed["runtimes"]),
+                        "installedDuringSession": False,
+                        "realModelExecuted": False,
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "runtime-authorization-v2-validation":
+                authorized = load_runtime_authorization_v2()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "authorizationOutcome": authorized["authorizationOutcome"],
+                        "runtimeId": authorized["runtimeId"],
+                        "installationAuthorized": False,
+                        "candidateSelected": False,
+                        "acquisitionStatus": authorized["acquisitionStatus"],
+                        "executionStatus": authorized["executionStatus"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "track6b-readiness-validation":
+                readiness = load_readiness()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "readiness": readiness["readiness"],
+                        "verdict": readiness["verdict"],
+                        "blockerCount": len(readiness["blockers"]),
+                        "selectionOutcome": readiness["selectionOutcome"],
+                        "acquisitionStatus": readiness["acquisitionStatus"],
+                        "executionStatus": readiness["executionStatus"],
+                        "realModelExecuted": False,
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "track6a-review-validation":
+                review = load_track6a_review()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "reviewStatus": review["reviewStatus"],
+                        "decision": review["decision"],
+                        "profileId": review["profileId"],
+                        "profileVersion": review["profileVersion"],
+                        "runtimeId": review["runtimeId"],
+                        "versionTag": review["versionTag"],
+                        "installationAuthorized": False,
+                        "installedDuringSession": False,
+                        "candidateFormatGap": True,
+                        "candidateDecision": review["candidateDecision"],
+                        "track6Authorization": review["track6Authorization"],
+                        "acquisitionStatus": review["acquisitionStatus"],
+                        "executionStatus": review["executionStatus"],
+                        "realModelExecuted": False,
+                        "productionReady": False,
+                    }
+                )
             if args.command == "track5-review-validation":
                 review = load_review()
                 return _summary(
@@ -352,9 +508,14 @@ def main(argv: list[str] | None = None) -> int:
         CacheError,
         VerificationError,
         RuntimeAuthorizationError,
+        RuntimeSecurityError,
+        SandboxCapabilityError,
+        HardenedExecutionError,
+        AttestationError,
         IsolationError,
         EvidenceError,
         ReviewError,
+        Track6AReviewError,
         ResultStoreError,
         SchemaValidationError,
         json.JSONDecodeError,

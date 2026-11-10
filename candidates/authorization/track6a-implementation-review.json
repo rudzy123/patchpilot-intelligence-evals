@@ -1,0 +1,255 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "reviewStatus": "accepted-by-principal-systems-architect",
+  "reviewDate": "2026-11-10",
+  "reviewAuthority": "PatchPilot Principal Systems Architect",
+  "decision": "hardened execution boundary approved with documented residuals",
+  "authorizedScope": "This approval accepts the Track 6A hardened execution boundary with documented residuals for the next controlled architectural Session only.",
+  "readinessMeaning": "Track 6B readiness means the hardened execution boundary is ready for the next controlled architectural Session.",
+  "profileId": "linux-bwrap-systemd-v1",
+  "profileVersion": "1.0.0",
+  "mechanism": "bubblewrap+systemd-user-scope",
+  "runtimeId": "onnxruntime",
+  "versionTag": "v1.31.1",
+  "immutableRevision": "6af1a932e2286d5c58166085d24c68783033edee",
+  "artifactFormat": "onnx",
+  "installationAuthorized": false,
+  "installedDuringSession": false,
+  "candidateFormatGap": true,
+  "candidateDecision": "no-selection",
+  "track6Authorization": "not-authorized",
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed",
+  "locallyObservedArtifactDigests": [],
+  "acceptedControls": [
+    {
+      "controlId": "user-namespace",
+      "source": "capability-probe",
+      "statement": "User namespace isolation was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "mount-namespace",
+      "source": "capability-probe",
+      "statement": "Mount namespace isolation was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "pid-namespace",
+      "source": "capability-probe",
+      "statement": "PID namespace isolation was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "network-namespace",
+      "source": "capability-probe",
+      "statement": "Network namespace isolation was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "ipc-namespace",
+      "source": "capability-probe",
+      "statement": "IPC namespace isolation was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "uts-namespace",
+      "source": "capability-probe",
+      "statement": "UTS namespace isolation was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "cgroup-namespace",
+      "source": "capability-probe",
+      "statement": "Cgroup namespace isolation was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "minimal-environment",
+      "source": "execution-profile",
+      "statement": "The minimal constructed environment was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "read-only-verified-artifacts",
+      "source": "execution-profile",
+      "statement": "Read-only synthetic artifacts were accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "read-only-candidate-configuration",
+      "source": "execution-profile",
+      "statement": "Read-only synthetic configuration was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "isolated-writable-results",
+      "source": "execution-profile",
+      "statement": "Isolated writable results were accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "no-gold-label-access",
+      "source": "execution-profile",
+      "statement": "Hidden gold labels were accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "no-prior-result-access",
+      "source": "execution-profile",
+      "statement": "Hidden prior results were accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "no-sibling-repository-access",
+      "source": "execution-profile",
+      "statement": "Hidden sibling repositories were accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "no-home-directory-access",
+      "source": "execution-profile",
+      "statement": "Hidden home material was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "no-ssh-configuration-access",
+      "source": "execution-profile",
+      "statement": "Hidden SSH material was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "no-cloud-credentials",
+      "source": "execution-profile",
+      "statement": "Hidden cloud credentials were accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "no-outbound-network",
+      "source": "execution-profile",
+      "statement": "Host-network denial was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "dns-denial",
+      "source": "execution-profile",
+      "statement": "DNS denial was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "ipv4-denial",
+      "source": "execution-profile",
+      "statement": "IPv4 denial was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "ipv6-denial",
+      "source": "execution-profile",
+      "statement": "IPv6 denial was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "host-loopback-denial",
+      "source": "execution-profile",
+      "statement": "Host-loopback-service denial was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "external-unix-socket-denial",
+      "source": "execution-profile",
+      "statement": "External Unix-socket denial was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "memory-limit",
+      "source": "execution-profile",
+      "statement": "Cgroup MemoryMax was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "process-count-limit",
+      "source": "execution-profile",
+      "statement": "Cgroup TasksMax was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "cpu-time-limit",
+      "source": "execution-profile",
+      "statement": "The CPU-time limit was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "address-space-limit",
+      "source": "execution-profile",
+      "statement": "The address-space limit was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "wall-clock-limit",
+      "source": "execution-profile",
+      "statement": "The wall-clock limit was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "file-size-limit",
+      "source": "execution-profile",
+      "statement": "The file-size limit was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "open-file-limit",
+      "source": "execution-profile",
+      "statement": "The open-file limit was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "stdout-limit",
+      "source": "execution-profile",
+      "statement": "The stdout limit was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "stderr-limit",
+      "source": "execution-profile",
+      "statement": "The stderr limit was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "process-tree-termination",
+      "source": "execution-profile",
+      "statement": "Complete process-tree cleanup was accepted as enforced on the evaluated host."
+    },
+    {
+      "controlId": "no-shell",
+      "source": "execution-profile",
+      "statement": "Direct argument execution with no shell was accepted as enforced on the evaluated host."
+    }
+  ],
+  "acceptedResiduals": [
+    {
+      "residualId": "sandbox-local-loopback",
+      "statement": "Sandbox-local loopback remains available inside the isolated namespace."
+    },
+    {
+      "residualId": "seccomp-unsupported",
+      "statement": "Seccomp is unsupported because enforcement was not proven."
+    },
+    {
+      "residualId": "unshare-failed",
+      "statement": "Direct unshare failed."
+    },
+    {
+      "residualId": "podman-unavailable",
+      "statement": "Rootless Podman is unavailable."
+    },
+    {
+      "residualId": "docker-unavailable",
+      "statement": "Rootless Docker is unavailable."
+    },
+    {
+      "residualId": "direct-cgroup-delegation-failed",
+      "statement": "Direct cgroup delegation failed."
+    },
+    {
+      "residualId": "single-uid-user-namespace",
+      "statement": "The user namespace uses a single UID map."
+    },
+    {
+      "residualId": "numeric-uid-in-mount-options",
+      "statement": "Numeric UID mount options remain."
+    },
+    {
+      "residualId": "candidate-format-gap",
+      "statement": "The authorized runtime supports ONNX while the current candidate contract remains safetensors."
+    },
+    {
+      "residualId": "rlimit-nproc-not-private",
+      "statement": "RLIMIT_NPROC is not a private process-count boundary."
+    },
+    {
+      "residualId": "acquisition-remains-not-authorized",
+      "statement": "Track 6 acquisition remains not authorized."
+    }
+  ],
+  "notAuthorized": [
+    "runtime installation",
+    "model or tokenizer acquisition",
+    "model conversion",
+    "candidate selection",
+    "real inference",
+    "evaluation-gate changes",
+    "shadow mode",
+    "PatchPilot production composition"
+  ],
+  "reviewDigest": "bcd6417c7e61b3c5130466f76fec62fdcf7f972c9ab485e6c97b0fec93f217ab"
+}

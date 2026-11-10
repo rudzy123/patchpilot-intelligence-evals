@@ -16,6 +16,7 @@ from patchpilot_intelligence_evals.provenance import PROVENANCE_SENTENCE
 from patchpilot_intelligence_evals.schemas import (
     CANDIDATE_SCHEMA_NAMES,
     SCHEMA_NAMES,
+    TRACK6A_SCHEMA_NAMES,
     load_schema,
     repo_root,
     validate,
@@ -58,12 +59,18 @@ _DOCUMENTS = (
     "docs/architecture/model-artifact-verification.md",
     "docs/architecture/runtime-selection.md",
     "docs/architecture/track6-acquisition-boundary.md",
+    "docs/architecture/linux-isolation-capabilities.md",
+    "docs/architecture/hardened-execution.md",
+    "docs/architecture/runtime-authorization.md",
+    "docs/architecture/track6b-acquisition-prerequisites.md",
     "docs/provenance/initial-corpus-provenance.md",
+    "docs/provenance/runtime-evidence.md",
     "docs/provenance/candidate-fixtures.md",
     "docs/provenance/candidate-shortlist.md",
     "docs/provenance/selected-candidate-authorization.md",
     "docs/provenance/candidate-evidence-closure.md",
     "docs/provenance/track5-implementation-review.md",
+    "docs/provenance/track6a-implementation-review.md",
 )
 
 
@@ -130,6 +137,13 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals evidence-closure-validation",
         "uv run patchpilot-evals track6-authorization-validation",
         "uv run patchpilot-evals track5-review-validation",
+        "uv run patchpilot-evals sandbox-capability-validation",
+        "uv run patchpilot-evals hardened-execution-profile-validation",
+        "uv run patchpilot-evals execution-attestation-validation",
+        "uv run patchpilot-evals runtime-security-assessment-validation",
+        "uv run patchpilot-evals runtime-authorization-v2-validation",
+        "uv run patchpilot-evals track6b-readiness-validation",
+        "uv run patchpilot-evals track6a-review-validation",
     ):
         assert command in text
     uses = re.findall(r"uses: (\S+)", text)
@@ -164,11 +178,19 @@ def test_help_lists_commands() -> None:
     assert "evidence-closure-validation" in text
     assert "track6-authorization-validation" in text
     assert "track5-review-validation" in text
+    assert "sandbox-capability-validation" in text
+    assert "hardened-execution-profile-validation" in text
+    assert "hardened-fixture-execution" in text
+    assert "execution-attestation-validation" in text
+    assert "runtime-security-assessment-validation" in text
+    assert "runtime-authorization-v2-validation" in text
+    assert "track6b-readiness-validation" in text
+    assert "track6a-review-validation" in text
 
 
 def test_committed_json_files_validate() -> None:
     root = repo_root()
-    for name in SCHEMA_NAMES + CANDIDATE_SCHEMA_NAMES:
+    for name in SCHEMA_NAMES + CANDIDATE_SCHEMA_NAMES + TRACK6A_SCHEMA_NAMES:
         document = load_schema(name)
         assert document["additionalProperties"] is False
     for path in sorted((root / "corpus" / "cases").glob("*.json")):

@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0.0",
+  "profileId": "linux-bwrap-systemd-v1",
+  "profileVersion": "1.0.0",
+  "mechanism": "bubblewrap+systemd-user-scope",
+  "bubblewrapVersion": "0.11.1",
+  "systemdVersion": "259",
+  "operatingSystemFamily": "linux",
+  "architecture": "x86_64",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed",
+  "memoryMechanism": "cgroup-memory-max",
+  "addressSpaceMechanism": "rlimit-as",
+  "processCountMechanism": "cgroup-tasks-max",
+  "limits": {
+    "memoryMaxBytes": 268435456,
+    "tasksMax": 32,
+    "cpuSeconds": 5,
+    "addressSpaceBytes": 2147483648,
+    "fileSizeBytes": 1048576,
+    "openFiles": 128,
+    "wallClockSeconds": 15,
+    "stdoutBytes": 65536,
+    "stderrBytes": 16384,
+    "retries": 0
+  },
+  "controls": [
+    {
+      "controlId": "unprivileged-execution",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "minimal-environment",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "read-only-verified-artifacts",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "read-only-candidate-configuration",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "isolated-writable-results",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "no-gold-label-access",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "no-prior-result-access",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "no-sibling-repository-access",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "no-home-directory-access",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "no-ssh-configuration-access",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "no-cloud-credentials",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "no-outbound-network",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "host-loopback-denial",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "dns-denial",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "ipv4-denial",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "ipv6-denial",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "external-unix-socket-denial",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "process-count-limit",
+      "disposition": "enforced",
+      "mechanism": "systemd-user-scope"
+    },
+    {
+      "controlId": "cpu-time-limit",
+      "disposition": "enforced",
+      "mechanism": "rlimit-cpu"
+    },
+    {
+      "controlId": "memory-limit",
+      "disposition": "enforced",
+      "mechanism": "systemd-user-scope"
+    },
+    {
+      "controlId": "address-space-limit",
+      "disposition": "enforced",
+      "mechanism": "rlimit-as"
+    },
+    {
+      "controlId": "wall-clock-limit",
+      "disposition": "enforced",
+      "mechanism": "parent-process"
+    },
+    {
+      "controlId": "file-size-limit",
+      "disposition": "enforced",
+      "mechanism": "rlimit-fsize"
+    },
+    {
+      "controlId": "open-file-limit",
+      "disposition": "enforced",
+      "mechanism": "rlimit-nofile"
+    },
+    {
+      "controlId": "stdout-limit",
+      "disposition": "enforced",
+      "mechanism": "parent-process"
+    },
+    {
+      "controlId": "stderr-limit",
+      "disposition": "enforced",
+      "mechanism": "parent-process"
+    },
+    {
+      "controlId": "process-tree-termination",
+      "disposition": "enforced",
+      "mechanism": "parent-process"
+    },
+    {
+      "controlId": "no-shell",
+      "disposition": "enforced",
+      "mechanism": "parent-process"
+    },
+    {
+      "controlId": "explicit-working-directory",
+      "disposition": "enforced",
+      "mechanism": "bubblewrap"
+    },
+    {
+      "controlId": "sandbox-local-loopback-denial",
+      "disposition": "unsupported",
+      "mechanism": "unsupported"
+    },
+    {
+      "controlId": "seccomp",
+      "disposition": "unsupported",
+      "mechanism": "unsupported"
+    },
+    {
+      "controlId": "private-rlimit-nproc",
+      "disposition": "unsupported",
+      "mechanism": "unsupported"
+    },
+    {
+      "controlId": "rootless-podman",
+      "disposition": "unavailable",
+      "mechanism": "unavailable"
+    },
+    {
+      "controlId": "rootless-docker",
+      "disposition": "unavailable",
+      "mechanism": "unavailable"
+    },
+    {
+      "controlId": "unshare",
+      "disposition": "failed",
+      "mechanism": "unshare"
+    },
+    {
+      "controlId": "direct-cgroup-delegation",
+      "disposition": "failed",
+      "mechanism": "cgroup-write"
+    }
+  ]
+}

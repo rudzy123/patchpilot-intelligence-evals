@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:runtime-security-assessment:v1",
+  "title": "Runtime security assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "retrievedOn",
+    "acquisitionStatus",
+    "executionStatus",
+    "installedDuringSession",
+    "approvedCandidateFormat",
+    "runtimes"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "retrievedOn": { "const": "2026-11-10" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" },
+    "installedDuringSession": { "const": false },
+    "approvedCandidateFormat": { "const": "safetensors" },
+    "runtimes": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/runtime" }
+    }
+  },
+  "$defs": {
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtimeId",
+        "projectUrl",
+        "sourceUrl",
+        "licenseName",
+        "licenseUrl",
+        "versionTag",
+        "immutableRevision",
+        "artifactFormat",
+        "criteria",
+        "disqualifiers",
+        "advisoryIds",
+        "evidence"
+      ],
+      "properties": {
+        "runtimeId": { "enum": ["llama-cpp", "onnxruntime", "transformers"] },
+        "projectUrl": { "type": "string", "pattern": "^https://[a-zA-Z0-9./_-]+$" },
+        "sourceUrl": { "type": "string", "pattern": "^https://[a-zA-Z0-9./_-]+$" },
+        "licenseName": { "enum": ["MIT", "Apache-2.0"] },
+        "licenseUrl": { "type": "string", "pattern": "^https://[a-zA-Z0-9./_-]+$" },
+        "versionTag": { "type": "string", "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "immutableRevision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "artifactFormat": { "enum": ["gguf", "onnx", "safetensors"] },
+        "criteria": { "$ref": "#/$defs/criteria" },
+        "disqualifiers": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/criterion" }
+        },
+        "advisoryIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^GHSA-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}$" }
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": { "$ref": "#/$defs/evidence" }
+        }
+      }
+    },
+    "criteria": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "explicit-license",
+        "immutable-version",
+        "official-source",
+        "clear-artifact-format",
+        "cpu-only",
+        "offline-loading",
+        "local-artifact-paths",
+        "no-remote-code-required",
+        "no-mandatory-telemetry",
+        "telemetry-can-be-disabled",
+        "deterministic-settings",
+        "advisories-reviewed",
+        "subprocess-integration",
+        "independent-acquisition-verification",
+        "not-production-dependency"
+      ],
+      "properties": {
+        "explicit-license": { "enum": ["pass", "fail"] },
+        "immutable-version": { "enum": ["pass", "fail"] },
+        "official-source": { "enum": ["pass", "fail"] },
+        "clear-artifact-format": { "enum": ["pass", "fail"] },
+        "cpu-only": { "enum": ["pass", "fail"] },
+        "offline-loading": { "enum": ["pass", "fail"] },
+        "local-artifact-paths": { "enum": ["pass", "fail"] },
+        "no-remote-code-required": { "enum": ["pass", "fail"] },
+        "no-mandatory-telemetry": { "enum": ["pass", "fail"] },
+        "telemetry-can-be-disabled": { "enum": ["pass", "fail"] },
+        "deterministic-settings": { "enum": ["pass", "fail"] },
+        "advisories-reviewed": { "enum": ["pass", "fail"] },
+        "subprocess-integration": { "enum": ["pass", "fail"] },
+        "independent-acquisition-verification": { "enum": ["pass", "fail"] },
+        "not-production-dependency": { "enum": ["pass", "fail"] }
+      }
+    },
+    "criterion": {
+      "enum": [
+        "explicit-license",
+        "immutable-version",
+        "official-source",
+        "clear-artifact-format",
+        "cpu-only",
+        "offline-loading",
+        "local-artifact-paths",
+        "no-remote-code-required",
+        "no-mandatory-telemetry",
+        "telemetry-can-be-disabled",
+        "deterministic-settings",
+        "advisories-reviewed",
+        "subprocess-integration",
+        "independent-acquisition-verification",
+        "not-production-dependency"
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceName", "publisher", "retrievedOn", "evidenceClass", "claim", "url"],
+      "properties": {
+        "sourceName": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "publisher": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "retrievedOn": { "const": "2026-11-10" },
+        "evidenceClass": { "enum": ["authoritative", "unresolved"] },
+        "claim": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "url": { "type": "string", "pattern": "^https://[a-zA-Z0-9./_#?=&%-]+$" }
+      }
+    }
+  }
+}

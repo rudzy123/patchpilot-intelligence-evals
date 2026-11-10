@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed",
+  "operatingSystemFamily": "linux",
+  "architecture": "x86_64",
+  "probes": [
+    {
+      "probeId": "user-namespace",
+      "commandPresent": true,
+      "disposition": "enforced",
+      "evidence": "behavior-proven",
+      "mechanismVersion": "0.11.1"
+    },
+    {
+      "probeId": "mount-namespace",
+      "commandPresent": true,
+      "disposition": "enforced",
+      "evidence": "behavior-proven",
+      "mechanismVersion": "0.11.1"
+    },
+    {
+      "probeId": "pid-namespace",
+      "commandPresent": true,
+      "disposition": "enforced",
+      "evidence": "behavior-proven",
+      "mechanismVersion": "0.11.1"
+    },
+    {
+      "probeId": "network-namespace",
+      "commandPresent": true,
+      "disposition": "enforced",
+      "evidence": "behavior-proven",
+      "mechanismVersion": "0.11.1"
+    },
+    {
+      "probeId": "ipc-namespace",
+      "commandPresent": true,
+      "disposition": "enforced",
+      "evidence": "behavior-proven",
+      "mechanismVersion": "0.11.1"
+    },
+    {
+      "probeId": "uts-namespace",
+      "commandPresent": true,
+      "disposition": "enforced",
+      "evidence": "behavior-proven",
+      "mechanismVersion": "0.11.1"
+    },
+    {
+      "probeId": "cgroup-namespace",
+      "commandPresent": true,
+      "disposition": "enforced",
+      "evidence": "behavior-proven",
+      "mechanismVersion": "0.11.1"
+    },
+    {
+      "probeId": "bubblewrap",
+      "commandPresent": true,
+      "disposition": "enforced",
+      "evidence": "behavior-proven",
+      "mechanismVersion": "0.11.1"
+    },
+    {
+      "probeId": "rootless-podman",
+      "commandPresent": false,
+      "disposition": "unavailable",
+      "evidence": "command-missing",
+      "mechanismVersion": null
+    },
+    {
+      "probeId": "rootless-docker",
+      "commandPresent": false,
+      "disposition": "unavailable",
+      "evidence": "command-missing",
+      "mechanismVersion": null
+    },
+    {
+      "probeId": "unshare",
+      "commandPresent": true,
+      "disposition": "failed",
+      "evidence": "probe-failed",
+      "mechanismVersion": "2.41.3"
+    },
+    {
+      "probeId": "systemd-user-scope",
+      "commandPresent": true,
+      "disposition": "enforced",
+      "evidence": "behavior-proven",
+      "mechanismVersion": "259"
+    },
+    {
+      "probeId": "cgroup-v2",
+      "commandPresent": true,
+      "disposition": "enforced",
+      "evidence": "behavior-proven",
+      "mechanismVersion": null
+    },
+    {
+      "probeId": "cgroup-delegation",
+      "commandPresent": true,
+      "disposition": "failed",
+      "evidence": "probe-failed",
+      "mechanismVersion": null
+    },
+    {
+      "probeId": "rlimit-cpu",
+      "commandPresent": true,
+      "disposition": "enforced",
+      "evidence": "behavior-proven",
+      "mechanismVersion": null
+    },
+    {
+      "probeId": "rlimit-as",
+      "commandPresent": true,
+      "disposition": "enforced",
+      "evidence": "behavior-proven",
+      "mechanismVersion": null
+    },
+    {
+      "probeId": "rlimit-fsize",
+      "commandPresent": true,
+      "disposition": "enforced",
+      "evidence": "behavior-proven",
+      "mechanismVersion": null
+    },
+    {
+      "probeId": "rlimit-nofile",
+      "commandPresent": true,
+      "disposition": "enforced",
+      "evidence": "behavior-proven",
+      "mechanismVersion": null
+    },
+    {
+      "probeId": "rlimit-nproc",
+      "commandPresent": true,
+      "disposition": "unsupported",
+      "evidence": "per-user-not-private",
+      "mechanismVersion": null
+    },
+    {
+      "probeId": "seccomp",
+      "commandPresent": true,
+      "disposition": "unsupported",
+      "evidence": "command-present-unproven",
+      "mechanismVersion": "0.11.1"
+    }
+  ]
+}

@@ -96,3 +96,13 @@ jobs:
           uv run patchpilot-evals evidence-closure-validation
           uv run patchpilot-evals track6-authorization-validation
           uv run patchpilot-evals track5-review-validation
+
+      - name: Validate the hardened execution records
+        run: |
+          uv run patchpilot-evals sandbox-capability-validation
+          uv run patchpilot-evals hardened-execution-profile-validation
+          uv run patchpilot-evals execution-attestation-validation
+          uv run patchpilot-evals runtime-security-assessment-validation
+          uv run patchpilot-evals runtime-authorization-v2-validation
+          uv run patchpilot-evals track6b-readiness-validation
+          uv run patchpilot-evals track6a-review-validation

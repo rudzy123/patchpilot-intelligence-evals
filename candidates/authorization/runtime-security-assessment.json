@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "retrievedOn": "2026-11-10",
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed",
+  "installedDuringSession": false,
+  "approvedCandidateFormat": "safetensors",
+  "runtimes": [
+    {
+      "runtimeId": "llama-cpp",
+      "projectUrl": "https://github.com/ggml-org/llama.cpp",
+      "sourceUrl": "https://github.com/ggml-org/llama.cpp",
+      "licenseName": "MIT",
+      "licenseUrl": "https://github.com/ggml-org/llama.cpp/blob/v0.9.0/LICENSE",
+      "versionTag": "v0.9.0",
+      "immutableRevision": "cd959bae99ff4bed22bef2604f45241c09bbb8c8",
+      "artifactFormat": "gguf",
+      "criteria": {
+        "explicit-license": "pass",
+        "immutable-version": "pass",
+        "official-source": "pass",
+        "clear-artifact-format": "pass",
+        "cpu-only": "fail",
+        "offline-loading": "pass",
+        "local-artifact-paths": "pass",
+        "no-remote-code-required": "pass",
+        "no-mandatory-telemetry": "pass",
+        "telemetry-can-be-disabled": "pass",
+        "deterministic-settings": "pass",
+        "advisories-reviewed": "fail",
+        "subprocess-integration": "pass",
+        "independent-acquisition-verification": "pass",
+        "not-production-dependency": "pass"
+      },
+      "disqualifiers": ["cpu-only", "advisories-reviewed"],
+      "advisoryIds": ["GHSA-5998-89hj-xhfc", "GHSA-fhv7-8956-mv3h", "GHSA-w4wv-vq5v-xp26"],
+      "evidence": [
+        {
+          "sourceName": "llama.cpp v0.9.0 commit",
+          "publisher": "ggml-org",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "Tag v0.9.0 resolves to commit cd959bae99ff4bed22bef2604f45241c09bbb8c8. The pinned LICENSE file is the MIT license.",
+          "url": "https://github.com/ggml-org/llama.cpp/commit/cd959bae99ff4bed22bef2604f45241c09bbb8c8"
+        },
+        {
+          "sourceName": "llama.cpp model formats",
+          "publisher": "ggml-org",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "Inference at this tag consumes GGUF. GGUF is a clear artifact format. Explicit Linux x86_64 CPU support was not established from the retrieved CPU text.",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/v0.9.0/docs/models.md"
+        },
+        {
+          "sourceName": "llama.cpp GGUF advisories",
+          "publisher": "GitHub Advisory Database",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "unresolved",
+          "claim": "GHSA-5998-89hj-xhfc, GHSA-fhv7-8956-mv3h, and GHSA-w4wv-vq5v-xp26 describe GGUF parsing flaws whose patched versions were not identified.",
+          "url": "https://github.com/advisories/GHSA-5998-89hj-xhfc"
+        }
+      ]
+    },
+    {
+      "runtimeId": "onnxruntime",
+      "projectUrl": "https://onnxruntime.ai",
+      "sourceUrl": "https://github.com/microsoft/onnxruntime",
+      "licenseName": "MIT",
+      "licenseUrl": "https://github.com/microsoft/onnxruntime/blob/v1.31.1/LICENSE",
+      "versionTag": "v1.31.1",
+      "immutableRevision": "6af1a932e2286d5c58166085d24c68783033edee",
+      "artifactFormat": "onnx",
+      "criteria": {
+        "explicit-license": "pass",
+        "immutable-version": "pass",
+        "official-source": "pass",
+        "clear-artifact-format": "pass",
+        "cpu-only": "pass",
+        "offline-loading": "pass",
+        "local-artifact-paths": "pass",
+        "no-remote-code-required": "pass",
+        "no-mandatory-telemetry": "pass",
+        "telemetry-can-be-disabled": "pass",
+        "deterministic-settings": "pass",
+        "advisories-reviewed": "pass",
+        "subprocess-integration": "pass",
+        "independent-acquisition-verification": "pass",
+        "not-production-dependency": "pass"
+      },
+      "disqualifiers": [],
+      "advisoryIds": [],
+      "evidence": [
+        {
+          "sourceName": "ONNX Runtime v1.31.1 commit",
+          "publisher": "Microsoft",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "Tag v1.31.1 resolves to commit 6af1a932e2286d5c58166085d24c68783033edee. The pinned LICENSE file is the MIT license.",
+          "url": "https://github.com/microsoft/onnxruntime/commit/6af1a932e2286d5c58166085d24c68783033edee"
+        },
+        {
+          "sourceName": "ONNX Runtime session API",
+          "publisher": "Microsoft",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "InferenceSession loads ONNX or ORT graphs from local paths. ONNX is a clear format. Offline loading does not require remote code.",
+          "url": "https://onnxruntime.ai/docs/api/python/api_summary"
+        },
+        {
+          "sourceName": "ONNX Runtime CPU provider",
+          "publisher": "Microsoft",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "CPUExecutionProvider is the documented CPU path. Telemetry disablement is an explicit API, and no advisory for this pin was returned.",
+          "url": "https://onnxruntime.ai/docs/get-started/with-c.html"
+        }
+      ]
+    },
+    {
+      "runtimeId": "transformers",
+      "projectUrl": "https://github.com/huggingface/transformers",
+      "sourceUrl": "https://github.com/huggingface/transformers",
+      "licenseName": "Apache-2.0",
+      "licenseUrl": "https://github.com/huggingface/transformers/blob/v5.22.2/LICENSE",
+      "versionTag": "v5.22.2",
+      "immutableRevision": "6d195c6262a0ac2ef44f7b9a308617562286ff45",
+      "artifactFormat": "safetensors",
+      "criteria": {
+        "explicit-license": "pass",
+        "immutable-version": "pass",
+        "official-source": "pass",
+        "clear-artifact-format": "pass",
+        "cpu-only": "fail",
+        "offline-loading": "pass",
+        "local-artifact-paths": "pass",
+        "no-remote-code-required": "fail",
+        "no-mandatory-telemetry": "pass",
+        "telemetry-can-be-disabled": "pass",
+        "deterministic-settings": "pass",
+        "advisories-reviewed": "fail",
+        "subprocess-integration": "pass",
+        "independent-acquisition-verification": "pass",
+        "not-production-dependency": "pass"
+      },
+      "disqualifiers": ["cpu-only", "no-remote-code-required", "advisories-reviewed"],
+      "advisoryIds": ["GHSA-8jfx-5878-hv4v", "GHSA-9qm5-hqg9-j2fx", "GHSA-hv5j-58mm-f6v9"],
+      "evidence": [
+        {
+          "sourceName": "Transformers v5.22.2 commit",
+          "publisher": "Hugging Face",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "Tag v5.22.2 resolves to commit 6d195c6262a0ac2ef44f7b9a308617562286ff45. The pinned LICENSE file is Apache-2.0.",
+          "url": "https://github.com/huggingface/transformers/commit/6d195c6262a0ac2ef44f7b9a308617562286ff45"
+        },
+        {
+          "sourceName": "Transformers loading documentation",
+          "publisher": "Hugging Face",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "authoritative",
+          "claim": "from_pretrained can load local safetensors. The same documentation executes repository Python when trust_remote_code is true, so remote code is not excluded. Explicit Linux x86_64 CPU support was not established.",
+          "url": "https://huggingface.co/docs/transformers/main_classes/model"
+        },
+        {
+          "sourceName": "Transformers advisory coverage",
+          "publisher": "GitHub Advisory Database",
+          "retrievedOn": "2026-11-10",
+          "evidenceClass": "unresolved",
+          "claim": "GHSA-9qm5-hqg9-j2fx, GHSA-hv5j-58mm-f6v9, and GHSA-8jfx-5878-hv4v name local deserialization with unknown affected ranges.",
+          "url": "https://github.com/advisories/GHSA-9qm5-hqg9-j2fx"
+        }
+      ]
+    }
+  ]
+}
