@@ -11,3 +11,5 @@ The approved model format for this boundary is publisher safetensors with no con
 `transformers` is huggingface/transformers tag `v5.22.2` at `6d195c6262a0ac2ef44f7b9a308617562286ff45`, Apache-2.0. It can load local safetensors. It fails because official loading documentation executes repository Python when remote code is trusted, because explicit Linux x86_64 support was not established, and because three deserialization advisories have unknown affected ranges.
 
 The decision is `no-runtime`. No version is pinned for later acquisition. `acquisitionStatus` stays `not-acquired`, `executionStatus` stays `not-executed`, and `productionReady` stays false. Advisory identifiers are recorded without advisory bodies.
+
+Principal Systems Architect review on 2026-11-10 accepts this no-runtime decision. It does not authorize a runtime. The acceptance record is [track5-implementation-review.md](../provenance/track5-implementation-review.md).

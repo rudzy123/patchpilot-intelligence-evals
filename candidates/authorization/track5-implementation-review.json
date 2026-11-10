@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "reviewStatus": "accepted-by-principal-systems-architect",
+  "reviewDate": "2026-11-10",
+  "reviewAuthority": "PatchPilot Principal Systems Architect",
+  "decision": "track 5 boundary approved and acquisition withheld",
+  "authorizedScope": "This approval accepts the Track 5 fail-closed implementation record only.",
+  "componentReviews": [
+    {
+      "componentId": "real-candidate-boundary",
+      "disposition": "approved",
+      "statement": "The real-candidate boundary is approved. The offline illustration stays not-authorized."
+    },
+    {
+      "componentId": "external-artifact-cache-boundary",
+      "disposition": "approved",
+      "statement": "The external artifact-cache boundary is approved."
+    },
+    {
+      "componentId": "synthetic-artifact-verification",
+      "disposition": "approved-with-documented-limitations",
+      "statement": "Synthetic artifact-verification controls are approved. Executable sniffing is not malware detection."
+    }
+  ],
+  "runtimeDecision": "no-runtime",
+  "candidateDecision": "no-selection",
+  "track6Authorization": "not-authorized",
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed",
+  "locallyObservedArtifactDigests": [],
+  "unmetPrerequisites": [
+    {
+      "prerequisiteId": "one-qualifying-candidate",
+      "statement": "One qualifying candidate."
+    },
+    {
+      "prerequisiteId": "one-authorized-runtime",
+      "statement": "One authorized runtime."
+    },
+    {
+      "prerequisiteId": "isolation-without-acquisition-blocker",
+      "statement": "Isolation without an acquisition blocker."
+    },
+    {
+      "prerequisiteId": "immutable-revision-and-source",
+      "statement": "Immutable revision and source satisfying the selected-candidate contract."
+    },
+    {
+      "prerequisiteId": "tokenizer-provenance",
+      "statement": "Resolved tokenizer provenance and licensing."
+    },
+    {
+      "prerequisiteId": "weight-license-and-commercial-use",
+      "statement": "Resolved weight licensing and commercial-use terms."
+    },
+    {
+      "prerequisiteId": "redistribution-unnecessary",
+      "statement": "Confirmation that redistribution is unnecessary or explicitly authorized."
+    }
+  ],
+  "passingPrerequisites": [
+    {
+      "prerequisiteId": "cache-and-verification",
+      "statement": "Cache and verification boundary."
+    },
+    {
+      "prerequisiteId": "hardware-fit",
+      "statement": "Hardware fit."
+    },
+    {
+      "prerequisiteId": "no-gate-change",
+      "statement": "No evaluation-gate change."
+    }
+  ],
+  "acceptedResiduals": [
+    {
+      "residualId": "namespace-or-container-controls",
+      "statement": "Nine isolation controls still require namespace or container enforcement."
+    },
+    {
+      "residualId": "executable-sniffing-not-malware-detection",
+      "statement": "Executable-content sniffing is not malware detection."
+    },
+    {
+      "residualId": "python-hooks-not-os-network-isolation",
+      "statement": "Python network hooks are not operating-system network isolation."
+    },
+    {
+      "residualId": "rlimit-as-address-space",
+      "statement": "RLIMIT_AS limits address space rather than resident memory."
+    },
+    {
+      "residualId": "rlimit-nproc-per-user",
+      "statement": "RLIMIT_NPROC is a per-user control."
+    },
+    {
+      "residualId": "sandbox-process-group-timeout",
+      "statement": "A restricted verification sandbox that cannot signal a process group may classify an intended timeout as internal-harness-failure."
+    },
+    {
+      "residualId": "clean-evaluation-output-root",
+      "statement": "Ignored pre-existing build output must be removed or an empty explicit output root must be used before reproducible evaluation commands."
+    }
+  ],
+  "notAuthorized": [
+    "Track 6 acquisition",
+    "a candidate",
+    "a runtime",
+    "model or tokenizer download",
+    "model execution",
+    "quantization",
+    "gate changes",
+    "shadow mode",
+    "PatchPilot production composition"
+  ],
+  "reviewDigest": "82e4da036ef4c7069fcd243b1fd7f20623deca0d491cc1c93070c07c4cde9ca8"
+}

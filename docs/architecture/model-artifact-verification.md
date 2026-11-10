@@ -7,3 +7,5 @@ The verified identity is the SHA-256 of the canonical verification record. Readi
 Symlinks are not followed. A remote-code requirement is rejected. Executable sniffing checks the permission bits, a leading shebang, and ELF magic. That sniff is not malware detection and it is not a statement that a file is safe to execute.
 
 The committed template is [model-artifact-verification-template.json](../../candidates/templates/model-artifact-verification-template.json). `artifact-verification-validation` checks it. Tests use temporary synthetic bytes outside the repository. The cache rules are in [external-artifact-cache.md](external-artifact-cache.md).
+
+Principal Systems Architect review on 2026-11-10 accepts these controls with the documented limitation that executable sniffing is not malware detection. The acceptance record is [track5-implementation-review.md](../provenance/track5-implementation-review.md).

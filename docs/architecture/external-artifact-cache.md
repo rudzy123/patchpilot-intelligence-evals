@@ -9,3 +9,5 @@ Attempts use three directories under that root: `quarantine`, `verified`, and `r
 Git does not track an in-repository `artifact-cache/` directory or weight and tokenizer file names. CI does not upload a cache. No persistent model cache is created by the tests. The checks are not an operating-system sandbox.
 
 The policy command is `artifact-cache-policy-validation`. The state rules sit beside [model-artifact-verification.md](model-artifact-verification.md) and [real-candidate-boundary.md](real-candidate-boundary.md).
+
+Principal Systems Architect review on 2026-11-10 accepts this cache boundary. The acceptance record is [track5-implementation-review.md](../provenance/track5-implementation-review.md).

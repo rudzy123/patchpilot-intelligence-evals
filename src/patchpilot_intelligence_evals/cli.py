@@ -22,6 +22,7 @@ from patchpilot_intelligence_evals.comparison import compare_results
 from patchpilot_intelligence_evals.corpus import CorpusError, canonical_dumps, validate_corpus
 from patchpilot_intelligence_evals.evaluator import evaluate_baseline
 from patchpilot_intelligence_evals.evidence_closure import EvidenceError, load_closure
+from patchpilot_intelligence_evals.implementation_review import ReviewError, load_review
 from patchpilot_intelligence_evals.isolation_profile import IsolationError, load_profile
 from patchpilot_intelligence_evals.network_guard import (
     BoundaryError,
@@ -62,6 +63,7 @@ def _parser() -> argparse.ArgumentParser:
     commands.add_parser("isolation-profile-validation")
     commands.add_parser("evidence-closure-validation")
     commands.add_parser("track6-authorization-validation")
+    commands.add_parser("track5-review-validation")
     one_case = commands.add_parser("candidate-execution")
     one_case.add_argument("--manifest", required=True)
     one_case.add_argument("--case-id", required=True)
@@ -237,6 +239,20 @@ def main(argv: list[str] | None = None) -> int:
                         "productionReady": False,
                     }
                 )
+            if args.command == "track5-review-validation":
+                review = load_review()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "reviewStatus": review["reviewStatus"],
+                        "runtimeDecision": review["runtimeDecision"],
+                        "candidateDecision": review["candidateDecision"],
+                        "track6Authorization": review["track6Authorization"],
+                        "acquisitionStatus": review["acquisitionStatus"],
+                        "executionStatus": review["executionStatus"],
+                        "productionReady": False,
+                    }
+                )
             if args.command == "candidate-execution":
                 manifest = load_manifest(_checked_relative(str(args.manifest)))
                 output_dir = args.output_dir
@@ -338,6 +354,7 @@ def main(argv: list[str] | None = None) -> int:
         RuntimeAuthorizationError,
         IsolationError,
         EvidenceError,
+        ReviewError,
         ResultStoreError,
         SchemaValidationError,
         json.JSONDecodeError,

@@ -63,6 +63,7 @@ _DOCUMENTS = (
     "docs/provenance/candidate-shortlist.md",
     "docs/provenance/selected-candidate-authorization.md",
     "docs/provenance/candidate-evidence-closure.md",
+    "docs/provenance/track5-implementation-review.md",
 )
 
 
@@ -128,6 +129,7 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals isolation-profile-validation",
         "uv run patchpilot-evals evidence-closure-validation",
         "uv run patchpilot-evals track6-authorization-validation",
+        "uv run patchpilot-evals track5-review-validation",
     ):
         assert command in text
     uses = re.findall(r"uses: (\S+)", text)
@@ -161,6 +163,7 @@ def test_help_lists_commands() -> None:
     assert "isolation-profile-validation" in text
     assert "evidence-closure-validation" in text
     assert "track6-authorization-validation" in text
+    assert "track5-review-validation" in text
 
 
 def test_committed_json_files_validate() -> None:

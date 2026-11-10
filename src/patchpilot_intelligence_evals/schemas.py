@@ -55,6 +55,7 @@ TRACK5_SCHEMA_NAMES: tuple[str, ...] = (
     "real-candidate-isolation-profile",
     "candidate-evidence-closure",
     "track6-acquisition-authorization",
+    "track5-implementation-review",
 )
 
 

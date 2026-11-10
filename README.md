@@ -38,6 +38,7 @@ uv run patchpilot-evals runtime-authorization-validation
 uv run patchpilot-evals isolation-profile-validation
 uv run patchpilot-evals evidence-closure-validation
 uv run patchpilot-evals track6-authorization-validation
+uv run patchpilot-evals track5-review-validation
 ```
 
 `baseline-evaluation` writes a file only when `--output` is a path inside this repository. The result record includes a timestamp, so it is not committed.
@@ -75,6 +76,8 @@ Intelligence Track 4 records an accepted no-selection. Review status is `accepte
 - [docs/provenance/selected-candidate-authorization.md](docs/provenance/selected-candidate-authorization.md)
 
 Intelligence Track 5 adds the real-candidate boundary. It does not authorize acquisition. Fixture manifests stay deterministic test doubles, with a 15-second timeout, 64 KiB of standard output, and 16 KiB of standard error. The offline-local-model file is an illustration: acquisition stays `not-acquired` and execution stays `not-executed`. Cache roots stay outside this repository. Executable sniffing is not malware detection. Linux resource limits and the Python hooks are not an operating-system sandbox. The runtime decision is no-runtime. The evidence closure keeps no-selection. Track 6 is `not-authorized`. `productionReady` stays false.
+
+The Track 5 implementation review is `accepted-by-principal-systems-architect` on 2026-11-10 by the PatchPilot Principal Systems Architect. That acceptance covers the fail-closed boundary records only. It is recorded in [docs/provenance/track5-implementation-review.md](docs/provenance/track5-implementation-review.md).
 
 - [docs/architecture/real-candidate-boundary.md](docs/architecture/real-candidate-boundary.md)
 - [docs/architecture/external-artifact-cache.md](docs/architecture/external-artifact-cache.md)

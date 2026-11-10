@@ -95,3 +95,4 @@ jobs:
           uv run patchpilot-evals isolation-profile-validation
           uv run patchpilot-evals evidence-closure-validation
           uv run patchpilot-evals track6-authorization-validation
+          uv run patchpilot-evals track5-review-validation

@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track5-implementation-review:v1",
+  "title": "Track 5 implementation review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "reviewStatus",
+    "reviewDate",
+    "reviewAuthority",
+    "decision",
+    "authorizedScope",
+    "componentReviews",
+    "runtimeDecision",
+    "candidateDecision",
+    "track6Authorization",
+    "acquisitionStatus",
+    "executionStatus",
+    "locallyObservedArtifactDigests",
+    "unmetPrerequisites",
+    "passingPrerequisites",
+    "acceptedResiduals",
+    "notAuthorized",
+    "reviewDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "reviewStatus": { "const": "accepted-by-principal-systems-architect" },
+    "reviewDate": { "const": "2026-11-10" },
+    "reviewAuthority": { "const": "PatchPilot Principal Systems Architect" },
+    "decision": { "const": "track 5 boundary approved and acquisition withheld" },
+    "authorizedScope": {
+      "const": "This approval accepts the Track 5 fail-closed implementation record only."
+    },
+    "componentReviews": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/componentReview" }
+    },
+    "runtimeDecision": { "const": "no-runtime" },
+    "candidateDecision": { "const": "no-selection" },
+    "track6Authorization": { "const": "not-authorized" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" },
+    "locallyObservedArtifactDigests": {
+      "type": "array",
+      "maxItems": 0,
+      "items": false
+    },
+    "unmetPrerequisites": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": { "$ref": "#/$defs/prerequisite" }
+    },
+    "passingPrerequisites": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/prerequisite" }
+    },
+    "acceptedResiduals": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": { "$ref": "#/$defs/residual" }
+    },
+    "notAuthorized": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+    },
+    "reviewDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "componentReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["componentId", "disposition", "statement"],
+      "properties": {
+        "componentId": {
+          "enum": [
+            "real-candidate-boundary",
+            "external-artifact-cache-boundary",
+            "synthetic-artifact-verification"
+          ]
+        },
+        "disposition": { "enum": ["approved", "approved-with-documented-limitations"] },
+        "statement": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    },
+    "prerequisite": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prerequisiteId", "statement"],
+      "properties": {
+        "prerequisiteId": {
+          "enum": [
+            "one-qualifying-candidate",
+            "one-authorized-runtime",
+            "cache-and-verification",
+            "isolation-without-acquisition-blocker",
+            "hardware-fit",
+            "immutable-revision-and-source",
+            "tokenizer-provenance",
+            "weight-license-and-commercial-use",
+            "redistribution-unnecessary",
+            "no-gate-change"
+          ]
+        },
+        "statement": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    },
+    "residual": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["residualId", "statement"],
+      "properties": {
+        "residualId": {
+          "enum": [
+            "namespace-or-container-controls",
+            "executable-sniffing-not-malware-detection",
+            "python-hooks-not-os-network-isolation",
+            "rlimit-as-address-space",
+            "rlimit-nproc-per-user",
+            "sandbox-process-group-timeout",
+            "clean-evaluation-output-root"
+          ]
+        },
+        "statement": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    }
+  }
+}

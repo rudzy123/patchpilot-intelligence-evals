@@ -15,3 +15,5 @@ The Track 5 record is [real-candidate-isolation-profile.json](../../candidates/a
 Linux `RLIMIT_CPU`, `RLIMIT_AS`, `RLIMIT_FSIZE`, `RLIMIT_NOFILE`, and `RLIMIT_NPROC` can be set on a harmless child. `RLIMIT_AS` limits address space, not resident memory. `RLIMIT_NPROC` is a per-user limit. Those probes do not execute a model.
 
 Read-only artifact and configuration mounts, hiding gold labels, prior results, sibling trees, the home directory, SSH configuration, and cloud-credential files, and an operating-system network denial require a namespace or container. They are deferred blockers. `acquisitionBlocked` is true. This profile is not an operating-system sandbox.
+
+Principal Systems Architect review on 2026-11-10 accepts these classifications, including the nine deferred controls. The acceptance record is [track5-implementation-review.md](../provenance/track5-implementation-review.md).

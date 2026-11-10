@@ -7,3 +7,5 @@ An offline manifest names an official model, a 40-character revision, license an
 The committed illustration is [offline-local-model-manifest.json](../../candidates/templates/offline-local-model-manifest.json). Its model id, revision, and `example.invalid` URLs are schema fixtures. They are not a selected candidate and not an upstream commit. `real-candidate-manifest-validation` checks that file. It does not download or execute anything.
 
 Paths, credentials, host names, and IP addresses are rejected. A manifest cannot claim a local digest before acquisition. The external cache and verification rules are separate from this identity record.
+
+Principal Systems Architect review on 2026-11-10 accepts this boundary. The illustration stays `not-authorized`. The acceptance record is [track5-implementation-review.md](../provenance/track5-implementation-review.md).

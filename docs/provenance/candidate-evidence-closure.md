@@ -9,3 +9,5 @@ The other Track 4 gaps stay unresolved. A model card, a related model, a mirror,
 Qwen tokenizer provenance stays pass. The residual is recorded: the LICENSE text does not enumerate tokenizer filenames, and the files are in the licensed revision. The Qwen 3B research license states a clear non-commercial position. That position is not acquisition authorization.
 
 `bounded-subprocess-compatibility` stays fail while the isolation profile has an acquisition blocker. Every weighted score stays null. The selection stays `no-selection`. Acquisition stays `not-acquired`, execution stays `not-executed`, and `productionReady` stays false.
+
+Principal Systems Architect review on 2026-11-10 accepts this no-selection. The acceptance record is [track5-implementation-review.md](track5-implementation-review.md).
