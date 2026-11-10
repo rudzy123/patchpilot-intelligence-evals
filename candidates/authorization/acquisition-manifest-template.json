@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "selectionOutcome": "no-selection",
+  "authorizationState": "not-authorized",
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed",
+  "approvedModelId": null,
+  "immutableRevision": null,
+  "approvedSourceUrl": null,
+  "expectedFiles": [],
+  "observedFiles": [],
+  "locallyObservedArtifactDigests": [],
+  "redistributionAuthorized": false,
+  "networkFallback": "prohibited",
+  "controls": [
+    {
+      "controlId": "official-source",
+      "requirement": "A future acquisition may use only one approved official URL pinned to one revision."
+    },
+    {
+      "controlId": "empty-quarantine",
+      "requirement": "Download into an empty quarantine directory that is not the Git work tree."
+    },
+    {
+      "controlId": "no-execution-during-download",
+      "requirement": "Do not import a model loader or execute repository files during download."
+    },
+    {
+      "controlId": "separate-inventory",
+      "requirement": "Record expected and observed file names, sizes, and SHA-256 digests in separate fields."
+    },
+    {
+      "controlId": "safetensors-only",
+      "requirement": "Accept only named safetensors weights plus the named tokenizer and configuration files."
+    },
+    {
+      "controlId": "reject-unexpected",
+      "requirement": "Reject unexpected files, symlinks, executable bits, pickle headers, and torch.load checkpoints."
+    },
+    {
+      "controlId": "no-remote-code",
+      "requirement": "Do not enable trust_remote_code or any other remote modeling code."
+    },
+    {
+      "controlId": "offline-verification",
+      "requirement": "A later load test uses local paths only and disables network fallback and telemetry."
+    },
+    {
+      "controlId": "no-git-or-ci-weights",
+      "requirement": "Do not commit weights to Git and do not upload weights as CI artifacts."
+    },
+    {
+      "controlId": "no-redistribution",
+      "requirement": "Do not redistribute weights. This template does not grant redistribution."
+    }
+  ]
+}

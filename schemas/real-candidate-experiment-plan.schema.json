@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:real-candidate-experiment-plan:v1",
+  "title": "Real candidate experiment plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "selectionOutcome",
+    "experimentAuthorized",
+    "acquisitionStatus",
+    "executionStatus",
+    "selectedCandidate",
+    "selectedRuntime",
+    "selectedQuantization",
+    "locallyObservedArtifactDigests",
+    "corpusVersion",
+    "corpusDigest",
+    "protocolVersion",
+    "promptIdentity",
+    "promptTemplateId",
+    "promptTemplate",
+    "promptTemplateDigest",
+    "decoding",
+    "repetitionCount",
+    "alternateConsistencyMetric",
+    "contextTokenLimit",
+    "maximumGeneratedWords",
+    "explanationTextMaxCharacters",
+    "timeoutSeconds",
+    "maxStdoutBytes",
+    "maxStderrBytes",
+    "retries",
+    "maximumConcurrentProcesses",
+    "maximumConcurrentModelInvocations",
+    "networkPolicy",
+    "gatesUnchanged",
+    "percentageGatesCalibrated",
+    "winner",
+    "experimentId",
+    "executionOutcomes"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "enum": ["no-selection", "selected"] },
+    "experimentAuthorized": { "type": "boolean" },
+    "acquisitionStatus": { "enum": ["not-acquired", "acquired"] },
+    "executionStatus": { "enum": ["not-executed", "executed"] },
+    "selectedCandidate": {
+      "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 1, "maxLength": 160 }]
+    },
+    "selectedRuntime": {
+      "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 1, "maxLength": 120 }]
+    },
+    "selectedQuantization": {
+      "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 1, "maxLength": 40 }]
+    },
+    "locallyObservedArtifactDigests": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+    },
+    "corpusVersion": { "const": "1.0.0" },
+    "corpusDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "protocolVersion": { "const": "1.0.0" },
+    "promptIdentity": { "const": "candidate-protocol-1.0.0" },
+    "promptTemplateId": { "const": "finding-explanation-1.0.0" },
+    "promptTemplate": { "type": "string", "minLength": 1, "maxLength": 4000 },
+    "promptTemplateDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "decoding": { "$ref": "#/$defs/decoding" },
+    "repetitionCount": { "const": 3 },
+    "alternateConsistencyMetric": { "const": "ungatedCanonicalAgreement" },
+    "contextTokenLimit": { "const": 8192 },
+    "maximumGeneratedWords": { "const": 1200 },
+    "explanationTextMaxCharacters": { "const": 400 },
+    "timeoutSeconds": { "const": 15 },
+    "maxStdoutBytes": { "const": 65536 },
+    "maxStderrBytes": { "const": 16384 },
+    "retries": { "const": 0 },
+    "maximumConcurrentProcesses": { "const": 1 },
+    "maximumConcurrentModelInvocations": { "const": 0 },
+    "networkPolicy": { "const": "prohibited" },
+    "gatesUnchanged": { "const": true },
+    "percentageGatesCalibrated": { "const": false },
+    "winner": { "type": "null" },
+    "experimentId": { "type": "null" },
+    "executionOutcomes": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 15,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/executionOutcome" }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "selectionOutcome": { "const": "no-selection" } },
+        "required": ["selectionOutcome"]
+      },
+      "then": {
+        "properties": {
+          "experimentAuthorized": { "const": false },
+          "acquisitionStatus": { "const": "not-acquired" },
+          "executionStatus": { "const": "not-executed" },
+          "selectedCandidate": { "type": "null" },
+          "selectedRuntime": { "type": "null" },
+          "selectedQuantization": { "type": "null" },
+          "locallyObservedArtifactDigests": { "maxItems": 0 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "decoding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["temperature", "topP", "topK", "seed", "seedControl"],
+      "properties": {
+        "temperature": { "const": 0 },
+        "topP": { "const": 1 },
+        "topK": { "const": 1 },
+        "seed": { "const": 0 },
+        "seedControl": { "type": ["boolean", "null"] }
+      }
+    },
+    "executionOutcome": {
+      "enum": [
+        "internal-harness-failure",
+        "timeout",
+        "output-limit-exceeded",
+        "stderr-limit-exceeded",
+        "network-policy-failure",
+        "nonzero-exit",
+        "malformed-output",
+        "multiple-outputs",
+        "schema-invalid-output",
+        "protocol-mismatch",
+        "request-id-mismatch",
+        "candidate-identity-mismatch",
+        "candidate-rejection",
+        "candidate-unavailable",
+        "success"
+      ]
+    }
+  }
+}

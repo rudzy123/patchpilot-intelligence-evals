@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:real-candidate-authorization:v1",
+  "title": "Real candidate authorization",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "selectionOutcome",
+    "acquisitionStatus",
+    "executionStatus",
+    "locallyObservedArtifactDigests",
+    "approvedModelId",
+    "immutableRevision",
+    "officialSourceUrl",
+    "modelCardUrl",
+    "licenseUrl",
+    "tokenizerSource",
+    "approvedRuntime",
+    "approvedQuantization",
+    "reviewStatus",
+    "reviewDate",
+    "reviewAuthority",
+    "decision",
+    "approvalReasons",
+    "authorizedScope",
+    "notAuthorized",
+    "prohibitedUses",
+    "track5StopConditions",
+    "blockers",
+    "nextDecisions"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "enum": ["no-selection", "selected"] },
+    "acquisitionStatus": { "enum": ["not-acquired", "acquired"] },
+    "executionStatus": { "enum": ["not-executed", "executed"] },
+    "locallyObservedArtifactDigests": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+    },
+    "approvedModelId": {
+      "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 1, "maxLength": 160 }]
+    },
+    "immutableRevision": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+      ]
+    },
+    "officialSourceUrl": { "$ref": "#/$defs/urlOrNull" },
+    "modelCardUrl": { "$ref": "#/$defs/urlOrNull" },
+    "licenseUrl": { "$ref": "#/$defs/urlOrNull" },
+    "tokenizerSource": { "$ref": "#/$defs/urlOrNull" },
+    "approvedRuntime": {
+      "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 1, "maxLength": 120 }]
+    },
+    "approvedQuantization": {
+      "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 1, "maxLength": 40 }]
+    },
+    "reviewStatus": { "const": "accepted-by-principal-systems-architect" },
+    "reviewDate": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "reviewAuthority": { "const": "PatchPilot Principal Systems Architect" },
+    "decision": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "approvalReasons": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": { "type": "string", "minLength": 1, "maxLength": 400 }
+    },
+    "authorizedScope": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "notAuthorized": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+    },
+    "prohibitedUses": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 200 }
+    },
+    "track5StopConditions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 400 }
+    },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 400 }
+    },
+    "nextDecisions": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 400 }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "selectionOutcome": { "const": "no-selection" } },
+        "required": ["selectionOutcome"]
+      },
+      "then": {
+        "properties": {
+          "acquisitionStatus": { "const": "not-acquired" },
+          "executionStatus": { "const": "not-executed" },
+          "locallyObservedArtifactDigests": { "maxItems": 0 },
+          "approvedModelId": { "type": "null" },
+          "immutableRevision": { "type": "null" },
+          "officialSourceUrl": { "type": "null" },
+          "modelCardUrl": { "type": "null" },
+          "licenseUrl": { "type": "null" },
+          "tokenizerSource": { "type": "null" },
+          "approvedRuntime": { "type": "null" },
+          "approvedQuantization": { "type": "null" },
+          "decision": { "const": "no candidate authorized" },
+          "authorizedScope": {
+            "const": "This approval authorizes the no-selection record only."
+          },
+          "blockers": { "minItems": 1 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "urlOrNull": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^https://\\S+$", "maxLength": 300 }
+      ]
+    }
+  }
+}

@@ -1,0 +1,401 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:candidate-shortlist:v1",
+  "title": "Candidate shortlist",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "retrievalDate",
+    "selectionOutcome",
+    "selectedModelId",
+    "runtimeAuthorization",
+    "scoringApplied",
+    "scoringModel",
+    "mandatoryCriteria",
+    "sharedEvidence",
+    "candidates"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "retrievalDate": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "selectionOutcome": { "enum": ["no-selection", "selected"] },
+    "selectedModelId": {
+      "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 1, "maxLength": 160 }]
+    },
+    "runtimeAuthorization": { "enum": ["not-authorized", "authorized"] },
+    "scoringApplied": { "type": "boolean" },
+    "scoringModel": { "$ref": "#/$defs/scoringModel" },
+    "mandatoryCriteria": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 15,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/criterion" }
+    },
+    "sharedEvidence": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 12,
+      "items": { "$ref": "#/$defs/evidence" }
+    },
+    "candidates": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/candidate" }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "selectionOutcome": { "const": "no-selection" } },
+        "required": ["selectionOutcome"]
+      },
+      "then": {
+        "properties": {
+          "selectedModelId": { "type": "null" },
+          "runtimeAuthorization": { "const": "not-authorized" },
+          "scoringApplied": { "const": false }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "criterion": {
+      "enum": [
+        "explicit-weight-use-license",
+        "clear-commercial-use-position",
+        "clear-redistribution-position",
+        "immutable-official-revision",
+        "no-remote-code-requirement",
+        "fully-offline-runtime-support",
+        "tokenizer-provenance",
+        "artifact-digest-capability",
+        "local-resource-fit",
+        "bounded-subprocess-compatibility",
+        "no-mandatory-telemetry",
+        "no-tenant-data-requirement",
+        "official-model-card",
+        "documented-limitations",
+        "no-production-dependency"
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceName",
+        "publisher",
+        "retrievedOn",
+        "evidenceClass",
+        "claim",
+        "locator"
+      ],
+      "properties": {
+        "sourceName": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "publisher": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "retrievedOn": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "evidenceClass": { "enum": ["authoritative", "secondary", "unresolved"] },
+        "claim": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "locator": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "url"],
+              "properties": {
+                "kind": { "const": "url" },
+                "url": { "type": "string", "pattern": "^https://\\S+$", "maxLength": 300 }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "repositoryPath"],
+              "properties": {
+                "kind": { "const": "repository" },
+                "repositoryPath": {
+                  "type": "string",
+                  "pattern": "^(docs|schemas|src|candidates)/[A-Za-z0-9_./-]+$",
+                  "maxLength": 200
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "scoringModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["totalPoints", "components", "tieBreakOrder", "excludedTieBreakers"],
+      "properties": {
+        "totalPoints": { "const": 100 },
+        "components": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["component", "points"],
+            "properties": {
+              "component": {
+                "enum": [
+                  "license-provenance",
+                  "security-offline-isolation",
+                  "local-hardware-fit",
+                  "evaluation-suitability",
+                  "model-card-disclosure",
+                  "runtime-maturity"
+                ]
+              },
+              "points": { "type": "integer", "minimum": 1, "maximum": 25 }
+            }
+          }
+        },
+        "tieBreakOrder": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1, "maxLength": 160 }
+        },
+        "excludedTieBreakers": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "leaderboard-position",
+              "popularity",
+              "download-count",
+              "benchmark-prestige"
+            ]
+          }
+        }
+      }
+    },
+    "criterionMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "explicit-weight-use-license",
+        "clear-commercial-use-position",
+        "clear-redistribution-position",
+        "immutable-official-revision",
+        "no-remote-code-requirement",
+        "fully-offline-runtime-support",
+        "tokenizer-provenance",
+        "artifact-digest-capability",
+        "local-resource-fit",
+        "bounded-subprocess-compatibility",
+        "no-mandatory-telemetry",
+        "no-tenant-data-requirement",
+        "official-model-card",
+        "documented-limitations",
+        "no-production-dependency"
+      ],
+      "properties": {
+        "explicit-weight-use-license": { "enum": ["pass", "fail"] },
+        "clear-commercial-use-position": { "enum": ["pass", "fail"] },
+        "clear-redistribution-position": { "enum": ["pass", "fail"] },
+        "immutable-official-revision": { "enum": ["pass", "fail"] },
+        "no-remote-code-requirement": { "enum": ["pass", "fail"] },
+        "fully-offline-runtime-support": { "enum": ["pass", "fail"] },
+        "tokenizer-provenance": { "enum": ["pass", "fail"] },
+        "artifact-digest-capability": { "enum": ["pass", "fail"] },
+        "local-resource-fit": { "enum": ["pass", "fail"] },
+        "bounded-subprocess-compatibility": { "enum": ["pass", "fail"] },
+        "no-mandatory-telemetry": { "enum": ["pass", "fail"] },
+        "no-tenant-data-requirement": { "enum": ["pass", "fail"] },
+        "official-model-card": { "enum": ["pass", "fail"] },
+        "documented-limitations": { "enum": ["pass", "fail"] },
+        "no-production-dependency": { "enum": ["pass", "fail"] }
+      }
+    },
+    "scoreObject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "total",
+        "licenseProvenance",
+        "securityOfflineIsolation",
+        "localHardwareFit",
+        "evaluationSuitability",
+        "modelCardDisclosure",
+        "runtimeMaturity"
+      ],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "licenseProvenance": { "type": "integer", "minimum": 0, "maximum": 25 },
+        "securityOfflineIsolation": { "type": "integer", "minimum": 0, "maximum": 20 },
+        "localHardwareFit": { "type": "integer", "minimum": 0, "maximum": 20 },
+        "evaluationSuitability": { "type": "integer", "minimum": 0, "maximum": 20 },
+        "modelCardDisclosure": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "runtimeMaturity": { "type": "integer", "minimum": 0, "maximum": 5 }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modelId",
+        "organization",
+        "revision",
+        "parameterCount",
+        "architectureFamily",
+        "contextTokens",
+        "officialSourceUrl",
+        "modelCardUrl",
+        "licenseUrl",
+        "mandatoryStatus",
+        "mandatoryCriteria",
+        "disqualifiers",
+        "weightedScore",
+        "locallyObservedArtifactDigests",
+        "publisherArtifact",
+        "peakMemory",
+        "latencyClass",
+        "conflicts",
+        "evidence"
+      ],
+      "properties": {
+        "modelId": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "organization": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "revision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "parameterCount": { "type": "integer", "minimum": 1 },
+        "architectureFamily": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "contextTokens": { "type": "integer", "minimum": 1 },
+        "officialSourceUrl": { "type": "string", "pattern": "^https://\\S+$", "maxLength": 300 },
+        "modelCardUrl": { "type": "string", "pattern": "^https://\\S+$", "maxLength": 300 },
+        "licenseUrl": { "type": "string", "pattern": "^https://\\S+$", "maxLength": 300 },
+        "mandatoryStatus": { "enum": ["pass", "fail"] },
+        "mandatoryCriteria": { "$ref": "#/$defs/criterionMap" },
+        "disqualifiers": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/criterion" }
+        },
+        "weightedScore": {
+          "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/scoreObject" }]
+        },
+        "locallyObservedArtifactDigests": {
+          "type": "array",
+          "maxItems": 0,
+          "items": { "type": "string" }
+        },
+        "publisherArtifact": { "$ref": "#/$defs/publisherArtifact" },
+        "peakMemory": { "$ref": "#/$defs/peakMemory" },
+        "latencyClass": { "enum": ["unknown", "measured"] },
+        "conflicts": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/conflict" }
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/evidence" }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "mandatoryStatus": { "const": "fail" } },
+            "required": ["mandatoryStatus"]
+          },
+          "then": {
+            "properties": {
+              "weightedScore": { "type": "null" },
+              "disqualifiers": { "minItems": 1 }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "mandatoryStatus": { "const": "pass" } },
+            "required": ["mandatoryStatus"]
+          },
+          "then": {
+            "properties": {
+              "weightedScore": { "$ref": "#/$defs/scoreObject" },
+              "disqualifiers": { "maxItems": 0 }
+            }
+          }
+        }
+      ]
+    },
+    "publisherArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["format", "byteCount", "digestDisposition", "upstreamSha256", "fileNames"],
+      "properties": {
+        "format": { "enum": ["safetensors"] },
+        "byteCount": { "type": "integer", "minimum": 1 },
+        "digestDisposition": { "enum": ["agreed", "conflicting", "unavailable"] },
+        "upstreamSha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          ]
+        },
+        "fileNames": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": { "type": "string", "minLength": 1, "maxLength": 120 }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "digestDisposition": { "const": "agreed" } },
+            "required": ["digestDisposition"]
+          },
+          "then": {
+            "properties": {
+              "upstreamSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "digestDisposition": { "enum": ["conflicting", "unavailable"] } },
+            "required": ["digestDisposition"]
+          },
+          "then": {
+            "properties": { "upstreamSha256": { "type": "null" } }
+          }
+        }
+      ]
+    },
+    "peakMemory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["estimateClass", "contextTokens", "gibibytes"],
+      "properties": {
+        "estimateClass": { "enum": ["publisher-provided", "runtime-documentation", "calculated", "unknown"] },
+        "contextTokens": { "type": "integer", "minimum": 1 },
+        "gibibytes": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9]+\\.[0-9]{3}$" }
+          ]
+        }
+      }
+    },
+    "conflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["topic", "restrictiveInterpretation"],
+      "properties": {
+        "topic": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "restrictiveInterpretation": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    }
+  }
+}

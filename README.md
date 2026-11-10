@@ -56,3 +56,12 @@ The network hook patches `socket.socket`, `socket.create_connection`, `socket.ge
 ## Later track
 
 Intelligence Track 3 adds an offline candidate protocol and deterministic test doubles. It does not select, download, or execute a real model. A later track can evaluate a real offline candidate only after a separate provenance review for anything that is not original work, an operating-system isolation decision, and Principal Architect approval of any gate change. Percentage gates remain uncalibrated. This repository must stay out of PatchPilot production code, CI, and releases until a later accepted decision says otherwise.
+
+Intelligence Track 4 records an accepted no-selection. Review status is `accepted-by-principal-systems-architect` on 2026-11-10. That acceptance covers the no-selection record only. No offline candidate, runtime, or artifact acquisition is authorized. The criteria, hardware envelope, acquisition template, isolation rules, and experiment contract are:
+
+- [docs/architecture/real-candidate-selection.md](docs/architecture/real-candidate-selection.md)
+- [docs/architecture/real-candidate-acquisition.md](docs/architecture/real-candidate-acquisition.md)
+- [docs/architecture/real-candidate-isolation.md](docs/architecture/real-candidate-isolation.md)
+- [docs/architecture/real-candidate-evaluation-plan.md](docs/architecture/real-candidate-evaluation-plan.md)
+- [docs/provenance/candidate-shortlist.md](docs/provenance/candidate-shortlist.md)
+- [docs/provenance/selected-candidate-authorization.md](docs/provenance/selected-candidate-authorization.md)

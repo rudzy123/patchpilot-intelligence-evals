@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "retrievedOn": "2026-11-10",
+  "operatingSystemFamily": "Linux",
+  "operatingSystemVersion": "Ubuntu 26.04.1 LTS",
+  "kernelVersion": "7.0.0-43-generic",
+  "cpuArchitecture": "x86_64",
+  "logicalCpuCount": 16,
+  "totalMemoryKib": 31487340,
+  "storageBytes": 1964601909248,
+  "availableStorageBytes": 1403456720896,
+  "gpuAvailability": "unavailable",
+  "gpuModel": null,
+  "gpuMemoryBytes": null,
+  "runtimeCapabilities": [
+    "CPython 3.12 within the repository pin >=3.12,<3.13",
+    "AVX2",
+    "AVX-512F",
+    "AVX-512 BF16",
+    "GPU compute unavailable",
+    "llama.cpp is not installed"
+  ],
+  "resourceEnvelope": {
+    "maximumArtifactBytes": 8589934592,
+    "maximumPeakProcessMemoryBytes": 12884901888,
+    "maximumContextTokens": 8192,
+    "maximumExplanationCharacters": 400,
+    "maximumGeneratedWords": 1200,
+    "maximumConcurrentProcesses": 1,
+    "maximumConcurrentModelInvocations": 0,
+    "timeoutSeconds": 15,
+    "gpuRequired": false,
+    "cpuFallbackRequired": true,
+    "minimumFreeStorageMultiple": 2,
+    "quantizationApproved": false
+  }
+}
