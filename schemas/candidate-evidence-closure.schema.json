@@ -1,0 +1,255 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:candidate-evidence-closure:v1",
+  "title": "Candidate evidence closure",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "retrievedOn",
+    "selectionOutcome",
+    "selectedModelId",
+    "scoringApplied",
+    "qualifyingCandidateCount",
+    "acquisitionStatus",
+    "executionStatus",
+    "locallyObservedArtifactDigests",
+    "candidates"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "retrievedOn": { "const": "2026-11-10" },
+    "selectionOutcome": { "enum": ["no-selection", "selected"] },
+    "selectedModelId": {
+      "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/modelId" }]
+    },
+    "scoringApplied": { "type": "boolean" },
+    "qualifyingCandidateCount": { "type": "integer", "minimum": 0, "maximum": 1 },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" },
+    "locallyObservedArtifactDigests": {
+      "type": "array",
+      "maxItems": 0,
+      "items": false
+    },
+    "candidates": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/candidate" }
+    }
+  },
+  "$defs": {
+    "modelId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,80}/[A-Za-z0-9][A-Za-z0-9._-]{0,80}$"
+    },
+    "criterionName": {
+      "enum": [
+        "explicit-weight-use-license",
+        "clear-commercial-use-position",
+        "clear-redistribution-position",
+        "immutable-official-revision",
+        "no-remote-code-requirement",
+        "fully-offline-runtime-support",
+        "tokenizer-provenance",
+        "artifact-digest-capability",
+        "local-resource-fit",
+        "bounded-subprocess-compatibility",
+        "no-mandatory-telemetry",
+        "no-tenant-data-requirement",
+        "official-model-card",
+        "documented-limitations",
+        "no-production-dependency"
+      ]
+    },
+    "criterionMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "explicit-weight-use-license",
+        "clear-commercial-use-position",
+        "clear-redistribution-position",
+        "immutable-official-revision",
+        "no-remote-code-requirement",
+        "fully-offline-runtime-support",
+        "tokenizer-provenance",
+        "artifact-digest-capability",
+        "local-resource-fit",
+        "bounded-subprocess-compatibility",
+        "no-mandatory-telemetry",
+        "no-tenant-data-requirement",
+        "official-model-card",
+        "documented-limitations",
+        "no-production-dependency"
+      ],
+      "properties": {
+        "explicit-weight-use-license": { "enum": ["pass", "fail"] },
+        "clear-commercial-use-position": { "enum": ["pass", "fail"] },
+        "clear-redistribution-position": { "enum": ["pass", "fail"] },
+        "immutable-official-revision": { "enum": ["pass", "fail"] },
+        "no-remote-code-requirement": { "enum": ["pass", "fail"] },
+        "fully-offline-runtime-support": { "enum": ["pass", "fail"] },
+        "tokenizer-provenance": { "enum": ["pass", "fail"] },
+        "artifact-digest-capability": { "enum": ["pass", "fail"] },
+        "local-resource-fit": { "enum": ["pass", "fail"] },
+        "bounded-subprocess-compatibility": { "enum": ["pass", "fail"] },
+        "no-mandatory-telemetry": { "enum": ["pass", "fail"] },
+        "no-tenant-data-requirement": { "enum": ["pass", "fail"] },
+        "official-model-card": { "enum": ["pass", "fail"] },
+        "documented-limitations": { "enum": ["pass", "fail"] },
+        "no-production-dependency": { "enum": ["pass", "fail"] }
+      }
+    },
+    "gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gapId", "previousBlocker", "status", "restrictiveInterpretation"],
+      "properties": {
+        "gapId": { "$ref": "#/$defs/criterionName" },
+        "previousBlocker": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "status": { "enum": ["resolved", "unresolved"] },
+        "restrictiveInterpretation": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    },
+    "conflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["topic", "status", "restrictiveInterpretation"],
+      "properties": {
+        "topic": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "status": { "enum": ["resolved", "unresolved"] },
+        "restrictiveInterpretation": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceName", "publisher", "retrievedOn", "evidenceClass", "claim", "locator"],
+      "properties": {
+        "sourceName": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "publisher": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "retrievedOn": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "evidenceClass": { "enum": ["authoritative", "secondary", "unresolved"] },
+        "claim": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "locator": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "url"],
+          "properties": {
+            "kind": { "const": "url" },
+            "url": { "type": "string", "pattern": "^https://\\S+$", "maxLength": 300 }
+          }
+        }
+      }
+    },
+    "shard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fileName", "byteCount", "sha256"],
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{0,120}\\.safetensors$"
+        },
+        "byteCount": { "type": "integer", "minimum": 1, "maximum": 8589934592 },
+        "sha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          ]
+        }
+      }
+    },
+    "publisherArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["format", "byteCount", "digestDisposition", "upstreamSha256", "shards"],
+      "properties": {
+        "format": { "const": "safetensors" },
+        "byteCount": { "type": "integer", "minimum": 1, "maximum": 8589934592 },
+        "digestDisposition": { "enum": ["agreed", "conflicting"] },
+        "upstreamSha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          ]
+        },
+        "shards": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": { "$ref": "#/$defs/shard" }
+        }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modelId",
+        "revision",
+        "previousDisqualifiers",
+        "gaps",
+        "mandatoryCriteria",
+        "mandatoryStatus",
+        "disqualifiers",
+        "weightedScore",
+        "conflicts",
+        "evidence",
+        "publisherArtifact",
+        "locallyObservedArtifactDigests"
+      ],
+      "properties": {
+        "modelId": { "$ref": "#/$defs/modelId" },
+        "revision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "previousDisqualifiers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/criterionName" }
+        },
+        "gaps": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": { "$ref": "#/$defs/gap" }
+        },
+        "mandatoryCriteria": { "$ref": "#/$defs/criterionMap" },
+        "mandatoryStatus": { "enum": ["pass", "fail"] },
+        "disqualifiers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/criterionName" }
+        },
+        "weightedScore": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "integer", "minimum": 0, "maximum": 100 }
+          ]
+        },
+        "conflicts": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": { "$ref": "#/$defs/conflict" }
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": { "$ref": "#/$defs/evidence" }
+        },
+        "publisherArtifact": { "$ref": "#/$defs/publisherArtifact" },
+        "locallyObservedArtifactDigests": {
+          "type": "array",
+          "maxItems": 0,
+          "items": false
+        }
+      }
+    }
+  }
+}

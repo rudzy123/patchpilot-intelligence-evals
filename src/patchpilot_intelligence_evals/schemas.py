@@ -44,6 +44,20 @@ AUTHORIZATION_SCHEMA_NAMES: tuple[str, ...] = (
     "real-candidate-experiment-plan",
 )
 
+# Track 5 real-candidate boundary documents. They stay outside Track 2, Track 3,
+# and Track 4 identifiers. Names are appended as each closed schema is added.
+TRACK5_SCHEMA_NAMES: tuple[str, ...] = (
+    "offline-local-model-manifest",
+    "external-artifact-cache-policy",
+    "model-artifact-verification",
+    "runtime-assessment",
+    "runtime-authorization",
+    "real-candidate-isolation-profile",
+    "candidate-evidence-closure",
+    "track6-acquisition-authorization",
+    "track5-implementation-review",
+)
+
 
 class SchemaValidationError(Exception):
     """A document failed a closed schema. The message omits document values."""
@@ -58,7 +72,7 @@ def repo_root() -> Path:
 
 
 def schema_path(schema_name: str) -> Path:
-    known = SCHEMA_NAMES + CANDIDATE_SCHEMA_NAMES + AUTHORIZATION_SCHEMA_NAMES
+    known = SCHEMA_NAMES + CANDIDATE_SCHEMA_NAMES + AUTHORIZATION_SCHEMA_NAMES + TRACK5_SCHEMA_NAMES
     if schema_name not in known:
         raise KeyError(schema_name)
     return repo_root() / "schemas" / f"{schema_name}.schema.json"
@@ -90,7 +104,7 @@ def validate(schema_name: str, instance: object) -> None:
 
 
 def assert_schemas_closed() -> None:
-    names = SCHEMA_NAMES + CANDIDATE_SCHEMA_NAMES + AUTHORIZATION_SCHEMA_NAMES
+    names = SCHEMA_NAMES + CANDIDATE_SCHEMA_NAMES + AUTHORIZATION_SCHEMA_NAMES + TRACK5_SCHEMA_NAMES
     for name in names:
         document = load_schema(name)
         if document.get("additionalProperties") is not False:

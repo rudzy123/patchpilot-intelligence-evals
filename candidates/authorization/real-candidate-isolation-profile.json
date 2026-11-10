@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "operatingSystemSandboxClaimed": false,
+  "fixtureTimeoutSeconds": 15,
+  "budgets": {
+    "artifactVerificationSeconds": 60,
+    "startupAndLoadSeconds": 180,
+    "warmPerCaseSeconds": 120,
+    "completeCorpusSeconds": 5400,
+    "cleanupSeconds": 30,
+    "maxStdoutBytes": 65536,
+    "maxStderrBytes": 65536,
+    "maxCandidateProcesses": 1,
+    "maxConcurrentEvaluations": 1,
+    "retries": 0
+  },
+  "controls": [
+    {
+      "controlId": "unprivileged-execution",
+      "enforcement": "current-harness",
+      "disposition": "enforced",
+      "acquisitionBlocking": false,
+      "statement": "The fixture runner does not call a setuid or sudo path. It is not a user namespace."
+    },
+    {
+      "controlId": "minimal-environment",
+      "enforcement": "current-harness",
+      "disposition": "enforced",
+      "acquisitionBlocking": false,
+      "statement": "The fixture child receives PATH, language, and Python flags only. Provider credentials are not copied."
+    },
+    {
+      "controlId": "read-only-verified-artifacts",
+      "enforcement": "namespace-or-container",
+      "disposition": "deferred-blocker",
+      "acquisitionBlocking": true,
+      "statement": "Read-only mounts for verified artifacts require a namespace or container. The Python path hook is not that mount."
+    },
+    {
+      "controlId": "read-only-candidate-configuration",
+      "enforcement": "namespace-or-container",
+      "disposition": "deferred-blocker",
+      "acquisitionBlocking": true,
+      "statement": "Read-only candidate configuration requires a namespace or container. This profile does not create one."
+    },
+    {
+      "controlId": "isolated-writable-results",
+      "enforcement": "current-harness",
+      "disposition": "enforced",
+      "acquisitionBlocking": false,
+      "statement": "The fixture runner uses a temporary working directory. That directory is not a private mount."
+    },
+    {
+      "controlId": "no-gold-label-access",
+      "enforcement": "namespace-or-container",
+      "disposition": "deferred-blocker",
+      "acquisitionBlocking": true,
+      "statement": "The open hook rejects lexical corpus paths. Hiding gold labels from the operating system requires a namespace or container."
+    },
+    {
+      "controlId": "no-prior-result-access",
+      "enforcement": "namespace-or-container",
+      "disposition": "deferred-blocker",
+      "acquisitionBlocking": true,
+      "statement": "The open hook rejects known result file names. Hiding prior results at the operating-system boundary is not implemented."
+    },
+    {
+      "controlId": "no-sibling-repository-access",
+      "enforcement": "namespace-or-container",
+      "disposition": "deferred-blocker",
+      "acquisitionBlocking": true,
+      "statement": "Path parts named patchpilot or neural-from-scratch are denied lexically. A mount that hides those trees is not implemented."
+    },
+    {
+      "controlId": "no-home-directory-access",
+      "enforcement": "namespace-or-container",
+      "disposition": "deferred-blocker",
+      "acquisitionBlocking": true,
+      "statement": "The child environment omits HOME. The process can still open a home path unless a namespace hides it."
+    },
+    {
+      "controlId": "no-ssh-configuration-access",
+      "enforcement": "namespace-or-container",
+      "disposition": "deferred-blocker",
+      "acquisitionBlocking": true,
+      "statement": "SSH configuration is not copied into the child environment. Hiding the files requires a namespace or container."
+    },
+    {
+      "controlId": "no-cloud-credentials",
+      "enforcement": "namespace-or-container",
+      "disposition": "deferred-blocker",
+      "acquisitionBlocking": true,
+      "statement": "Cloud credential variables are not copied. Credential files remain readable without a filesystem namespace."
+    },
+    {
+      "controlId": "no-outbound-network",
+      "enforcement": "namespace-or-container",
+      "disposition": "deferred-blocker",
+      "acquisitionBlocking": true,
+      "statement": "The socket hook is in-process. It is not a network namespace, seccomp filter, or firewall."
+    },
+    {
+      "controlId": "process-count-limit",
+      "enforcement": "linux-resource-limit",
+      "disposition": "enforced",
+      "acquisitionBlocking": false,
+      "statement": "RLIMIT_NPROC can be set on a child. It is a per-user limit, not a private process namespace."
+    },
+    {
+      "controlId": "cpu-time-limit",
+      "enforcement": "linux-resource-limit",
+      "disposition": "enforced",
+      "acquisitionBlocking": false,
+      "statement": "RLIMIT_CPU can stop a child that exceeds its CPU-second budget."
+    },
+    {
+      "controlId": "memory-limit",
+      "enforcement": "linux-resource-limit",
+      "disposition": "enforced",
+      "acquisitionBlocking": false,
+      "statement": "RLIMIT_AS limits address space. It is not resident-set size and it is not a cgroup memory controller."
+    },
+    {
+      "controlId": "wall-clock-limit",
+      "enforcement": "current-harness",
+      "disposition": "enforced",
+      "acquisitionBlocking": false,
+      "statement": "The fixture runner enforces a 15-second wall clock. Real-candidate ceilings are recorded here and are not applied to fixtures."
+    },
+    {
+      "controlId": "file-size-limit",
+      "enforcement": "linux-resource-limit",
+      "disposition": "enforced",
+      "acquisitionBlocking": false,
+      "statement": "RLIMIT_FSIZE can stop a child from writing past the selected file-size budget."
+    },
+    {
+      "controlId": "open-file-limit",
+      "enforcement": "linux-resource-limit",
+      "disposition": "enforced",
+      "acquisitionBlocking": false,
+      "statement": "RLIMIT_NOFILE can stop a child from opening files past the selected descriptor budget."
+    },
+    {
+      "controlId": "process-tree-termination",
+      "enforcement": "current-harness",
+      "disposition": "enforced",
+      "acquisitionBlocking": false,
+      "statement": "The fixture runner sends SIGKILL to the child process group when the platform permits. It is not a pid namespace."
+    },
+    {
+      "controlId": "no-shell",
+      "enforcement": "current-harness",
+      "disposition": "enforced",
+      "acquisitionBlocking": false,
+      "statement": "The fixture runner starts the child with an argument array and shell set to false."
+    },
+    {
+      "controlId": "no-elevated-execution",
+      "enforcement": "current-harness",
+      "disposition": "enforced",
+      "acquisitionBlocking": false,
+      "statement": "The harness does not raise privileges. It does not prove that the operating system would deny a privileged helper."
+    },
+    {
+      "controlId": "explicit-working-directory",
+      "enforcement": "current-harness",
+      "disposition": "enforced",
+      "acquisitionBlocking": false,
+      "statement": "The fixture child working directory is the temporary runtime directory chosen by the runner."
+    },
+    {
+      "controlId": "canonical-protocol",
+      "enforcement": "current-harness",
+      "disposition": "enforced",
+      "acquisitionBlocking": false,
+      "statement": "The child receives one canonical JSON request on standard input and returns one JSON response on standard output."
+    }
+  ],
+  "acquisitionBlocked": true,
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed"
+}

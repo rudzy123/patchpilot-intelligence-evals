@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:runtime-assessment:v1",
+  "title": "Runtime assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "retrievedOn",
+    "approvedFormat",
+    "quantizationApproved",
+    "runtimes",
+    "acquisitionStatus",
+    "executionStatus",
+    "installedDuringSession"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "retrievedOn": { "const": "2026-11-10" },
+    "approvedFormat": { "const": "safetensors" },
+    "quantizationApproved": { "const": false },
+    "runtimes": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/runtime" }
+    },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" },
+    "installedDuringSession": { "const": false }
+  },
+  "$defs": {
+    "criterion": { "enum": ["pass", "fail"] },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtimeId",
+        "projectUrl",
+        "sourceUrl",
+        "licenseName",
+        "licenseUrl",
+        "versionTag",
+        "immutableRevision",
+        "criteria",
+        "disqualifiers",
+        "advisoryIds",
+        "evidence"
+      ],
+      "properties": {
+        "runtimeId": { "enum": ["llama-cpp", "onnxruntime", "transformers"] },
+        "projectUrl": { "$ref": "#/$defs/httpsUrl" },
+        "sourceUrl": { "$ref": "#/$defs/httpsUrl" },
+        "licenseName": { "enum": ["Apache-2.0", "MIT"] },
+        "licenseUrl": { "$ref": "#/$defs/httpsUrl" },
+        "versionTag": { "type": "string", "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "immutableRevision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "criteria": { "$ref": "#/$defs/criteria" },
+        "disqualifiers": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/criterionName" }
+        },
+        "advisoryIds": {
+          "type": "array",
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^GHSA-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}$"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": { "$ref": "#/$defs/evidence" }
+        }
+      }
+    },
+    "criterionName": {
+      "enum": [
+        "approved-format-support",
+        "bounded-context-and-output",
+        "cpu-support",
+        "deterministic-controls",
+        "documented-artifact-loading",
+        "explicit-open-source-license",
+        "explicit-telemetry-disablement",
+        "immutable-version",
+        "local-artifact-paths",
+        "maintainable-security-posture",
+        "no-mandatory-cloud",
+        "no-mandatory-telemetry",
+        "no-production-dependency",
+        "no-trust-remote-code",
+        "offline-local-loading",
+        "subprocess-compatibility"
+      ]
+    },
+    "criteria": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approved-format-support",
+        "bounded-context-and-output",
+        "cpu-support",
+        "deterministic-controls",
+        "documented-artifact-loading",
+        "explicit-open-source-license",
+        "explicit-telemetry-disablement",
+        "immutable-version",
+        "local-artifact-paths",
+        "maintainable-security-posture",
+        "no-mandatory-cloud",
+        "no-mandatory-telemetry",
+        "no-production-dependency",
+        "no-trust-remote-code",
+        "offline-local-loading",
+        "subprocess-compatibility"
+      ],
+      "properties": {
+        "approved-format-support": { "$ref": "#/$defs/criterion" },
+        "bounded-context-and-output": { "$ref": "#/$defs/criterion" },
+        "cpu-support": { "$ref": "#/$defs/criterion" },
+        "deterministic-controls": { "$ref": "#/$defs/criterion" },
+        "documented-artifact-loading": { "$ref": "#/$defs/criterion" },
+        "explicit-open-source-license": { "$ref": "#/$defs/criterion" },
+        "explicit-telemetry-disablement": { "$ref": "#/$defs/criterion" },
+        "immutable-version": { "$ref": "#/$defs/criterion" },
+        "local-artifact-paths": { "$ref": "#/$defs/criterion" },
+        "maintainable-security-posture": { "$ref": "#/$defs/criterion" },
+        "no-mandatory-cloud": { "$ref": "#/$defs/criterion" },
+        "no-mandatory-telemetry": { "$ref": "#/$defs/criterion" },
+        "no-production-dependency": { "$ref": "#/$defs/criterion" },
+        "no-trust-remote-code": { "$ref": "#/$defs/criterion" },
+        "offline-local-loading": { "$ref": "#/$defs/criterion" },
+        "subprocess-compatibility": { "$ref": "#/$defs/criterion" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceName", "publisher", "retrievedOn", "evidenceClass", "claim", "url"],
+      "properties": {
+        "sourceName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "publisher": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "retrievedOn": { "const": "2026-11-10" },
+        "evidenceClass": { "enum": ["authoritative", "unresolved"] },
+        "claim": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "url": { "$ref": "#/$defs/httpsUrl" }
+      }
+    },
+    "httpsUrl": { "type": "string", "pattern": "^https://[^\\s]+$", "maxLength": 300 }
+  }
+}

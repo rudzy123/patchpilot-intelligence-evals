@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:model-artifact-verification:v1",
+  "title": "Model artifact verification",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "verificationState",
+    "attemptId",
+    "acquisitionStatus",
+    "executionStatus",
+    "expectedFiles",
+    "observedFiles",
+    "locallyObservedArtifactDigests",
+    "upstreamDigestComparison",
+    "approvedFormat",
+    "remoteCodeRequired",
+    "executableContentDetected",
+    "tokenizerProvenanceRecorded",
+    "licenseReferenceRecorded",
+    "malwareDetectionClaimed",
+    "reasonCodes",
+    "identityDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "verificationState": { "enum": ["not-acquired", "verified", "rejected"] },
+    "attemptId": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,40}$" }
+      ]
+    },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" },
+    "expectedFiles": {
+      "type": "array",
+      "maxItems": 16,
+      "items": { "$ref": "#/$defs/expectedFile" }
+    },
+    "observedFiles": {
+      "type": "array",
+      "maxItems": 16,
+      "items": { "$ref": "#/$defs/observedFile" }
+    },
+    "locallyObservedArtifactDigests": {
+      "type": "array",
+      "maxItems": 16,
+      "items": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+    },
+    "upstreamDigestComparison": {
+      "enum": ["not-applicable", "not-provided", "matched", "mismatch"]
+    },
+    "approvedFormat": { "const": "safetensors" },
+    "remoteCodeRequired": { "type": "boolean" },
+    "executableContentDetected": { "type": "boolean" },
+    "tokenizerProvenanceRecorded": { "type": "boolean" },
+    "licenseReferenceRecorded": { "type": "boolean" },
+    "malwareDetectionClaimed": { "const": false },
+    "reasonCodes": {
+      "type": "array",
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "count-mismatch",
+          "digest-mismatch",
+          "executable-content",
+          "identity-changed",
+          "missing-file",
+          "missing-provenance",
+          "path-traversal",
+          "remote-code",
+          "size-mismatch",
+          "symlink-escape",
+          "unexpected-file",
+          "unsupported-format"
+        ]
+      }
+    },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "verificationState": { "const": "not-acquired" } },
+        "required": ["verificationState"]
+      },
+      "then": {
+        "properties": {
+          "attemptId": { "type": "null" },
+          "expectedFiles": { "maxItems": 0 },
+          "observedFiles": { "maxItems": 0 },
+          "locallyObservedArtifactDigests": { "maxItems": 0 },
+          "reasonCodes": { "maxItems": 0 },
+          "upstreamDigestComparison": { "const": "not-applicable" },
+          "remoteCodeRequired": { "const": false },
+          "executableContentDetected": { "const": false },
+          "tokenizerProvenanceRecorded": { "const": false },
+          "licenseReferenceRecorded": { "const": false }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "verificationState": { "const": "verified" } },
+        "required": ["verificationState"]
+      },
+      "then": {
+        "properties": {
+          "attemptId": { "type": "string" },
+          "expectedFiles": { "minItems": 1 },
+          "observedFiles": { "minItems": 1 },
+          "locallyObservedArtifactDigests": { "minItems": 1 },
+          "reasonCodes": { "maxItems": 0 },
+          "upstreamDigestComparison": { "enum": ["matched", "not-provided"] },
+          "remoteCodeRequired": { "const": false },
+          "executableContentDetected": { "const": false },
+          "tokenizerProvenanceRecorded": { "const": true },
+          "licenseReferenceRecorded": { "const": true }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "verificationState": { "const": "rejected" } },
+        "required": ["verificationState"]
+      },
+      "then": {
+        "properties": {
+          "attemptId": { "type": "string" },
+          "locallyObservedArtifactDigests": { "maxItems": 0 },
+          "reasonCodes": { "minItems": 1 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "expectedFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fileName", "expectedBytes", "upstreamSha256"],
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{0,120}\\.safetensors$"
+        },
+        "expectedBytes": { "type": "integer", "minimum": 1, "maximum": 8589934592 },
+        "upstreamSha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          ]
+        }
+      }
+    },
+    "observedFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fileName", "observedBytes", "sha256"],
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{0,120}\\.safetensors$"
+        },
+        "observedBytes": { "type": "integer", "minimum": 0, "maximum": 8589934592 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    }
+  }
+}

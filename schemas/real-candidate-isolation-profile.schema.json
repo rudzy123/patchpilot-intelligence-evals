@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:real-candidate-isolation-profile:v1",
+  "title": "Real candidate isolation profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "operatingSystemSandboxClaimed",
+    "fixtureTimeoutSeconds",
+    "budgets",
+    "controls",
+    "acquisitionBlocked",
+    "acquisitionStatus",
+    "executionStatus"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "operatingSystemSandboxClaimed": { "const": false },
+    "fixtureTimeoutSeconds": { "const": 15 },
+    "budgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifactVerificationSeconds",
+        "startupAndLoadSeconds",
+        "warmPerCaseSeconds",
+        "completeCorpusSeconds",
+        "cleanupSeconds",
+        "maxStdoutBytes",
+        "maxStderrBytes",
+        "maxCandidateProcesses",
+        "maxConcurrentEvaluations",
+        "retries"
+      ],
+      "properties": {
+        "artifactVerificationSeconds": { "const": 60 },
+        "startupAndLoadSeconds": { "const": 180 },
+        "warmPerCaseSeconds": { "const": 120 },
+        "completeCorpusSeconds": { "const": 5400 },
+        "cleanupSeconds": { "const": 30 },
+        "maxStdoutBytes": { "const": 65536 },
+        "maxStderrBytes": { "const": 65536 },
+        "maxCandidateProcesses": { "const": 1 },
+        "maxConcurrentEvaluations": { "const": 1 },
+        "retries": { "const": 0 }
+      }
+    },
+    "controls": {
+      "type": "array",
+      "minItems": 23,
+      "maxItems": 23,
+      "items": { "$ref": "#/$defs/control" }
+    },
+    "acquisitionBlocked": { "const": true },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" }
+  },
+  "$defs": {
+    "control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "controlId",
+        "enforcement",
+        "disposition",
+        "acquisitionBlocking",
+        "statement"
+      ],
+      "properties": {
+        "controlId": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "maxLength": 80
+        },
+        "enforcement": {
+          "enum": [
+            "current-harness",
+            "linux-resource-limit",
+            "namespace-or-container",
+            "unavailable"
+          ]
+        },
+        "disposition": { "enum": ["enforced", "deferred-blocker"] },
+        "acquisitionBlocking": { "type": "boolean" },
+        "statement": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    }
+  }
+}

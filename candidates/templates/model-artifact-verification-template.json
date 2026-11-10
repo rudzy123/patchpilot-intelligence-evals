@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "verificationState": "not-acquired",
+  "attemptId": null,
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed",
+  "expectedFiles": [],
+  "observedFiles": [],
+  "locallyObservedArtifactDigests": [],
+  "upstreamDigestComparison": "not-applicable",
+  "approvedFormat": "safetensors",
+  "remoteCodeRequired": false,
+  "executableContentDetected": false,
+  "tokenizerProvenanceRecorded": false,
+  "licenseReferenceRecorded": false,
+  "malwareDetectionClaimed": false,
+  "reasonCodes": [],
+  "identityDigest": "b8055224b99ecd991f5e1cf0d79480ecba311a99173d59727d7a956a9718a4ec"
+}

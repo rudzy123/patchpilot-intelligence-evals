@@ -84,3 +84,15 @@ jobs:
           uv run patchpilot-evals comparison-validation --result "$comparison"
           record=$(find build/ci-calibration -name calibration-record.json)
           uv run patchpilot-evals calibration-validation --result "$record"
+
+      - name: Validate the real-candidate boundary
+        run: |
+          uv run patchpilot-evals real-candidate-manifest-validation --manifest candidates/templates/offline-local-model-manifest.json
+          uv run patchpilot-evals artifact-cache-policy-validation
+          uv run patchpilot-evals artifact-verification-validation --manifest candidates/templates/model-artifact-verification-template.json
+          uv run patchpilot-evals runtime-assessment-validation
+          uv run patchpilot-evals runtime-authorization-validation
+          uv run patchpilot-evals isolation-profile-validation
+          uv run patchpilot-evals evidence-closure-validation
+          uv run patchpilot-evals track6-authorization-validation
+          uv run patchpilot-evals track5-review-validation

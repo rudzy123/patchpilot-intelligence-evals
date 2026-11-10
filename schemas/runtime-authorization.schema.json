@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:runtime-authorization:v1",
+  "title": "Runtime authorization",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "retrievedOn",
+    "authorizationOutcome",
+    "runtimeId",
+    "versionTag",
+    "immutableRevision",
+    "assessedRuntimeIds",
+    "disqualifiers",
+    "acquisitionStatus",
+    "executionStatus",
+    "locallyObservedArtifactDigests",
+    "installedDuringSession"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "retrievedOn": { "const": "2026-11-10" },
+    "authorizationOutcome": { "enum": ["authorized", "no-runtime"] },
+    "runtimeId": {
+      "oneOf": [
+        { "type": "null" },
+        { "enum": ["llama-cpp", "onnxruntime", "transformers"] }
+      ]
+    },
+    "versionTag": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$" }
+      ]
+    },
+    "immutableRevision": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+      ]
+    },
+    "assessedRuntimeIds": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "uniqueItems": true,
+      "items": { "enum": ["llama-cpp", "onnxruntime", "transformers"] }
+    },
+    "disqualifiers": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["runtimeId", "criteria"],
+        "properties": {
+          "runtimeId": { "enum": ["llama-cpp", "onnxruntime", "transformers"] },
+          "criteria": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "approved-format-support",
+                "bounded-context-and-output",
+                "cpu-support",
+                "deterministic-controls",
+                "documented-artifact-loading",
+                "explicit-open-source-license",
+                "explicit-telemetry-disablement",
+                "immutable-version",
+                "local-artifact-paths",
+                "maintainable-security-posture",
+                "no-mandatory-cloud",
+                "no-mandatory-telemetry",
+                "no-production-dependency",
+                "no-trust-remote-code",
+                "offline-local-loading",
+                "subprocess-compatibility"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "installedDuringSession": { "const": false }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "authorizationOutcome": { "const": "no-runtime" } },
+        "required": ["authorizationOutcome"]
+      },
+      "then": {
+        "properties": {
+          "runtimeId": { "type": "null" },
+          "versionTag": { "type": "null" },
+          "immutableRevision": { "type": "null" },
+          "disqualifiers": { "minItems": 1 }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "authorizationOutcome": { "const": "authorized" } },
+        "required": ["authorizationOutcome"]
+      },
+      "then": {
+        "properties": {
+          "runtimeId": { "type": "string" },
+          "versionTag": { "type": "string" },
+          "immutableRevision": { "type": "string" }
+        }
+      }
+    }
+  ]
+}

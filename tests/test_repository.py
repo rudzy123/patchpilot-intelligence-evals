@@ -53,10 +53,17 @@ _DOCUMENTS = (
     "docs/architecture/real-candidate-acquisition.md",
     "docs/architecture/real-candidate-isolation.md",
     "docs/architecture/real-candidate-evaluation-plan.md",
+    "docs/architecture/real-candidate-boundary.md",
+    "docs/architecture/external-artifact-cache.md",
+    "docs/architecture/model-artifact-verification.md",
+    "docs/architecture/runtime-selection.md",
+    "docs/architecture/track6-acquisition-boundary.md",
     "docs/provenance/initial-corpus-provenance.md",
     "docs/provenance/candidate-fixtures.md",
     "docs/provenance/candidate-shortlist.md",
     "docs/provenance/selected-candidate-authorization.md",
+    "docs/provenance/candidate-evidence-closure.md",
+    "docs/provenance/track5-implementation-review.md",
 )
 
 
@@ -114,6 +121,15 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals comparison-validation --result",
         "uv run patchpilot-evals calibration-validation --result",
         "uv run patchpilot-evals calibration --output-dir",
+        "uv run patchpilot-evals real-candidate-manifest-validation --manifest",
+        "uv run patchpilot-evals artifact-cache-policy-validation",
+        "uv run patchpilot-evals artifact-verification-validation --manifest",
+        "uv run patchpilot-evals runtime-assessment-validation",
+        "uv run patchpilot-evals runtime-authorization-validation",
+        "uv run patchpilot-evals isolation-profile-validation",
+        "uv run patchpilot-evals evidence-closure-validation",
+        "uv run patchpilot-evals track6-authorization-validation",
+        "uv run patchpilot-evals track5-review-validation",
     ):
         assert command in text
     uses = re.findall(r"uses: (\S+)", text)
@@ -139,6 +155,15 @@ def test_help_lists_commands() -> None:
     assert "comparison-validation" in text
     assert "calibration-validation" in text
     assert "calibration" in text
+    assert "real-candidate-manifest-validation" in text
+    assert "artifact-cache-policy-validation" in text
+    assert "artifact-verification-validation" in text
+    assert "runtime-assessment-validation" in text
+    assert "runtime-authorization-validation" in text
+    assert "isolation-profile-validation" in text
+    assert "evidence-closure-validation" in text
+    assert "track6-authorization-validation" in text
+    assert "track5-review-validation" in text
 
 
 def test_committed_json_files_validate() -> None:
