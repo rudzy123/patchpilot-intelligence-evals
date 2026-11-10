@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track6a-implementation-review:v1",
+  "title": "Track 6A implementation review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "reviewStatus",
+    "reviewDate",
+    "reviewAuthority",
+    "decision",
+    "authorizedScope",
+    "readinessMeaning",
+    "profileId",
+    "profileVersion",
+    "mechanism",
+    "runtimeId",
+    "versionTag",
+    "immutableRevision",
+    "artifactFormat",
+    "installationAuthorized",
+    "installedDuringSession",
+    "candidateFormatGap",
+    "candidateDecision",
+    "track6Authorization",
+    "acquisitionStatus",
+    "executionStatus",
+    "locallyObservedArtifactDigests",
+    "acceptedControls",
+    "acceptedResiduals",
+    "notAuthorized",
+    "reviewDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "reviewStatus": { "const": "accepted-by-principal-systems-architect" },
+    "reviewDate": { "const": "2026-11-10" },
+    "reviewAuthority": { "const": "PatchPilot Principal Systems Architect" },
+    "decision": {
+      "const": "hardened execution boundary approved with documented residuals"
+    },
+    "authorizedScope": {
+      "const": "This approval accepts the Track 6A hardened execution boundary with documented residuals for the next controlled architectural Session only."
+    },
+    "readinessMeaning": {
+      "const": "Track 6B readiness means the hardened execution boundary is ready for the next controlled architectural Session."
+    },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "profileVersion": { "const": "1.0.0" },
+    "mechanism": { "const": "bubblewrap+systemd-user-scope" },
+    "runtimeId": { "const": "onnxruntime" },
+    "versionTag": { "const": "v1.31.1" },
+    "immutableRevision": { "const": "6af1a932e2286d5c58166085d24c68783033edee" },
+    "artifactFormat": { "const": "onnx" },
+    "installationAuthorized": { "const": false },
+    "installedDuringSession": { "const": false },
+    "candidateFormatGap": { "const": true },
+    "candidateDecision": { "const": "no-selection" },
+    "track6Authorization": { "const": "not-authorized" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0, "items": false },
+    "acceptedControls": {
+      "type": "array",
+      "minItems": 34,
+      "maxItems": 34,
+      "items": { "$ref": "#/$defs/acceptedControl" }
+    },
+    "acceptedResiduals": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": { "$ref": "#/$defs/acceptedResidual" }
+    },
+    "notAuthorized": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+    },
+    "reviewDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "acceptedControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["controlId", "source", "statement"],
+      "properties": {
+        "controlId": {
+          "enum": [
+            "user-namespace",
+            "mount-namespace",
+            "pid-namespace",
+            "network-namespace",
+            "ipc-namespace",
+            "uts-namespace",
+            "cgroup-namespace",
+            "minimal-environment",
+            "read-only-verified-artifacts",
+            "read-only-candidate-configuration",
+            "isolated-writable-results",
+            "no-gold-label-access",
+            "no-prior-result-access",
+            "no-sibling-repository-access",
+            "no-home-directory-access",
+            "no-ssh-configuration-access",
+            "no-cloud-credentials",
+            "no-outbound-network",
+            "dns-denial",
+            "ipv4-denial",
+            "ipv6-denial",
+            "host-loopback-denial",
+            "external-unix-socket-denial",
+            "memory-limit",
+            "process-count-limit",
+            "cpu-time-limit",
+            "address-space-limit",
+            "wall-clock-limit",
+            "file-size-limit",
+            "open-file-limit",
+            "stdout-limit",
+            "stderr-limit",
+            "process-tree-termination",
+            "no-shell"
+          ]
+        },
+        "source": { "enum": ["capability-probe", "execution-profile"] },
+        "statement": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    },
+    "acceptedResidual": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["residualId", "statement"],
+      "properties": {
+        "residualId": {
+          "enum": [
+            "sandbox-local-loopback",
+            "seccomp-unsupported",
+            "unshare-failed",
+            "podman-unavailable",
+            "docker-unavailable",
+            "direct-cgroup-delegation-failed",
+            "single-uid-user-namespace",
+            "numeric-uid-in-mount-options",
+            "candidate-format-gap",
+            "rlimit-nproc-not-private",
+            "acquisition-remains-not-authorized"
+          ]
+        },
+        "statement": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    }
+  }
+}

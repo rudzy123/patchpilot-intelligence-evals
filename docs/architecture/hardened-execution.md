@@ -1,0 +1,25 @@
+# Hardened execution
+
+The hardened launcher is the operating-system boundary for synthetic fixtures. The candidate runner in [subprocess-isolation.md](subprocess-isolation.md) is unchanged. That runner, its in-process socket hook, and its resource probes remain a process boundary. They are not this launcher.
+
+The profile is [hardened-execution-profile.json](../../candidates/authorization/hardened-execution-profile.json), version `1.0.0`, profile id `linux-bwrap-systemd-v1`, mechanism `bubblewrap+systemd-user-scope`. Bubblewrap is `0.11.1`. The systemd user-scope major version is `259`. The committed attestation is [hardened-execution-attestation.json](../../candidates/authorization/hardened-execution-attestation.json).
+
+The parent composes one argument vector: `systemd-run --user --scope`, then `bwrap`, then `prlimit`, then the staged interpreter and `/fixture/main.py`. `shell` stays false. There is no `shell -c` and no retry. The scope sets `MemoryMax` and `TasksMax`. `prlimit` sets `RLIMIT_CPU`, `RLIMIT_AS`, `RLIMIT_FSIZE`, and `RLIMIT_NOFILE`. `RLIMIT_AS` is address space. `MemoryMax` is the cgroup resident-memory control. `TasksMax` is the process-count control. `RLIMIT_NPROC` is not applied as a private process limit.
+
+Bubblewrap uses user, pid, ipc, uts, network, and cgroup namespaces, `--die-with-parent`, `--new-session`, hostname `sandbox`, and `--chdir /results`. The mount set is the staged interpreter and its library closure, the copied fixture, read-only synthetic artifact and config directories, a private writable result directory, `/proc`, `/dev`, and a fresh `/tmp`. The repository root, corpus, build directory, home directory, `/etc`, and credential directories are not mounted. Bind sources that contain `/home` or `/Users` are refused. The interpreter prefix is copied under `/tmp` and its `sysconfig` path text is rewritten to `/opt/runtime` before the bind.
+
+The child environment is constructed, not inherited: `PATH`, `PYTHONHOME`, `LANG`, `LC_ALL`, `PYTHONDONTWRITEBYTECODE`, `PYTHONIOENCODING`, `PYTHONUTF8`, and `PWD`. `HOME`, proxy variables, `SSH_AUTH_SOCK`, cloud variables, and package-manager variables are dropped.
+
+Default ceilings are 256 MiB `MemoryMax`, 32 tasks, 5 CPU seconds, 2 GiB address space, 1 MiB file size, 128 open files, 15 seconds of wall clock, 64 KiB of standard output, and 16 KiB of standard error. The parent enforces the wall clock and the stream caps, then `SIGKILL`s the scope and the process group. Cleanup must leave the scope inactive and the direct child reaped. One-limit fixtures exceed a single ceiling and leave the others at the default, except the address-space fixture, which raises `MemoryMax` so the cgroup does not kill the process first.
+
+The network namespace denies external IPv4 `192.0.2.1`, external IPv6 `2001:db8::1`, DNS for `example.invalid`, a host `127.0.0.1` listener, and a host Unix socket outside the mount. Bubblewrap brings sandbox-local loopback up. A connection to sandbox-local `127.0.0.1:9` receives `ConnectionRefusedError`. That residual is `sandbox-local-loopback`. It does not authorize a shared network namespace. The same host listener is reachable from bubblewrap when `--unshare-net` is omitted; that positive control is not the launch path.
+
+Filesystem fixtures hide synthetic gold labels, prior results, sibling directory names `patchpilot` and `neural-from-scratch`, a synthetic home tree, SSH, and cloud-credential sentinels. Artifact and config mounts are read-only. Results are created only under the private result directory. A symlink under the artifact mount does not expose the hidden sentinel. Mount info from the fixture does not contain `/home/`. Numeric `uid=` options can still appear; that residual is `numeric-uid-in-mount-options`, and the number is not stored. `proc` binfmt was not visible to the fixture.
+
+On a non-Linux host, or when `bwrap`, `systemd-run`, `systemctl`, or `prlimit` is missing, the launcher raises `unsupported-capability` or `unsupported-platform` and does not execute the fixture in the parent namespaces. Attestations store digests, control ids, mechanism versions, `linux`, and `x86_64`. They omit host names, user names, addresses, environment values, and identity-bearing paths. Every attestation sets `realModelExecuted` false and `productionReady` false.
+
+`hardened-fixture-execution` runs outside the in-process socket hook. The parent opens a host listener so the fixture can show that the network namespace does not reach it. The hook remains in place for corpus and candidate commands. The child still runs in the network namespace.
+
+Principal Systems Architect review on 2026-11-10 accepts this boundary with documented residuals. Review status is `accepted-by-principal-systems-architect`. The acceptance record is [track6a-implementation-review.md](../provenance/track6a-implementation-review.md). That acceptance is limited to the next controlled architectural Session.
+
+CI validates the committed records. It does not install bubblewrap, start a container engine, or run the live fixture.

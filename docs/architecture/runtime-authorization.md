@@ -1,0 +1,11 @@
+# Runtime authorization
+
+Track 5 runtime authorization stays `no-runtime`. That record is [runtime-authorization.json](../../candidates/authorization/runtime-authorization.json). Track 6A assesses the same three pinned runtimes again against the hardened-execution checklist. The assessment is [runtime-security-assessment.json](../../candidates/authorization/runtime-security-assessment.json). The decision is [runtime-authorization-v2.json](../../candidates/authorization/runtime-authorization-v2.json). Evidence notes are in [runtime-evidence.md](../provenance/runtime-evidence.md).
+
+The checklist is license, immutable revision, official source, clear artifact format, CPU-only execution, offline loading, local artifact paths, no required remote code, no mandatory telemetry, a telemetry disable path, deterministic settings, reviewed advisories, subprocess acquisition, independent verification of that acquisition, and exclusion from this repository's production dependencies. The Track 5 safetensors mismatch is a candidate-format gap. It does not, by itself, disqualify a runtime under this checklist.
+
+`llama-cpp` `v0.9.0` at `cd959bae99ff4bed22bef2604f45241c09bbb8c8` fails `cpu-only` and `advisories-reviewed`. `transformers` `v5.22.2` at `6d195c6262a0ac2ef44f7b9a308617562286ff45` fails `cpu-only`, `no-remote-code-required`, and `advisories-reviewed`. `onnxruntime` `v1.31.1` at `6af1a932e2286d5c58166085d24c68783033edee` passes every checklist item. The authorization outcome is `authorized` for `onnxruntime`, format `onnx`.
+
+`installationAuthorized` stays false. `candidateSelected` stays false. `candidateFormatGap` stays true because the approved candidate format remains safetensors. `installedDuringSession` stays false. Local artifact digests stay empty. `acquisitionStatus` stays `not-acquired`, `executionStatus` stays `not-executed`, `realModelExecuted` stays false, and `productionReady` stays false. No runtime was installed, downloaded, or executed. Principal Systems Architect review on 2026-11-10 accepts this runtime identity without authorizing installation. The acceptance record is [track6a-implementation-review.md](../provenance/track6a-implementation-review.md).
+
+Two passing runtimes, or zero passing runtimes, produce `no-runtime`. A `no-runtime` result is valid and makes Track 6B readiness `not-ready`.

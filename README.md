@@ -39,6 +39,13 @@ uv run patchpilot-evals isolation-profile-validation
 uv run patchpilot-evals evidence-closure-validation
 uv run patchpilot-evals track6-authorization-validation
 uv run patchpilot-evals track5-review-validation
+uv run patchpilot-evals sandbox-capability-validation
+uv run patchpilot-evals hardened-execution-profile-validation
+uv run patchpilot-evals execution-attestation-validation
+uv run patchpilot-evals runtime-security-assessment-validation
+uv run patchpilot-evals runtime-authorization-v2-validation
+uv run patchpilot-evals track6b-readiness-validation
+uv run patchpilot-evals track6a-review-validation
 ```
 
 `baseline-evaluation` writes a file only when `--output` is a path inside this repository. The result record includes a timestamp, so it is not committed.
@@ -78,6 +85,17 @@ Intelligence Track 4 records an accepted no-selection. Review status is `accepte
 Intelligence Track 5 adds the real-candidate boundary. It does not authorize acquisition. Fixture manifests stay deterministic test doubles, with a 15-second timeout, 64 KiB of standard output, and 16 KiB of standard error. The offline-local-model file is an illustration: acquisition stays `not-acquired` and execution stays `not-executed`. Cache roots stay outside this repository. Executable sniffing is not malware detection. Linux resource limits and the Python hooks are not an operating-system sandbox. The runtime decision is no-runtime. The evidence closure keeps no-selection. Track 6 is `not-authorized`. `productionReady` stays false.
 
 The Track 5 implementation review is `accepted-by-principal-systems-architect` on 2026-11-10 by the PatchPilot Principal Systems Architect. That acceptance covers the fail-closed boundary records only. It is recorded in [docs/provenance/track5-implementation-review.md](docs/provenance/track5-implementation-review.md).
+
+Intelligence Track 6A adds a separate hardened launcher for synthetic fixtures: bubblewrap `0.11.1` namespaces plus a transient systemd user scope. `MemoryMax` is the cgroup memory control. `RLIMIT_AS` remains address space. The candidate runner is unchanged. The Track 6A review is `accepted-by-principal-systems-architect` on 2026-11-10. That acceptance covers the hardened execution boundary with documented residuals for the next controlled architectural Session. The selected mechanism is `linux-bwrap-systemd-v1` version `1.0.0`. The runtime identity is `onnxruntime` `v1.31.1`. Installation stays unauthorized, selection stays `no-selection`, the candidate format gap stays present, acquisition stays `not-acquired`, execution stays `not-executed`, `realModelExecuted` stays false, and `productionReady` stays false. The Track 6 acquisition record stays `not-authorized`. Track 6B readiness is `ready` with documented residuals. Readiness does not authorize runtime installation, model or tokenizer acquisition, model conversion, candidate selection, real inference, evaluation-gate changes, shadow mode, or PatchPilot production composition.
+
+The Track 6A implementation review is recorded in [docs/provenance/track6a-implementation-review.md](docs/provenance/track6a-implementation-review.md).
+
+- [docs/architecture/linux-isolation-capabilities.md](docs/architecture/linux-isolation-capabilities.md)
+- [docs/architecture/hardened-execution.md](docs/architecture/hardened-execution.md)
+- [docs/architecture/runtime-authorization.md](docs/architecture/runtime-authorization.md)
+- [docs/architecture/track6b-acquisition-prerequisites.md](docs/architecture/track6b-acquisition-prerequisites.md)
+- [docs/provenance/runtime-evidence.md](docs/provenance/runtime-evidence.md)
+- [docs/provenance/track6a-implementation-review.md](docs/provenance/track6a-implementation-review.md)
 
 - [docs/architecture/real-candidate-boundary.md](docs/architecture/real-candidate-boundary.md)
 - [docs/architecture/external-artifact-cache.md](docs/architecture/external-artifact-cache.md)

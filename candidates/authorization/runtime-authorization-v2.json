@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "retrievedOn": "2026-11-10",
+  "authorizationOutcome": "authorized",
+  "runtimeId": "onnxruntime",
+  "versionTag": "v1.31.1",
+  "immutableRevision": "6af1a932e2286d5c58166085d24c68783033edee",
+  "artifactFormat": "onnx",
+  "approvedCandidateFormat": "safetensors",
+  "candidateFormatGap": true,
+  "assessedRuntimeIds": [
+    "llama-cpp",
+    "onnxruntime",
+    "transformers"
+  ],
+  "disqualifiers": [
+    {
+      "runtimeId": "llama-cpp",
+      "criteria": [
+        "cpu-only",
+        "advisories-reviewed"
+      ]
+    },
+    {
+      "runtimeId": "transformers",
+      "criteria": [
+        "cpu-only",
+        "no-remote-code-required",
+        "advisories-reviewed"
+      ]
+    }
+  ],
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed",
+  "locallyObservedArtifactDigests": [],
+  "installedDuringSession": false,
+  "installationAuthorized": false,
+  "candidateSelected": false
+}

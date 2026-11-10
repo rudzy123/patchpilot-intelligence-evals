@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track6b-readiness:v1",
+  "title": "Track 6B readiness",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "selectionOutcome",
+    "acquisitionStatus",
+    "executionStatus",
+    "readiness",
+    "verdict",
+    "profileId",
+    "profileVersion",
+    "runtimeAuthorizationOutcome",
+    "runtimeId",
+    "blockers",
+    "residualIds",
+    "localModelArtifactDigests",
+    "candidateSelected",
+    "installationAuthorized"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" },
+    "readiness": { "enum": ["ready", "not-ready"] },
+    "verdict": {
+      "enum": [
+        "TRACK 6B HARDENED ACQUISITION READY",
+        "TRACK 6B HARDENED ACQUISITION READY WITH DOCUMENTED RESIDUALS",
+        "TRACK 6B HARDENED ACQUISITION NOT READY"
+      ]
+    },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "profileVersion": { "const": "1.0.0" },
+    "runtimeAuthorizationOutcome": { "enum": ["authorized", "no-runtime"] },
+    "runtimeId": {
+      "oneOf": [{ "type": "null" }, { "enum": ["llama-cpp", "onnxruntime", "transformers"] }]
+    },
+    "blockers": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+    "residualIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z0-9-]{1,64}$" }
+    },
+    "localModelArtifactDigests": { "type": "array", "maxItems": 0 },
+    "candidateSelected": { "const": false },
+    "installationAuthorized": { "const": false }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "readiness": { "const": "ready" } },
+        "required": ["readiness"]
+      },
+      "then": { "properties": { "blockers": { "maxItems": 0 } } }
+    },
+    {
+      "if": {
+        "properties": { "readiness": { "const": "not-ready" } },
+        "required": ["readiness"]
+      },
+      "then": { "properties": { "blockers": { "minItems": 1 } } }
+    }
+  ]
+}

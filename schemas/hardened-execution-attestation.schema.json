@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:hardened-execution-attestation:v1",
+  "title": "Hardened execution attestation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "profileId",
+    "profileVersion",
+    "mechanism",
+    "mechanismVersion",
+    "operatingSystemFamily",
+    "architecture",
+    "enforcedControlIds",
+    "unavailableControlIds",
+    "failedControlIds",
+    "unsupportedControlIds",
+    "runtimeAuthorizationId",
+    "fixtureIdentity",
+    "fixtureDigest",
+    "inputDigest",
+    "outputDigest",
+    "exitClassification",
+    "attempts",
+    "resourceLimits",
+    "networkTestResult",
+    "filesystemVisibilityResult",
+    "processTreeCleanupResult",
+    "executedAt",
+    "repositoryCommit",
+    "acquisitionStatus",
+    "executionStatus"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "profileVersion": { "const": "1.0.0" },
+    "mechanism": { "const": "bubblewrap+systemd-user-scope" },
+    "mechanismVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "operatingSystemFamily": { "const": "linux" },
+    "architecture": { "enum": ["x86_64", "aarch64"] },
+    "enforcedControlIds": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "unavailableControlIds": { "type": "array", "items": { "type": "string" } },
+    "failedControlIds": { "type": "array", "items": { "type": "string" } },
+    "unsupportedControlIds": { "type": "array", "items": { "type": "string" } },
+    "runtimeAuthorizationId": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[a-z0-9-]+@v[0-9]+\\.[0-9]+\\.[0-9]+$" }
+      ]
+    },
+    "fixtureIdentity": { "type": "string", "pattern": "^[a-z0-9-]{1,64}$" },
+    "fixtureDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "inputDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "outputDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "exitClassification": {
+      "enum": [
+        "success",
+        "timeout",
+        "output-limit-exceeded",
+        "stderr-limit-exceeded",
+        "signal-killed",
+        "nonzero",
+        "internal-harness-failure"
+      ]
+    },
+    "attempts": { "const": 1 },
+    "resourceLimits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "memoryMaxBytes",
+        "tasksMax",
+        "cpuSeconds",
+        "addressSpaceBytes",
+        "fileSizeBytes",
+        "openFiles",
+        "wallClockSeconds",
+        "stdoutBytes",
+        "stderrBytes",
+        "retries"
+      ],
+      "properties": {
+        "memoryMaxBytes": { "type": "integer", "minimum": 1 },
+        "tasksMax": { "type": "integer", "minimum": 1 },
+        "cpuSeconds": { "type": "integer", "minimum": 1 },
+        "addressSpaceBytes": { "type": "integer", "minimum": 1 },
+        "fileSizeBytes": { "type": "integer", "minimum": 0 },
+        "openFiles": { "type": "integer", "minimum": 1 },
+        "wallClockSeconds": { "type": "number", "exclusiveMinimum": 0 },
+        "stdoutBytes": { "type": "integer", "minimum": 1 },
+        "stderrBytes": { "type": "integer", "minimum": 1 },
+        "retries": { "const": 0 }
+      }
+    },
+    "networkTestResult": { "enum": ["passed", "failed", "not-run"] },
+    "filesystemVisibilityResult": { "enum": ["passed", "failed", "not-run"] },
+    "processTreeCleanupResult": { "enum": ["reaped", "proven", "failed"] },
+    "executedAt": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+    },
+    "repositoryCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" }
+  }
+}

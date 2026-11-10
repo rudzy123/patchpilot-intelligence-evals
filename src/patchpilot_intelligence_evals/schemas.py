@@ -58,6 +58,25 @@ TRACK5_SCHEMA_NAMES: tuple[str, ...] = (
     "track5-implementation-review",
 )
 
+# Track 6A hardened-execution documents. They stay outside earlier schema groups.
+TRACK6A_SCHEMA_NAMES: tuple[str, ...] = (
+    "sandbox-capability-report",
+    "hardened-execution-profile",
+    "hardened-execution-attestation",
+    "runtime-security-assessment",
+    "runtime-authorization-v2",
+    "track6b-readiness",
+    "track6a-implementation-review",
+)
+
+_ALL_SCHEMA_NAMES: tuple[str, ...] = (
+    SCHEMA_NAMES
+    + CANDIDATE_SCHEMA_NAMES
+    + AUTHORIZATION_SCHEMA_NAMES
+    + TRACK5_SCHEMA_NAMES
+    + TRACK6A_SCHEMA_NAMES
+)
+
 
 class SchemaValidationError(Exception):
     """A document failed a closed schema. The message omits document values."""
@@ -72,7 +91,7 @@ def repo_root() -> Path:
 
 
 def schema_path(schema_name: str) -> Path:
-    known = SCHEMA_NAMES + CANDIDATE_SCHEMA_NAMES + AUTHORIZATION_SCHEMA_NAMES + TRACK5_SCHEMA_NAMES
+    known = _ALL_SCHEMA_NAMES
     if schema_name not in known:
         raise KeyError(schema_name)
     return repo_root() / "schemas" / f"{schema_name}.schema.json"
@@ -104,8 +123,7 @@ def validate(schema_name: str, instance: object) -> None:
 
 
 def assert_schemas_closed() -> None:
-    names = SCHEMA_NAMES + CANDIDATE_SCHEMA_NAMES + AUTHORIZATION_SCHEMA_NAMES + TRACK5_SCHEMA_NAMES
-    for name in names:
+    for name in _ALL_SCHEMA_NAMES:
         document = load_schema(name)
         if document.get("additionalProperties") is not False:
             raise SchemaError(f"{name} is not closed")

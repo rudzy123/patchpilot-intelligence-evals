@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:sandbox-capability-report:v1",
+  "title": "Sandbox capability report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "acquisitionStatus",
+    "executionStatus",
+    "operatingSystemFamily",
+    "architecture",
+    "probes"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" },
+    "operatingSystemFamily": { "enum": ["linux", "darwin", "windows", "other"] },
+    "architecture": { "enum": ["x86_64", "aarch64", "other"] },
+    "probes": {
+      "type": "array",
+      "minItems": 20,
+      "maxItems": 20,
+      "items": { "$ref": "#/$defs/probe" }
+    }
+  },
+  "$defs": {
+    "probe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["probeId", "commandPresent", "disposition", "evidence", "mechanismVersion"],
+      "properties": {
+        "probeId": {
+          "enum": [
+            "user-namespace",
+            "mount-namespace",
+            "pid-namespace",
+            "network-namespace",
+            "ipc-namespace",
+            "uts-namespace",
+            "cgroup-namespace",
+            "bubblewrap",
+            "rootless-podman",
+            "rootless-docker",
+            "unshare",
+            "systemd-user-scope",
+            "cgroup-v2",
+            "cgroup-delegation",
+            "rlimit-cpu",
+            "rlimit-as",
+            "rlimit-fsize",
+            "rlimit-nofile",
+            "rlimit-nproc",
+            "seccomp"
+          ]
+        },
+        "commandPresent": { "type": "boolean" },
+        "disposition": { "enum": ["enforced", "unavailable", "unsupported", "failed"] },
+        "evidence": {
+          "enum": [
+            "behavior-proven",
+            "command-missing",
+            "command-present-unproven",
+            "probe-failed",
+            "per-user-not-private"
+          ]
+        },
+        "mechanismVersion": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9]+(\\.[0-9]+){0,2}$" }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "disposition": { "const": "enforced" } },
+            "required": ["disposition"]
+          },
+          "then": {
+            "properties": { "evidence": { "const": "behavior-proven" } }
+          }
+        }
+      ]
+    }
+  }
+}

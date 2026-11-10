@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:hardened-execution-profile:v1",
+  "title": "Hardened execution profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profileId",
+    "profileVersion",
+    "mechanism",
+    "bubblewrapVersion",
+    "systemdVersion",
+    "operatingSystemFamily",
+    "architecture",
+    "productionReady",
+    "realModelExecuted",
+    "acquisitionStatus",
+    "executionStatus",
+    "memoryMechanism",
+    "addressSpaceMechanism",
+    "processCountMechanism",
+    "limits",
+    "controls"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "profileVersion": { "const": "1.0.0" },
+    "mechanism": { "const": "bubblewrap+systemd-user-scope" },
+    "bubblewrapVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "systemdVersion": { "type": "string", "pattern": "^[0-9]+$" },
+    "operatingSystemFamily": { "const": "linux" },
+    "architecture": { "enum": ["x86_64", "aarch64"] },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" },
+    "memoryMechanism": { "const": "cgroup-memory-max" },
+    "addressSpaceMechanism": { "const": "rlimit-as" },
+    "processCountMechanism": { "const": "cgroup-tasks-max" },
+    "limits": { "$ref": "#/$defs/limits" },
+    "controls": {
+      "type": "array",
+      "minItems": 36,
+      "maxItems": 36,
+      "items": { "$ref": "#/$defs/control" }
+    }
+  },
+  "$defs": {
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "memoryMaxBytes",
+        "tasksMax",
+        "cpuSeconds",
+        "addressSpaceBytes",
+        "fileSizeBytes",
+        "openFiles",
+        "wallClockSeconds",
+        "stdoutBytes",
+        "stderrBytes",
+        "retries"
+      ],
+      "properties": {
+        "memoryMaxBytes": { "const": 268435456 },
+        "tasksMax": { "const": 32 },
+        "cpuSeconds": { "const": 5 },
+        "addressSpaceBytes": { "const": 2147483648 },
+        "fileSizeBytes": { "const": 1048576 },
+        "openFiles": { "const": 128 },
+        "wallClockSeconds": { "const": 15 },
+        "stdoutBytes": { "const": 65536 },
+        "stderrBytes": { "const": 16384 },
+        "retries": { "const": 0 }
+      }
+    },
+    "control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["controlId", "disposition", "mechanism"],
+      "properties": {
+        "controlId": { "$ref": "#/$defs/controlId" },
+        "disposition": { "enum": ["enforced", "unavailable", "unsupported", "failed"] },
+        "mechanism": {
+          "enum": [
+            "bubblewrap",
+            "systemd-user-scope",
+            "rlimit-cpu",
+            "rlimit-as",
+            "rlimit-fsize",
+            "rlimit-nofile",
+            "parent-process",
+            "unavailable",
+            "unsupported",
+            "unshare",
+            "cgroup-write"
+          ]
+        }
+      }
+    },
+    "controlId": {
+      "enum": [
+        "unprivileged-execution",
+        "minimal-environment",
+        "read-only-verified-artifacts",
+        "read-only-candidate-configuration",
+        "isolated-writable-results",
+        "no-gold-label-access",
+        "no-prior-result-access",
+        "no-sibling-repository-access",
+        "no-home-directory-access",
+        "no-ssh-configuration-access",
+        "no-cloud-credentials",
+        "no-outbound-network",
+        "host-loopback-denial",
+        "dns-denial",
+        "ipv4-denial",
+        "ipv6-denial",
+        "external-unix-socket-denial",
+        "process-count-limit",
+        "cpu-time-limit",
+        "memory-limit",
+        "address-space-limit",
+        "wall-clock-limit",
+        "file-size-limit",
+        "open-file-limit",
+        "stdout-limit",
+        "stderr-limit",
+        "process-tree-termination",
+        "no-shell",
+        "explicit-working-directory",
+        "sandbox-local-loopback-denial",
+        "seccomp",
+        "private-rlimit-nproc",
+        "rootless-podman",
+        "rootless-docker",
+        "unshare",
+        "direct-cgroup-delegation"
+      ]
+    }
+  }
+}

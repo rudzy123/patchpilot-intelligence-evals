@@ -34,7 +34,15 @@ Track 5 does not acquire a model or execute one. The cache policy stores rules o
 
 Artifact verification compares expected and observed names, sizes, and SHA-256 values. Executable detection is limited to mode bits, a shebang, and ELF magic. That check is not malware detection.
 
-The real-candidate profile can set `RLIMIT_CPU`, `RLIMIT_AS`, `RLIMIT_FSIZE`, `RLIMIT_NOFILE`, and `RLIMIT_NPROC` on a child. `RLIMIT_AS` limits address space, not resident memory. `RLIMIT_NPROC` is a per-user limit. Read-only mounts, hidden home and credential files, and operating-system network denial are deferred acquisition blockers. Those limits and the Python hooks are not an operating-system sandbox.
+The real-candidate profile can set `RLIMIT_CPU`, `RLIMIT_AS`, `RLIMIT_FSIZE`, `RLIMIT_NOFILE`, and `RLIMIT_NPROC` on a child. `RLIMIT_AS` limits address space, not resident memory. `RLIMIT_NPROC` is a per-user limit. Read-only mounts, hidden home and credential files, and operating-system network denial are deferred acquisition blockers on that profile. Those limits and the Python hooks are not an operating-system sandbox.
+
+## Hardened fixture launcher
+
+Synthetic fixtures can run through a separate launcher: bubblewrap namespaces inside a transient systemd user scope. That launcher is the operating-system boundary for those fixtures. It does not replace the candidate runner above. The candidate runner still has no namespace, cgroup, or operating-system network denial.
+
+The launcher keeps a private network namespace. Host loopback, external IPv4, external IPv6, DNS, and host Unix sockets outside the mount are denied. Sandbox-local loopback comes up with the namespace; a connection there is refused by the absence of a listener, and seccomp does not currently block `socket`. Seccomp stays unproven. `MemoryMax` limits cgroup memory. `RLIMIT_AS` limits address space. `TasksMax` limits process count. `RLIMIT_NPROC` is not used as a private process limit.
+
+The launcher mounts a staged interpreter, the fixture, read-only synthetic inputs, and a private result directory. It does not mount the repository root, home directory, or credential directories. The child environment is an allowlist. Attestations omit host names, user names, addresses, and environment values. The launcher does not execute a model. `productionReady` stays false.
 
 ## Supported use
 
