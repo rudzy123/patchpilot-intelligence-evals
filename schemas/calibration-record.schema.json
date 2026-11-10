@@ -1,0 +1,271 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:calibration-record:v1",
+  "title": "Calibration record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "protocolVersion",
+    "productionReady",
+    "gatesUnchanged",
+    "approvalStatus",
+    "authorizesModel",
+    "authorizesProvider",
+    "authorizesShadowMode",
+    "authorizesProductionComposition",
+    "authorizesGateChange",
+    "corpusVersion",
+    "corpusDigest",
+    "fixtureResults",
+    "boundaryChecks",
+    "corpusImbalance",
+    "insufficientlyExercisedMetrics",
+    "falsePositiveRisks",
+    "falseNegativeRisks",
+    "blindSpots",
+    "proposedAdjustments",
+    "futureRealCandidatePrerequisites",
+    "calibrationDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "protocolVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "gatesUnchanged": { "const": true },
+    "approvalStatus": { "const": "not-approved" },
+    "authorizesModel": { "const": false },
+    "authorizesProvider": { "const": false },
+    "authorizesShadowMode": { "const": false },
+    "authorizesProductionComposition": { "const": false },
+    "authorizesGateChange": { "const": false },
+    "corpusVersion": { "const": "1.0.0" },
+    "corpusDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "fixtureResults": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": { "$ref": "#/$defs/fixtureResult" }
+    },
+    "boundaryChecks": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/boundaryCheck" }
+    },
+    "corpusImbalance": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": { "$ref": "#/$defs/categoryCount" }
+    },
+    "insufficientlyExercisedMetrics": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/metricName" }
+    },
+    "falsePositiveRisks": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/note" }
+    },
+    "falseNegativeRisks": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/note" }
+    },
+    "blindSpots": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/note" }
+    },
+    "proposedAdjustments": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/proposal" }
+    },
+    "futureRealCandidatePrerequisites": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/note" }
+    },
+    "calibrationDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "note": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "detail"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]{1,80}$" },
+        "detail": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    },
+    "proposal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "detail", "adopted", "approvalStatus"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]{1,80}$" },
+        "detail": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "adopted": { "const": false },
+        "approvalStatus": { "const": "not-approved" }
+      }
+    },
+    "metricName": {
+      "enum": [
+        "outputSchemaValidity",
+        "citationValidity",
+        "evidenceAttributionAccuracy",
+        "unsupportedFactualClaims",
+        "decisiveEvidenceOmission",
+        "correctUncertainty",
+        "correctRefusal",
+        "promptInjectionResistance",
+        "crossTenantDisclosure",
+        "unauthorizedStateMutation",
+        "affectednessOrPriorityChange",
+        "secretDisclosure",
+        "deterministicReplayConsistency",
+        "latency",
+        "peakProcessMemory"
+      ]
+    },
+    "categoryCount": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["category", "count"],
+      "properties": {
+        "category": {
+          "enum": [
+            "grounding-citation",
+            "insufficient-evidence-refusal",
+            "prompt-injection",
+            "cross-tenant-negative-control",
+            "contradiction",
+            "stale-unavailable-incomparable"
+          ]
+        },
+        "count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "boundaryCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "status", "numerator", "denominator"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z0-9-]{1,80}$" },
+        "status": { "enum": ["pass", "fail", "unmeasured"] },
+        "numerator": { "type": "integer", "minimum": 0 },
+        "denominator": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "fixtureId": {
+      "enum": [
+        "fixture-conforming",
+        "fixture-unsupported-claim",
+        "fixture-prompt-injection-following",
+        "fixture-cross-tenant-leaking",
+        "fixture-timeout",
+        "fixture-malformed-output",
+        "fixture-excessive-output",
+        "fixture-nonzero-exit"
+      ]
+    },
+    "intendedSignal": {
+      "enum": [
+        "all-gates-pass",
+        "authorized-input-only",
+        "gate-unsupported-factual-claims",
+        "gate-prompt-injection-resistance",
+        "gate-cross-tenant-disclosure",
+        "execution-timeout",
+        "execution-malformed-output",
+        "execution-output-limit-exceeded",
+        "execution-nonzero-exit"
+      ]
+    },
+    "dominantOutcome": {
+      "enum": [
+        "internal-harness-failure",
+        "timeout",
+        "output-limit-exceeded",
+        "stderr-limit-exceeded",
+        "network-policy-failure",
+        "nonzero-exit",
+        "malformed-output",
+        "multiple-outputs",
+        "schema-invalid-output",
+        "protocol-mismatch",
+        "request-id-mismatch",
+        "candidate-identity-mismatch",
+        "candidate-rejection",
+        "candidate-unavailable",
+        "success",
+        "mixed"
+      ]
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "status", "numerator", "denominator"],
+      "properties": {
+        "kind": { "enum": ["invariant", "proposed-percentage"] },
+        "status": { "enum": ["pass", "fail", "unmeasured"] },
+        "numerator": { "type": "integer", "minimum": 0 },
+        "denominator": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "crossTenantDisclosure",
+        "unauthorizedStateMutation",
+        "affectednessOrPriorityChange",
+        "secretDisclosure",
+        "outputSchemaValidity",
+        "citationValidity",
+        "evidenceAttributionAccuracy",
+        "unsupportedFactualClaims",
+        "correctRefusal",
+        "promptInjectionResistance"
+      ],
+      "properties": {
+        "crossTenantDisclosure": { "$ref": "#/$defs/gate" },
+        "unauthorizedStateMutation": { "$ref": "#/$defs/gate" },
+        "affectednessOrPriorityChange": { "$ref": "#/$defs/gate" },
+        "secretDisclosure": { "$ref": "#/$defs/gate" },
+        "outputSchemaValidity": { "$ref": "#/$defs/gate" },
+        "citationValidity": { "$ref": "#/$defs/gate" },
+        "evidenceAttributionAccuracy": { "$ref": "#/$defs/gate" },
+        "unsupportedFactualClaims": { "$ref": "#/$defs/gate" },
+        "correctRefusal": { "$ref": "#/$defs/gate" },
+        "promptInjectionResistance": { "$ref": "#/$defs/gate" }
+      }
+    },
+    "fixtureResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidateId",
+        "manifestDigest",
+        "intendedSignal",
+        "dominantExecutionOutcome",
+        "caseCount",
+        "successCount",
+        "sensitivity",
+        "gates"
+      ],
+      "properties": {
+        "candidateId": { "$ref": "#/$defs/fixtureId" },
+        "manifestDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "intendedSignal": { "$ref": "#/$defs/intendedSignal" },
+        "dominantExecutionOutcome": { "$ref": "#/$defs/dominantOutcome" },
+        "caseCount": { "const": 24 },
+        "successCount": { "type": "integer", "minimum": 0, "maximum": 24 },
+        "sensitivity": { "enum": ["detected", "not-detected"] },
+        "gates": { "$ref": "#/$defs/gates" }
+      }
+    }
+  }
+}

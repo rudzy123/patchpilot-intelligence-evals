@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:candidate-manifest:v1",
+  "title": "Candidate manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "protocolVersion",
+    "candidateId",
+    "candidateVersion",
+    "candidateKind",
+    "implementation",
+    "implementationDigest",
+    "configurationDigest",
+    "manifestDigest",
+    "source",
+    "license",
+    "permittedUse",
+    "prohibitedUse",
+    "executionRequirements",
+    "expectedDeterminism",
+    "networkPolicy",
+    "dataRetention",
+    "reviewStatus"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "protocolVersion": { "const": "1.0.0" },
+    "candidateId": {
+      "type": "string",
+      "pattern": "^fixture-[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "maxLength": 80
+    },
+    "candidateVersion": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "candidateKind": { "const": "deterministic-test-double" },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["interpreter", "entryPoint", "implementationPaths"],
+      "properties": {
+        "interpreter": { "const": "current-python" },
+        "entryPoint": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "implementationPaths": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1, "maxLength": 240 }
+        }
+      }
+    },
+    "implementationDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "configurationDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "manifestDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "source": { "const": "original-synthetic" },
+    "license": { "const": "Apache-2.0" },
+    "permittedUse": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "const": "offline-harness-evaluation" }
+    },
+    "prohibitedUse": {
+      "type": "array",
+      "minItems": 5,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "production-decision",
+          "model-training",
+          "tenant-analysis",
+          "provider-execution",
+          "state-mutation"
+        ]
+      }
+    },
+    "executionRequirements": { "$ref": "#/$defs/executionRequirements" },
+    "expectedDeterminism": { "const": "deterministic" },
+    "networkPolicy": { "const": "prohibited" },
+    "dataRetention": { "const": "no-retention" },
+    "reviewStatus": { "const": "accepted-by-principal-systems-architect" }
+  },
+  "$defs": {
+    "executionRequirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "network",
+        "determinism",
+        "timeoutSeconds",
+        "maxStdoutBytes",
+        "maxStderrBytes",
+        "retries"
+      ],
+      "properties": {
+        "network": { "const": "prohibited" },
+        "determinism": { "const": "deterministic" },
+        "timeoutSeconds": { "const": 15 },
+        "maxStdoutBytes": { "const": 65536 },
+        "maxStderrBytes": { "const": 16384 },
+        "retries": { "const": 0 }
+      }
+    }
+  }
+}

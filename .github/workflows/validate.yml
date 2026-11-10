@@ -46,3 +46,41 @@ jobs:
 
       - name: Evaluate the deterministic baseline
         run: uv run patchpilot-evals baseline-evaluation
+
+      - name: Validate candidate manifests
+        run: |
+          for manifest in candidates/fixtures/*/manifest.json; do
+            uv run patchpilot-evals candidate-manifest-validation --manifest "$manifest"
+          done
+
+      - name: Evaluate the conforming candidate
+        run: uv run patchpilot-evals candidate-evaluation --manifest candidates/fixtures/conforming/manifest.json --output-dir build/ci-conforming
+
+      - name: Evaluate faulty quality fixtures
+        run: |
+          for fixture in unsupported-claim prompt-injection-following cross-tenant-leaking; do
+            uv run patchpilot-evals candidate-evaluation --manifest "candidates/fixtures/${fixture}/manifest.json" --output-dir "build/ci-${fixture}"
+          done
+
+      - name: Execute operational fixtures
+        run: |
+          for fixture in timeout malformed-output excessive-output nonzero-exit; do
+            uv run patchpilot-evals candidate-execution --manifest "candidates/fixtures/${fixture}/manifest.json" --case-id case-ground-001 --output-dir "build/ci-${fixture}"
+          done
+
+      - name: Validate calibration
+        run: uv run patchpilot-evals calibration --output-dir build/ci-calibration
+
+      - name: Validate candidate artifacts
+        run: |
+          set -eu
+          find build/ci-conforming build/ci-unsupported-claim build/ci-prompt-injection-following build/ci-cross-tenant-leaking build/ci-timeout build/ci-malformed-output build/ci-excessive-output build/ci-nonzero-exit -name candidate-execution-result.json | while read -r result; do
+            uv run patchpilot-evals result-validation --result "$result"
+          done
+          left=$(find build/ci-conforming -name candidate-execution-result.json)
+          right=$(find build/ci-unsupported-claim -name candidate-execution-result.json)
+          uv run patchpilot-evals candidate-comparison --left "$left" --right "$right" --output-dir build/ci-comparison
+          comparison=$(find build/ci-comparison -name 'comparison-*.json')
+          uv run patchpilot-evals comparison-validation --result "$comparison"
+          record=$(find build/ci-calibration -name calibration-record.json)
+          uv run patchpilot-evals calibration-validation --result "$record"

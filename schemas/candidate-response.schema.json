@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:candidate-response:v1",
+  "title": "Candidate response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "protocolVersion",
+    "requestId",
+    "candidateId",
+    "candidateVersion",
+    "status"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "protocolVersion": { "const": "1.0.0" },
+    "requestId": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "candidateId": {
+      "type": "string",
+      "pattern": "^fixture-[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "maxLength": 80
+    },
+    "candidateVersion": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "status": { "enum": ["success", "unavailable", "rejected"] },
+    "findingExplanationOutput": { "type": "object" },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["category", "message"],
+      "properties": {
+        "category": { "enum": ["unavailable", "rejected"] },
+        "message": { "type": "string", "minLength": 1, "maxLength": 200 }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "status": { "const": "success" } },
+        "required": ["status"]
+      },
+      "then": {
+        "required": ["findingExplanationOutput"],
+        "not": { "required": ["failure"] }
+      }
+    },
+    {
+      "if": {
+        "properties": { "status": { "const": "rejected" } },
+        "required": ["status"]
+      },
+      "then": {
+        "required": ["failure"],
+        "not": { "required": ["findingExplanationOutput"] },
+        "properties": {
+          "failure": {
+            "properties": { "category": { "const": "rejected" } }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "status": { "const": "unavailable" } },
+        "required": ["status"]
+      },
+      "then": {
+        "required": ["failure"],
+        "not": { "required": ["findingExplanationOutput"] },
+        "properties": {
+          "failure": {
+            "properties": { "category": { "const": "unavailable" } }
+          }
+        }
+      }
+    }
+  ]
+}

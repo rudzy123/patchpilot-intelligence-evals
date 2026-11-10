@@ -35,3 +35,7 @@ Remediation suggestions are non-authoritative text. Their objects have no due da
 `explanationLabel` may be `deterministic-baseline-assistance` or `generated-explanation`, so a future offline candidate can use the output schema. This baseline always uses the first label. `purpose` on a result may be `harness-validation`, `baseline-performance`, or `candidate-performance`. The baseline command records `harness-validation`. `productionReady` is always false.
 
 The corpus manifest is checked by the corpus validator. It is not a sixth candidate schema.
+
+## Candidate protocol
+
+Track 3 adds six closed schemas for a candidate manifest, request, response, execution result, comparison, and calibration record. Those schemas are not part of the baseline experiment manifest. The finding-explanation input still omits gold labels and negative controls. A candidate response cannot add product-authority fields because the schemas are closed. Execution failure is recorded separately from a quality-gate failure. `productionReady` stays false.
