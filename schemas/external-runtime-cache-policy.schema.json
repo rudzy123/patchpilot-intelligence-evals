@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:external-runtime-cache-policy:v1",
+  "title": "External runtime cache policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "runtimeInstalled",
+    "modelAcquired",
+    "realModelExecuted",
+    "installationAuthorized",
+    "cacheLocation",
+    "states",
+    "executionFromQuarantine",
+    "executionFromRejected",
+    "gitTracking",
+    "ciUpload",
+    "tenantData",
+    "rootRequirements",
+    "siblingRepositoryNames",
+    "runtimeId",
+    "versionTag",
+    "immutableRevision",
+    "distributionId",
+    "packageFileName",
+    "licenseName",
+    "approvedSharedLibraries",
+    "telemetryRequirement",
+    "maxFileBytes",
+    "maxFileCount",
+    "cleanup",
+    "promotionRequiresCompleteVerification",
+    "acquisitionStatus",
+    "executionStatus",
+    "conversionStatus"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "runtimeInstalled": { "const": false },
+    "modelAcquired": { "const": false },
+    "realModelExecuted": { "const": false },
+    "installationAuthorized": { "const": false },
+    "cacheLocation": { "const": "repository-external" },
+    "states": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        { "const": "quarantine" },
+        { "const": "verified" },
+        { "const": "rejected" }
+      ],
+      "items": false
+    },
+    "executionFromQuarantine": { "const": "prohibited" },
+    "executionFromRejected": { "const": "prohibited" },
+    "gitTracking": { "const": "prohibited" },
+    "ciUpload": { "const": "prohibited" },
+    "tenantData": { "const": "prohibited" },
+    "rootRequirements": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "distinct-from-model-artifact-cache",
+          "distinct-from-output-directory",
+          "explicit-root",
+          "outside-git-repository",
+          "outside-sibling-repositories",
+          "reject-repository-contained-root",
+          "reject-symlink-escape",
+          "reject-traversal",
+          "stable-root-during-validation"
+        ]
+      }
+    },
+    "siblingRepositoryNames": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": { "enum": ["neural-from-scratch", "patchpilot"] }
+    },
+    "runtimeId": { "const": "onnxruntime" },
+    "versionTag": { "const": "v1.31.1" },
+    "immutableRevision": { "const": "6af1a932e2286d5c58166085d24c68783033edee" },
+    "distributionId": { "const": "onnxruntime-linux-x64-cpu" },
+    "packageFileName": { "const": "onnxruntime-linux-x64-1.31.1.tgz" },
+    "licenseName": { "const": "MIT" },
+    "approvedSharedLibraries": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "items": { "const": "libonnxruntime.so.1.31.1" }
+    },
+    "telemetryRequirement": { "const": "disabled" },
+    "maxFileBytes": { "const": 134217728 },
+    "maxFileCount": { "const": 32 },
+    "cleanup": { "const": "delete-attempt-payload-retain-reason-codes" },
+    "promotionRequiresCompleteVerification": { "const": true },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" },
+    "conversionStatus": { "const": "not-performed" }
+  }
+}

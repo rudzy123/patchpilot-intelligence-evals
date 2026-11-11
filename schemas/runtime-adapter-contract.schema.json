@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:runtime-adapter-contract:v1",
+  "title": "Runtime adapter contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "runtimeInstalled",
+    "modelAcquired",
+    "realModelExecuted",
+    "installationAuthorized",
+    "adapterId",
+    "adapterVersion",
+    "protocolVersion",
+    "runtimeId",
+    "versionTag",
+    "immutableRevision",
+    "profileId",
+    "profileVersion",
+    "offlineMode",
+    "telemetry",
+    "automaticRetrieval",
+    "automaticConversion",
+    "fallbackExecution",
+    "shell",
+    "argumentStyle",
+    "oneRequestOneResponse",
+    "localPaths",
+    "sourceModel",
+    "executableRuntimeModel",
+    "syntheticFixture",
+    "realCandidateOutcome",
+    "failureCategories",
+    "selectionOutcome",
+    "acquisitionStatus",
+    "executionStatus",
+    "conversionStatus"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "runtimeInstalled": { "const": false },
+    "modelAcquired": { "const": false },
+    "realModelExecuted": { "const": false },
+    "installationAuthorized": { "const": false },
+    "adapterId": { "const": "patchpilot-onnxruntime-adapter" },
+    "adapterVersion": { "const": "1.0.0" },
+    "protocolVersion": { "const": "1.0.0" },
+    "runtimeId": { "const": "onnxruntime" },
+    "versionTag": { "const": "v1.31.1" },
+    "immutableRevision": { "const": "6af1a932e2286d5c58166085d24c68783033edee" },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "profileVersion": { "const": "1.0.0" },
+    "offlineMode": { "const": "required" },
+    "telemetry": { "const": "disabled" },
+    "automaticRetrieval": { "const": "prohibited" },
+    "automaticConversion": { "const": "prohibited" },
+    "fallbackExecution": { "const": "prohibited" },
+    "shell": { "const": "prohibited" },
+    "argumentStyle": { "const": "direct-argument-vector" },
+    "oneRequestOneResponse": { "const": true },
+    "localPaths": { "const": "ephemeral-execution-configuration" },
+    "sourceModel": { "$ref": "#/$defs/sourceModel" },
+    "executableRuntimeModel": { "$ref": "#/$defs/executableRuntimeModel" },
+    "syntheticFixture": { "$ref": "#/$defs/syntheticFixture" },
+    "realCandidateOutcome": { "const": "format-unavailable" },
+    "failureCategories": {
+      "type": "array",
+      "minItems": 18,
+      "maxItems": 18,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "conversion-attempt",
+          "fallback-execution",
+          "format-unavailable",
+          "hardened-profile",
+          "internal-harness-failure",
+          "missing-external-data",
+          "nonzero",
+          "offline-required",
+          "output-limit-exceeded",
+          "protocol-malformed",
+          "retrieval-attempt",
+          "shell-rejected",
+          "source-model-rejected",
+          "telemetry-enabled",
+          "timeout",
+          "unexpected-external-data",
+          "unverified-model",
+          "unverified-runtime"
+        ]
+      }
+    },
+    "selectionOutcome": { "const": "no-selection" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" },
+    "conversionStatus": { "const": "not-performed" }
+  },
+  "$defs": {
+    "sourceModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["format", "role", "execution"],
+      "properties": {
+        "format": { "const": "safetensors" },
+        "role": { "const": "conversion-input" },
+        "execution": { "const": "prohibited" }
+      }
+    },
+    "executableRuntimeModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["format", "graphRole", "externalDataRole", "state"],
+      "properties": {
+        "format": { "const": "onnx" },
+        "graphRole": { "const": "onnx-graph" },
+        "externalDataRole": { "const": "onnx-external-data" },
+        "state": { "const": "unavailable" }
+      }
+    },
+    "syntheticFixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fixtureName", "role", "modelArtifact"],
+      "properties": {
+        "fixtureName": { "const": "synthetic_runtime_adapter.py" },
+        "role": { "const": "protocol-test" },
+        "modelArtifact": { "const": false }
+      }
+    }
+  }
+}

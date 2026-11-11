@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track6c-readiness:v1",
+  "title": "Track 6C readiness",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "selectionOutcome",
+    "readinessOutcome",
+    "verdict",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "runtimeId",
+    "versionTag",
+    "profileId",
+    "profileVersion",
+    "blockers",
+    "locallyObservedRuntimeDigests",
+    "locallyObservedModelArtifactDigests",
+    "installationAuthorized"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "readinessOutcome": { "enum": ["not-ready", "ready"] },
+    "verdict": {
+      "enum": [
+        "TRACK 6C CONTROLLED STAGING NOT READY",
+        "TRACK 6C CONTROLLED STAGING READY",
+        "TRACK 6C CONTROLLED STAGING READY WITH DOCUMENTED RESIDUALS"
+      ]
+    },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "runtimeId": { "const": "onnxruntime" },
+    "versionTag": { "const": "v1.31.1" },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "profileVersion": { "const": "1.0.0" },
+    "blockers": {
+      "type": "array",
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "bounded-subprocess-compatibility",
+          "conversion-not-authorized",
+          "equivalence-not-measured",
+          "explicit-weight-use-license",
+          "hardened-profile",
+          "no-qualifying-direct-onnx",
+          "onnx-directory-exceeds-artifact-cap",
+          "runtime-identity",
+          "sources-not-independently-eligible",
+          "tokenizer-provenance",
+          "toolchain-not-offline-closed"
+        ]
+      }
+    },
+    "locallyObservedRuntimeDigests": { "type": "array", "maxItems": 0 },
+    "locallyObservedModelArtifactDigests": { "type": "array", "maxItems": 0 },
+    "installationAuthorized": { "const": false }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "readinessOutcome": { "const": "not-ready" } },
+        "required": ["readinessOutcome"]
+      },
+      "then": {
+        "properties": {
+          "verdict": { "const": "TRACK 6C CONTROLLED STAGING NOT READY" },
+          "blockers": { "minItems": 1 }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "readinessOutcome": { "const": "ready" } },
+        "required": ["readinessOutcome"]
+      },
+      "then": {
+        "properties": {
+          "blockers": { "maxItems": 0 }
+        }
+      }
+    }
+  ]
+}

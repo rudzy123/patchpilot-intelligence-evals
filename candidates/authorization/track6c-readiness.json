@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "selectionOutcome": "no-selection",
+  "readinessOutcome": "not-ready",
+  "verdict": "TRACK 6C CONTROLLED STAGING NOT READY",
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "runtimeId": "onnxruntime",
+  "versionTag": "v1.31.1",
+  "profileId": "linux-bwrap-systemd-v1",
+  "profileVersion": "1.0.0",
+  "blockers": [
+    "bounded-subprocess-compatibility",
+    "conversion-not-authorized",
+    "equivalence-not-measured",
+    "explicit-weight-use-license",
+    "no-qualifying-direct-onnx",
+    "onnx-directory-exceeds-artifact-cap",
+    "sources-not-independently-eligible",
+    "tokenizer-provenance",
+    "toolchain-not-offline-closed"
+  ],
+  "locallyObservedRuntimeDigests": [],
+  "locallyObservedModelArtifactDigests": [],
+  "installationAuthorized": false
+}

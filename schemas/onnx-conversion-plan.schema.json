@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:onnx-conversion-plan:v1",
+  "title": "ONNX conversion plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "runtimeInstalled",
+    "modelAcquired",
+    "realModelExecuted",
+    "installationAuthorized",
+    "authorizationOutcome",
+    "conversionStatus",
+    "selectionOutcome",
+    "retrievedOn",
+    "toolchains",
+    "equivalence",
+    "offlineClosed",
+    "equivalenceMeasured",
+    "locallyObservedArtifactDigests",
+    "acquisitionStatus",
+    "executionStatus"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "runtimeInstalled": { "const": false },
+    "modelAcquired": { "const": false },
+    "realModelExecuted": { "const": false },
+    "installationAuthorized": { "const": false },
+    "authorizationOutcome": { "enum": ["not-authorized", "authorized"] },
+    "conversionStatus": { "const": "not-performed" },
+    "selectionOutcome": { "const": "no-selection" },
+    "retrievedOn": { "const": "2026-11-10" },
+    "toolchains": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/toolchain" }
+    },
+    "equivalence": { "$ref": "#/$defs/equivalence" },
+    "offlineClosed": { "type": "boolean" },
+    "equivalenceMeasured": { "const": false },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "authorizationOutcome": { "const": "not-authorized" } },
+        "required": ["authorizationOutcome"]
+      },
+      "then": { "properties": { "offlineClosed": { "const": false } } }
+    }
+  ],
+  "$defs": {
+    "toolchain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "toolchainId",
+        "versionTag",
+        "immutableRevision",
+        "licenseName",
+        "authorizationOutcome",
+        "disqualifiers"
+      ],
+      "properties": {
+        "toolchainId": {
+          "enum": ["onnxruntime-genai", "optimum-onnx", "pytorch-onnx-exporter"]
+        },
+        "versionTag": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "immutableRevision": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+          ]
+        },
+        "licenseName": {
+          "enum": ["Apache-2.0", "MIT", "unresolved"]
+        },
+        "authorizationOutcome": { "const": "not-authorized" },
+        "disqualifiers": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "architecture-support-unresolved",
+              "export-defaults-not-offline-closed",
+              "not-a-closed-safetensors-toolchain",
+              "runtime-pin-not-authorized",
+              "sources-not-independently-eligible",
+              "torch-pin-unresolved",
+              "version-unresolved"
+            ]
+          }
+        }
+      }
+    },
+    "equivalence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "comparison",
+        "atol",
+        "rtol",
+        "convertedProvenance",
+        "publisherProvided",
+        "opsetDisposition",
+        "precisionDisposition",
+        "externalDataDisposition",
+        "determinismDisposition"
+      ],
+      "properties": {
+        "comparison": { "const": "allclose" },
+        "atol": { "const": "0.0001" },
+        "rtol": { "const": "0.001" },
+        "convertedProvenance": { "const": "locally-converted" },
+        "publisherProvided": { "const": false },
+        "opsetDisposition": { "const": "unresolved" },
+        "precisionDisposition": { "const": "unresolved" },
+        "externalDataDisposition": { "const": "unresolved" },
+        "determinismDisposition": { "const": "variation-characterized" }
+      }
+    }
+  }
+}

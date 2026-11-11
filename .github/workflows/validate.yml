@@ -106,3 +106,12 @@ jobs:
           uv run patchpilot-evals runtime-authorization-v2-validation
           uv run patchpilot-evals track6b-readiness-validation
           uv run patchpilot-evals track6a-review-validation
+
+      - name: Validate the Track 6B staging records
+        run: |
+          uv run patchpilot-evals external-runtime-cache-policy-validation
+          uv run patchpilot-evals runtime-artifact-verification-validation --manifest candidates/templates/runtime-artifact-verification-template.json
+          uv run patchpilot-evals runtime-adapter-contract-validation
+          uv run patchpilot-evals candidate-format-resolution-validation
+          uv run patchpilot-evals onnx-conversion-plan-validation
+          uv run patchpilot-evals track6c-readiness-validation

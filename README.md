@@ -46,6 +46,12 @@ uv run patchpilot-evals runtime-security-assessment-validation
 uv run patchpilot-evals runtime-authorization-v2-validation
 uv run patchpilot-evals track6b-readiness-validation
 uv run patchpilot-evals track6a-review-validation
+uv run patchpilot-evals external-runtime-cache-policy-validation
+uv run patchpilot-evals runtime-artifact-verification-validation --manifest candidates/templates/runtime-artifact-verification-template.json
+uv run patchpilot-evals runtime-adapter-contract-validation
+uv run patchpilot-evals candidate-format-resolution-validation
+uv run patchpilot-evals onnx-conversion-plan-validation
+uv run patchpilot-evals track6c-readiness-validation
 ```
 
 `baseline-evaluation` writes a file only when `--output` is a path inside this repository. The result record includes a timestamp, so it is not committed.
@@ -96,6 +102,16 @@ The Track 6A implementation review is recorded in [docs/provenance/track6a-imple
 - [docs/architecture/track6b-acquisition-prerequisites.md](docs/architecture/track6b-acquisition-prerequisites.md)
 - [docs/provenance/runtime-evidence.md](docs/provenance/runtime-evidence.md)
 - [docs/provenance/track6a-implementation-review.md](docs/provenance/track6a-implementation-review.md)
+
+Intelligence Track 6B records the external runtime-staging boundary, the synthetic adapter contract, and a fail-closed format decision. No official ONNX artifact qualifies. Safetensors remains a source format for a separately authorized conversion and is not an executable ONNX Runtime input. Conversion stays `not-authorized`. Track 6C readiness is `not-ready`, with verdict `TRACK 6C CONTROLLED STAGING NOT READY`. Installation stays unauthorized, selection stays `no-selection`, acquisition stays `not-acquired`, conversion stays `not-performed`, execution stays `not-executed`, `realModelExecuted` stays false, and `productionReady` stays false. These validation commands do not install ONNX Runtime, download a model, or convert a checkpoint.
+
+- [docs/architecture/external-runtime-staging.md](docs/architecture/external-runtime-staging.md)
+- [docs/architecture/runtime-adapter-contract.md](docs/architecture/runtime-adapter-contract.md)
+- [docs/architecture/candidate-format-resolution.md](docs/architecture/candidate-format-resolution.md)
+- [docs/architecture/onnx-conversion-boundary.md](docs/architecture/onnx-conversion-boundary.md)
+- [docs/architecture/track6c-readiness.md](docs/architecture/track6c-readiness.md)
+- [docs/provenance/runtime-staging-provenance.md](docs/provenance/runtime-staging-provenance.md)
+- [docs/provenance/conversion-toolchain-evidence.md](docs/provenance/conversion-toolchain-evidence.md)
 
 - [docs/architecture/real-candidate-boundary.md](docs/architecture/real-candidate-boundary.md)
 - [docs/architecture/external-artifact-cache.md](docs/architecture/external-artifact-cache.md)
