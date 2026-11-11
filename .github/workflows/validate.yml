@@ -1,17 +1,26 @@
-name: validate
+name: Validation
 
 on:
   pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || format('run-{0}', github.run_id) }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
-  validate:
+  quality:
+    name: Quality
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -38,8 +47,50 @@ jobs:
       - name: Type-check
         run: uv run mypy src tests
 
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python 3.12 and uv
+        uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.13.0"
+          python-version: "3.12"
+          enable-cache: false
+          github-token: ""
+
+      - name: Sync from the lockfile
+        run: uv sync --frozen
+
       - name: Test
         run: uv run pytest
+
+  repository-contracts:
+    name: Repository Contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python 3.12 and uv
+        uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.13.0"
+          python-version: "3.12"
+          enable-cache: false
+          github-token: ""
+
+      - name: Sync from the lockfile
+        run: uv sync --frozen
 
       - name: Validate the corpus
         run: uv run patchpilot-evals corpus-validation
@@ -124,3 +175,9 @@ jobs:
           uv run patchpilot-evals artifact-budget-validation
           uv run patchpilot-evals bounded-subprocess-compatibility-validation
           uv run patchpilot-evals track6d-readiness-validation
+
+      - name: Validate workflow policy
+        run: uv run patchpilot-evals workflow-policy-validation
+
+      - name: Validate dependency architecture policy
+        run: uv run patchpilot-evals dependency-architecture-policy-validation

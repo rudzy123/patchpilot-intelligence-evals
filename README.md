@@ -58,13 +58,15 @@ uv run patchpilot-evals direct-onnx-evidence-validation
 uv run patchpilot-evals artifact-budget-validation
 uv run patchpilot-evals bounded-subprocess-compatibility-validation
 uv run patchpilot-evals track6d-readiness-validation
+uv run patchpilot-evals workflow-policy-validation
+uv run patchpilot-evals dependency-architecture-policy-validation
 ```
 
 `baseline-evaluation` writes a file only when `--output` is a path inside this repository. The result record includes a timestamp, so it is not committed.
 
 Candidate evaluation writes only under the explicit `--output-dir`, at a path derived from the experiment id, and it refuses to replace an existing artifact. `build/` is gitignored. `result-validation`, `comparison-validation`, and `calibration-validation` are the authoritative checks for those three artifacts. A conforming fixture run shows harness behavior on the authorized request. `productionReady` stays false.
 
-[.github/workflows/validate.yml](.github/workflows/validate.yml) runs these checks on pull requests and on pushes to `main`. It uses Python 3.12, uv 0.13.0, and the committed `uv.lock`. Actions are pinned to commit SHAs. The workflow token can read repository contents. It does not use secrets, publish a package, create a release, or deploy.
+[.github/workflows/validate.yml](.github/workflows/validate.yml) is the `Validation` workflow. It runs Quality, Tests, and Repository Contracts on pull requests to `main`, on pushes to `main`, and on manual dispatch. It uses Python 3.12, uv 0.13.0, and `uv sync --frozen`. [.github/workflows/codeql.yml](.github/workflows/codeql.yml) analyzes Python. [.github/workflows/dependency-review.yml](.github/workflows/dependency-review.yml) checks pull-request dependency changes. Actions are pinned to commit SHAs. Validation and Dependency Review tokens can read repository contents. CodeQL can also write code-scanning results. The workflows do not use secrets, publish a package, create a release, or deploy. Required checks and the operator ruleset procedure are in [docs/operations/required-checks.md](docs/operations/required-checks.md) and [docs/operations/main-ruleset-procedure.md](docs/operations/main-ruleset-procedure.md).
 
 ## Boundaries
 

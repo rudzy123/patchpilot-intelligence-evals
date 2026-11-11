@@ -74,6 +74,11 @@ _DOCUMENTS = (
     "docs/architecture/tokenizer-eligibility.md",
     "docs/architecture/direct-onnx-eligibility.md",
     "docs/architecture/track6d-acquisition-readiness.md",
+    "docs/architecture/protected-repository-validation.md",
+    "docs/security/github-actions-supply-chain.md",
+    "docs/operations/required-checks.md",
+    "docs/operations/main-ruleset-procedure.md",
+    "docs/provenance/github-action-pins.md",
     "docs/provenance/initial-corpus-provenance.md",
     "docs/provenance/runtime-evidence.md",
     "docs/provenance/candidate-fixtures.md",
@@ -171,13 +176,14 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals artifact-budget-validation",
         "uv run patchpilot-evals bounded-subprocess-compatibility-validation",
         "uv run patchpilot-evals track6d-readiness-validation",
+        "uv run patchpilot-evals workflow-policy-validation",
+        "uv run patchpilot-evals dependency-architecture-policy-validation",
     ):
         assert command in text
     uses = re.findall(r"uses: (\S+)", text)
-    assert uses == [
-        "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
-        "astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2",
-    ]
+    checkout = "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1"
+    setup_uv = "astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2"
+    assert uses == [checkout, setup_uv, checkout, setup_uv, checkout, setup_uv]
     for name in ("torch", "transformers", "openai", "anthropic", "huggingface"):
         assert name not in text.lower()
 
@@ -225,6 +231,8 @@ def test_help_lists_commands() -> None:
     assert "artifact-budget-validation" in text
     assert "bounded-subprocess-compatibility-validation" in text
     assert "track6d-readiness-validation" in text
+    assert "workflow-policy-validation" in text
+    assert "dependency-architecture-policy-validation" in text
 
 
 def test_committed_json_files_validate() -> None:

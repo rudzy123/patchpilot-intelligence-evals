@@ -17,6 +17,8 @@ Contributions to this repository must be original work for PatchPilot evaluation
 - Do not put secrets in cases, tests, logs, or commits.
 - Tests and evaluation commands must stay offline. Package installation is the only step that may use a package index.
 - Keep JSON Schemas closed. Do not add fields that assign affectedness, priority, Finding state, queue rank, or remediation completion.
+- Pin every external GitHub Action to a full commit SHA recorded in [docs/provenance/github-action-pins.md](docs/provenance/github-action-pins.md). Do not add `pull_request_target`, a write token, or a model or runtime download to a workflow.
+- Required checks and the main ruleset procedure are in [docs/operations/required-checks.md](docs/operations/required-checks.md) and [docs/operations/main-ruleset-procedure.md](docs/operations/main-ruleset-procedure.md). Do not change repository rulesets from a pull request.
 - Run the commands in [README.md](README.md) before asking for review.
 
 Report accidental sensitive data through [SECURITY.md](SECURITY.md). Do not open a public issue that contains the data.
