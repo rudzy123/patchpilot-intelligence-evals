@@ -11,6 +11,7 @@ Contributions to this repository must be original work for PatchPilot evaluation
 - A passing Track 5 validation command does not authorize Track 6 acquisition.
 - A passing Track 6A validation command does not authorize acquisition, runtime installation, or model execution. Do not add a CI step that installs bubblewrap, Podman, Docker, or a model runtime.
 - Track 6B readiness does not authorize runtime installation, model or tokenizer acquisition, model conversion, candidate selection, real inference, evaluation-gate changes, shadow mode, or PatchPilot production composition.
+- A passing Track 6B validation command does not install ONNX Runtime, download a model, or convert a checkpoint. Track 6C readiness is `not-ready` and does not authorize installation, acquisition, conversion, or inference.
 - Candidate fixtures are deterministic test doubles. Do not describe them as models or give them network access.
 - Do not put secrets in cases, tests, logs, or commits.
 - Tests and evaluation commands must stay offline. Package installation is the only step that may use a package index.

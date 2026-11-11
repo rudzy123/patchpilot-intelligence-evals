@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:candidate-format-resolution:v1",
+  "title": "Candidate format resolution",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "runtimeInstalled",
+    "modelAcquired",
+    "realModelExecuted",
+    "installationAuthorized",
+    "selectionOutcome",
+    "resolutionOutcome",
+    "directOnnxQualified",
+    "retrievedOn",
+    "artifactCapBytes",
+    "families",
+    "locallyObservedArtifactDigests",
+    "acquisitionStatus",
+    "executionStatus",
+    "conversionStatus"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "runtimeInstalled": { "const": false },
+    "modelAcquired": { "const": false },
+    "realModelExecuted": { "const": false },
+    "installationAuthorized": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "resolutionOutcome": { "enum": ["no-path", "direct-onnx"] },
+    "directOnnxQualified": { "type": "boolean" },
+    "retrievedOn": { "const": "2026-11-10" },
+    "artifactCapBytes": { "const": 8589934592 },
+    "families": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/family" }
+    },
+    "locallyObservedArtifactDigests": {
+      "type": "array",
+      "maxItems": 0
+    },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" },
+    "conversionStatus": { "const": "not-performed" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "resolutionOutcome": { "const": "no-path" } },
+        "required": ["resolutionOutcome"]
+      },
+      "then": { "properties": { "directOnnxQualified": { "const": false } } }
+    },
+    {
+      "if": {
+        "properties": { "resolutionOutcome": { "const": "direct-onnx" } },
+        "required": ["resolutionOutcome"]
+      },
+      "then": { "properties": { "directOnnxQualified": { "const": true } } }
+    }
+  ],
+  "$defs": {
+    "listingFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fileName", "byteCount", "upstreamListingSha256"],
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._+/]{0,160}$"
+        },
+        "byteCount": { "type": "integer", "minimum": 1 },
+        "upstreamListingSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "family": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modelId",
+        "revision",
+        "officialOnnxPresent",
+        "qualifies",
+        "onnxDirectoryBytes",
+        "listingDigestDisposition",
+        "listingFiles",
+        "blockers"
+      ],
+      "properties": {
+        "modelId": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "revision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "officialOnnxPresent": { "type": "boolean" },
+        "qualifies": { "type": "boolean" },
+        "onnxDirectoryBytes": {
+          "oneOf": [{ "type": "null" }, { "type": "integer", "minimum": 0 }]
+        },
+        "listingDigestDisposition": {
+          "enum": ["not-applicable", "listing-only", "redacted"]
+        },
+        "listingFiles": {
+          "type": "array",
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/listingFile" }
+        },
+        "blockers": {
+          "type": "array",
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "artifact-digest-capability",
+              "bounded-subprocess-compatibility",
+              "converted-onnx-not-qualifying",
+              "documented-limitations",
+              "explicit-weight-use-license",
+              "fully-offline-runtime-support",
+              "no-official-onnx",
+              "onnx-directory-exceeds-artifact-cap",
+              "onnx-graph-uninspected",
+              "quantization-not-approved",
+              "tokenizer-provenance"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

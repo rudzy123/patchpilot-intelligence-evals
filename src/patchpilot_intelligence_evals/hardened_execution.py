@@ -59,14 +59,29 @@ class ExecutionResult:
     argv: tuple[str, ...]
 
 
+def allowlisted_environment(
+    environment: tuple[tuple[str, str], ...] = (),
+) -> tuple[tuple[str, str], ...]:
+    """Accept only the official ONNX Runtime telemetry disable, or no extra variable."""
+    if environment == ():
+        return ()
+    if environment != (("ORT_DISABLE_TELEMETRY", "1"),):
+        raise HardenedExecutionError("environment")
+    return environment
+
+
 def build_argv(
     *,
     unit: str,
     mounts: tuple[Mount, ...] | list[Mount],
     limits: ResourceLimits,
     arguments: tuple[str, ...],
+    environment: tuple[tuple[str, str], ...] = (),
 ) -> list[str]:
     """Return the systemd, bubblewrap, and prlimit argument vector."""
+    extra: list[str] = []
+    for key, value in allowlisted_environment(environment):
+        extra.extend(["--setenv", key, value])
     argv = [
         "systemd-run",
         "--user",
@@ -78,6 +93,7 @@ def build_argv(
         "--",
         "bwrap",
         *namespace_arguments(),
+        *extra,
         *bwrap_mount_arguments(mounts),
         "--",
         *prlimit_arguments(limits),
@@ -104,6 +120,7 @@ def execute_hardened(
     artifact_dir: Path | None = None,
     config_dir: Path | None = None,
     executable: Path | None = None,
+    environment: tuple[tuple[str, str], ...] = (),
 ) -> ExecutionResult:
     """Run one fixture inside the boundary. ``attempts`` is always 1."""
     if not sys.platform.startswith("linux"):
@@ -119,7 +136,13 @@ def execute_hardened(
     except FilesystemPolicyError as exc:
         raise HardenedExecutionError(exc.code) from None
     unit = f"patchpilot-h{token_hex(8)}"
-    argv = build_argv(unit=unit, mounts=mounts, limits=chosen, arguments=arguments)
+    argv = build_argv(
+        unit=unit,
+        mounts=mounts,
+        limits=chosen,
+        arguments=arguments,
+        environment=environment,
+    )
     proc = subprocess.Popen(
         argv,
         stdout=subprocess.PIPE,

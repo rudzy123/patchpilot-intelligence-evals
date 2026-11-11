@@ -17,8 +17,13 @@ from patchpilot_intelligence_evals.artifact_verification import (
     load_verification_manifest,
 )
 from patchpilot_intelligence_evals.candidate_evaluation import evaluate_candidate
+from patchpilot_intelligence_evals.candidate_format_resolution import (
+    FormatResolutionError,
+    load_format_resolution,
+)
 from patchpilot_intelligence_evals.candidate_manifest import ManifestError, load_manifest
 from patchpilot_intelligence_evals.comparison import compare_results
+from patchpilot_intelligence_evals.conversion_plan import ConversionPlanError, load_conversion_plan
 from patchpilot_intelligence_evals.corpus import CorpusError, canonical_dumps, validate_corpus
 from patchpilot_intelligence_evals.evaluator import evaluate_baseline
 from patchpilot_intelligence_evals.evidence_closure import EvidenceError, load_closure
@@ -50,11 +55,22 @@ from patchpilot_intelligence_evals.result_store import (
     read_validated_artifact,
     write_canonical,
 )
+from patchpilot_intelligence_evals.runtime_adapter_contract import (
+    AdapterError,
+    load_adapter_contract,
+)
+from patchpilot_intelligence_evals.runtime_artifact_verification import (
+    RuntimeVerificationError,
+)
+from patchpilot_intelligence_evals.runtime_artifact_verification import (
+    load_verification_manifest as load_runtime_verification_manifest,
+)
 from patchpilot_intelligence_evals.runtime_authorization import (
     RuntimeAuthorizationError,
     load_assessment,
     load_authorization,
 )
+from patchpilot_intelligence_evals.runtime_cache import RuntimeCacheError, load_runtime_policy
 from patchpilot_intelligence_evals.runtime_security import (
     RuntimeSecurityError,
 )
@@ -71,6 +87,10 @@ from patchpilot_intelligence_evals.sandbox_capabilities import (
 from patchpilot_intelligence_evals.schemas import SchemaValidationError, repo_root
 from patchpilot_intelligence_evals.track6a_review import Track6AReviewError
 from patchpilot_intelligence_evals.track6a_review import load_review as load_track6a_review
+from patchpilot_intelligence_evals.track6c_readiness import (
+    Track6CReadinessError,
+    load_track6c_readiness,
+)
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -101,6 +121,13 @@ def _parser() -> argparse.ArgumentParser:
     commands.add_parser("runtime-authorization-v2-validation")
     commands.add_parser("track6b-readiness-validation")
     commands.add_parser("track6a-review-validation")
+    commands.add_parser("external-runtime-cache-policy-validation")
+    runtime_verification = commands.add_parser("runtime-artifact-verification-validation")
+    runtime_verification.add_argument("--manifest", required=True)
+    commands.add_parser("runtime-adapter-contract-validation")
+    commands.add_parser("candidate-format-resolution-validation")
+    commands.add_parser("onnx-conversion-plan-validation")
+    commands.add_parser("track6c-readiness-validation")
     one_case = commands.add_parser("candidate-execution")
     one_case.add_argument("--manifest", required=True)
     one_case.add_argument("--case-id", required=True)
@@ -199,6 +226,80 @@ def main(argv: list[str] | None = None) -> int:
                         "candidateKind": offline["candidateKind"],
                         "acquisitionStatus": offline["acquisitionStatus"],
                         "executionStatus": offline["executionStatus"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "external-runtime-cache-policy-validation":
+                runtime_policy = load_runtime_policy()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "cacheLocation": runtime_policy["cacheLocation"],
+                        "runtimeInstalled": False,
+                        "acquisitionStatus": runtime_policy["acquisitionStatus"],
+                        "executionStatus": runtime_policy["executionStatus"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "runtime-artifact-verification-validation":
+                runtime_verified = load_runtime_verification_manifest(
+                    _checked_relative(str(args.manifest))
+                )
+                return _summary(
+                    {
+                        "status": "ok",
+                        "verificationState": runtime_verified["verificationState"],
+                        "runtimeInstalled": False,
+                        "acquisitionStatus": runtime_verified["acquisitionStatus"],
+                        "executionStatus": runtime_verified["executionStatus"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "runtime-adapter-contract-validation":
+                contract = load_adapter_contract()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "adapterId": contract["adapterId"],
+                        "adapterVersion": contract["adapterVersion"],
+                        "profileId": contract["profileId"],
+                        "executableModelFormat": contract["executableRuntimeModel"]["format"],
+                        "realCandidateOutcome": contract["realCandidateOutcome"],
+                        "runtimeInstalled": False,
+                        "realModelExecuted": False,
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "candidate-format-resolution-validation":
+                resolution = load_format_resolution()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "resolutionOutcome": resolution["resolutionOutcome"],
+                        "directOnnxQualified": resolution["directOnnxQualified"],
+                        "selectionOutcome": resolution["selectionOutcome"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "onnx-conversion-plan-validation":
+                plan = load_conversion_plan()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "authorizationOutcome": plan["authorizationOutcome"],
+                        "conversionStatus": plan["conversionStatus"],
+                        "equivalenceMeasured": plan["equivalenceMeasured"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "track6c-readiness-validation":
+                readiness = load_track6c_readiness()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "readinessOutcome": readiness["readinessOutcome"],
+                        "verdict": readiness["verdict"],
+                        "installationAuthorized": False,
                         "productionReady": False,
                     }
                 )
@@ -507,6 +608,12 @@ def main(argv: list[str] | None = None) -> int:
         ProtocolError,
         CacheError,
         VerificationError,
+        RuntimeCacheError,
+        RuntimeVerificationError,
+        AdapterError,
+        FormatResolutionError,
+        ConversionPlanError,
+        Track6CReadinessError,
         RuntimeAuthorizationError,
         RuntimeSecurityError,
         SandboxCapabilityError,

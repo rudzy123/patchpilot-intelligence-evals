@@ -17,6 +17,7 @@ from patchpilot_intelligence_evals.schemas import (
     CANDIDATE_SCHEMA_NAMES,
     SCHEMA_NAMES,
     TRACK6A_SCHEMA_NAMES,
+    TRACK6B_SCHEMA_NAMES,
     load_schema,
     repo_root,
     validate,
@@ -63,6 +64,11 @@ _DOCUMENTS = (
     "docs/architecture/hardened-execution.md",
     "docs/architecture/runtime-authorization.md",
     "docs/architecture/track6b-acquisition-prerequisites.md",
+    "docs/architecture/external-runtime-staging.md",
+    "docs/architecture/runtime-adapter-contract.md",
+    "docs/architecture/candidate-format-resolution.md",
+    "docs/architecture/onnx-conversion-boundary.md",
+    "docs/architecture/track6c-readiness.md",
     "docs/provenance/initial-corpus-provenance.md",
     "docs/provenance/runtime-evidence.md",
     "docs/provenance/candidate-fixtures.md",
@@ -71,6 +77,8 @@ _DOCUMENTS = (
     "docs/provenance/candidate-evidence-closure.md",
     "docs/provenance/track5-implementation-review.md",
     "docs/provenance/track6a-implementation-review.md",
+    "docs/provenance/runtime-staging-provenance.md",
+    "docs/provenance/conversion-toolchain-evidence.md",
 )
 
 
@@ -144,6 +152,12 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals runtime-authorization-v2-validation",
         "uv run patchpilot-evals track6b-readiness-validation",
         "uv run patchpilot-evals track6a-review-validation",
+        "uv run patchpilot-evals external-runtime-cache-policy-validation",
+        "uv run patchpilot-evals runtime-artifact-verification-validation --manifest",
+        "uv run patchpilot-evals runtime-adapter-contract-validation",
+        "uv run patchpilot-evals candidate-format-resolution-validation",
+        "uv run patchpilot-evals onnx-conversion-plan-validation",
+        "uv run patchpilot-evals track6c-readiness-validation",
     ):
         assert command in text
     uses = re.findall(r"uses: (\S+)", text)
@@ -186,11 +200,18 @@ def test_help_lists_commands() -> None:
     assert "runtime-authorization-v2-validation" in text
     assert "track6b-readiness-validation" in text
     assert "track6a-review-validation" in text
+    assert "external-runtime-cache-policy-validation" in text
+    assert "runtime-artifact-verification-validation" in text
+    assert "runtime-adapter-contract-validation" in text
+    assert "candidate-format-resolution-validation" in text
+    assert "onnx-conversion-plan-validation" in text
+    assert "track6c-readiness-validation" in text
 
 
 def test_committed_json_files_validate() -> None:
     root = repo_root()
-    for name in SCHEMA_NAMES + CANDIDATE_SCHEMA_NAMES + TRACK6A_SCHEMA_NAMES:
+    names = SCHEMA_NAMES + CANDIDATE_SCHEMA_NAMES + TRACK6A_SCHEMA_NAMES + TRACK6B_SCHEMA_NAMES
+    for name in names:
         document = load_schema(name)
         assert document["additionalProperties"] is False
     for path in sorted((root / "corpus" / "cases").glob("*.json")):

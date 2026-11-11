@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "runtimeInstalled": false,
+  "modelAcquired": false,
+  "realModelExecuted": false,
+  "installationAuthorized": false,
+  "selectionOutcome": "no-selection",
+  "resolutionOutcome": "no-path",
+  "directOnnxQualified": false,
+  "retrievedOn": "2026-11-10",
+  "artifactCapBytes": 8589934592,
+  "families": [
+    {
+      "modelId": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "officialOnnxPresent": false,
+      "qualifies": false,
+      "onnxDirectoryBytes": null,
+      "listingDigestDisposition": "not-applicable",
+      "listingFiles": [],
+      "blockers": [
+        "bounded-subprocess-compatibility",
+        "documented-limitations",
+        "no-official-onnx"
+      ]
+    },
+    {
+      "modelId": "Qwen/Qwen2.5-3B-Instruct",
+      "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "officialOnnxPresent": false,
+      "qualifies": false,
+      "onnxDirectoryBytes": null,
+      "listingDigestDisposition": "not-applicable",
+      "listingFiles": [],
+      "blockers": [
+        "bounded-subprocess-compatibility",
+        "documented-limitations",
+        "no-official-onnx"
+      ]
+    },
+    {
+      "modelId": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "officialOnnxPresent": true,
+      "qualifies": false,
+      "onnxDirectoryBytes": 19246095294,
+      "listingDigestDisposition": "listing-only",
+      "listingFiles": [
+        {
+          "fileName": "onnx/model.onnx",
+          "byteCount": 165580,
+          "upstreamListingSha256": "c538daa78f811830dc9028aa228a63a218147ab478c0c65ef6e2d8cab532380a"
+        },
+        {
+          "fileName": "onnx/model.onnx_data",
+          "byteCount": 6847602688,
+          "upstreamListingSha256": "023686a59a534e45af70bc5f99ae70e592481701680591f9844fc140a3db220a"
+        },
+        {
+          "fileName": "onnx/model_bnb4.onnx",
+          "byteCount": 1311307655,
+          "upstreamListingSha256": "ac7400ca170e6644d95d26394846d2cce8083298e8519b1df7ac1eaa0ab2b5b6"
+        },
+        {
+          "fileName": "onnx/model_fp16.onnx",
+          "byteCount": 1326807956,
+          "upstreamListingSha256": "3d891d77661f6339f727b3188f1c21b1429a1e4e55c40d1f60f85048b00a4348"
+        },
+        {
+          "fileName": "onnx/model_fp16.onnx_data",
+          "byteCount": 2097152000,
+          "upstreamListingSha256": "5f48c05c14ed97738f8dc5854c20c229ddc8661f43fa914085843901a4ba8740"
+        },
+        {
+          "fileName": "onnx/model_int8.onnx",
+          "byteCount": 1714119778,
+          "upstreamListingSha256": "db5cb9057f4e7014f00c38fd9764f0103e60bb4d145ad600b7144625f0d56930"
+        },
+        {
+          "fileName": "onnx/model_q4.onnx",
+          "byteCount": 1411969607,
+          "upstreamListingSha256": "467b7b8f62d99f184d3628d24b8d65c151e331695f6e9ea997616c4e279e9a51"
+        },
+        {
+          "fileName": "onnx/model_q4f16.onnx",
+          "byteCount": 1108730338,
+          "upstreamListingSha256": "d94946187fb5f27579f3db4ba21fb7f7466c7cbd18956bd420d3981f75282f9c"
+        },
+        {
+          "fileName": "onnx/model_quantized.onnx",
+          "byteCount": 1714119846,
+          "upstreamListingSha256": "b1110061268f161512c234c4d43cd9dbe61eeb1454e9b94b652edf4de55ae51c"
+        },
+        {
+          "fileName": "onnx/model_uint8.onnx",
+          "byteCount": 1714119846,
+          "upstreamListingSha256": "b1110061268f161512c234c4d43cd9dbe61eeb1454e9b94b652edf4de55ae51c"
+        }
+      ],
+      "blockers": [
+        "bounded-subprocess-compatibility",
+        "converted-onnx-not-qualifying",
+        "explicit-weight-use-license",
+        "onnx-directory-exceeds-artifact-cap",
+        "onnx-graph-uninspected",
+        "quantization-not-approved",
+        "tokenizer-provenance"
+      ]
+    },
+    {
+      "modelId": "allenai/OLMo-2-0425-1B-Instruct",
+      "revision": "48d788eca847d4d7548f375ad03d3c9312f6139e",
+      "officialOnnxPresent": false,
+      "qualifies": false,
+      "onnxDirectoryBytes": null,
+      "listingDigestDisposition": "not-applicable",
+      "listingFiles": [],
+      "blockers": [
+        "bounded-subprocess-compatibility",
+        "explicit-weight-use-license",
+        "no-official-onnx",
+        "tokenizer-provenance"
+      ]
+    },
+    {
+      "modelId": "google/gemma-3-1b-it",
+      "revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+      "officialOnnxPresent": false,
+      "qualifies": false,
+      "onnxDirectoryBytes": null,
+      "listingDigestDisposition": "redacted",
+      "listingFiles": [],
+      "blockers": [
+        "artifact-digest-capability",
+        "bounded-subprocess-compatibility",
+        "fully-offline-runtime-support",
+        "no-official-onnx",
+        "tokenizer-provenance"
+      ]
+    }
+  ],
+  "locallyObservedArtifactDigests": [],
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed",
+  "conversionStatus": "not-performed"
+}

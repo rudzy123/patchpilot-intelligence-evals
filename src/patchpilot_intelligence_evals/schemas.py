@@ -69,12 +69,23 @@ TRACK6A_SCHEMA_NAMES: tuple[str, ...] = (
     "track6a-implementation-review",
 )
 
+# Track 6B runtime-staging documents. They stay outside earlier schema groups.
+TRACK6B_SCHEMA_NAMES: tuple[str, ...] = (
+    "external-runtime-cache-policy",
+    "runtime-artifact-verification",
+    "runtime-adapter-contract",
+    "candidate-format-resolution",
+    "onnx-conversion-plan",
+    "track6c-readiness",
+)
+
 _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     SCHEMA_NAMES
     + CANDIDATE_SCHEMA_NAMES
     + AUTHORIZATION_SCHEMA_NAMES
     + TRACK5_SCHEMA_NAMES
     + TRACK6A_SCHEMA_NAMES
+    + TRACK6B_SCHEMA_NAMES
 )
 
 

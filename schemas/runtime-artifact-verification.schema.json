@@ -1,0 +1,213 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:runtime-artifact-verification:v1",
+  "title": "Runtime artifact verification",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "runtimeInstalled",
+    "modelAcquired",
+    "realModelExecuted",
+    "installationAuthorized",
+    "verificationState",
+    "attemptId",
+    "acquisitionStatus",
+    "executionStatus",
+    "conversionStatus",
+    "runtimeId",
+    "versionTag",
+    "immutableRevision",
+    "distributionId",
+    "packageFileName",
+    "licenseName",
+    "telemetryConfiguration",
+    "expectedFiles",
+    "observedFiles",
+    "locallyObservedArtifactDigests",
+    "upstreamDigestComparison",
+    "malwareDetectionClaimed",
+    "reasonCodes",
+    "identityDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "runtimeInstalled": { "const": false },
+    "modelAcquired": { "const": false },
+    "realModelExecuted": { "const": false },
+    "installationAuthorized": { "const": false },
+    "verificationState": { "enum": ["not-staged", "verified", "rejected"] },
+    "attemptId": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,40}$" }
+      ]
+    },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "executionStatus": { "const": "not-executed" },
+    "conversionStatus": { "const": "not-performed" },
+    "runtimeId": { "const": "onnxruntime" },
+    "versionTag": { "const": "v1.31.1" },
+    "immutableRevision": { "const": "6af1a932e2286d5c58166085d24c68783033edee" },
+    "distributionId": { "const": "onnxruntime-linux-x64-cpu" },
+    "packageFileName": { "const": "onnxruntime-linux-x64-1.31.1.tgz" },
+    "licenseName": { "const": "MIT" },
+    "telemetryConfiguration": { "enum": ["absent", "disabled", "enabled"] },
+    "expectedFiles": {
+      "type": "array",
+      "maxItems": 32,
+      "items": { "$ref": "#/$defs/expectedFile" }
+    },
+    "observedFiles": {
+      "type": "array",
+      "maxItems": 32,
+      "items": { "$ref": "#/$defs/observedFile" }
+    },
+    "locallyObservedArtifactDigests": {
+      "type": "array",
+      "maxItems": 32,
+      "items": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+    },
+    "upstreamDigestComparison": {
+      "enum": ["not-applicable", "not-provided", "matched", "mismatch"]
+    },
+    "malwareDetectionClaimed": { "const": false },
+    "reasonCodes": {
+      "type": "array",
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "count-mismatch",
+          "digest-mismatch",
+          "identity-changed",
+          "license-mismatch",
+          "missing-file",
+          "path-traversal",
+          "runtime-identity",
+          "size-mismatch",
+          "symlink-escape",
+          "telemetry-enabled",
+          "unapproved-shared-library",
+          "unexpected-file",
+          "unsupported-executable-format",
+          "version-mismatch",
+          "writable-artifact"
+        ]
+      }
+    },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "verificationState": { "const": "not-staged" } },
+        "required": ["verificationState"]
+      },
+      "then": {
+        "properties": {
+          "attemptId": { "type": "null" },
+          "expectedFiles": { "maxItems": 0 },
+          "observedFiles": { "maxItems": 0 },
+          "locallyObservedArtifactDigests": { "maxItems": 0 },
+          "reasonCodes": { "maxItems": 0 },
+          "upstreamDigestComparison": { "const": "not-applicable" },
+          "telemetryConfiguration": { "const": "absent" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "verificationState": { "const": "verified" } },
+        "required": ["verificationState"]
+      },
+      "then": {
+        "properties": {
+          "attemptId": { "type": "string" },
+          "expectedFiles": { "minItems": 1 },
+          "observedFiles": { "minItems": 1 },
+          "locallyObservedArtifactDigests": { "minItems": 1 },
+          "reasonCodes": { "maxItems": 0 },
+          "upstreamDigestComparison": { "enum": ["matched", "not-provided"] },
+          "telemetryConfiguration": { "const": "disabled" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "verificationState": { "const": "rejected" } },
+        "required": ["verificationState"]
+      },
+      "then": {
+        "properties": {
+          "attemptId": { "type": "string" },
+          "locallyObservedArtifactDigests": { "maxItems": 0 },
+          "reasonCodes": { "minItems": 1 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "expectedFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fileName",
+        "role",
+        "expectedBytes",
+        "upstreamSha256",
+        "executableFormat"
+      ],
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]{0,120}$"
+        },
+        "role": {
+          "enum": [
+            "adapter",
+            "configuration",
+            "executable",
+            "license",
+            "notice",
+            "shared-library"
+          ]
+        },
+        "expectedBytes": { "type": "integer", "minimum": 1, "maximum": 134217728 },
+        "upstreamSha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          ]
+        },
+        "executableFormat": { "enum": ["elf", "not-executable"] }
+      }
+    },
+    "observedFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fileName", "role", "observedBytes", "sha256", "executableFormat"],
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]{0,120}$"
+        },
+        "role": {
+          "enum": [
+            "adapter",
+            "configuration",
+            "executable",
+            "license",
+            "notice",
+            "shared-library"
+          ]
+        },
+        "observedBytes": { "type": "integer", "minimum": 0, "maximum": 134217728 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "executableFormat": { "enum": ["elf", "not-executable"] }
+      }
+    }
+  }
+}

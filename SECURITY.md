@@ -44,6 +44,10 @@ The launcher keeps a private network namespace. Host loopback, external IPv4, ex
 
 The launcher mounts a staged interpreter, the fixture, read-only synthetic inputs, and a private result directory. It does not mount the repository root, home directory, or credential directories. The child environment is an allowlist. Attestations omit host names, user names, addresses, and environment values. The launcher does not execute a model. `productionReady` stays false.
 
+## External runtime root
+
+A future ONNX Runtime archive would be staged outside this repository, outside the model-artifact cache, and outside the output directory. The committed policy stores no host path. Quarantine and rejected trees cannot be executed. Promotion requires a verified inventory. Shared libraries must be ELF. Other staged files must not be executable. `malwareDetectionClaimed` stays false. These checks are not an operating-system sandbox. No runtime archive is present, and installation stays unauthorized.
+
 ## Supported use
 
 Offline harness checks and future offline candidate runs inside this repository. Do not use these fixtures for production decisions.

@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "runtimeInstalled": false,
+  "modelAcquired": false,
+  "realModelExecuted": false,
+  "installationAuthorized": false,
+  "authorizationOutcome": "not-authorized",
+  "conversionStatus": "not-performed",
+  "selectionOutcome": "no-selection",
+  "retrievedOn": "2026-11-10",
+  "toolchains": [
+    {
+      "toolchainId": "optimum-onnx",
+      "versionTag": "v0.1.0",
+      "immutableRevision": "d2328e386a81b0970a458a7570a38b131414edc6",
+      "licenseName": "Apache-2.0",
+      "authorizationOutcome": "not-authorized",
+      "disqualifiers": [
+        "export-defaults-not-offline-closed",
+        "runtime-pin-not-authorized",
+        "sources-not-independently-eligible",
+        "torch-pin-unresolved"
+      ]
+    },
+    {
+      "toolchainId": "onnxruntime-genai",
+      "versionTag": "v0.19.0",
+      "immutableRevision": "d01b2441a72d4e3223415b9b08474c6e65fbc028",
+      "licenseName": "MIT",
+      "authorizationOutcome": "not-authorized",
+      "disqualifiers": [
+        "architecture-support-unresolved",
+        "sources-not-independently-eligible"
+      ]
+    },
+    {
+      "toolchainId": "pytorch-onnx-exporter",
+      "versionTag": "unresolved",
+      "immutableRevision": null,
+      "licenseName": "unresolved",
+      "authorizationOutcome": "not-authorized",
+      "disqualifiers": [
+        "not-a-closed-safetensors-toolchain",
+        "sources-not-independently-eligible",
+        "version-unresolved"
+      ]
+    }
+  ],
+  "equivalence": {
+    "comparison": "allclose",
+    "atol": "0.0001",
+    "rtol": "0.001",
+    "convertedProvenance": "locally-converted",
+    "publisherProvided": false,
+    "opsetDisposition": "unresolved",
+    "precisionDisposition": "unresolved",
+    "externalDataDisposition": "unresolved",
+    "determinismDisposition": "variation-characterized"
+  },
+  "offlineClosed": false,
+  "equivalenceMeasured": false,
+  "locallyObservedArtifactDigests": [],
+  "acquisitionStatus": "not-acquired",
+  "executionStatus": "not-executed"
+}
