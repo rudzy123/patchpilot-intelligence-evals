@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "retrievedOn": "2026-11-11",
+  "selectionOutcome": "no-selection",
+  "selectedModelId": null,
+  "scoringApplied": false,
+  "qualifyingCandidateCount": 0,
+  "finalistCount": 1,
+  "finalistModelIds": [
+    "LiquidAI/LFM2.5-1.2B-Instruct"
+  ],
+  "locallyObservedArtifactDigests": [],
+  "candidates": [
+    {
+      "modelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+      "weightedScore": null,
+      "categoryScores": null,
+      "mandatoryStatus": "fail",
+      "disqualifiers": [
+        "local-resource-fit"
+      ],
+      "tokenizerOutcome": "pass",
+      "directOnnxOutcome": "pass",
+      "hardwareFit": "fail",
+      "executionOutcome": "pass",
+      "suitabilityOutcome": "unresolved",
+      "fixedRevision": true,
+      "unresolvedConflict": true,
+      "qualifies": false
+    }
+  ]
+}

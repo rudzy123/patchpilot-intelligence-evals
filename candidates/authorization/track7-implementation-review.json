@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "reviewStatus": "accepted-by-principal-systems-architect",
+  "reviewDate": "2026-11-11",
+  "reviewAuthority": "PatchPilot Principal Systems Architect",
+  "decision": "track 7 candidate landscape approved and acquisition withheld",
+  "authorizedScope": "This approval accepts the Track 7 fail-closed landscape only.",
+  "landscapeDisposition": "approved",
+  "candidateDecision": "no-selection",
+  "track8Authorization": "not-authorized",
+  "discoveryCandidateCount": 8,
+  "finalistCount": 1,
+  "finalistModelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+  "footprintBytes": 9446591609,
+  "artifactCapBytes": 8589934592,
+  "excessBytes": 856657017,
+  "peakMemoryBytes": null,
+  "weightedScore": null,
+  "qualifyingCandidateCount": 0,
+  "selectionOutcome": "no-selection",
+  "componentReviews": [
+    {
+      "componentId": "candidate-landscape",
+      "disposition": "approved",
+      "statement": "The Track 7 candidate landscape is approved."
+    },
+    {
+      "componentId": "candidate-selection",
+      "disposition": "approved",
+      "statement": "Candidate selection remains no-selection."
+    },
+    {
+      "componentId": "track8-acquisition",
+      "disposition": "approved",
+      "statement": "Track 8 acquisition remains not-authorized."
+    }
+  ],
+  "acceptedBlockers": [
+    {
+      "blockerId": "footprint-exceeds-8gib",
+      "statement": "The complete footprint exceeds 8 GiB by 856,657,017 bytes."
+    },
+    {
+      "blockerId": "fp32-peak-memory-unknown",
+      "statement": "FP32 peak memory is unknown."
+    },
+    {
+      "blockerId": "explanation-suitability-unresolved",
+      "statement": "Explanation suitability remains unresolved."
+    },
+    {
+      "blockerId": "safety-limitations-unresolved",
+      "statement": "Safety limitations remain unresolved."
+    },
+    {
+      "blockerId": "mandatory-criteria-unmet",
+      "statement": "No candidate passes all mandatory criteria."
+    }
+  ],
+  "notAuthorized": [
+    "candidate selection",
+    "runtime installation",
+    "model acquisition",
+    "tokenizer acquisition",
+    "conversion",
+    "quantization",
+    "inference",
+    "gate changes",
+    "PatchPilot composition"
+  ],
+  "locallyObservedArtifactDigests": [],
+  "reviewDigest": "9d65c5a408ad12ecc2c687298453a5b114b8c5fbed0f20c87bc4e43924c27c6a"
+}

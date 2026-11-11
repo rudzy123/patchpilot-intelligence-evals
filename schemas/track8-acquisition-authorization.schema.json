@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track8-acquisition-authorization:v1",
+  "title": "Track 8 acquisition authorization",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "retrievedOn",
+    "selectionOutcome",
+    "selectedModelId",
+    "authorizationOutcome",
+    "verdict",
+    "installationAuthorized",
+    "conversionAuthorized",
+    "quantizationApproved",
+    "blockers",
+    "finalistCount",
+    "finalistModelIds",
+    "locallyObservedRuntimeDigests",
+    "locallyObservedModelDigests",
+    "locallyObservedTokenizerDigests",
+    "locallyObservedConfigurationDigests"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "retrievedOn": { "const": "2026-11-11" },
+    "selectionOutcome": { "enum": ["no-selection", "selected"] },
+    "selectedModelId": {
+      "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 3, "maxLength": 160 }]
+    },
+    "authorizationOutcome": {
+      "enum": [
+        "authorized",
+        "authorized-with-documented-residuals",
+        "not-authorized",
+        "blocked-by-unresolved-authority"
+      ]
+    },
+    "verdict": {
+      "enum": [
+        "TRACK 8 CONTROLLED ACQUISITION AUTHORIZED",
+        "TRACK 8 CONTROLLED ACQUISITION AUTHORIZED WITH DOCUMENTED RESIDUALS",
+        "TRACK 8 CONTROLLED ACQUISITION NOT AUTHORIZED",
+        "BLOCKED BY UNRESOLVED AUTHORITY"
+      ]
+    },
+    "installationAuthorized": { "const": false },
+    "conversionAuthorized": { "const": false },
+    "quantizationApproved": { "const": false },
+    "blockers": {
+      "type": "array",
+      "maxItems": 24,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 3, "maxLength": 80 }
+    },
+    "finalistCount": { "type": "integer", "minimum": 0, "maximum": 4 },
+    "finalistModelIds": {
+      "type": "array",
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 3, "maxLength": 160 }
+    },
+    "locallyObservedRuntimeDigests": { "type": "array", "maxItems": 0 },
+    "locallyObservedModelDigests": { "type": "array", "maxItems": 0 },
+    "locallyObservedTokenizerDigests": { "type": "array", "maxItems": 0 },
+    "locallyObservedConfigurationDigests": { "type": "array", "maxItems": 0 }
+  }
+}

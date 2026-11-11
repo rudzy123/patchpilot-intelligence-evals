@@ -17,6 +17,10 @@ from patchpilot_intelligence_evals.artifact_verification import (
     VerificationError,
     load_verification_manifest,
 )
+from patchpilot_intelligence_evals.candidate_discovery import (
+    DiscoveryError,
+    load_candidate_discovery,
+)
 from patchpilot_intelligence_evals.candidate_eligibility import (
     EligibilityError,
     load_candidate_eligibility,
@@ -48,6 +52,23 @@ from patchpilot_intelligence_evals.execution_attestation import (
 )
 from patchpilot_intelligence_evals.execution_attestation import (
     load_profile as load_hardened_profile,
+)
+from patchpilot_intelligence_evals.explanation_suitability import (
+    SuitabilityError,
+    load_explanation_suitability,
+)
+from patchpilot_intelligence_evals.finalist_budget import (
+    FinalistBudgetError,
+    load_finalist_budget,
+)
+from patchpilot_intelligence_evals.finalist_eligibility import (
+    FinalistEligibilityError,
+    load_finalist_eligibility,
+)
+from patchpilot_intelligence_evals.finalist_onnx import FinalistOnnxError, load_finalist_onnx
+from patchpilot_intelligence_evals.finalist_tokenizer import (
+    FinalistTokenizerError,
+    load_finalist_tokenizer,
 )
 from patchpilot_intelligence_evals.hardened_execution import (
     HardenedExecutionError,
@@ -113,6 +134,15 @@ from patchpilot_intelligence_evals.track6c_readiness import (
     load_track6c_readiness,
 )
 from patchpilot_intelligence_evals.track6d_readiness import Track6DError, load_track6d_readiness
+from patchpilot_intelligence_evals.track7_review import Track7ReviewError, load_track7_review
+from patchpilot_intelligence_evals.track7_selection import (
+    Track7SelectionError,
+    load_track7_selection,
+)
+from patchpilot_intelligence_evals.track8_authorization import (
+    Track8AuthorizationError,
+    load_track8_authorization,
+)
 from patchpilot_intelligence_evals.workflow_policy import (
     WorkflowPolicyError,
     validate_workflow_policy,
@@ -160,6 +190,15 @@ def _parser() -> argparse.ArgumentParser:
     commands.add_parser("artifact-budget-validation")
     commands.add_parser("bounded-subprocess-compatibility-validation")
     commands.add_parser("track6d-readiness-validation")
+    commands.add_parser("candidate-discovery-validation")
+    commands.add_parser("finalist-eligibility-validation")
+    commands.add_parser("finalist-tokenizer-validation")
+    commands.add_parser("finalist-direct-onnx-validation")
+    commands.add_parser("finalist-artifact-budget-validation")
+    commands.add_parser("finalist-explanation-suitability-validation")
+    commands.add_parser("track7-selection-validation")
+    commands.add_parser("track8-acquisition-authorization-validation")
+    commands.add_parser("track7-review-validation")
     commands.add_parser("workflow-policy-validation")
     commands.add_parser("dependency-architecture-policy-validation")
     one_case = commands.add_parser("candidate-execution")
@@ -414,6 +453,108 @@ def main(argv: list[str] | None = None) -> int:
                         "verdict": readiness["verdict"],
                         "selectionOutcome": readiness["selectionOutcome"],
                         "installationAuthorized": False,
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "candidate-discovery-validation":
+                discovery = load_candidate_discovery()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "discoveryCandidateCount": discovery["discoveryCandidateCount"],
+                        "finalistCount": discovery["finalistCount"],
+                        "acquisitionStatus": "not-acquired",
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "finalist-eligibility-validation":
+                eligibility = load_finalist_eligibility()
+                finalist = eligibility["finalists"][0]
+                return _summary(
+                    {
+                        "status": "ok",
+                        "finalistCount": eligibility["finalistCount"],
+                        "weightedScore": finalist["weightedScore"],
+                        "mandatoryStatus": finalist["mandatoryStatus"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "finalist-tokenizer-validation":
+                tokenizer = load_finalist_tokenizer()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "eligibilityOutcome": tokenizer["finalists"][0]["eligibilityOutcome"],
+                        "finalistCount": tokenizer["finalistCount"],
+                        "acquisitionStatus": "not-acquired",
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "finalist-direct-onnx-validation":
+                onnx = load_finalist_onnx()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "directPathEligible": onnx["finalists"][0]["directPathEligible"],
+                        "graphParsed": False,
+                        "finalistCount": onnx["finalistCount"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "finalist-artifact-budget-validation":
+                budget = load_finalist_budget()
+                row = budget["finalists"][0]
+                return _summary(
+                    {
+                        "status": "ok",
+                        "hardwareFit": row["hardwareFit"],
+                        "executionOutcome": row["executionOutcome"],
+                        "footprintBytes": row["footprintBytes"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "finalist-explanation-suitability-validation":
+                suitability = load_explanation_suitability()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "suitabilityOutcome": suitability["finalists"][0]["suitabilityOutcome"],
+                        "measuredQualityClaimed": False,
+                        "finalistCount": suitability["finalistCount"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "track7-selection-validation":
+                selection = load_track7_selection()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "selectionOutcome": selection["selectionOutcome"],
+                        "selectedModelId": selection["selectedModelId"],
+                        "scoringApplied": selection["scoringApplied"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "track8-acquisition-authorization-validation":
+                authorization = load_track8_authorization()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "authorizationOutcome": authorization["authorizationOutcome"],
+                        "verdict": authorization["verdict"],
+                        "installationAuthorized": False,
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "track7-review-validation":
+                review = load_track7_review()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "reviewStatus": review["reviewStatus"],
+                        "candidateDecision": review["candidateDecision"],
+                        "track8Authorization": review["track8Authorization"],
+                        "reviewDigest": review["reviewDigest"],
                         "productionReady": False,
                     }
                 )
@@ -730,6 +871,15 @@ def main(argv: list[str] | None = None) -> int:
         RuntimeVerificationError,
         AdapterError,
         FormatResolutionError,
+        DiscoveryError,
+        FinalistEligibilityError,
+        FinalistTokenizerError,
+        FinalistOnnxError,
+        FinalistBudgetError,
+        SuitabilityError,
+        Track7SelectionError,
+        Track7ReviewError,
+        Track8AuthorizationError,
         EligibilityError,
         TokenizerError,
         OnnxEvidenceError,

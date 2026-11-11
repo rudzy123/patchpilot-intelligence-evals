@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track7-implementation-review:v1",
+  "title": "Track 7 implementation review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "reviewStatus",
+    "reviewDate",
+    "reviewAuthority",
+    "decision",
+    "authorizedScope",
+    "landscapeDisposition",
+    "candidateDecision",
+    "track8Authorization",
+    "discoveryCandidateCount",
+    "finalistCount",
+    "finalistModelId",
+    "footprintBytes",
+    "artifactCapBytes",
+    "excessBytes",
+    "peakMemoryBytes",
+    "weightedScore",
+    "qualifyingCandidateCount",
+    "selectionOutcome",
+    "componentReviews",
+    "acceptedBlockers",
+    "notAuthorized",
+    "locallyObservedArtifactDigests",
+    "reviewDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "reviewStatus": { "const": "accepted-by-principal-systems-architect" },
+    "reviewDate": { "const": "2026-11-11" },
+    "reviewAuthority": { "const": "PatchPilot Principal Systems Architect" },
+    "decision": { "const": "track 7 candidate landscape approved and acquisition withheld" },
+    "authorizedScope": {
+      "const": "This approval accepts the Track 7 fail-closed landscape only."
+    },
+    "landscapeDisposition": { "const": "approved" },
+    "candidateDecision": { "const": "no-selection" },
+    "track8Authorization": { "const": "not-authorized" },
+    "discoveryCandidateCount": { "const": 8 },
+    "finalistCount": { "const": 1 },
+    "finalistModelId": { "const": "LiquidAI/LFM2.5-1.2B-Instruct" },
+    "footprintBytes": { "const": 9446591609 },
+    "artifactCapBytes": { "const": 8589934592 },
+    "excessBytes": { "const": 856657017 },
+    "peakMemoryBytes": { "type": "null" },
+    "weightedScore": { "type": "null" },
+    "qualifyingCandidateCount": { "const": 0 },
+    "selectionOutcome": { "const": "no-selection" },
+    "componentReviews": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/componentReview" }
+    },
+    "acceptedBlockers": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/acceptedBlocker" }
+    },
+    "notAuthorized": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 3, "maxLength": 80 }
+    },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "reviewDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "componentReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["componentId", "disposition", "statement"],
+      "properties": {
+        "componentId": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "disposition": { "const": "approved" },
+        "statement": { "type": "string", "minLength": 10, "maxLength": 240 }
+      }
+    },
+    "acceptedBlocker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blockerId", "statement"],
+      "properties": {
+        "blockerId": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "statement": { "type": "string", "minLength": 10, "maxLength": 240 }
+      }
+    }
+  }
+}

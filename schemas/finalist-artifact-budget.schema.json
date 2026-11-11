@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:finalist-artifact-budget:v1",
+  "title": "Track 7 finalist artifact budget",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "fit": { "enum": ["pass", "fail"] },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceId",
+        "sourceName",
+        "url",
+        "publisher",
+        "retrievedOn",
+        "immutableRevision",
+        "claim",
+        "evidenceClass",
+        "applicability",
+        "conflictDisposition"
+      ],
+      "properties": {
+        "evidenceId": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "sourceName": { "type": "string", "minLength": 3, "maxLength": 120 },
+        "url": {
+          "type": "string",
+          "pattern": "^https://[A-Za-z0-9.-]+(?:/[A-Za-z0-9._~:/?#\\[\\]!$&'()*+,;=%-]*)?$"
+        },
+        "publisher": { "type": "string", "minLength": 2, "maxLength": 80 },
+        "retrievedOn": { "const": "2026-11-11" },
+        "immutableRevision": {
+          "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/sha" }]
+        },
+        "claim": { "type": "string", "pattern": "^[^\"']{20,400}$" },
+        "evidenceClass": {
+          "enum": ["authoritative", "secondary", "conflicting", "unresolved"]
+        },
+        "applicability": { "type": "string", "minLength": 3, "maxLength": 160 },
+        "conflictDisposition": {
+          "enum": ["none", "restrictive-reading", "rejected-unofficial", "unresolved"]
+        }
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "retrievedOn",
+    "artifactCapBytes",
+    "memoryCapBytes",
+    "contextCapTokens",
+    "availableStorageBytes",
+    "runtimeId",
+    "runtimeVersionTag",
+    "runtimeRevision",
+    "runtimePackageFileName",
+    "runtimeStagingListedBytes",
+    "runtimePackagePublishedSha256",
+    "adapterId",
+    "adapterVersion",
+    "profileId",
+    "profileVersion",
+    "safetensorsExecution",
+    "quantizationApproved",
+    "verificationPerformed",
+    "finalistCount",
+    "finalistModelIds",
+    "locallyObservedArtifactDigests",
+    "finalists"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "retrievedOn": { "const": "2026-11-11" },
+    "artifactCapBytes": { "const": 8589934592 },
+    "memoryCapBytes": { "const": 12884901888 },
+    "contextCapTokens": { "const": 8192 },
+    "availableStorageBytes": { "const": 1403456720896 },
+    "runtimeId": { "const": "onnxruntime" },
+    "runtimeVersionTag": { "const": "v1.31.1" },
+    "runtimeRevision": {
+      "const": "6af1a932e2286d5c58166085d24c68783033edee"
+    },
+    "runtimePackageFileName": { "const": "onnxruntime-linux-x64-1.31.1.tgz" },
+    "runtimeStagingListedBytes": { "const": 11413655 },
+    "runtimePackagePublishedSha256": {
+      "const": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9"
+    },
+    "adapterId": { "const": "patchpilot-onnxruntime-adapter" },
+    "adapterVersion": { "const": "1.0.0" },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "profileVersion": { "const": "1.0.0" },
+    "safetensorsExecution": { "const": "prohibited" },
+    "quantizationApproved": { "const": false },
+    "verificationPerformed": { "const": false },
+    "finalistCount": { "type": "integer", "minimum": 0, "maximum": 4 },
+    "finalistModelIds": {
+      "type": "array",
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 3, "maxLength": 160 }
+    },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "finalists": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "modelId",
+          "onnxRevision",
+          "contextTokens",
+          "peakMemoryBytes",
+          "peakMemoryBasis",
+          "quantizationPresent",
+          "cpuOnlyViability",
+          "verificationOverheadEqualsInventory",
+          "graphBytes",
+          "externalDataBytes",
+          "tokenizerBytes",
+          "configurationBytes",
+          "metadataBytes",
+          "inventoryBytes",
+          "verificationOverheadBytes",
+          "runtimeStagingListedBytes",
+          "footprintBytes",
+          "artifactFit",
+          "memoryFit",
+          "contextFit",
+          "storageHeadroom",
+          "hardwareFit",
+          "executionOutcome",
+          "properties",
+          "evidence"
+        ],
+        "properties": {
+          "modelId": { "type": "string", "minLength": 3, "maxLength": 160 },
+          "onnxRevision": { "$ref": "#/$defs/sha" },
+          "contextTokens": {
+            "oneOf": [{ "type": "null" }, { "type": "integer", "minimum": 1 }]
+          },
+          "peakMemoryBytes": {
+            "oneOf": [{ "type": "null" }, { "type": "integer", "minimum": 0 }]
+          },
+          "peakMemoryBasis": {
+            "enum": ["unknown-fp32", "publisher-stated", "unresolved"]
+          },
+          "quantizationPresent": { "type": "boolean" },
+          "cpuOnlyViability": { "enum": ["pass", "fail", "unresolved"] },
+          "verificationOverheadEqualsInventory": { "const": true },
+          "graphBytes": { "type": "integer", "minimum": 0 },
+          "externalDataBytes": { "type": "integer", "minimum": 0 },
+          "tokenizerBytes": { "type": "integer", "minimum": 0 },
+          "configurationBytes": { "type": "integer", "minimum": 0 },
+          "metadataBytes": { "type": "integer", "minimum": 0 },
+          "inventoryBytes": { "type": "integer", "minimum": 0 },
+          "verificationOverheadBytes": { "type": "integer", "minimum": 0 },
+          "runtimeStagingListedBytes": { "type": "integer", "minimum": 0 },
+          "footprintBytes": {
+            "oneOf": [{ "type": "null" }, { "type": "integer", "minimum": 0 }]
+          },
+          "artifactFit": { "$ref": "#/$defs/fit" },
+          "memoryFit": { "$ref": "#/$defs/fit" },
+          "contextFit": { "$ref": "#/$defs/fit" },
+          "storageHeadroom": { "$ref": "#/$defs/fit" },
+          "hardwareFit": { "$ref": "#/$defs/fit" },
+          "executionOutcome": { "enum": ["pass", "fail"] },
+          "properties": {
+            "type": "array",
+            "minItems": 18,
+            "maxItems": 18,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["name", "result"],
+              "properties": {
+                "name": {
+                  "enum": [
+                    "verified-runtime-identity",
+                    "verified-onnx-graph",
+                    "complete-external-data",
+                    "verified-tokenizer-configuration",
+                    "direct-argument-arrays",
+                    "no-shell",
+                    "hardened-launcher",
+                    "offline-execution",
+                    "telemetry-disabled",
+                    "no-automatic-retrieval",
+                    "no-remote-code",
+                    "no-automatic-conversion",
+                    "bounded-startup",
+                    "bounded-generation",
+                    "one-request-one-response",
+                    "process-tree-cleanup",
+                    "bounded-output",
+                    "no-quantization"
+                  ]
+                },
+                "result": { "enum": ["pass", "fail"] }
+              }
+            }
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 6,
+            "items": { "$ref": "#/$defs/evidence" }
+          }
+        }
+      }
+    }
+  }
+}

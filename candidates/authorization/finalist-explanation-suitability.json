@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "retrievedOn": "2026-11-11",
+  "finalistCount": 1,
+  "finalistModelIds": [
+    "LiquidAI/LFM2.5-1.2B-Instruct"
+  ],
+  "measuredQualityClaimed": false,
+  "locallyObservedArtifactDigests": [],
+  "finalists": [
+    {
+      "modelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+      "assessments": [
+        {
+          "topic": "instructionFollowing",
+          "status": "supported",
+          "evidenceId": "lfm-suitability-card"
+        },
+        {
+          "topic": "structuredOutput",
+          "status": "supported",
+          "evidenceId": "lfm-suitability-card"
+        },
+        {
+          "topic": "englishLanguage",
+          "status": "supported",
+          "evidenceId": "lfm-suitability-card"
+        },
+        {
+          "topic": "contextSufficiency",
+          "status": "supported",
+          "evidenceId": "lfm-suitability-card"
+        },
+        {
+          "topic": "conciseGeneration",
+          "status": "supported",
+          "evidenceId": "lfm-suitability-card"
+        },
+        {
+          "topic": "factualExplanationLimitations",
+          "status": "stated",
+          "evidenceId": "lfm-suitability-card"
+        },
+        {
+          "topic": "safetyLimitations",
+          "status": "not-stated",
+          "evidenceId": "lfm-suitability-card"
+        },
+        {
+          "topic": "citationIdReproduction",
+          "status": "unresolved",
+          "evidenceId": "lfm-suitability-card"
+        },
+        {
+          "topic": "refusalAndUncertainty",
+          "status": "unresolved",
+          "evidenceId": "lfm-suitability-card"
+        },
+        {
+          "topic": "deploymentCaveats",
+          "status": "stated",
+          "evidenceId": "lfm-suitability-onnx"
+        }
+      ],
+      "suitabilityOutcome": "unresolved",
+      "evidence": [
+        {
+          "evidenceId": "lfm-suitability-card",
+          "sourceName": "LFM2.5-1.2B-Instruct model card",
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct/blob/b9d816ab510f9a28dca37cb182e9da8b0226e13c/README.md",
+          "publisher": "Liquid AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+          "claim": "The pinned card describes an English-capable instruction model with 32768 tokens of context, tool-calling guidance, and a stated limit for knowledge-intensive tasks and programming. Safety, citation, and refusal behavior are not stated.",
+          "evidenceClass": "authoritative",
+          "applicability": "LiquidAI/LFM2.5-1.2B-Instruct",
+          "conflictDisposition": "restrictive-reading"
+        },
+        {
+          "evidenceId": "lfm-suitability-onnx",
+          "sourceName": "LFM2.5 ONNX model card",
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/blob/10f72e70abf67ac0fd7ebf15bc5854726891d864/README.md",
+          "publisher": "Liquid AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+          "claim": "The pinned ONNX card documents local ONNX Runtime execution for this export and requires the external-data files beside the graph.",
+          "evidenceClass": "authoritative",
+          "applicability": "LiquidAI/LFM2.5-1.2B-Instruct",
+          "conflictDisposition": "none"
+        }
+      ]
+    }
+  ]
+}

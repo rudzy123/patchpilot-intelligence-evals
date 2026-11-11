@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:finalist-direct-onnx:v1",
+  "title": "Track 7 finalist direct ONNX evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceId",
+        "sourceName",
+        "url",
+        "publisher",
+        "retrievedOn",
+        "immutableRevision",
+        "claim",
+        "evidenceClass",
+        "applicability",
+        "conflictDisposition"
+      ],
+      "properties": {
+        "evidenceId": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "sourceName": { "type": "string", "minLength": 3, "maxLength": 120 },
+        "url": {
+          "type": "string",
+          "pattern": "^https://[A-Za-z0-9.-]+(?:/[A-Za-z0-9._~:/?#\\[\\]!$&'()*+,;=%-]*)?$"
+        },
+        "publisher": { "type": "string", "minLength": 2, "maxLength": 80 },
+        "retrievedOn": { "const": "2026-11-11" },
+        "immutableRevision": {
+          "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/sha" }]
+        },
+        "claim": { "type": "string", "pattern": "^[^\"']{20,400}$" },
+        "evidenceClass": {
+          "enum": ["authoritative", "secondary", "conflicting", "unresolved"]
+        },
+        "applicability": { "type": "string", "minLength": 3, "maxLength": 160 },
+        "conflictDisposition": {
+          "enum": ["none", "restrictive-reading", "rejected-unofficial", "unresolved"]
+        }
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "retrievedOn",
+    "finalistCount",
+    "finalistModelIds",
+    "locallyObservedArtifactDigests",
+    "graphParsed",
+    "finalists"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "retrievedOn": { "const": "2026-11-11" },
+    "finalistCount": { "type": "integer", "minimum": 0, "maximum": 4 },
+    "finalistModelIds": {
+      "type": "array",
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 3, "maxLength": 160 }
+    },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "graphParsed": { "const": false },
+    "finalists": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "modelId",
+          "sourceRevision",
+          "onnxRevision",
+          "onnxRepository",
+          "publisher",
+          "publisherClass",
+          "modelRelationship",
+          "licenseName",
+          "licenseConsistent",
+          "remoteCodeRequired",
+          "runtimeCompatibility",
+          "opsetStated",
+          "graphParsed",
+          "symlinkDependence",
+          "pathTraversal",
+          "externalDataComplete",
+          "relationshipEstablished",
+          "verificationPerformed",
+          "directPathEligible",
+          "files",
+          "evidence"
+        ],
+        "properties": {
+          "modelId": { "type": "string", "minLength": 3, "maxLength": 160 },
+          "sourceRevision": { "$ref": "#/$defs/sha" },
+          "onnxRevision": { "$ref": "#/$defs/sha" },
+          "onnxRepository": { "type": "string", "minLength": 3, "maxLength": 160 },
+          "publisher": { "type": "string", "minLength": 2, "maxLength": 80 },
+          "publisherClass": {
+            "enum": [
+              "official-direct",
+              "official-quantized-only",
+              "community",
+              "mirror",
+              "absent"
+            ]
+          },
+          "modelRelationship": {
+            "enum": ["exact-family", "related-family", "unrelated", "unresolved"]
+          },
+          "licenseName": { "type": "string", "minLength": 2, "maxLength": 80 },
+          "licenseConsistent": { "type": "boolean" },
+          "remoteCodeRequired": { "type": "boolean" },
+          "runtimeCompatibility": { "enum": ["pass", "fail", "unresolved"] },
+          "opsetStated": { "type": "boolean" },
+          "graphParsed": { "const": false },
+          "symlinkDependence": { "type": "boolean" },
+          "pathTraversal": { "type": "boolean" },
+          "externalDataComplete": { "type": "boolean" },
+          "relationshipEstablished": { "type": "boolean" },
+          "verificationPerformed": { "const": false },
+          "directPathEligible": { "type": "boolean" },
+          "files": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 32,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "path",
+                "role",
+                "listedByteCount",
+                "publishedSha256",
+                "localDigestRequired",
+                "selected",
+                "quantized",
+                "reducedPrecision",
+                "transport"
+              ],
+              "properties": {
+                "path": { "type": "string", "pattern": "^[A-Za-z0-9._/-]+$" },
+                "role": {
+                  "enum": [
+                    "graph",
+                    "external-data",
+                    "tokenizer",
+                    "configuration",
+                    "metadata"
+                  ]
+                },
+                "listedByteCount": { "type": "integer", "minimum": 0 },
+                "publishedSha256": {
+                  "oneOf": [
+                    { "type": "null" },
+                    { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+                  ]
+                },
+                "localDigestRequired": { "type": "boolean" },
+                "selected": { "type": "boolean" },
+                "quantized": { "type": "boolean" },
+                "reducedPrecision": { "type": "boolean" },
+                "transport": { "enum": ["git-lfs", "git-blob"] }
+              }
+            }
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 8,
+            "items": { "$ref": "#/$defs/evidence" }
+          }
+        }
+      }
+    }
+  }
+}
