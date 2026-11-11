@@ -11,10 +11,15 @@ from patchpilot_intelligence_evals.acquisition_authorization import (
     AcquisitionError,
     load_track6_authorization,
 )
+from patchpilot_intelligence_evals.artifact_budget import BudgetError, load_artifact_budget
 from patchpilot_intelligence_evals.artifact_cache import CacheError, load_cache_policy
 from patchpilot_intelligence_evals.artifact_verification import (
     VerificationError,
     load_verification_manifest,
+)
+from patchpilot_intelligence_evals.candidate_eligibility import (
+    EligibilityError,
+    load_candidate_eligibility,
 )
 from patchpilot_intelligence_evals.candidate_evaluation import evaluate_candidate
 from patchpilot_intelligence_evals.candidate_format_resolution import (
@@ -25,6 +30,10 @@ from patchpilot_intelligence_evals.candidate_manifest import ManifestError, load
 from patchpilot_intelligence_evals.comparison import compare_results
 from patchpilot_intelligence_evals.conversion_plan import ConversionPlanError, load_conversion_plan
 from patchpilot_intelligence_evals.corpus import CorpusError, canonical_dumps, validate_corpus
+from patchpilot_intelligence_evals.direct_onnx_evidence import (
+    OnnxEvidenceError,
+    load_direct_onnx_evidence,
+)
 from patchpilot_intelligence_evals.evaluator import evaluate_baseline
 from patchpilot_intelligence_evals.evidence_closure import EvidenceError, load_closure
 from patchpilot_intelligence_evals.execution_attestation import (
@@ -85,12 +94,21 @@ from patchpilot_intelligence_evals.sandbox_capabilities import (
     load_capability_report,
 )
 from patchpilot_intelligence_evals.schemas import SchemaValidationError, repo_root
+from patchpilot_intelligence_evals.subprocess_compatibility import (
+    SubprocessError,
+    load_subprocess_compatibility,
+)
+from patchpilot_intelligence_evals.tokenizer_eligibility import (
+    TokenizerError,
+    load_tokenizer_eligibility,
+)
 from patchpilot_intelligence_evals.track6a_review import Track6AReviewError
 from patchpilot_intelligence_evals.track6a_review import load_review as load_track6a_review
 from patchpilot_intelligence_evals.track6c_readiness import (
     Track6CReadinessError,
     load_track6c_readiness,
 )
+from patchpilot_intelligence_evals.track6d_readiness import Track6DError, load_track6d_readiness
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -128,6 +146,12 @@ def _parser() -> argparse.ArgumentParser:
     commands.add_parser("candidate-format-resolution-validation")
     commands.add_parser("onnx-conversion-plan-validation")
     commands.add_parser("track6c-readiness-validation")
+    commands.add_parser("candidate-eligibility-validation")
+    commands.add_parser("tokenizer-eligibility-validation")
+    commands.add_parser("direct-onnx-evidence-validation")
+    commands.add_parser("artifact-budget-validation")
+    commands.add_parser("bounded-subprocess-compatibility-validation")
+    commands.add_parser("track6d-readiness-validation")
     one_case = commands.add_parser("candidate-execution")
     one_case.add_argument("--manifest", required=True)
     one_case.add_argument("--case-id", required=True)
@@ -299,6 +323,86 @@ def main(argv: list[str] | None = None) -> int:
                         "status": "ok",
                         "readinessOutcome": readiness["readinessOutcome"],
                         "verdict": readiness["verdict"],
+                        "installationAuthorized": False,
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "candidate-eligibility-validation":
+                closure = load_candidate_eligibility()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "selectionOutcome": closure["selectionOutcome"],
+                        "qualifyingCandidateCount": closure["qualifyingCandidateCount"],
+                        "scoringApplied": closure["scoringApplied"],
+                        "acquisitionStatus": closure["acquisitionStatus"],
+                        "executionStatus": closure["executionStatus"],
+                        "realModelExecuted": False,
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "tokenizer-eligibility-validation":
+                tokenizer = load_tokenizer_eligibility()
+                passing = sum(
+                    item["eligibilityOutcome"] == "pass" for item in tokenizer["families"]
+                )
+                return _summary(
+                    {
+                        "status": "ok",
+                        "passingFamilies": passing,
+                        "acquisitionStatus": tokenizer["acquisitionStatus"],
+                        "executionStatus": tokenizer["executionStatus"],
+                        "realModelExecuted": False,
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "direct-onnx-evidence-validation":
+                onnx = load_direct_onnx_evidence()
+                direct_count = sum(item["directPathEligible"] for item in onnx["families"])
+                return _summary(
+                    {
+                        "status": "ok",
+                        "directPathCount": direct_count,
+                        "graphParsed": False,
+                        "acquisitionStatus": onnx["acquisitionStatus"],
+                        "realModelExecuted": False,
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "artifact-budget-validation":
+                budget = load_artifact_budget()
+                hardware_pass = sum(item["hardwareFit"] == "pass" for item in budget["families"])
+                return _summary(
+                    {
+                        "status": "ok",
+                        "hardwarePassCount": hardware_pass,
+                        "artifactCapBytes": budget["artifactCapBytes"],
+                        "memoryCapBytes": budget["memoryCapBytes"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "bounded-subprocess-compatibility-validation":
+                subprocess_record = load_subprocess_compatibility()
+                compatible = sum(
+                    item["compatibilityOutcome"] == "pass" for item in subprocess_record["families"]
+                )
+                return _summary(
+                    {
+                        "status": "ok",
+                        "compatibleCount": compatible,
+                        "runtimeNoteQualifiesCandidate": False,
+                        "realModelExecuted": False,
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "track6d-readiness-validation":
+                readiness = load_track6d_readiness()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "readinessOutcome": readiness["readinessOutcome"],
+                        "verdict": readiness["verdict"],
+                        "selectionOutcome": readiness["selectionOutcome"],
                         "installationAuthorized": False,
                         "productionReady": False,
                     }
@@ -612,6 +716,12 @@ def main(argv: list[str] | None = None) -> int:
         RuntimeVerificationError,
         AdapterError,
         FormatResolutionError,
+        EligibilityError,
+        TokenizerError,
+        OnnxEvidenceError,
+        BudgetError,
+        SubprocessError,
+        Track6DError,
         ConversionPlanError,
         Track6CReadinessError,
         RuntimeAuthorizationError,

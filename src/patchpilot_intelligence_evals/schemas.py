@@ -79,6 +79,16 @@ TRACK6B_SCHEMA_NAMES: tuple[str, ...] = (
     "track6c-readiness",
 )
 
+# Track 6C candidate-eligibility documents. They stay outside earlier schema groups.
+TRACK6C_SCHEMA_NAMES: tuple[str, ...] = (
+    "candidate-eligibility-closure",
+    "tokenizer-eligibility",
+    "direct-onnx-artifact",
+    "candidate-artifact-budget",
+    "bounded-subprocess-compatibility",
+    "track6d-acquisition-readiness",
+)
+
 _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     SCHEMA_NAMES
     + CANDIDATE_SCHEMA_NAMES
@@ -86,6 +96,7 @@ _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     + TRACK5_SCHEMA_NAMES
     + TRACK6A_SCHEMA_NAMES
     + TRACK6B_SCHEMA_NAMES
+    + TRACK6C_SCHEMA_NAMES
 )
 
 

@@ -1,0 +1,252 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "graphParsed": false,
+  "retrievedOn": "2026-11-11",
+  "locallyObservedArtifactDigests": [],
+  "families": [
+    {
+      "modelId": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "publisherClass": "absent",
+      "directPathEligible": false,
+      "externalDataComplete": false,
+      "pairQualifies": false,
+      "directoryBytes": null,
+      "nonquantizedPairBytes": null,
+      "files": [],
+      "rejectedSources": [
+        {
+          "publisher": "onnx-community",
+          "url": "https://huggingface.co/onnx-community/Qwen2.5-1.5B-Instruct",
+          "reason": "Community conversion, not a Qwen publication."
+        },
+        {
+          "publisher": "tonythethompson",
+          "url": "https://huggingface.co/tonythethompson/Qwen2.5-1.5B-Instruct-ONNX",
+          "reason": "Community conversion, not a Qwen publication."
+        }
+      ],
+      "evidence": [
+        {
+          "evidenceId": "qwen15-onnx-listing",
+          "sourceName": "Qwen2.5-1.5B-Instruct revision listing",
+          "url": "https://huggingface.co/api/models/Qwen/Qwen2.5-1.5B-Instruct/revision/989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+          "claim": "The official revision lists no ONNX file.",
+          "evidenceClass": "authoritative",
+          "conflictDisposition": "none"
+        }
+      ]
+    },
+    {
+      "modelId": "Qwen/Qwen2.5-3B-Instruct",
+      "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "publisherClass": "absent",
+      "directPathEligible": false,
+      "externalDataComplete": false,
+      "pairQualifies": false,
+      "directoryBytes": null,
+      "nonquantizedPairBytes": null,
+      "files": [],
+      "rejectedSources": [],
+      "evidence": [
+        {
+          "evidenceId": "qwen3-onnx-listing",
+          "sourceName": "Qwen2.5-3B-Instruct revision listing",
+          "url": "https://huggingface.co/api/models/Qwen/Qwen2.5-3B-Instruct/revision/aa8e72537993ba99e69dfaafa59ed015b17504d1",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+          "claim": "The official revision lists no ONNX file. A GGUF repository is not ONNX.",
+          "evidenceClass": "authoritative",
+          "conflictDisposition": "none"
+        }
+      ]
+    },
+    {
+      "modelId": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "publisherClass": "hosted-conversion",
+      "directPathEligible": false,
+      "externalDataComplete": false,
+      "pairQualifies": false,
+      "directoryBytes": 19246095294,
+      "nonquantizedPairBytes": 6847768268,
+      "files": [
+        {
+          "path": "onnx/model.onnx",
+          "role": "graph",
+          "byteCount": 165580,
+          "upstreamListingSha256": "c538daa78f811830dc9028aa228a63a218147ab478c0c65ef6e2d8cab532380a",
+          "gitOid": "b69ac087826fbedefba1dbe97b9d17cf48675792",
+          "quantized": false,
+          "approved": false
+        },
+        {
+          "path": "onnx/model.onnx_data",
+          "role": "external-data",
+          "byteCount": 6847602688,
+          "upstreamListingSha256": "023686a59a534e45af70bc5f99ae70e592481701680591f9844fc140a3db220a",
+          "gitOid": "aed3bffe07e9e2a2fc68503e0425f830ddc87a3b",
+          "quantized": false,
+          "approved": false
+        },
+        {
+          "path": "onnx/model_bnb4.onnx",
+          "role": "reduced-precision",
+          "byteCount": 1311307655,
+          "upstreamListingSha256": "ac7400ca170e6644d95d26394846d2cce8083298e8519b1df7ac1eaa0ab2b5b6",
+          "gitOid": "c3ab9a75c21b830771d5b924b250c5dc724c87b4",
+          "quantized": true,
+          "approved": false
+        },
+        {
+          "path": "onnx/model_fp16.onnx",
+          "role": "reduced-precision",
+          "byteCount": 1326807956,
+          "upstreamListingSha256": "3d891d77661f6339f727b3188f1c21b1429a1e4e55c40d1f60f85048b00a4348",
+          "gitOid": "07b5ef0888039365fe64cd30a0d4bedcf1ccbc84",
+          "quantized": false,
+          "approved": false
+        },
+        {
+          "path": "onnx/model_fp16.onnx_data",
+          "role": "reduced-precision",
+          "byteCount": 2097152000,
+          "upstreamListingSha256": "5f48c05c14ed97738f8dc5854c20c229ddc8661f43fa914085843901a4ba8740",
+          "gitOid": "187b37c4f0b643f43e2c2b120fa6374e5265b163",
+          "quantized": false,
+          "approved": false
+        },
+        {
+          "path": "onnx/model_int8.onnx",
+          "role": "reduced-precision",
+          "byteCount": 1714119778,
+          "upstreamListingSha256": "db5cb9057f4e7014f00c38fd9764f0103e60bb4d145ad600b7144625f0d56930",
+          "gitOid": "4ea45ed05b995911304345e9d5dde087f7a7c148",
+          "quantized": true,
+          "approved": false
+        },
+        {
+          "path": "onnx/model_q4.onnx",
+          "role": "reduced-precision",
+          "byteCount": 1411969607,
+          "upstreamListingSha256": "467b7b8f62d99f184d3628d24b8d65c151e331695f6e9ea997616c4e279e9a51",
+          "gitOid": "cecf443db34b2f4b3df139036fbb4543845dcf55",
+          "quantized": true,
+          "approved": false
+        },
+        {
+          "path": "onnx/model_q4f16.onnx",
+          "role": "reduced-precision",
+          "byteCount": 1108730338,
+          "upstreamListingSha256": "d94946187fb5f27579f3db4ba21fb7f7466c7cbd18956bd420d3981f75282f9c",
+          "gitOid": "369e89655598bf48287847b0e90b4e780f6a14e2",
+          "quantized": true,
+          "approved": false
+        },
+        {
+          "path": "onnx/model_quantized.onnx",
+          "role": "reduced-precision",
+          "byteCount": 1714119846,
+          "upstreamListingSha256": "b1110061268f161512c234c4d43cd9dbe61eeb1454e9b94b652edf4de55ae51c",
+          "gitOid": "e06dd6dc1f43a3e2a750286d4d45846125588314",
+          "quantized": true,
+          "approved": false
+        },
+        {
+          "path": "onnx/model_uint8.onnx",
+          "role": "reduced-precision",
+          "byteCount": 1714119846,
+          "upstreamListingSha256": "b1110061268f161512c234c4d43cd9dbe61eeb1454e9b94b652edf4de55ae51c",
+          "gitOid": "e06dd6dc1f43a3e2a750286d4d45846125588314",
+          "quantized": true,
+          "approved": false
+        }
+      ],
+      "rejectedSources": [],
+      "evidence": [
+        {
+          "evidenceId": "smol-onnx-tree",
+          "sourceName": "SmolLM2-1.7B-Instruct ONNX tree",
+          "url": "https://huggingface.co/api/models/HuggingFaceTB/SmolLM2-1.7B-Instruct/tree/31b70e2e869a7173562077fd711b654946d38674/onnx",
+          "publisher": "HuggingFaceTB",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "31b70e2e869a7173562077fd711b654946d38674",
+          "claim": "The onnx tree is a hosted conversion. Filename adjacency is not external data.",
+          "evidenceClass": "authoritative",
+          "conflictDisposition": "restrictive-reading"
+        }
+      ]
+    },
+    {
+      "modelId": "allenai/OLMo-2-0425-1B-Instruct",
+      "revision": "48d788eca847d4d7548f375ad03d3c9312f6139e",
+      "publisherClass": "absent",
+      "directPathEligible": false,
+      "externalDataComplete": false,
+      "pairQualifies": false,
+      "directoryBytes": null,
+      "nonquantizedPairBytes": null,
+      "files": [],
+      "rejectedSources": [],
+      "evidence": [
+        {
+          "evidenceId": "olmo-onnx-listing",
+          "sourceName": "OLMo-2-0425-1B-Instruct revision listing",
+          "url": "https://huggingface.co/api/models/allenai/OLMo-2-0425-1B-Instruct/revision/48d788eca847d4d7548f375ad03d3c9312f6139e",
+          "publisher": "Allen Institute for AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "48d788eca847d4d7548f375ad03d3c9312f6139e",
+          "claim": "The official revision lists no ONNX file. The GGUF repository is quantized.",
+          "evidenceClass": "authoritative",
+          "conflictDisposition": "rejected-unofficial"
+        }
+      ]
+    },
+    {
+      "modelId": "google/gemma-3-1b-it",
+      "revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+      "publisherClass": "absent",
+      "directPathEligible": false,
+      "externalDataComplete": false,
+      "pairQualifies": false,
+      "directoryBytes": null,
+      "nonquantizedPairBytes": null,
+      "files": [],
+      "rejectedSources": [
+        {
+          "publisher": "onnx-community",
+          "url": "https://huggingface.co/onnx-community/gemma-3-1b-it-ONNX",
+          "reason": "Not a Google publication of this text checkpoint."
+        },
+        {
+          "publisher": "onnxruntime",
+          "url": "https://huggingface.co/onnxruntime/Gemma-3-ONNX",
+          "reason": "Not a Google publication of this text checkpoint."
+        }
+      ],
+      "evidence": [
+        {
+          "evidenceId": "gemma-onnx-listing",
+          "sourceName": "gemma-3-1b-it revision listing",
+          "url": "https://huggingface.co/api/models/google/gemma-3-1b-it/revision/dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+          "publisher": "Google",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+          "claim": "The official revision lists no ONNX file.",
+          "evidenceClass": "authoritative",
+          "conflictDisposition": "none"
+        }
+      ]
+    }
+  ]
+}

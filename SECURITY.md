@@ -48,6 +48,10 @@ The launcher mounts a staged interpreter, the fixture, read-only synthetic input
 
 A future ONNX Runtime archive would be staged outside this repository, outside the model-artifact cache, and outside the output directory. The committed policy stores no host path. Quarantine and rejected trees cannot be executed. Promotion requires a verified inventory. Shared libraries must be ELF. Other staged files must not be executable. `malwareDetectionClaimed` stays false. These checks are not an operating-system sandbox. No runtime archive is present, and installation stays unauthorized.
 
+## Track 6D readiness
+
+Track 6D acquisition readiness is `not-ready`. The record does not authorize runtime installation, model or tokenizer acquisition, model conversion, candidate selection, or real inference. Validation reads local records only.
+
 ## Supported use
 
 Offline harness checks and future offline candidate runs inside this repository. Do not use these fixtures for production decisions.

@@ -115,3 +115,12 @@ jobs:
           uv run patchpilot-evals candidate-format-resolution-validation
           uv run patchpilot-evals onnx-conversion-plan-validation
           uv run patchpilot-evals track6c-readiness-validation
+
+      - name: Validate the Track 6C eligibility records
+        run: |
+          uv run patchpilot-evals candidate-eligibility-validation
+          uv run patchpilot-evals tokenizer-eligibility-validation
+          uv run patchpilot-evals direct-onnx-evidence-validation
+          uv run patchpilot-evals artifact-budget-validation
+          uv run patchpilot-evals bounded-subprocess-compatibility-validation
+          uv run patchpilot-evals track6d-readiness-validation

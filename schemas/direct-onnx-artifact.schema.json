@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:direct-onnx-artifact:v1",
+  "title": "Direct official ONNX evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "graphParsed",
+    "retrievedOn",
+    "locallyObservedArtifactDigests",
+    "families"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "graphParsed": { "const": false },
+    "retrievedOn": { "const": "2026-11-11" },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "families": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/family" }
+    }
+  },
+  "$defs": {
+    "modelId": {
+      "enum": [
+        "Qwen/Qwen2.5-1.5B-Instruct",
+        "Qwen/Qwen2.5-3B-Instruct",
+        "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "allenai/OLMo-2-0425-1B-Instruct",
+        "google/gemma-3-1b-it"
+      ]
+    },
+    "family": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modelId",
+        "revision",
+        "publisherClass",
+        "directPathEligible",
+        "externalDataComplete",
+        "pairQualifies",
+        "directoryBytes",
+        "nonquantizedPairBytes",
+        "files",
+        "rejectedSources",
+        "evidence"
+      ],
+      "properties": {
+        "modelId": { "$ref": "#/$defs/modelId" },
+        "revision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "publisherClass": {
+          "enum": ["absent", "hosted-conversion", "official-direct", "rejected-unofficial"]
+        },
+        "directPathEligible": { "type": "boolean" },
+        "externalDataComplete": { "type": "boolean" },
+        "pairQualifies": { "type": "boolean" },
+        "directoryBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "nonquantizedPairBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "files": {
+          "type": "array",
+          "maxItems": 10,
+          "items": { "$ref": "#/$defs/file" }
+        },
+        "rejectedSources": {
+          "type": "array",
+          "maxItems": 4,
+          "items": { "$ref": "#/$defs/rejected" }
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": { "$ref": "#/$defs/evidence" }
+        }
+      }
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "role",
+        "byteCount",
+        "upstreamListingSha256",
+        "gitOid",
+        "quantized",
+        "approved"
+      ],
+      "properties": {
+        "path": { "type": "string", "pattern": "^onnx/[A-Za-z0-9._-]+$" },
+        "role": { "enum": ["graph", "external-data", "reduced-precision"] },
+        "byteCount": { "type": "integer", "minimum": 0 },
+        "upstreamListingSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "gitOid": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "quantized": { "type": "boolean" },
+        "approved": { "const": false }
+      }
+    },
+    "rejected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["publisher", "url", "reason"],
+      "properties": {
+        "publisher": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "url": { "type": "string", "pattern": "^https://\\S+$", "maxLength": 300 },
+        "reason": { "type": "string", "minLength": 1, "maxLength": 200 }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceId",
+        "sourceName",
+        "url",
+        "publisher",
+        "retrievedOn",
+        "immutableRevision",
+        "claim",
+        "evidenceClass",
+        "conflictDisposition"
+      ],
+      "properties": {
+        "evidenceId": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "sourceName": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "url": { "type": "string", "pattern": "^https://\\S+$", "maxLength": 300 },
+        "publisher": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "retrievedOn": { "const": "2026-11-11" },
+        "immutableRevision": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+          ]
+        },
+        "claim": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "evidenceClass": {
+          "enum": ["authoritative", "secondary", "conflicting", "unresolved"]
+        },
+        "conflictDisposition": {
+          "enum": ["none", "restrictive-reading", "rejected-unofficial", "unresolved"]
+        }
+      }
+    }
+  }
+}

@@ -18,6 +18,7 @@ from patchpilot_intelligence_evals.schemas import (
     SCHEMA_NAMES,
     TRACK6A_SCHEMA_NAMES,
     TRACK6B_SCHEMA_NAMES,
+    TRACK6C_SCHEMA_NAMES,
     load_schema,
     repo_root,
     validate,
@@ -69,6 +70,10 @@ _DOCUMENTS = (
     "docs/architecture/candidate-format-resolution.md",
     "docs/architecture/onnx-conversion-boundary.md",
     "docs/architecture/track6c-readiness.md",
+    "docs/architecture/candidate-eligibility-closure.md",
+    "docs/architecture/tokenizer-eligibility.md",
+    "docs/architecture/direct-onnx-eligibility.md",
+    "docs/architecture/track6d-acquisition-readiness.md",
     "docs/provenance/initial-corpus-provenance.md",
     "docs/provenance/runtime-evidence.md",
     "docs/provenance/candidate-fixtures.md",
@@ -79,6 +84,8 @@ _DOCUMENTS = (
     "docs/provenance/track6a-implementation-review.md",
     "docs/provenance/runtime-staging-provenance.md",
     "docs/provenance/conversion-toolchain-evidence.md",
+    "docs/provenance/candidate-license-closure.md",
+    "docs/provenance/direct-onnx-evidence.md",
 )
 
 
@@ -158,6 +165,12 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals candidate-format-resolution-validation",
         "uv run patchpilot-evals onnx-conversion-plan-validation",
         "uv run patchpilot-evals track6c-readiness-validation",
+        "uv run patchpilot-evals candidate-eligibility-validation",
+        "uv run patchpilot-evals tokenizer-eligibility-validation",
+        "uv run patchpilot-evals direct-onnx-evidence-validation",
+        "uv run patchpilot-evals artifact-budget-validation",
+        "uv run patchpilot-evals bounded-subprocess-compatibility-validation",
+        "uv run patchpilot-evals track6d-readiness-validation",
     ):
         assert command in text
     uses = re.findall(r"uses: (\S+)", text)
@@ -206,11 +219,23 @@ def test_help_lists_commands() -> None:
     assert "candidate-format-resolution-validation" in text
     assert "onnx-conversion-plan-validation" in text
     assert "track6c-readiness-validation" in text
+    assert "candidate-eligibility-validation" in text
+    assert "tokenizer-eligibility-validation" in text
+    assert "direct-onnx-evidence-validation" in text
+    assert "artifact-budget-validation" in text
+    assert "bounded-subprocess-compatibility-validation" in text
+    assert "track6d-readiness-validation" in text
 
 
 def test_committed_json_files_validate() -> None:
     root = repo_root()
-    names = SCHEMA_NAMES + CANDIDATE_SCHEMA_NAMES + TRACK6A_SCHEMA_NAMES + TRACK6B_SCHEMA_NAMES
+    names = (
+        SCHEMA_NAMES
+        + CANDIDATE_SCHEMA_NAMES
+        + TRACK6A_SCHEMA_NAMES
+        + TRACK6B_SCHEMA_NAMES
+        + TRACK6C_SCHEMA_NAMES
+    )
     for name in names:
         document = load_schema(name)
         assert document["additionalProperties"] is False

@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:tokenizer-eligibility:v1",
+  "title": "Tokenizer eligibility",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "retrievedOn",
+    "locallyObservedArtifactDigests",
+    "families"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "retrievedOn": { "const": "2026-11-11" },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "families": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/family" }
+    }
+  },
+  "$defs": {
+    "modelId": {
+      "enum": [
+        "Qwen/Qwen2.5-1.5B-Instruct",
+        "Qwen/Qwen2.5-3B-Instruct",
+        "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "allenai/OLMo-2-0425-1B-Instruct",
+        "google/gemma-3-1b-it"
+      ]
+    },
+    "state": {
+      "enum": ["pass", "fail", "unresolved", "conflicting", "not-applicable"]
+    },
+    "instrument": {
+      "enum": [
+        "revision-license-file",
+        "separate-instrument",
+        "terms-do-not-name-tokenizer",
+        "assumed-from-model-license",
+        "absent"
+      ]
+    },
+    "family": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modelId",
+        "revision",
+        "tokenizerIdentity",
+        "sourceKind",
+        "immutableRevision",
+        "fileInventory",
+        "licenseInstrument",
+        "commercialUse",
+        "redistribution",
+        "modification",
+        "offlineLoading",
+        "remoteCodeRequired",
+        "automaticRetrievalRequired",
+        "eligibilityOutcome",
+        "conflicts",
+        "evidence"
+      ],
+      "properties": {
+        "modelId": { "$ref": "#/$defs/modelId" },
+        "revision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "tokenizerIdentity": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "sourceKind": {
+          "enum": ["model-revision", "separate-repository", "unresolved"]
+        },
+        "immutableRevision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "fileInventory": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["fileName", "byteCount"],
+            "properties": {
+              "fileName": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,80}$"
+              },
+              "byteCount": { "type": "null" }
+            }
+          }
+        },
+        "licenseInstrument": { "$ref": "#/$defs/instrument" },
+        "commercialUse": { "$ref": "#/$defs/state" },
+        "redistribution": { "$ref": "#/$defs/state" },
+        "modification": { "$ref": "#/$defs/state" },
+        "offlineLoading": { "$ref": "#/$defs/state" },
+        "remoteCodeRequired": { "type": "boolean" },
+        "automaticRetrievalRequired": { "type": "boolean" },
+        "eligibilityOutcome": { "enum": ["pass", "fail"] },
+        "conflicts": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["topic", "status", "restrictiveInterpretation"],
+            "properties": {
+              "topic": { "type": "string", "minLength": 1, "maxLength": 80 },
+              "status": {
+                "enum": ["resolved", "unresolved", "conflicting", "failed", "not-applicable"]
+              },
+              "restrictiveInterpretation": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 400
+              }
+            }
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "evidenceId",
+              "sourceName",
+              "url",
+              "publisher",
+              "retrievedOn",
+              "immutableRevision",
+              "claim",
+              "evidenceClass",
+              "applicability",
+              "conflictDisposition"
+            ],
+            "properties": {
+              "evidenceId": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+              "sourceName": { "type": "string", "minLength": 1, "maxLength": 160 },
+              "url": { "type": "string", "pattern": "^https://\\S+$", "maxLength": 300 },
+              "publisher": { "type": "string", "minLength": 1, "maxLength": 120 },
+              "retrievedOn": { "const": "2026-11-11" },
+              "immutableRevision": {
+                "oneOf": [
+                  { "type": "null" },
+                  { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+                ]
+              },
+              "claim": { "type": "string", "minLength": 1, "maxLength": 400 },
+              "evidenceClass": {
+                "enum": ["authoritative", "secondary", "conflicting", "unresolved"]
+              },
+              "applicability": { "type": "string", "minLength": 1, "maxLength": 160 },
+              "conflictDisposition": {
+                "enum": ["none", "restrictive-reading", "rejected-unofficial", "unresolved"]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,360 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "retrievedOn": "2026-11-11",
+  "locallyObservedArtifactDigests": [],
+  "families": [
+    {
+      "modelId": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "tokenizerIdentity": "Qwen2.5-1.5B-Instruct tokenizer",
+      "sourceKind": "model-revision",
+      "immutableRevision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "fileInventory": [
+        {
+          "fileName": "merges.txt",
+          "byteCount": null
+        },
+        {
+          "fileName": "tokenizer.json",
+          "byteCount": null
+        },
+        {
+          "fileName": "tokenizer_config.json",
+          "byteCount": null
+        },
+        {
+          "fileName": "vocab.json",
+          "byteCount": null
+        }
+      ],
+      "licenseInstrument": "terms-do-not-name-tokenizer",
+      "commercialUse": "unresolved",
+      "redistribution": "unresolved",
+      "modification": "unresolved",
+      "offlineLoading": "pass",
+      "remoteCodeRequired": false,
+      "automaticRetrievalRequired": false,
+      "eligibilityOutcome": "fail",
+      "conflicts": [
+        {
+          "topic": "tokenizer-applicability",
+          "status": "unresolved",
+          "restrictiveInterpretation": "Apache-2.0 covers a Work with an attached notice. This file names no tokenizer."
+        }
+      ],
+      "evidence": [
+        {
+          "evidenceId": "qwen15-tokenizer-license",
+          "sourceName": "Qwen2.5-1.5B-Instruct license file",
+          "url": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct/blob/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/LICENSE",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+          "claim": "Apache-2.0 names none of the four tokenizer files listed for this revision.",
+          "evidenceClass": "authoritative",
+          "applicability": "Qwen/Qwen2.5-1.5B-Instruct",
+          "conflictDisposition": "unresolved"
+        },
+        {
+          "evidenceId": "qwen15-tokenizer-listing",
+          "sourceName": "Qwen2.5-1.5B-Instruct revision listing",
+          "url": "https://huggingface.co/api/models/Qwen/Qwen2.5-1.5B-Instruct/revision/989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+          "claim": "Listing files: merges.txt, vocab.json, tokenizer.json, tokenizer_config.json.",
+          "evidenceClass": "authoritative",
+          "applicability": "Qwen/Qwen2.5-1.5B-Instruct",
+          "conflictDisposition": "none"
+        }
+      ]
+    },
+    {
+      "modelId": "Qwen/Qwen2.5-3B-Instruct",
+      "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "tokenizerIdentity": "Qwen2.5-3B-Instruct tokenizer",
+      "sourceKind": "model-revision",
+      "immutableRevision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "fileInventory": [
+        {
+          "fileName": "merges.txt",
+          "byteCount": null
+        },
+        {
+          "fileName": "tokenizer.json",
+          "byteCount": null
+        },
+        {
+          "fileName": "tokenizer_config.json",
+          "byteCount": null
+        },
+        {
+          "fileName": "vocab.json",
+          "byteCount": null
+        }
+      ],
+      "licenseInstrument": "terms-do-not-name-tokenizer",
+      "commercialUse": "unresolved",
+      "redistribution": "unresolved",
+      "modification": "unresolved",
+      "offlineLoading": "pass",
+      "remoteCodeRequired": false,
+      "automaticRetrievalRequired": false,
+      "eligibilityOutcome": "fail",
+      "conflicts": [
+        {
+          "topic": "tokenizer-applicability",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The research license names weights and code. It does not name tokenizer files."
+        },
+        {
+          "topic": "separate-instrument",
+          "status": "resolved",
+          "restrictiveInterpretation": "This research LICENSE is not the 1.5B Apache-2.0 file. The grants stay separate."
+        }
+      ],
+      "evidence": [
+        {
+          "evidenceId": "qwen3-tokenizer-license",
+          "sourceName": "Qwen2.5-3B-Instruct research license",
+          "url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/blob/aa8e72537993ba99e69dfaafa59ed015b17504d1/LICENSE",
+          "publisher": "Alibaba Cloud",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+          "claim": "Materials include weights and code. The text does not name tokenizer files.",
+          "evidenceClass": "authoritative",
+          "applicability": "Qwen/Qwen2.5-3B-Instruct",
+          "conflictDisposition": "unresolved"
+        },
+        {
+          "evidenceId": "qwen3-tokenizer-listing",
+          "sourceName": "Qwen2.5-3B-Instruct revision listing",
+          "url": "https://huggingface.co/api/models/Qwen/Qwen2.5-3B-Instruct/revision/aa8e72537993ba99e69dfaafa59ed015b17504d1",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+          "claim": "Listing files: merges.txt, vocab.json, tokenizer.json, tokenizer_config.json.",
+          "evidenceClass": "authoritative",
+          "applicability": "Qwen/Qwen2.5-3B-Instruct",
+          "conflictDisposition": "none"
+        }
+      ]
+    },
+    {
+      "modelId": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "tokenizerIdentity": "SmolLM2-1.7B-Instruct tokenizer",
+      "sourceKind": "model-revision",
+      "immutableRevision": "31b70e2e869a7173562077fd711b654946d38674",
+      "fileInventory": [
+        {
+          "fileName": "merges.txt",
+          "byteCount": null
+        },
+        {
+          "fileName": "tokenizer.json",
+          "byteCount": null
+        },
+        {
+          "fileName": "tokenizer_config.json",
+          "byteCount": null
+        },
+        {
+          "fileName": "vocab.json",
+          "byteCount": null
+        },
+        {
+          "fileName": "special_tokens_map.json",
+          "byteCount": null
+        }
+      ],
+      "licenseInstrument": "absent",
+      "commercialUse": "unresolved",
+      "redistribution": "unresolved",
+      "modification": "unresolved",
+      "offlineLoading": "pass",
+      "remoteCodeRequired": false,
+      "automaticRetrievalRequired": false,
+      "eligibilityOutcome": "fail",
+      "conflicts": [
+        {
+          "topic": "tokenizer-license",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The model card is not a tokenizer license. cosmo2 publishes no license file."
+        }
+      ],
+      "evidence": [
+        {
+          "evidenceId": "smol-tokenizer-listing",
+          "sourceName": "SmolLM2-1.7B-Instruct revision listing",
+          "url": "https://huggingface.co/api/models/HuggingFaceTB/SmolLM2-1.7B-Instruct",
+          "publisher": "HuggingFaceTB",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "31b70e2e869a7173562077fd711b654946d38674",
+          "claim": "Tokenizer files are in the revision. That revision has no LICENSE file.",
+          "evidenceClass": "authoritative",
+          "applicability": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+          "conflictDisposition": "unresolved"
+        },
+        {
+          "evidenceId": "smol-cosmo2-tokenizer",
+          "sourceName": "cosmo2 tokenizer card",
+          "url": "https://huggingface.co/api/models/HuggingFaceTB/cosmo2-tokenizer",
+          "publisher": "HuggingFaceTB",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "4ce2318a3628e77279c939ed6a9f3f03034402de",
+          "claim": "cosmo2 at this revision has no license field and no LICENSE file.",
+          "evidenceClass": "authoritative",
+          "applicability": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+          "conflictDisposition": "unresolved"
+        }
+      ]
+    },
+    {
+      "modelId": "allenai/OLMo-2-0425-1B-Instruct",
+      "revision": "48d788eca847d4d7548f375ad03d3c9312f6139e",
+      "tokenizerIdentity": "OLMo-2-0425-1B-Instruct tokenizer",
+      "sourceKind": "model-revision",
+      "immutableRevision": "48d788eca847d4d7548f375ad03d3c9312f6139e",
+      "fileInventory": [
+        {
+          "fileName": "merges.txt",
+          "byteCount": null
+        },
+        {
+          "fileName": "tokenizer.json",
+          "byteCount": null
+        },
+        {
+          "fileName": "tokenizer_config.json",
+          "byteCount": null
+        },
+        {
+          "fileName": "vocab.json",
+          "byteCount": null
+        },
+        {
+          "fileName": "special_tokens_map.json",
+          "byteCount": null
+        }
+      ],
+      "licenseInstrument": "absent",
+      "commercialUse": "unresolved",
+      "redistribution": "unresolved",
+      "modification": "unresolved",
+      "offlineLoading": "pass",
+      "remoteCodeRequired": false,
+      "automaticRetrievalRequired": false,
+      "eligibilityOutcome": "fail",
+      "conflicts": [
+        {
+          "topic": "tokenizer-license",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The instruct card does not state a tokenizer license. dolma2 has no license file."
+        }
+      ],
+      "evidence": [
+        {
+          "evidenceId": "olmo-tokenizer-listing",
+          "sourceName": "OLMo-2-0425-1B-Instruct revision listing",
+          "url": "https://huggingface.co/api/models/allenai/OLMo-2-0425-1B-Instruct/revision/48d788eca847d4d7548f375ad03d3c9312f6139e",
+          "publisher": "Allen Institute for AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "48d788eca847d4d7548f375ad03d3c9312f6139e",
+          "claim": "Tokenizer files are in the revision. That revision has no LICENSE file.",
+          "evidenceClass": "authoritative",
+          "applicability": "allenai/OLMo-2-0425-1B-Instruct",
+          "conflictDisposition": "unresolved"
+        },
+        {
+          "evidenceId": "olmo-dolma2-tokenizer",
+          "sourceName": "dolma2 tokenizer card",
+          "url": "https://huggingface.co/api/models/allenai/dolma2-tokenizer",
+          "publisher": "Allen Institute for AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "5292e5d6c0f40b67cc765fe41bec991cf4345b5c",
+          "claim": "dolma2 at this revision has no license field and no LICENSE file.",
+          "evidenceClass": "authoritative",
+          "applicability": "allenai/OLMo-2-0425-1B-Instruct",
+          "conflictDisposition": "unresolved"
+        }
+      ]
+    },
+    {
+      "modelId": "google/gemma-3-1b-it",
+      "revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+      "tokenizerIdentity": "gemma-3-1b-it tokenizer",
+      "sourceKind": "model-revision",
+      "immutableRevision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+      "fileInventory": [
+        {
+          "fileName": "added_tokens.json",
+          "byteCount": null
+        },
+        {
+          "fileName": "special_tokens_map.json",
+          "byteCount": null
+        },
+        {
+          "fileName": "tokenizer.json",
+          "byteCount": null
+        },
+        {
+          "fileName": "tokenizer.model",
+          "byteCount": null
+        },
+        {
+          "fileName": "tokenizer_config.json",
+          "byteCount": null
+        }
+      ],
+      "licenseInstrument": "terms-do-not-name-tokenizer",
+      "commercialUse": "unresolved",
+      "redistribution": "unresolved",
+      "modification": "unresolved",
+      "offlineLoading": "pass",
+      "remoteCodeRequired": false,
+      "automaticRetrievalRequired": false,
+      "eligibilityOutcome": "fail",
+      "conflicts": [
+        {
+          "topic": "tokenizer-grant",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The Gemma terms cover weights and parameters. They do not name the tokenizer."
+        }
+      ],
+      "evidence": [
+        {
+          "evidenceId": "gemma-tokenizer-terms",
+          "sourceName": "Gemma terms of use",
+          "url": "https://ai.google.dev/gemma/terms",
+          "publisher": "Google",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": null,
+          "claim": "The terms define Gemma as weights and parameters and do not name a tokenizer.",
+          "evidenceClass": "authoritative",
+          "applicability": "google/gemma-3-1b-it",
+          "conflictDisposition": "restrictive-reading"
+        },
+        {
+          "evidenceId": "gemma-tokenizer-listing",
+          "sourceName": "gemma-3-1b-it revision listing",
+          "url": "https://huggingface.co/api/models/google/gemma-3-1b-it/revision/dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+          "publisher": "Google",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+          "claim": "The revision lists tokenizer.json and tokenizer.model. Terms omit them.",
+          "evidenceClass": "authoritative",
+          "applicability": "google/gemma-3-1b-it",
+          "conflictDisposition": "unresolved"
+        }
+      ]
+    }
+  ]
+}

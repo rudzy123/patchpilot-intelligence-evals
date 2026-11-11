@@ -52,6 +52,12 @@ uv run patchpilot-evals runtime-adapter-contract-validation
 uv run patchpilot-evals candidate-format-resolution-validation
 uv run patchpilot-evals onnx-conversion-plan-validation
 uv run patchpilot-evals track6c-readiness-validation
+uv run patchpilot-evals candidate-eligibility-validation
+uv run patchpilot-evals tokenizer-eligibility-validation
+uv run patchpilot-evals direct-onnx-evidence-validation
+uv run patchpilot-evals artifact-budget-validation
+uv run patchpilot-evals bounded-subprocess-compatibility-validation
+uv run patchpilot-evals track6d-readiness-validation
 ```
 
 `baseline-evaluation` writes a file only when `--output` is a path inside this repository. The result record includes a timestamp, so it is not committed.
@@ -112,6 +118,15 @@ Intelligence Track 6B records the external runtime-staging boundary, the synthet
 - [docs/architecture/track6c-readiness.md](docs/architecture/track6c-readiness.md)
 - [docs/provenance/runtime-staging-provenance.md](docs/provenance/runtime-staging-provenance.md)
 - [docs/provenance/conversion-toolchain-evidence.md](docs/provenance/conversion-toolchain-evidence.md)
+
+Intelligence Track 6C reassesses direct ONNX eligibility for the five pinned families and selects none. Track 6D readiness is `not-ready`, with verdict `TRACK 6D CONTROLLED ACQUISITION NOT READY`. That readiness does not authorize runtime installation, model or tokenizer acquisition, model conversion, candidate selection, or real inference. These commands validate local records only.
+
+- [docs/architecture/candidate-eligibility-closure.md](docs/architecture/candidate-eligibility-closure.md)
+- [docs/architecture/tokenizer-eligibility.md](docs/architecture/tokenizer-eligibility.md)
+- [docs/architecture/direct-onnx-eligibility.md](docs/architecture/direct-onnx-eligibility.md)
+- [docs/architecture/track6d-acquisition-readiness.md](docs/architecture/track6d-acquisition-readiness.md)
+- [docs/provenance/candidate-license-closure.md](docs/provenance/candidate-license-closure.md)
+- [docs/provenance/direct-onnx-evidence.md](docs/provenance/direct-onnx-evidence.md)
 
 - [docs/architecture/real-candidate-boundary.md](docs/architecture/real-candidate-boundary.md)
 - [docs/architecture/external-artifact-cache.md](docs/architecture/external-artifact-cache.md)
