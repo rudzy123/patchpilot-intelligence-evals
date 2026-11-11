@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track7-selection:v1",
+  "title": "Track 7 selection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "retrievedOn",
+    "selectionOutcome",
+    "selectedModelId",
+    "scoringApplied",
+    "qualifyingCandidateCount",
+    "finalistCount",
+    "finalistModelIds",
+    "locallyObservedArtifactDigests",
+    "candidates"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "retrievedOn": { "const": "2026-11-11" },
+    "selectionOutcome": { "enum": ["no-selection", "selected"] },
+    "selectedModelId": {
+      "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 3, "maxLength": 160 }]
+    },
+    "scoringApplied": { "type": "boolean" },
+    "qualifyingCandidateCount": { "type": "integer", "minimum": 0, "maximum": 4 },
+    "finalistCount": { "type": "integer", "minimum": 0, "maximum": 4 },
+    "finalistModelIds": {
+      "type": "array",
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 3, "maxLength": 160 }
+    },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "candidates": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "modelId",
+          "weightedScore",
+          "categoryScores",
+          "mandatoryStatus",
+          "disqualifiers",
+          "tokenizerOutcome",
+          "directOnnxOutcome",
+          "hardwareFit",
+          "executionOutcome",
+          "suitabilityOutcome",
+          "fixedRevision",
+          "unresolvedConflict",
+          "qualifies"
+        ],
+        "properties": {
+          "modelId": { "type": "string", "minLength": 3, "maxLength": 160 },
+          "weightedScore": {
+            "oneOf": [
+              { "type": "null" },
+              { "type": "integer", "minimum": 0, "maximum": 100 }
+            ]
+          },
+          "categoryScores": {
+            "oneOf": [
+              { "type": "null" },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "license-provenance",
+                  "security-offline",
+                  "hardware-fit",
+                  "evaluation-suitability",
+                  "model-card",
+                  "runtime-maturity"
+                ],
+                "properties": {
+                  "license-provenance": { "type": "integer", "minimum": 0, "maximum": 25 },
+                  "security-offline": { "type": "integer", "minimum": 0, "maximum": 20 },
+                  "hardware-fit": { "type": "integer", "minimum": 0, "maximum": 20 },
+                  "evaluation-suitability": { "type": "integer", "minimum": 0, "maximum": 20 },
+                  "model-card": { "type": "integer", "minimum": 0, "maximum": 10 },
+                  "runtime-maturity": { "type": "integer", "minimum": 0, "maximum": 5 }
+                }
+              }
+            ]
+          },
+          "mandatoryStatus": { "enum": ["pass", "fail"] },
+          "disqualifiers": {
+            "type": "array",
+            "maxItems": 15,
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 3, "maxLength": 80 }
+          },
+          "tokenizerOutcome": { "enum": ["pass", "fail"] },
+          "directOnnxOutcome": { "enum": ["pass", "fail"] },
+          "hardwareFit": { "enum": ["pass", "fail"] },
+          "executionOutcome": { "enum": ["pass", "fail"] },
+          "suitabilityOutcome": {
+            "enum": ["suitable-for-offline-evaluation", "unsuitable", "unresolved"]
+          },
+          "fixedRevision": { "type": "boolean" },
+          "unresolvedConflict": { "type": "boolean" },
+          "qualifies": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

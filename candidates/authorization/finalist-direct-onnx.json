@@ -1,0 +1,321 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "retrievedOn": "2026-11-11",
+  "finalistCount": 1,
+  "finalistModelIds": [
+    "LiquidAI/LFM2.5-1.2B-Instruct"
+  ],
+  "locallyObservedArtifactDigests": [],
+  "graphParsed": false,
+  "finalists": [
+    {
+      "modelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+      "sourceRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+      "onnxRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+      "onnxRepository": "LiquidAI/LFM2.5-1.2B-Instruct-ONNX",
+      "publisher": "Liquid AI",
+      "publisherClass": "official-direct",
+      "modelRelationship": "exact-family",
+      "licenseName": "LFM Open License v1.0",
+      "licenseConsistent": true,
+      "remoteCodeRequired": false,
+      "runtimeCompatibility": "pass",
+      "opsetStated": false,
+      "graphParsed": false,
+      "symlinkDependence": false,
+      "pathTraversal": false,
+      "externalDataComplete": true,
+      "relationshipEstablished": true,
+      "verificationPerformed": false,
+      "files": [
+        {
+          "path": "onnx/model.onnx",
+          "role": "graph",
+          "listedByteCount": 140810,
+          "publishedSha256": "240b836266733940519db3893df325b4cfac8bb87222acbfa0f05dd8c87a6639",
+          "localDigestRequired": false,
+          "selected": true,
+          "quantized": false,
+          "reducedPrecision": false,
+          "transport": "git-lfs"
+        },
+        {
+          "path": "onnx/model.onnx_data",
+          "role": "external-data",
+          "listedByteCount": 2063007744,
+          "publishedSha256": "04339fb19070d30e0b5523dfecf21b5a469dd3056a43ccd050ce6e756f039ebe",
+          "localDigestRequired": false,
+          "selected": true,
+          "quantized": false,
+          "reducedPrecision": false,
+          "transport": "git-lfs"
+        },
+        {
+          "path": "onnx/model.onnx_data_1",
+          "role": "external-data",
+          "listedByteCount": 2072240128,
+          "publishedSha256": "cf2d2083fb09ebc8dfcdc46709ed1b9bc978dd7a08a83a6993f30c078b3e6fc5",
+          "localDigestRequired": false,
+          "selected": true,
+          "quantized": false,
+          "reducedPrecision": false,
+          "transport": "git-lfs"
+        },
+        {
+          "path": "onnx/model.onnx_data_2",
+          "role": "external-data",
+          "listedByteCount": 578879488,
+          "publishedSha256": "5817c9c46604164ef96aa9524e34422edc3ffa86e480bafbbcc80de38c0a7759",
+          "localDigestRequired": false,
+          "selected": true,
+          "quantized": false,
+          "reducedPrecision": false,
+          "transport": "git-lfs"
+        },
+        {
+          "path": "tokenizer.json",
+          "role": "tokenizer",
+          "listedByteCount": 3297799,
+          "publishedSha256": null,
+          "localDigestRequired": true,
+          "selected": true,
+          "quantized": false,
+          "reducedPrecision": false,
+          "transport": "git-blob"
+        },
+        {
+          "path": "config.json",
+          "role": "configuration",
+          "listedByteCount": 1599,
+          "publishedSha256": null,
+          "localDigestRequired": true,
+          "selected": true,
+          "quantized": false,
+          "reducedPrecision": false,
+          "transport": "git-blob"
+        },
+        {
+          "path": "generation_config.json",
+          "role": "configuration",
+          "listedByteCount": 131,
+          "publishedSha256": null,
+          "localDigestRequired": true,
+          "selected": true,
+          "quantized": false,
+          "reducedPrecision": false,
+          "transport": "git-blob"
+        },
+        {
+          "path": "tokenizer_config.json",
+          "role": "configuration",
+          "listedByteCount": 2391,
+          "publishedSha256": null,
+          "localDigestRequired": true,
+          "selected": true,
+          "quantized": false,
+          "reducedPrecision": false,
+          "transport": "git-blob"
+        },
+        {
+          "path": "chat_template.jinja",
+          "role": "configuration",
+          "listedByteCount": 1783,
+          "publishedSha256": null,
+          "localDigestRequired": true,
+          "selected": true,
+          "quantized": false,
+          "reducedPrecision": false,
+          "transport": "git-blob"
+        },
+        {
+          "path": "LICENSE",
+          "role": "metadata",
+          "listedByteCount": 10596,
+          "publishedSha256": null,
+          "localDigestRequired": true,
+          "selected": true,
+          "quantized": false,
+          "reducedPrecision": false,
+          "transport": "git-blob"
+        },
+        {
+          "path": "README.md",
+          "role": "metadata",
+          "listedByteCount": 6508,
+          "publishedSha256": null,
+          "localDigestRequired": true,
+          "selected": true,
+          "quantized": false,
+          "reducedPrecision": false,
+          "transport": "git-blob"
+        },
+        {
+          "path": "onnx/model_fp16.onnx",
+          "role": "graph",
+          "listedByteCount": 140027,
+          "publishedSha256": "bc743b4b9ba1bbb4b2549d09045b2b78717712a72ec68ea33bee69c166610e25",
+          "localDigestRequired": false,
+          "selected": false,
+          "quantized": false,
+          "reducedPrecision": true,
+          "transport": "git-lfs"
+        },
+        {
+          "path": "onnx/model_fp16.onnx_data",
+          "role": "external-data",
+          "listedByteCount": 2067623936,
+          "publishedSha256": "dbc6b62ebc6547f80f5849d52f2e4511c0c1648984e46d71a7972534486bdeee",
+          "localDigestRequired": false,
+          "selected": false,
+          "quantized": false,
+          "reducedPrecision": true,
+          "transport": "git-lfs"
+        },
+        {
+          "path": "onnx/model_fp16.onnx_data_1",
+          "role": "external-data",
+          "listedByteCount": 289439744,
+          "publishedSha256": "3e320c36cdd1ed24e4af7f256151787128ff67a8fa36b1ff6b2c3f57edb5e6e4",
+          "localDigestRequired": false,
+          "selected": false,
+          "quantized": false,
+          "reducedPrecision": true,
+          "transport": "git-lfs"
+        },
+        {
+          "path": "onnx/model_q4.onnx",
+          "role": "graph",
+          "listedByteCount": 183173,
+          "publishedSha256": "c760a2d8be1d19c71c470ef294c1220ef85b5b3a0e31f12a363655ea7fab1d58",
+          "localDigestRequired": false,
+          "selected": false,
+          "quantized": true,
+          "reducedPrecision": false,
+          "transport": "git-lfs"
+        },
+        {
+          "path": "onnx/model_q4.onnx_data",
+          "role": "external-data",
+          "listedByteCount": 850059264,
+          "publishedSha256": "d9666c44e2acc32f06c9351f9e7c4fd66bc060d88ca8e7f954e836c6845f7488",
+          "localDigestRequired": false,
+          "selected": false,
+          "quantized": true,
+          "reducedPrecision": false,
+          "transport": "git-lfs"
+        },
+        {
+          "path": "onnx/model_q4f16.onnx",
+          "role": "graph",
+          "listedByteCount": 182795,
+          "publishedSha256": "a9986ad188200507342ac32f727aa4691edb5428b0aa8c4a9fbdf0c85a6fe667",
+          "localDigestRequired": false,
+          "selected": false,
+          "quantized": true,
+          "reducedPrecision": true,
+          "transport": "git-lfs"
+        },
+        {
+          "path": "onnx/model_q4f16.onnx_data",
+          "role": "external-data",
+          "listedByteCount": 760279040,
+          "publishedSha256": "46cfacc12941150620a3f644a5269e9baebd75d681cfa09cadeef71b8ed64ac2",
+          "localDigestRequired": false,
+          "selected": false,
+          "quantized": true,
+          "reducedPrecision": true,
+          "transport": "git-lfs"
+        },
+        {
+          "path": "onnx/model_q8.onnx",
+          "role": "graph",
+          "listedByteCount": 188702,
+          "publishedSha256": "4159fe2e86b581903f5bab107ae1f565581ffb0e0b0b88bbd37bdfb8e8147be7",
+          "localDigestRequired": false,
+          "selected": false,
+          "quantized": true,
+          "reducedPrecision": false,
+          "transport": "git-lfs"
+        },
+        {
+          "path": "onnx/model_q8.onnx_data",
+          "role": "external-data",
+          "listedByteCount": 1768022016,
+          "publishedSha256": "2f7ac1ece51cd846d36390c8eaba823bf55530ebefc0551585ae2b5afb86f779",
+          "localDigestRequired": false,
+          "selected": false,
+          "quantized": true,
+          "reducedPrecision": false,
+          "transport": "git-lfs"
+        },
+        {
+          "path": "onnx/model_quantized.onnx",
+          "role": "graph",
+          "listedByteCount": 185703,
+          "publishedSha256": "41f10dd256378c87406abda307aac9147d1a3e4f2df8d7cc15bdeac560382428",
+          "localDigestRequired": false,
+          "selected": false,
+          "quantized": true,
+          "reducedPrecision": false,
+          "transport": "git-lfs"
+        },
+        {
+          "path": "onnx/model_quantized.onnx_data",
+          "role": "external-data",
+          "listedByteCount": 1520558080,
+          "publishedSha256": "fe9d6c2ff3f8cf3383ea18e90c32e5bf1aedf68a0dfc2a0afb32ff24b4903d97",
+          "localDigestRequired": false,
+          "selected": false,
+          "quantized": true,
+          "reducedPrecision": false,
+          "transport": "git-lfs"
+        }
+      ],
+      "evidence": [
+        {
+          "evidenceId": "lfm-onnx-readme",
+          "sourceName": "LFM2.5 ONNX model card",
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/blob/10f72e70abf67ac0fd7ebf15bc5854726891d864/README.md",
+          "publisher": "Liquid AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+          "claim": "The pinned card maps model.onnx to FP32 weights in model.onnx_data, model.onnx_data_1, and model.onnx_data_2, and shows an ONNX Runtime session example. It does not state an opset.",
+          "evidenceClass": "authoritative",
+          "applicability": "LiquidAI/LFM2.5-1.2B-Instruct",
+          "conflictDisposition": "restrictive-reading"
+        },
+        {
+          "evidenceId": "lfm-onnx-tree",
+          "sourceName": "LFM2.5 ONNX tree listing",
+          "url": "https://huggingface.co/api/models/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/tree/10f72e70abf67ac0fd7ebf15bc5854726891d864/onnx",
+          "publisher": "Liquid AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+          "claim": "The pinned tree is the source for every recorded byte count and published sha256. Files without a published sha256 require a future local digest. Reduced-precision and quantized files are not selected.",
+          "evidenceClass": "authoritative",
+          "applicability": "LiquidAI/LFM2.5-1.2B-Instruct",
+          "conflictDisposition": "none"
+        },
+        {
+          "evidenceId": "lfm-onnx-license",
+          "sourceName": "LFM2.5 ONNX LICENSE file",
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/blob/10f72e70abf67ac0fd7ebf15bc5854726891d864/LICENSE",
+          "publisher": "Liquid AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+          "claim": "The pinned ONNX revision contains LFM Open License v1.0, the same instrument as the source revision, including the 10000000 USD commercial condition.",
+          "evidenceClass": "authoritative",
+          "applicability": "LiquidAI/LFM2.5-1.2B-Instruct",
+          "conflictDisposition": "none"
+        }
+      ],
+      "directPathEligible": true
+    }
+  ]
+}

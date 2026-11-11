@@ -19,6 +19,7 @@ from patchpilot_intelligence_evals.schemas import (
     TRACK6A_SCHEMA_NAMES,
     TRACK6B_SCHEMA_NAMES,
     TRACK6C_SCHEMA_NAMES,
+    TRACK7_SCHEMA_NAMES,
     load_schema,
     repo_root,
     validate,
@@ -74,6 +75,10 @@ _DOCUMENTS = (
     "docs/architecture/tokenizer-eligibility.md",
     "docs/architecture/direct-onnx-eligibility.md",
     "docs/architecture/track6d-acquisition-readiness.md",
+    "docs/architecture/candidate-landscape-refresh.md",
+    "docs/architecture/candidate-pre-screen.md",
+    "docs/architecture/direct-onnx-selection.md",
+    "docs/architecture/track8-acquisition-boundary.md",
     "docs/architecture/protected-repository-validation.md",
     "docs/security/github-actions-supply-chain.md",
     "docs/operations/required-checks.md",
@@ -91,6 +96,9 @@ _DOCUMENTS = (
     "docs/provenance/conversion-toolchain-evidence.md",
     "docs/provenance/candidate-license-closure.md",
     "docs/provenance/direct-onnx-evidence.md",
+    "docs/provenance/track7-candidate-evidence.md",
+    "docs/provenance/track7-implementation-review.md",
+    "docs/provenance/track7-source-register.md",
 )
 
 
@@ -176,6 +184,15 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals artifact-budget-validation",
         "uv run patchpilot-evals bounded-subprocess-compatibility-validation",
         "uv run patchpilot-evals track6d-readiness-validation",
+        "uv run patchpilot-evals candidate-discovery-validation",
+        "uv run patchpilot-evals finalist-eligibility-validation",
+        "uv run patchpilot-evals finalist-tokenizer-validation",
+        "uv run patchpilot-evals finalist-direct-onnx-validation",
+        "uv run patchpilot-evals finalist-artifact-budget-validation",
+        "uv run patchpilot-evals finalist-explanation-suitability-validation",
+        "uv run patchpilot-evals track7-selection-validation",
+        "uv run patchpilot-evals track8-acquisition-authorization-validation",
+        "uv run patchpilot-evals track7-review-validation",
         "uv run patchpilot-evals workflow-policy-validation",
         "uv run patchpilot-evals dependency-architecture-policy-validation",
     ):
@@ -231,6 +248,15 @@ def test_help_lists_commands() -> None:
     assert "artifact-budget-validation" in text
     assert "bounded-subprocess-compatibility-validation" in text
     assert "track6d-readiness-validation" in text
+    assert "candidate-discovery-validation" in text
+    assert "finalist-eligibility-validation" in text
+    assert "finalist-tokenizer-validation" in text
+    assert "finalist-direct-onnx-validation" in text
+    assert "finalist-artifact-budget-validation" in text
+    assert "finalist-explanation-suitability-validation" in text
+    assert "track7-selection-validation" in text
+    assert "track8-acquisition-authorization-validation" in text
+    assert "track7-review-validation" in text
     assert "workflow-policy-validation" in text
     assert "dependency-architecture-policy-validation" in text
 
@@ -243,6 +269,7 @@ def test_committed_json_files_validate() -> None:
         + TRACK6A_SCHEMA_NAMES
         + TRACK6B_SCHEMA_NAMES
         + TRACK6C_SCHEMA_NAMES
+        + TRACK7_SCHEMA_NAMES
     )
     for name in names:
         document = load_schema(name)

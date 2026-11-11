@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "retrievedOn": "2026-11-11",
+  "finalistCount": 1,
+  "finalistModelIds": [
+    "LiquidAI/LFM2.5-1.2B-Instruct"
+  ],
+  "locallyObservedArtifactDigests": [],
+  "finalists": [
+    {
+      "modelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+      "modelRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+      "revision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+      "sourceKind": "model-revision",
+      "sourceRepository": "LiquidAI/LFM2.5-1.2B-Instruct-ONNX",
+      "licenseInstrument": "revision-license-file",
+      "licenseName": "LFM Open License v1.0",
+      "commercialUse": "restricted",
+      "redistribution": "granted",
+      "modification": "granted",
+      "attributionRequired": true,
+      "offlineOperation": true,
+      "automaticRetrievalRequired": false,
+      "remoteCodeRequired": false,
+      "inventoryComplete": true,
+      "inventory": [
+        {
+          "fileName": "tokenizer.json",
+          "role": "tokenizer",
+          "listedByteCount": 3297799,
+          "localDigestRequired": true
+        },
+        {
+          "fileName": "tokenizer_config.json",
+          "role": "tokenizer",
+          "listedByteCount": 2391,
+          "localDigestRequired": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidenceId": "lfm-tokenizer-license",
+          "sourceName": "LFM2.5 ONNX LICENSE file",
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/blob/10f72e70abf67ac0fd7ebf15bc5854726891d864/LICENSE",
+          "publisher": "Liquid AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+          "claim": "The pinned ONNX LICENSE is LFM Open License v1.0 and applies to the Work in that revision, including tokenizer.json. Commercial use is conditioned on annual revenue not exceeding 10000000 USD.",
+          "evidenceClass": "authoritative",
+          "applicability": "LiquidAI/LFM2.5-1.2B-Instruct",
+          "conflictDisposition": "none"
+        },
+        {
+          "evidenceId": "lfm-tokenizer-offline",
+          "sourceName": "LFM2.5 ONNX model card",
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/blob/10f72e70abf67ac0fd7ebf15bc5854726891d864/README.md",
+          "publisher": "Liquid AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+          "claim": "The quickstart sets trust_remote_code, and the pinned trees contain no custom Python module. Local tokenizer files do not require a hosted tokenizer API. The flag is not a load requirement.",
+          "evidenceClass": "authoritative",
+          "applicability": "LiquidAI/LFM2.5-1.2B-Instruct",
+          "conflictDisposition": "restrictive-reading"
+        }
+      ],
+      "eligibilityOutcome": "pass"
+    }
+  ]
+}

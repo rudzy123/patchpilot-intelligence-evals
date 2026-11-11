@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "retrievedOn": "2026-11-11",
+  "finalistCount": 1,
+  "finalistModelIds": [
+    "LiquidAI/LFM2.5-1.2B-Instruct"
+  ],
+  "locallyObservedArtifactDigests": [],
+  "finalists": [
+    {
+      "modelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+      "revision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+      "onnxRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+      "publisher": "Liquid AI",
+      "sourceCodeLicense": "LFM Open License v1.0",
+      "weightLicense": "LFM Open License v1.0",
+      "licenseInstrument": "revision-license-file",
+      "commercialGrant": "restricted",
+      "redistributionGrant": "granted",
+      "modificationGrant": "granted",
+      "attributionRequired": true,
+      "revenueThresholdUsd": 10000000,
+      "intendedUse": "agentic tasks, data extraction, and retrieval augmented generation",
+      "excludedUse": "knowledge-intensive tasks and programming are not recommended",
+      "knownLimitations": "stated",
+      "languageLimitations": "stated",
+      "safetyLimitations": "not-stated",
+      "reliabilityLimitations": "stated",
+      "remoteCodeRequired": false,
+      "hostedApiRequired": false,
+      "telemetryRequired": false,
+      "officialCard": true,
+      "conflicts": [
+        {
+          "conflictId": "trust-remote-code-example",
+          "status": "resolved",
+          "disposition": "restrictive-reading",
+          "summary": "The ONNX quickstart sets trust_remote_code, and the pinned trees contain no custom Python module. The flag is not a load requirement."
+        },
+        {
+          "conflictId": "published-memory-figures",
+          "status": "resolved",
+          "disposition": "restrictive-reading",
+          "summary": "Sub-1GB figures are tied to NPU and Q4_0 rows and do not establish FP32 ONNX peak memory."
+        },
+        {
+          "conflictId": "safety-limitations",
+          "status": "unresolved",
+          "disposition": "unresolved",
+          "summary": "The card states a knowledge-task limitation and does not state safety limitations."
+        }
+      ],
+      "evidence": [
+        {
+          "evidenceId": "lfm-weight-license",
+          "sourceName": "LFM2.5 source LICENSE file",
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct/blob/b9d816ab510f9a28dca37cb182e9da8b0226e13c/LICENSE",
+          "publisher": "Liquid AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+          "claim": "The pinned LICENSE is LFM Open License v1.0 from Liquid AI, Inc. It grants reproduction and distribution subject to a commercial condition of 10000000 USD annual revenue, plus attribution duties.",
+          "evidenceClass": "authoritative",
+          "applicability": "LiquidAI/LFM2.5-1.2B-Instruct",
+          "conflictDisposition": "none"
+        },
+        {
+          "evidenceId": "lfm-model-card",
+          "sourceName": "LFM2.5-1.2B-Instruct model card",
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct/blob/b9d816ab510f9a28dca37cb182e9da8b0226e13c/README.md",
+          "publisher": "Liquid AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+          "claim": "The pinned card states intended agentic, extraction, and retrieval uses, and it states that knowledge-intensive tasks and programming are not recommended. It does not state safety limitations.",
+          "evidenceClass": "authoritative",
+          "applicability": "LiquidAI/LFM2.5-1.2B-Instruct",
+          "conflictDisposition": "none"
+        }
+      ],
+      "commercialUseResult": "pass",
+      "redistributionResult": "pass",
+      "modificationResult": "pass",
+      "remoteCodeResult": "pass",
+      "modelCardLimitationsResult": "pass",
+      "mandatoryCriteria": {
+        "explicit-weight-use-license": "pass",
+        "clear-commercial-use-position": "pass",
+        "clear-redistribution-position": "pass",
+        "immutable-official-revision": "pass",
+        "no-remote-code-requirement": "pass",
+        "fully-offline-runtime-support": "pass",
+        "tokenizer-provenance": "pass",
+        "artifact-digest-capability": "pass",
+        "local-resource-fit": "fail",
+        "bounded-subprocess-compatibility": "pass",
+        "no-mandatory-telemetry": "pass",
+        "no-tenant-data-requirement": "pass",
+        "official-model-card": "pass",
+        "documented-limitations": "pass",
+        "no-production-dependency": "pass"
+      },
+      "disqualifiers": [
+        "local-resource-fit"
+      ],
+      "mandatoryStatus": "fail",
+      "scoringEligible": false,
+      "weightedScore": null,
+      "categoryScores": null,
+      "unresolvedConflict": true
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "retrievedOn": "2026-11-11",
+  "selectionOutcome": "no-selection",
+  "selectedModelId": null,
+  "authorizationOutcome": "not-authorized",
+  "verdict": "TRACK 8 CONTROLLED ACQUISITION NOT AUTHORIZED",
+  "installationAuthorized": false,
+  "conversionAuthorized": false,
+  "quantizationApproved": false,
+  "blockers": [
+    "artifact-footprint-exceeds-8gib",
+    "explanation-suitability-unresolved",
+    "local-resource-fit",
+    "peak-memory-unknown",
+    "unresolved-conflict"
+  ],
+  "finalistCount": 1,
+  "finalistModelIds": [
+    "LiquidAI/LFM2.5-1.2B-Instruct"
+  ],
+  "locallyObservedRuntimeDigests": [],
+  "locallyObservedModelDigests": [],
+  "locallyObservedTokenizerDigests": [],
+  "locallyObservedConfigurationDigests": []
+}

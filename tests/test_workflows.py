@@ -366,6 +366,9 @@ def test_validation_jobs_keep_existing_coverage() -> None:
     assert "uv run pytest" not in contracts
     assert "ruff format" not in contracts
     assert "track6d-readiness-validation" in contracts
+    assert "candidate-discovery-validation" in contracts
+    assert "track8-acquisition-authorization-validation" in contracts
+    assert "track7-review-validation" in contracts
     assert "workflow-policy-validation" in contracts
     assert "dependency-architecture-policy-validation" in contracts
     assert "hardened-fixture-execution" not in text

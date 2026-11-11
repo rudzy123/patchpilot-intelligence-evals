@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "retrievedOn": "2026-11-11",
+  "artifactCapBytes": 8589934592,
+  "memoryCapBytes": 12884901888,
+  "contextCapTokens": 8192,
+  "availableStorageBytes": 1403456720896,
+  "runtimeId": "onnxruntime",
+  "runtimeVersionTag": "v1.31.1",
+  "runtimeRevision": "6af1a932e2286d5c58166085d24c68783033edee",
+  "runtimePackageFileName": "onnxruntime-linux-x64-1.31.1.tgz",
+  "runtimeStagingListedBytes": 11413655,
+  "runtimePackagePublishedSha256": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9",
+  "adapterId": "patchpilot-onnxruntime-adapter",
+  "adapterVersion": "1.0.0",
+  "profileId": "linux-bwrap-systemd-v1",
+  "profileVersion": "1.0.0",
+  "safetensorsExecution": "prohibited",
+  "quantizationApproved": false,
+  "verificationPerformed": false,
+  "finalistCount": 1,
+  "finalistModelIds": [
+    "LiquidAI/LFM2.5-1.2B-Instruct"
+  ],
+  "locallyObservedArtifactDigests": [],
+  "finalists": [
+    {
+      "modelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+      "onnxRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+      "contextTokens": 32768,
+      "peakMemoryBytes": null,
+      "peakMemoryBasis": "unknown-fp32",
+      "quantizationPresent": false,
+      "cpuOnlyViability": "pass",
+      "verificationOverheadEqualsInventory": true,
+      "properties": [
+        {
+          "name": "verified-runtime-identity",
+          "result": "pass"
+        },
+        {
+          "name": "verified-onnx-graph",
+          "result": "pass"
+        },
+        {
+          "name": "complete-external-data",
+          "result": "pass"
+        },
+        {
+          "name": "verified-tokenizer-configuration",
+          "result": "pass"
+        },
+        {
+          "name": "direct-argument-arrays",
+          "result": "pass"
+        },
+        {
+          "name": "no-shell",
+          "result": "pass"
+        },
+        {
+          "name": "hardened-launcher",
+          "result": "pass"
+        },
+        {
+          "name": "offline-execution",
+          "result": "pass"
+        },
+        {
+          "name": "telemetry-disabled",
+          "result": "pass"
+        },
+        {
+          "name": "no-automatic-retrieval",
+          "result": "pass"
+        },
+        {
+          "name": "no-remote-code",
+          "result": "pass"
+        },
+        {
+          "name": "no-automatic-conversion",
+          "result": "pass"
+        },
+        {
+          "name": "bounded-startup",
+          "result": "pass"
+        },
+        {
+          "name": "bounded-generation",
+          "result": "pass"
+        },
+        {
+          "name": "one-request-one-response",
+          "result": "pass"
+        },
+        {
+          "name": "process-tree-cleanup",
+          "result": "pass"
+        },
+        {
+          "name": "bounded-output",
+          "result": "pass"
+        },
+        {
+          "name": "no-quantization",
+          "result": "pass"
+        }
+      ],
+      "evidence": [
+        {
+          "evidenceId": "ort-v1-31-1-release",
+          "sourceName": "ONNX Runtime v1.31.1 release",
+          "url": "https://github.com/microsoft/onnxruntime/releases/tag/v1.31.1",
+          "publisher": "Microsoft",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "6af1a932e2286d5c58166085d24c68783033edee",
+          "claim": "Release v1.31.1 is commit 6af1a932e2286d5c58166085d24c68783033edee. The asset onnxruntime-linux-x64-1.31.1.tgz is listed at 11413655 bytes.",
+          "evidenceClass": "authoritative",
+          "applicability": "onnxruntime",
+          "conflictDisposition": "none"
+        },
+        {
+          "evidenceId": "lfm-memory-card",
+          "sourceName": "LFM2.5-1.2B-Instruct model card",
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct/blob/b9d816ab510f9a28dca37cb182e9da8b0226e13c/README.md",
+          "publisher": "Liquid AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+          "claim": "The card states sub-1GB figures for NPU and Q4_0 rows. Those figures do not establish FP32 ONNX peak memory, so peak memory stays unknown.",
+          "evidenceClass": "conflicting",
+          "applicability": "LiquidAI/LFM2.5-1.2B-Instruct",
+          "conflictDisposition": "restrictive-reading"
+        }
+      ],
+      "graphBytes": 140810,
+      "externalDataBytes": 4714127360,
+      "tokenizerBytes": 3297799,
+      "configurationBytes": 5904,
+      "metadataBytes": 17104,
+      "inventoryBytes": 4717588977,
+      "verificationOverheadBytes": 4717588977,
+      "runtimeStagingListedBytes": 11413655,
+      "footprintBytes": 9446591609,
+      "artifactFit": "fail",
+      "memoryFit": "fail",
+      "contextFit": "pass",
+      "storageHeadroom": "pass",
+      "hardwareFit": "fail",
+      "executionOutcome": "pass"
+    }
+  ]
+}

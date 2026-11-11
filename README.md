@@ -58,6 +58,15 @@ uv run patchpilot-evals direct-onnx-evidence-validation
 uv run patchpilot-evals artifact-budget-validation
 uv run patchpilot-evals bounded-subprocess-compatibility-validation
 uv run patchpilot-evals track6d-readiness-validation
+uv run patchpilot-evals candidate-discovery-validation
+uv run patchpilot-evals finalist-eligibility-validation
+uv run patchpilot-evals finalist-tokenizer-validation
+uv run patchpilot-evals finalist-direct-onnx-validation
+uv run patchpilot-evals finalist-artifact-budget-validation
+uv run patchpilot-evals finalist-explanation-suitability-validation
+uv run patchpilot-evals track7-selection-validation
+uv run patchpilot-evals track8-acquisition-authorization-validation
+uv run patchpilot-evals track7-review-validation
 uv run patchpilot-evals workflow-policy-validation
 uv run patchpilot-evals dependency-architecture-policy-validation
 ```
@@ -129,6 +138,16 @@ Intelligence Track 6C reassesses direct ONNX eligibility for the five pinned fam
 - [docs/architecture/track6d-acquisition-readiness.md](docs/architecture/track6d-acquisition-readiness.md)
 - [docs/provenance/candidate-license-closure.md](docs/provenance/candidate-license-closure.md)
 - [docs/provenance/direct-onnx-evidence.md](docs/provenance/direct-onnx-evidence.md)
+
+Intelligence Track 7 refreshes the offline candidate landscape and advances one finalist, `LiquidAI/LFM2.5-1.2B-Instruct`. The finalist fails the artifact budget and has unresolved explanation suitability, so the weighted score stays null. Selection is `no-selection`. Track 8 authorization is `not-authorized`, with verdict `TRACK 8 CONTROLLED ACQUISITION NOT AUTHORIZED`. These commands read local records only. They do not install a runtime, acquire a model or tokenizer, convert a checkpoint, or execute inference. `productionReady` stays false.
+
+- [docs/architecture/candidate-landscape-refresh.md](docs/architecture/candidate-landscape-refresh.md)
+- [docs/architecture/candidate-pre-screen.md](docs/architecture/candidate-pre-screen.md)
+- [docs/architecture/direct-onnx-selection.md](docs/architecture/direct-onnx-selection.md)
+- [docs/architecture/track8-acquisition-boundary.md](docs/architecture/track8-acquisition-boundary.md)
+- [docs/provenance/track7-candidate-evidence.md](docs/provenance/track7-candidate-evidence.md)
+- [docs/provenance/track7-implementation-review.md](docs/provenance/track7-implementation-review.md)
+- [docs/provenance/track7-source-register.md](docs/provenance/track7-source-register.md)
 
 - [docs/architecture/real-candidate-boundary.md](docs/architecture/real-candidate-boundary.md)
 - [docs/architecture/external-artifact-cache.md](docs/architecture/external-artifact-cache.md)
