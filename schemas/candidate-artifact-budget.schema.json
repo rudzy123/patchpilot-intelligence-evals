@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:candidate-artifact-budget:v1",
+  "title": "Candidate artifact budget",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "retrievedOn",
+    "artifactCapBytes",
+    "memoryCapBytes",
+    "contextCapTokens",
+    "availableStorageBytes",
+    "minimumFreeStorageMultiple",
+    "quantizationApproved",
+    "locallyObservedArtifactDigests",
+    "families"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "retrievedOn": { "const": "2026-11-11" },
+    "artifactCapBytes": { "const": 8589934592 },
+    "memoryCapBytes": { "const": 12884901888 },
+    "contextCapTokens": { "const": 8192 },
+    "availableStorageBytes": { "const": 1403456720896 },
+    "minimumFreeStorageMultiple": { "const": 2 },
+    "quantizationApproved": { "const": false },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "families": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/family" }
+    }
+  },
+  "$defs": {
+    "modelId": {
+      "enum": [
+        "Qwen/Qwen2.5-1.5B-Instruct",
+        "Qwen/Qwen2.5-3B-Instruct",
+        "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "allenai/OLMo-2-0425-1B-Instruct",
+        "google/gemma-3-1b-it"
+      ]
+    },
+    "fit": { "enum": ["pass", "fail"] },
+    "family": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modelId",
+        "contextTokens",
+        "contextFit",
+        "graphBytes",
+        "externalDataBytes",
+        "tokenizerConfigurationBytes",
+        "verificationOverheadBytes",
+        "runtimeStagingAllowanceBytes",
+        "peakMemoryBytes",
+        "quantizationPresent",
+        "footprintBytes",
+        "artifactFit",
+        "memoryFit",
+        "storageHeadroom",
+        "hardwareFit",
+        "directoryBytes",
+        "directoryExceedsCap",
+        "nonquantizedPairBytes",
+        "pairQualifies"
+      ],
+      "properties": {
+        "modelId": { "$ref": "#/$defs/modelId" },
+        "contextTokens": { "type": ["integer", "null"], "minimum": 0 },
+        "contextFit": { "$ref": "#/$defs/fit" },
+        "graphBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "externalDataBytes": {
+          "type": "array",
+          "maxItems": 8,
+          "items": { "type": ["integer", "null"], "minimum": 0 }
+        },
+        "tokenizerConfigurationBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "verificationOverheadBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "runtimeStagingAllowanceBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "peakMemoryBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "quantizationPresent": { "type": "boolean" },
+        "footprintBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "artifactFit": { "$ref": "#/$defs/fit" },
+        "memoryFit": { "$ref": "#/$defs/fit" },
+        "storageHeadroom": { "$ref": "#/$defs/fit" },
+        "hardwareFit": { "$ref": "#/$defs/fit" },
+        "directoryBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "directoryExceedsCap": { "type": "boolean" },
+        "nonquantizedPairBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "pairQualifies": { "const": false }
+      }
+    }
+  }
+}

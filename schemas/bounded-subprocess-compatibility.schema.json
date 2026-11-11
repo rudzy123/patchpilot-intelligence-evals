@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:bounded-subprocess-compatibility:v1",
+  "title": "Bounded subprocess compatibility",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "retrievedOn",
+    "adapterId",
+    "adapterVersion",
+    "versionTag",
+    "immutableRevision",
+    "profileId",
+    "runtimeNoteQualifiesCandidate",
+    "locallyObservedArtifactDigests",
+    "families",
+    "evidence"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "retrievedOn": { "const": "2026-11-11" },
+    "adapterId": { "const": "patchpilot-onnxruntime-adapter" },
+    "adapterVersion": { "const": "1.0.0" },
+    "versionTag": { "const": "v1.31.1" },
+    "immutableRevision": { "const": "6af1a932e2286d5c58166085d24c68783033edee" },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "runtimeNoteQualifiesCandidate": { "const": false },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "families": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/family" }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 4,
+      "items": { "$ref": "#/$defs/evidence" }
+    }
+  },
+  "$defs": {
+    "modelId": {
+      "enum": [
+        "Qwen/Qwen2.5-1.5B-Instruct",
+        "Qwen/Qwen2.5-3B-Instruct",
+        "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "allenai/OLMo-2-0425-1B-Instruct",
+        "google/gemma-3-1b-it"
+      ]
+    },
+    "propertyName": {
+      "enum": [
+        "verified-runtime-identity",
+        "verified-onnx-graph",
+        "complete-external-data",
+        "verified-tokenizer-configuration",
+        "direct-argument-arrays",
+        "no-shell",
+        "hardened-launcher",
+        "offline-execution",
+        "telemetry-disabled",
+        "no-automatic-retrieval",
+        "no-remote-code",
+        "no-automatic-conversion",
+        "bounded-startup",
+        "bounded-generation",
+        "one-request-one-response",
+        "process-tree-cleanup"
+      ]
+    },
+    "family": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["modelId", "directOnnxEligible", "properties", "compatibilityOutcome"],
+      "properties": {
+        "modelId": { "$ref": "#/$defs/modelId" },
+        "directOnnxEligible": { "const": false },
+        "properties": {
+          "type": "array",
+          "minItems": 16,
+          "maxItems": 16,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "result"],
+            "properties": {
+              "name": { "$ref": "#/$defs/propertyName" },
+              "result": { "enum": ["pass", "fail"] }
+            }
+          }
+        },
+        "compatibilityOutcome": { "const": "fail" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceId",
+        "sourceName",
+        "url",
+        "publisher",
+        "retrievedOn",
+        "claim",
+        "evidenceClass"
+      ],
+      "properties": {
+        "evidenceId": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "sourceName": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "url": { "type": "string", "pattern": "^https://\\S+$", "maxLength": 300 },
+        "publisher": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "retrievedOn": { "const": "2026-11-11" },
+        "claim": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "evidenceClass": {
+          "enum": ["authoritative", "secondary", "conflicting", "unresolved"]
+        }
+      }
+    }
+  }
+}

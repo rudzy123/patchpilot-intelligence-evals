@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "selectionOutcome": "no-selection",
+  "selectedModelId": null,
+  "scoringApplied": false,
+  "qualifyingCandidateCount": 0,
+  "readinessOutcome": "not-ready",
+  "verdict": "TRACK 6D CONTROLLED ACQUISITION NOT READY",
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "installationAuthorized": false,
+  "conversionAuthorized": false,
+  "quantizationApproved": false,
+  "blockers": [
+    "artifact-digest-capability",
+    "bounded-subprocess-compatibility",
+    "clear-commercial-use-position",
+    "clear-redistribution-position",
+    "documented-limitations",
+    "explicit-weight-use-license",
+    "fully-offline-runtime-support",
+    "local-resource-fit",
+    "tokenizer-provenance"
+  ],
+  "locallyObservedArtifactDigests": []
+}

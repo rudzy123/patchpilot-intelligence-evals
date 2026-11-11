@@ -1,0 +1,403 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "retrievedOn": "2026-11-11",
+  "adapterId": "patchpilot-onnxruntime-adapter",
+  "adapterVersion": "1.0.0",
+  "versionTag": "v1.31.1",
+  "immutableRevision": "6af1a932e2286d5c58166085d24c68783033edee",
+  "profileId": "linux-bwrap-systemd-v1",
+  "runtimeNoteQualifiesCandidate": false,
+  "locallyObservedArtifactDigests": [],
+  "families": [
+    {
+      "modelId": "Qwen/Qwen2.5-1.5B-Instruct",
+      "directOnnxEligible": false,
+      "properties": [
+        {
+          "name": "verified-runtime-identity",
+          "result": "fail"
+        },
+        {
+          "name": "verified-onnx-graph",
+          "result": "fail"
+        },
+        {
+          "name": "complete-external-data",
+          "result": "fail"
+        },
+        {
+          "name": "verified-tokenizer-configuration",
+          "result": "fail"
+        },
+        {
+          "name": "direct-argument-arrays",
+          "result": "fail"
+        },
+        {
+          "name": "no-shell",
+          "result": "fail"
+        },
+        {
+          "name": "hardened-launcher",
+          "result": "fail"
+        },
+        {
+          "name": "offline-execution",
+          "result": "fail"
+        },
+        {
+          "name": "telemetry-disabled",
+          "result": "fail"
+        },
+        {
+          "name": "no-automatic-retrieval",
+          "result": "fail"
+        },
+        {
+          "name": "no-remote-code",
+          "result": "fail"
+        },
+        {
+          "name": "no-automatic-conversion",
+          "result": "fail"
+        },
+        {
+          "name": "bounded-startup",
+          "result": "fail"
+        },
+        {
+          "name": "bounded-generation",
+          "result": "fail"
+        },
+        {
+          "name": "one-request-one-response",
+          "result": "fail"
+        },
+        {
+          "name": "process-tree-cleanup",
+          "result": "fail"
+        }
+      ],
+      "compatibilityOutcome": "fail"
+    },
+    {
+      "modelId": "Qwen/Qwen2.5-3B-Instruct",
+      "directOnnxEligible": false,
+      "properties": [
+        {
+          "name": "verified-runtime-identity",
+          "result": "fail"
+        },
+        {
+          "name": "verified-onnx-graph",
+          "result": "fail"
+        },
+        {
+          "name": "complete-external-data",
+          "result": "fail"
+        },
+        {
+          "name": "verified-tokenizer-configuration",
+          "result": "fail"
+        },
+        {
+          "name": "direct-argument-arrays",
+          "result": "fail"
+        },
+        {
+          "name": "no-shell",
+          "result": "fail"
+        },
+        {
+          "name": "hardened-launcher",
+          "result": "fail"
+        },
+        {
+          "name": "offline-execution",
+          "result": "fail"
+        },
+        {
+          "name": "telemetry-disabled",
+          "result": "fail"
+        },
+        {
+          "name": "no-automatic-retrieval",
+          "result": "fail"
+        },
+        {
+          "name": "no-remote-code",
+          "result": "fail"
+        },
+        {
+          "name": "no-automatic-conversion",
+          "result": "fail"
+        },
+        {
+          "name": "bounded-startup",
+          "result": "fail"
+        },
+        {
+          "name": "bounded-generation",
+          "result": "fail"
+        },
+        {
+          "name": "one-request-one-response",
+          "result": "fail"
+        },
+        {
+          "name": "process-tree-cleanup",
+          "result": "fail"
+        }
+      ],
+      "compatibilityOutcome": "fail"
+    },
+    {
+      "modelId": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "directOnnxEligible": false,
+      "properties": [
+        {
+          "name": "verified-runtime-identity",
+          "result": "fail"
+        },
+        {
+          "name": "verified-onnx-graph",
+          "result": "fail"
+        },
+        {
+          "name": "complete-external-data",
+          "result": "fail"
+        },
+        {
+          "name": "verified-tokenizer-configuration",
+          "result": "fail"
+        },
+        {
+          "name": "direct-argument-arrays",
+          "result": "fail"
+        },
+        {
+          "name": "no-shell",
+          "result": "fail"
+        },
+        {
+          "name": "hardened-launcher",
+          "result": "fail"
+        },
+        {
+          "name": "offline-execution",
+          "result": "fail"
+        },
+        {
+          "name": "telemetry-disabled",
+          "result": "fail"
+        },
+        {
+          "name": "no-automatic-retrieval",
+          "result": "fail"
+        },
+        {
+          "name": "no-remote-code",
+          "result": "fail"
+        },
+        {
+          "name": "no-automatic-conversion",
+          "result": "fail"
+        },
+        {
+          "name": "bounded-startup",
+          "result": "fail"
+        },
+        {
+          "name": "bounded-generation",
+          "result": "fail"
+        },
+        {
+          "name": "one-request-one-response",
+          "result": "fail"
+        },
+        {
+          "name": "process-tree-cleanup",
+          "result": "fail"
+        }
+      ],
+      "compatibilityOutcome": "fail"
+    },
+    {
+      "modelId": "allenai/OLMo-2-0425-1B-Instruct",
+      "directOnnxEligible": false,
+      "properties": [
+        {
+          "name": "verified-runtime-identity",
+          "result": "fail"
+        },
+        {
+          "name": "verified-onnx-graph",
+          "result": "fail"
+        },
+        {
+          "name": "complete-external-data",
+          "result": "fail"
+        },
+        {
+          "name": "verified-tokenizer-configuration",
+          "result": "fail"
+        },
+        {
+          "name": "direct-argument-arrays",
+          "result": "fail"
+        },
+        {
+          "name": "no-shell",
+          "result": "fail"
+        },
+        {
+          "name": "hardened-launcher",
+          "result": "fail"
+        },
+        {
+          "name": "offline-execution",
+          "result": "fail"
+        },
+        {
+          "name": "telemetry-disabled",
+          "result": "fail"
+        },
+        {
+          "name": "no-automatic-retrieval",
+          "result": "fail"
+        },
+        {
+          "name": "no-remote-code",
+          "result": "fail"
+        },
+        {
+          "name": "no-automatic-conversion",
+          "result": "fail"
+        },
+        {
+          "name": "bounded-startup",
+          "result": "fail"
+        },
+        {
+          "name": "bounded-generation",
+          "result": "fail"
+        },
+        {
+          "name": "one-request-one-response",
+          "result": "fail"
+        },
+        {
+          "name": "process-tree-cleanup",
+          "result": "fail"
+        }
+      ],
+      "compatibilityOutcome": "fail"
+    },
+    {
+      "modelId": "google/gemma-3-1b-it",
+      "directOnnxEligible": false,
+      "properties": [
+        {
+          "name": "verified-runtime-identity",
+          "result": "fail"
+        },
+        {
+          "name": "verified-onnx-graph",
+          "result": "fail"
+        },
+        {
+          "name": "complete-external-data",
+          "result": "fail"
+        },
+        {
+          "name": "verified-tokenizer-configuration",
+          "result": "fail"
+        },
+        {
+          "name": "direct-argument-arrays",
+          "result": "fail"
+        },
+        {
+          "name": "no-shell",
+          "result": "fail"
+        },
+        {
+          "name": "hardened-launcher",
+          "result": "fail"
+        },
+        {
+          "name": "offline-execution",
+          "result": "fail"
+        },
+        {
+          "name": "telemetry-disabled",
+          "result": "fail"
+        },
+        {
+          "name": "no-automatic-retrieval",
+          "result": "fail"
+        },
+        {
+          "name": "no-remote-code",
+          "result": "fail"
+        },
+        {
+          "name": "no-automatic-conversion",
+          "result": "fail"
+        },
+        {
+          "name": "bounded-startup",
+          "result": "fail"
+        },
+        {
+          "name": "bounded-generation",
+          "result": "fail"
+        },
+        {
+          "name": "one-request-one-response",
+          "result": "fail"
+        },
+        {
+          "name": "process-tree-cleanup",
+          "result": "fail"
+        }
+      ],
+      "compatibilityOutcome": "fail"
+    }
+  ],
+  "evidence": [
+    {
+      "evidenceId": "onnxruntime-v1311",
+      "sourceName": "ONNX Runtime v1.31.1 release",
+      "url": "https://github.com/microsoft/onnxruntime/releases/tag/v1.31.1",
+      "publisher": "Microsoft",
+      "retrievedOn": "2026-11-11",
+      "claim": "The v1.31.1 tag matches the adapter revision and publishes no graph.",
+      "evidenceClass": "authoritative"
+    },
+    {
+      "evidenceId": "onnxruntime-v1310-telemetry",
+      "sourceName": "ONNX Runtime v1.31.0 release",
+      "url": "https://github.com/microsoft/onnxruntime/releases/tag/v1.31.0",
+      "publisher": "Microsoft",
+      "retrievedOn": "2026-11-11",
+      "claim": "The source-build telemetry flag is inherited and qualifies no candidate.",
+      "evidenceClass": "authoritative"
+    },
+    {
+      "evidenceId": "onnxruntime-v1311-privacy",
+      "sourceName": "ONNX Runtime v1.31.1 privacy document",
+      "url": "https://github.com/microsoft/onnxruntime/blob/v1.31.1/docs/Privacy.md",
+      "publisher": "Microsoft",
+      "retrievedOn": "2026-11-11",
+      "claim": "The v1.31.1 privacy document body was empty on this retrieval.",
+      "evidenceClass": "unresolved"
+    }
+  ]
+}

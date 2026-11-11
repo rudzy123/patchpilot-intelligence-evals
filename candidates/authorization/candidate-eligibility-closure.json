@@ -1,0 +1,570 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "retrievedOn": "2026-11-11",
+  "selectionOutcome": "no-selection",
+  "selectedModelId": null,
+  "scoringApplied": false,
+  "qualifyingCandidateCount": 0,
+  "locallyObservedArtifactDigests": [],
+  "candidates": [
+    {
+      "modelId": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "priorBlockers": [
+        "bounded-subprocess-compatibility",
+        "documented-limitations",
+        "no-official-onnx",
+        "tokenizer-provenance"
+      ],
+      "weightLicenseResult": "pass",
+      "codeLicenseResult": "pass",
+      "commercialUseResult": "pass",
+      "commercialGrant": "granted",
+      "redistributionResult": "pass",
+      "acceptableUseResult": "pass",
+      "modelCardLimitationsResult": "fail",
+      "remoteCodeResult": "pass",
+      "officialSourceResult": "pass",
+      "mandatoryCriteria": {
+        "explicit-weight-use-license": "pass",
+        "clear-commercial-use-position": "pass",
+        "clear-redistribution-position": "pass",
+        "immutable-official-revision": "pass",
+        "no-remote-code-requirement": "pass",
+        "fully-offline-runtime-support": "pass",
+        "tokenizer-provenance": "fail",
+        "artifact-digest-capability": "pass",
+        "local-resource-fit": "pass",
+        "bounded-subprocess-compatibility": "fail",
+        "no-mandatory-telemetry": "pass",
+        "no-tenant-data-requirement": "pass",
+        "official-model-card": "pass",
+        "documented-limitations": "fail",
+        "no-production-dependency": "pass"
+      },
+      "mandatoryStatus": "fail",
+      "scoringEligible": false,
+      "weightedScore": null,
+      "disqualifiers": [
+        "bounded-subprocess-compatibility",
+        "documented-limitations",
+        "tokenizer-provenance"
+      ],
+      "conflicts": [
+        {
+          "topic": "published-context-length",
+          "status": "resolved",
+          "restrictiveInterpretation": "Series prose says 128K. The checkpoint says 32768. Use 32768."
+        },
+        {
+          "topic": "tokenizer-applicability",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The Apache-2.0 notice does not name tokenizer files. Weight use stays separate."
+        }
+      ],
+      "evidence": [
+        {
+          "evidenceId": "qwen15-readme",
+          "sourceName": "Qwen2.5-1.5B-Instruct model card",
+          "url": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct/blob/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/README.md",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+          "claim": "The pinned card states 32768 context and 8192 generation. It has no limitations section.",
+          "evidenceClass": "authoritative",
+          "applicability": "Qwen/Qwen2.5-1.5B-Instruct at 989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+          "conflictDisposition": "restrictive-reading"
+        },
+        {
+          "evidenceId": "qwen15-license",
+          "sourceName": "Qwen2.5-1.5B-Instruct license file",
+          "url": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct/blob/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/LICENSE",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+          "claim": "The pinned LICENSE file is Apache-2.0. It does not name the tokenizer files.",
+          "evidenceClass": "authoritative",
+          "applicability": "Qwen/Qwen2.5-1.5B-Instruct at 989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+          "conflictDisposition": "unresolved"
+        },
+        {
+          "evidenceId": "qwen15-listing",
+          "sourceName": "Qwen2.5-1.5B-Instruct revision listing",
+          "url": "https://huggingface.co/api/models/Qwen/Qwen2.5-1.5B-Instruct/revision/989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+          "claim": "The listing has LICENSE and tokenizer files. It has no ONNX file.",
+          "evidenceClass": "authoritative",
+          "applicability": "Qwen/Qwen2.5-1.5B-Instruct at 989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+          "conflictDisposition": "none"
+        },
+        {
+          "evidenceId": "qwen15-blog",
+          "sourceName": "Qwen2.5 official blog",
+          "url": "https://qwenlm.github.io/blog/qwen2.5/",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": null,
+          "claim": "The blog assigns Apache-2.0 to this size and adds no limitations section.",
+          "evidenceClass": "authoritative",
+          "applicability": "Qwen/Qwen2.5-1.5B-Instruct at 989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+          "conflictDisposition": "restrictive-reading"
+        },
+        {
+          "evidenceId": "qwen15-onnx-community",
+          "sourceName": "onnx-community Qwen2.5-1.5B-Instruct",
+          "url": "https://huggingface.co/onnx-community/Qwen2.5-1.5B-Instruct",
+          "publisher": "onnx-community",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": null,
+          "claim": "This is a community ONNX conversion, not a Qwen publication.",
+          "evidenceClass": "secondary",
+          "applicability": "Qwen/Qwen2.5-1.5B-Instruct at 989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+          "conflictDisposition": "rejected-unofficial"
+        }
+      ]
+    },
+    {
+      "modelId": "Qwen/Qwen2.5-3B-Instruct",
+      "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "priorBlockers": [
+        "bounded-subprocess-compatibility",
+        "documented-limitations",
+        "no-official-onnx",
+        "tokenizer-provenance"
+      ],
+      "weightLicenseResult": "pass",
+      "codeLicenseResult": "pass",
+      "commercialUseResult": "pass",
+      "commercialGrant": "not-granted",
+      "redistributionResult": "pass",
+      "acceptableUseResult": "pass",
+      "modelCardLimitationsResult": "fail",
+      "remoteCodeResult": "pass",
+      "officialSourceResult": "pass",
+      "mandatoryCriteria": {
+        "explicit-weight-use-license": "pass",
+        "clear-commercial-use-position": "pass",
+        "clear-redistribution-position": "pass",
+        "immutable-official-revision": "pass",
+        "no-remote-code-requirement": "pass",
+        "fully-offline-runtime-support": "pass",
+        "tokenizer-provenance": "fail",
+        "artifact-digest-capability": "pass",
+        "local-resource-fit": "pass",
+        "bounded-subprocess-compatibility": "fail",
+        "no-mandatory-telemetry": "pass",
+        "no-tenant-data-requirement": "pass",
+        "official-model-card": "pass",
+        "documented-limitations": "fail",
+        "no-production-dependency": "pass"
+      },
+      "mandatoryStatus": "fail",
+      "scoringEligible": false,
+      "weightedScore": null,
+      "disqualifiers": [
+        "bounded-subprocess-compatibility",
+        "documented-limitations",
+        "tokenizer-provenance"
+      ],
+      "conflicts": [
+        {
+          "topic": "qwen-research-commercial-use",
+          "status": "resolved",
+          "restrictiveInterpretation": "Weight commercial use is withheld and needs a separate license."
+        },
+        {
+          "topic": "published-context-length",
+          "status": "resolved",
+          "restrictiveInterpretation": "Series prose says 128K. This checkpoint says 32768. Use 32768."
+        },
+        {
+          "topic": "tokenizer-applicability",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The research license names weights. It does not name tokenizer files."
+        }
+      ],
+      "evidence": [
+        {
+          "evidenceId": "qwen3-readme",
+          "sourceName": "Qwen2.5-3B-Instruct model card",
+          "url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/blob/aa8e72537993ba99e69dfaafa59ed015b17504d1/README.md",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+          "claim": "The pinned card names qwen-research, states 32768 context, and has no limitations section.",
+          "evidenceClass": "authoritative",
+          "applicability": "Qwen/Qwen2.5-3B-Instruct at aa8e72537993ba99e69dfaafa59ed015b17504d1",
+          "conflictDisposition": "restrictive-reading"
+        },
+        {
+          "evidenceId": "qwen3-license",
+          "sourceName": "Qwen2.5-3B-Instruct research license",
+          "url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/blob/aa8e72537993ba99e69dfaafa59ed015b17504d1/LICENSE",
+          "publisher": "Alibaba Cloud",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+          "claim": "The research LICENSE withholds commercial weight use and omits tokenizer names.",
+          "evidenceClass": "authoritative",
+          "applicability": "Qwen/Qwen2.5-3B-Instruct at aa8e72537993ba99e69dfaafa59ed015b17504d1",
+          "conflictDisposition": "unresolved"
+        },
+        {
+          "evidenceId": "qwen3-listing",
+          "sourceName": "Qwen2.5-3B-Instruct revision listing",
+          "url": "https://huggingface.co/api/models/Qwen/Qwen2.5-3B-Instruct/revision/aa8e72537993ba99e69dfaafa59ed015b17504d1",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+          "claim": "The listing has LICENSE, two safetensors shards, tokenizer files, and no ONNX file.",
+          "evidenceClass": "authoritative",
+          "applicability": "Qwen/Qwen2.5-3B-Instruct at aa8e72537993ba99e69dfaafa59ed015b17504d1",
+          "conflictDisposition": "none"
+        },
+        {
+          "evidenceId": "qwen3-blog",
+          "sourceName": "Qwen2.5 official blog",
+          "url": "https://qwenlm.github.io/blog/qwen2.5/",
+          "publisher": "Qwen Team",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": null,
+          "claim": "The blog assigns this size the Qwen Research License, not Apache-2.0.",
+          "evidenceClass": "authoritative",
+          "applicability": "Qwen/Qwen2.5-3B-Instruct at aa8e72537993ba99e69dfaafa59ed015b17504d1",
+          "conflictDisposition": "restrictive-reading"
+        }
+      ]
+    },
+    {
+      "modelId": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "priorBlockers": [
+        "bounded-subprocess-compatibility",
+        "converted-onnx-not-qualifying",
+        "explicit-weight-use-license",
+        "onnx-directory-exceeds-artifact-cap",
+        "quantization-not-approved",
+        "tokenizer-provenance"
+      ],
+      "weightLicenseResult": "fail",
+      "codeLicenseResult": "fail",
+      "commercialUseResult": "unresolved",
+      "commercialGrant": "unresolved",
+      "redistributionResult": "unresolved",
+      "acceptableUseResult": "unresolved",
+      "modelCardLimitationsResult": "pass",
+      "remoteCodeResult": "pass",
+      "officialSourceResult": "pass",
+      "mandatoryCriteria": {
+        "explicit-weight-use-license": "fail",
+        "clear-commercial-use-position": "fail",
+        "clear-redistribution-position": "fail",
+        "immutable-official-revision": "pass",
+        "no-remote-code-requirement": "pass",
+        "fully-offline-runtime-support": "pass",
+        "tokenizer-provenance": "fail",
+        "artifact-digest-capability": "pass",
+        "local-resource-fit": "fail",
+        "bounded-subprocess-compatibility": "fail",
+        "no-mandatory-telemetry": "pass",
+        "no-tenant-data-requirement": "pass",
+        "official-model-card": "pass",
+        "documented-limitations": "pass",
+        "no-production-dependency": "pass"
+      },
+      "mandatoryStatus": "fail",
+      "scoringEligible": false,
+      "weightedScore": null,
+      "disqualifiers": [
+        "bounded-subprocess-compatibility",
+        "clear-commercial-use-position",
+        "clear-redistribution-position",
+        "explicit-weight-use-license",
+        "local-resource-fit",
+        "tokenizer-provenance"
+      ],
+      "conflicts": [
+        {
+          "topic": "weight-license-instrument",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The card says Apache-2.0 and the pinned tree has no LICENSE file. Weight use stays unresolved."
+        },
+        {
+          "topic": "remote-code-example",
+          "status": "resolved",
+          "restrictiveInterpretation": "One sample sets trust_remote_code. The pinned tree lists no Python module."
+        }
+      ],
+      "evidence": [
+        {
+          "evidenceId": "smol-readme",
+          "sourceName": "SmolLM2-1.7B-Instruct model card",
+          "url": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct/blob/31b70e2e869a7173562077fd711b654946d38674/README.md",
+          "publisher": "HuggingFaceTB",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "31b70e2e869a7173562077fd711b654946d38674",
+          "claim": "The card has a limitations section. Its Apache-2.0 line is not a LICENSE file.",
+          "evidenceClass": "authoritative",
+          "applicability": "HuggingFaceTB/SmolLM2-1.7B-Instruct at 31b70e2e869a7173562077fd711b654946d38674",
+          "conflictDisposition": "restrictive-reading"
+        },
+        {
+          "evidenceId": "smol-listing",
+          "sourceName": "SmolLM2-1.7B-Instruct revision listing",
+          "url": "https://huggingface.co/api/models/HuggingFaceTB/SmolLM2-1.7B-Instruct",
+          "publisher": "HuggingFaceTB",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "31b70e2e869a7173562077fd711b654946d38674",
+          "claim": "This revision is the repository head. It lists ONNX and tokenizer files and no LICENSE file.",
+          "evidenceClass": "authoritative",
+          "applicability": "HuggingFaceTB/SmolLM2-1.7B-Instruct at 31b70e2e869a7173562077fd711b654946d38674",
+          "conflictDisposition": "none"
+        },
+        {
+          "evidenceId": "smol-cosmo2",
+          "sourceName": "cosmo2 tokenizer card",
+          "url": "https://huggingface.co/api/models/HuggingFaceTB/cosmo2-tokenizer",
+          "publisher": "HuggingFaceTB",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "4ce2318a3628e77279c939ed6a9f3f03034402de",
+          "claim": "The cosmo2 revision has no license field and no LICENSE file.",
+          "evidenceClass": "authoritative",
+          "applicability": "HuggingFaceTB/SmolLM2-1.7B-Instruct at 31b70e2e869a7173562077fd711b654946d38674",
+          "conflictDisposition": "unresolved"
+        }
+      ]
+    },
+    {
+      "modelId": "allenai/OLMo-2-0425-1B-Instruct",
+      "revision": "48d788eca847d4d7548f375ad03d3c9312f6139e",
+      "priorBlockers": [
+        "bounded-subprocess-compatibility",
+        "explicit-weight-use-license",
+        "no-official-onnx",
+        "tokenizer-provenance"
+      ],
+      "weightLicenseResult": "fail",
+      "codeLicenseResult": "fail",
+      "commercialUseResult": "pass",
+      "commercialGrant": "restricted",
+      "redistributionResult": "unresolved",
+      "acceptableUseResult": "pass",
+      "modelCardLimitationsResult": "pass",
+      "remoteCodeResult": "pass",
+      "officialSourceResult": "pass",
+      "mandatoryCriteria": {
+        "explicit-weight-use-license": "fail",
+        "clear-commercial-use-position": "pass",
+        "clear-redistribution-position": "fail",
+        "immutable-official-revision": "pass",
+        "no-remote-code-requirement": "pass",
+        "fully-offline-runtime-support": "pass",
+        "tokenizer-provenance": "fail",
+        "artifact-digest-capability": "pass",
+        "local-resource-fit": "pass",
+        "bounded-subprocess-compatibility": "fail",
+        "no-mandatory-telemetry": "pass",
+        "no-tenant-data-requirement": "pass",
+        "official-model-card": "pass",
+        "documented-limitations": "pass",
+        "no-production-dependency": "pass"
+      },
+      "mandatoryStatus": "fail",
+      "scoringEligible": false,
+      "weightedScore": null,
+      "disqualifiers": [
+        "bounded-subprocess-compatibility",
+        "clear-redistribution-position",
+        "explicit-weight-use-license",
+        "tokenizer-provenance"
+      ],
+      "conflicts": [
+        {
+          "topic": "weight-license-instrument",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The card says Apache-2.0 and the pinned tree has no LICENSE file. Redistribution stays unresolved."
+        },
+        {
+          "topic": "research-and-educational-use",
+          "status": "resolved",
+          "restrictiveInterpretation": "The card limits use to research and education. That position controls and supplies no LICENSE file."
+        }
+      ],
+      "evidence": [
+        {
+          "evidenceId": "olmo-readme",
+          "sourceName": "OLMo-2-0425-1B-Instruct model card",
+          "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-Instruct/blob/48d788eca847d4d7548f375ad03d3c9312f6139e/README.md",
+          "publisher": "Allen Institute for AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "48d788eca847d4d7548f375ad03d3c9312f6139e",
+          "claim": "The card states research use and limited safety training. The tree has no LICENSE file.",
+          "evidenceClass": "authoritative",
+          "applicability": "allenai/OLMo-2-0425-1B-Instruct at 48d788eca847d4d7548f375ad03d3c9312f6139e",
+          "conflictDisposition": "restrictive-reading"
+        },
+        {
+          "evidenceId": "olmo-listing",
+          "sourceName": "OLMo-2-0425-1B-Instruct revision listing",
+          "url": "https://huggingface.co/api/models/allenai/OLMo-2-0425-1B-Instruct/revision/48d788eca847d4d7548f375ad03d3c9312f6139e",
+          "publisher": "Allen Institute for AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "48d788eca847d4d7548f375ad03d3c9312f6139e",
+          "claim": "The listing has tokenizer files and safetensors. It has no LICENSE file and no ONNX file.",
+          "evidenceClass": "authoritative",
+          "applicability": "allenai/OLMo-2-0425-1B-Instruct at 48d788eca847d4d7548f375ad03d3c9312f6139e",
+          "conflictDisposition": "none"
+        },
+        {
+          "evidenceId": "olmo-dolma2",
+          "sourceName": "dolma2 tokenizer card",
+          "url": "https://huggingface.co/api/models/allenai/dolma2-tokenizer",
+          "publisher": "Allen Institute for AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "5292e5d6c0f40b67cc765fe41bec991cf4345b5c",
+          "claim": "The dolma2 revision has no license field and no LICENSE file.",
+          "evidenceClass": "authoritative",
+          "applicability": "allenai/OLMo-2-0425-1B-Instruct at 48d788eca847d4d7548f375ad03d3c9312f6139e",
+          "conflictDisposition": "unresolved"
+        },
+        {
+          "evidenceId": "olmo-responsible-use",
+          "sourceName": "Ai2 Responsible Use Guidelines",
+          "url": "https://allenai.org/responsible-use",
+          "publisher": "Allen Institute for AI",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": null,
+          "claim": "The card points to this page. This retrieval returned no page body, so it closes nothing.",
+          "evidenceClass": "unresolved",
+          "applicability": "allenai/OLMo-2-0425-1B-Instruct at 48d788eca847d4d7548f375ad03d3c9312f6139e",
+          "conflictDisposition": "unresolved"
+        }
+      ]
+    },
+    {
+      "modelId": "google/gemma-3-1b-it",
+      "revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+      "priorBlockers": [
+        "artifact-digest-capability",
+        "bounded-subprocess-compatibility",
+        "fully-offline-runtime-support",
+        "no-official-onnx",
+        "tokenizer-provenance"
+      ],
+      "weightLicenseResult": "pass",
+      "codeLicenseResult": "unresolved",
+      "commercialUseResult": "pass",
+      "commercialGrant": "restricted",
+      "redistributionResult": "pass",
+      "acceptableUseResult": "pass",
+      "modelCardLimitationsResult": "pass",
+      "remoteCodeResult": "pass",
+      "officialSourceResult": "pass",
+      "mandatoryCriteria": {
+        "explicit-weight-use-license": "pass",
+        "clear-commercial-use-position": "pass",
+        "clear-redistribution-position": "pass",
+        "immutable-official-revision": "pass",
+        "no-remote-code-requirement": "pass",
+        "fully-offline-runtime-support": "fail",
+        "tokenizer-provenance": "fail",
+        "artifact-digest-capability": "fail",
+        "local-resource-fit": "pass",
+        "bounded-subprocess-compatibility": "fail",
+        "no-mandatory-telemetry": "pass",
+        "no-tenant-data-requirement": "pass",
+        "official-model-card": "pass",
+        "documented-limitations": "pass",
+        "no-production-dependency": "pass"
+      },
+      "mandatoryStatus": "fail",
+      "scoringEligible": false,
+      "weightedScore": null,
+      "disqualifiers": [
+        "artifact-digest-capability",
+        "bounded-subprocess-compatibility",
+        "fully-offline-runtime-support",
+        "tokenizer-provenance"
+      ],
+      "conflicts": [
+        {
+          "topic": "remote-restriction",
+          "status": "unresolved",
+          "restrictiveInterpretation": "Section 3.2 reserves remote restriction. Offline runtime support stays fail."
+        },
+        {
+          "topic": "tokenizer-grant",
+          "status": "unresolved",
+          "restrictiveInterpretation": "The terms cover weights and parameters. They do not name a tokenizer."
+        },
+        {
+          "topic": "published-context-length",
+          "status": "resolved",
+          "restrictiveInterpretation": "Family prose says 128K. The 1B size is 32K tokens. Use 32768."
+        },
+        {
+          "topic": "upstream-digest",
+          "status": "conflicting",
+          "restrictiveInterpretation": "The listing published no accepted safetensors digest. None is stored."
+        }
+      ],
+      "evidence": [
+        {
+          "evidenceId": "gemma-terms",
+          "sourceName": "Gemma terms of use",
+          "url": "https://ai.google.dev/gemma/terms",
+          "publisher": "Google",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": null,
+          "claim": "The terms dated 2026-04-01 cover Gemma 3 weights and reserve remote restriction.",
+          "evidenceClass": "authoritative",
+          "applicability": "google/gemma-3-1b-it at dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+          "conflictDisposition": "restrictive-reading"
+        },
+        {
+          "evidenceId": "gemma-model-card",
+          "sourceName": "Gemma 3 model card",
+          "url": "https://ai.google.dev/gemma/docs/core/model_card_3",
+          "publisher": "Google DeepMind",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": null,
+          "claim": "The card states limitations and assigns 32K context to the 1B size.",
+          "evidenceClass": "authoritative",
+          "applicability": "google/gemma-3-1b-it at dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+          "conflictDisposition": "restrictive-reading"
+        },
+        {
+          "evidenceId": "gemma-listing",
+          "sourceName": "gemma-3-1b-it revision listing",
+          "url": "https://huggingface.co/api/models/google/gemma-3-1b-it/revision/dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+          "publisher": "Google",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+          "claim": "The listing has tokenizer.model and safetensors. It has no ONNX file and no accepted digest.",
+          "evidenceClass": "authoritative",
+          "applicability": "google/gemma-3-1b-it at dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+          "conflictDisposition": "unresolved"
+        },
+        {
+          "evidenceId": "gemma-unofficial-onnx",
+          "sourceName": "Unofficial Gemma ONNX repositories",
+          "url": "https://huggingface.co/onnx-community/gemma-3-1b-it-ONNX",
+          "publisher": "onnx-community",
+          "retrievedOn": "2026-11-11",
+          "immutableRevision": null,
+          "claim": "onnx-community and Microsoft Gemma-3-ONNX are not Google publications of this checkpoint.",
+          "evidenceClass": "secondary",
+          "applicability": "google/gemma-3-1b-it at dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+          "conflictDisposition": "rejected-unofficial"
+        }
+      ]
+    }
+  ]
+}

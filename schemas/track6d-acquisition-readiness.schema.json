@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track6d-acquisition-readiness:v1",
+  "title": "Track 6D acquisition readiness",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "selectionOutcome",
+    "selectedModelId",
+    "scoringApplied",
+    "qualifyingCandidateCount",
+    "readinessOutcome",
+    "verdict",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "installationAuthorized",
+    "conversionAuthorized",
+    "quantizationApproved",
+    "blockers",
+    "locallyObservedArtifactDigests"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "selectionOutcome": { "enum": ["no-selection", "selected"] },
+    "selectedModelId": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "enum": [
+            "Qwen/Qwen2.5-1.5B-Instruct",
+            "Qwen/Qwen2.5-3B-Instruct",
+            "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+            "allenai/OLMo-2-0425-1B-Instruct",
+            "google/gemma-3-1b-it"
+          ]
+        }
+      ]
+    },
+    "scoringApplied": { "type": "boolean" },
+    "qualifyingCandidateCount": { "type": "integer", "minimum": 0, "maximum": 1 },
+    "readinessOutcome": {
+      "enum": ["ready", "ready-with-residuals", "not-ready", "blocked"]
+    },
+    "verdict": {
+      "enum": [
+        "TRACK 6D CONTROLLED ACQUISITION READY",
+        "TRACK 6D CONTROLLED ACQUISITION READY WITH DOCUMENTED RESIDUALS",
+        "TRACK 6D CONTROLLED ACQUISITION NOT READY",
+        "TRACK 6D CONTROLLED ACQUISITION BLOCKED BY UNRESOLVED AUTHORITY"
+      ]
+    },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "installationAuthorized": { "const": false },
+    "conversionAuthorized": { "const": false },
+    "quantizationApproved": { "const": false },
+    "blockers": {
+      "type": "array",
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+    },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 }
+  }
+}
