@@ -30,6 +30,10 @@ from patchpilot_intelligence_evals.candidate_manifest import ManifestError, load
 from patchpilot_intelligence_evals.comparison import compare_results
 from patchpilot_intelligence_evals.conversion_plan import ConversionPlanError, load_conversion_plan
 from patchpilot_intelligence_evals.corpus import CorpusError, canonical_dumps, validate_corpus
+from patchpilot_intelligence_evals.dependency_architecture_policy import (
+    DependencyPolicyError,
+    validate_dependency_policy,
+)
 from patchpilot_intelligence_evals.direct_onnx_evidence import (
     OnnxEvidenceError,
     load_direct_onnx_evidence,
@@ -109,6 +113,10 @@ from patchpilot_intelligence_evals.track6c_readiness import (
     load_track6c_readiness,
 )
 from patchpilot_intelligence_evals.track6d_readiness import Track6DError, load_track6d_readiness
+from patchpilot_intelligence_evals.workflow_policy import (
+    WorkflowPolicyError,
+    validate_workflow_policy,
+)
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -152,6 +160,8 @@ def _parser() -> argparse.ArgumentParser:
     commands.add_parser("artifact-budget-validation")
     commands.add_parser("bounded-subprocess-compatibility-validation")
     commands.add_parser("track6d-readiness-validation")
+    commands.add_parser("workflow-policy-validation")
+    commands.add_parser("dependency-architecture-policy-validation")
     one_case = commands.add_parser("candidate-execution")
     one_case.add_argument("--manifest", required=True)
     one_case.add_argument("--case-id", required=True)
@@ -703,6 +713,10 @@ def main(argv: list[str] | None = None) -> int:
                         "calibrationDigest": record["calibrationDigest"],
                     }
                 )
+            if args.command == "workflow-policy-validation":
+                return _summary(validate_workflow_policy())
+            if args.command == "dependency-architecture-policy-validation":
+                return _summary(validate_dependency_policy())
             return _fail()
     except (
         AcquisitionError,
@@ -735,6 +749,8 @@ def main(argv: list[str] | None = None) -> int:
         Track6AReviewError,
         ResultStoreError,
         SchemaValidationError,
+        DependencyPolicyError,
+        WorkflowPolicyError,
         json.JSONDecodeError,
     ):
         return _fail()

@@ -1,0 +1,298 @@
+{
+  "schemaVersion": 1,
+  "recordId": "repository-hardening-1",
+  "rulesetApplicationStatus": "not-applied",
+  "pullRequestObservationStatus": "not-observed",
+  "mergeQueue": "not-enabled",
+  "classicBranchProtection": "absent",
+  "observedCheckContexts": [],
+  "intendedRequiredChecks": [
+    {
+      "context": "Validation / Quality",
+      "workflowPath": ".github/workflows/validate.yml",
+      "workflowName": "Validation",
+      "jobId": "quality",
+      "jobName": "Quality",
+      "status": "required",
+      "applicableEvents": [
+        "pull_request",
+        "push",
+        "workflow_dispatch"
+      ]
+    },
+    {
+      "context": "Validation / Tests",
+      "workflowPath": ".github/workflows/validate.yml",
+      "workflowName": "Validation",
+      "jobId": "tests",
+      "jobName": "Tests",
+      "status": "required",
+      "applicableEvents": [
+        "pull_request",
+        "push",
+        "workflow_dispatch"
+      ]
+    },
+    {
+      "context": "Validation / Repository Contracts",
+      "workflowPath": ".github/workflows/validate.yml",
+      "workflowName": "Validation",
+      "jobId": "repository-contracts",
+      "jobName": "Repository Contracts",
+      "status": "required",
+      "applicableEvents": [
+        "pull_request",
+        "push",
+        "workflow_dispatch"
+      ]
+    },
+    {
+      "context": "CodeQL / Analyze",
+      "workflowPath": ".github/workflows/codeql.yml",
+      "workflowName": "CodeQL",
+      "jobId": "analyze",
+      "jobName": "Analyze",
+      "status": "required",
+      "applicableEvents": [
+        "pull_request",
+        "push",
+        "schedule",
+        "workflow_dispatch"
+      ]
+    },
+    {
+      "context": "Dependency Review / Dependency Review",
+      "workflowPath": ".github/workflows/dependency-review.yml",
+      "workflowName": "Dependency Review",
+      "jobId": "dependency-review",
+      "jobName": "Dependency Review",
+      "status": "required",
+      "applicableEvents": [
+        "pull_request"
+      ]
+    }
+  ],
+  "currentRuleset": {
+    "id": 26864084,
+    "name": "Require validation",
+    "enforcement": "active",
+    "target": "~DEFAULT_BRANCH",
+    "requiredCheckContext": "validate",
+    "observedCheckRunName": "validate",
+    "strictRequiredStatusChecks": false,
+    "dismissStaleReviews": false,
+    "conversationResolution": true,
+    "deletionBlocked": true,
+    "forcePushBlocked": true,
+    "linearHistory": "not-required",
+    "bypassActors": [],
+    "approvingReviewCount": 0,
+    "allowedMergeMethods": [
+      "merge",
+      "squash",
+      "rebase"
+    ],
+    "doNotEnforceOnCreate": true,
+    "htmlUrl": "https://github.com/rudzy123/patchpilot-intelligence-evals/rules/26864084"
+  },
+  "operatorChanges": [
+    "Set strict_required_status_checks_policy to true after observed check names exist.",
+    "Set dismiss_stale_reviews_on_push to true.",
+    "Replace the required context validate with the observed check-run names.",
+    "Do not enable required_linear_history.",
+    "Do not enable merge_queue.",
+    "Do not add bypass actors."
+  ],
+  "workflows": [
+    {
+      "id": "validation",
+      "path": ".github/workflows/validate.yml",
+      "name": "Validation",
+      "implementationStatus": "implemented",
+      "observedOnPullRequest": false,
+      "triggers": {
+        "pull_request": {
+          "branches": [
+            "main"
+          ]
+        },
+        "push": {
+          "branches": [
+            "main"
+          ]
+        },
+        "workflow_dispatch": null
+      },
+      "permissions": {
+        "contents": "read"
+      },
+      "concurrency": {
+        "group": "${{ github.workflow }}-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || format('run-{0}', github.run_id) }}",
+        "cancelInProgress": "${{ github.event_name == 'pull_request' }}"
+      },
+      "jobs": [
+        {
+          "id": "quality",
+          "name": "Quality",
+          "timeoutMinutes": 15
+        },
+        {
+          "id": "tests",
+          "name": "Tests",
+          "timeoutMinutes": 30
+        },
+        {
+          "id": "repository-contracts",
+          "name": "Repository Contracts",
+          "timeoutMinutes": 30
+        }
+      ],
+      "requiredStatus": "required"
+    },
+    {
+      "id": "codeql",
+      "path": ".github/workflows/codeql.yml",
+      "name": "CodeQL",
+      "implementationStatus": "implemented",
+      "observedOnPullRequest": false,
+      "triggers": {
+        "pull_request": {
+          "branches": [
+            "main"
+          ]
+        },
+        "push": {
+          "branches": [
+            "main"
+          ]
+        },
+        "schedule": [
+          {
+            "cron": "17 6 * * 1"
+          }
+        ],
+        "workflow_dispatch": null
+      },
+      "permissions": {
+        "contents": "read",
+        "security-events": "write"
+      },
+      "concurrency": {
+        "group": "${{ github.workflow }}-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || format('run-{0}', github.run_id) }}",
+        "cancelInProgress": "${{ github.event_name == 'pull_request' }}"
+      },
+      "jobs": [
+        {
+          "id": "analyze",
+          "name": "Analyze",
+          "timeoutMinutes": 30
+        }
+      ],
+      "requiredStatus": "required"
+    },
+    {
+      "id": "dependency-review",
+      "path": ".github/workflows/dependency-review.yml",
+      "name": "Dependency Review",
+      "implementationStatus": "implemented",
+      "observedOnPullRequest": false,
+      "triggers": {
+        "pull_request": {
+          "branches": [
+            "main"
+          ]
+        }
+      },
+      "permissions": {
+        "contents": "read"
+      },
+      "concurrency": {
+        "group": "${{ github.workflow }}-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || format('run-{0}', github.run_id) }}",
+        "cancelInProgress": "${{ github.event_name == 'pull_request' }}"
+      },
+      "jobs": [
+        {
+          "id": "dependency-review",
+          "name": "Dependency Review",
+          "timeoutMinutes": 15
+        }
+      ],
+      "requiredStatus": "required"
+    }
+  ],
+  "actions": [
+    {
+      "repository": "actions/checkout",
+      "path": "",
+      "reviewTag": "v7.0.1",
+      "commitSha": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "officialSource": "https://github.com/actions/checkout",
+      "retrievalDate": "2026-11-11",
+      "license": "MIT",
+      "purpose": "Check out the repository without persisting credentials.",
+      "authorClass": "github",
+      "tagKind": "lightweight"
+    },
+    {
+      "repository": "astral-sh/setup-uv",
+      "path": "",
+      "reviewTag": "v10.3.3",
+      "commitSha": "68559e99cc807c1eb7e9238fd43a15bba460eec2",
+      "officialSource": "https://github.com/astral-sh/setup-uv",
+      "retrievalDate": "2026-11-11",
+      "license": "MIT",
+      "purpose": "Install uv 0.13.0 and select Python 3.12 without a dependency cache.",
+      "authorClass": "astral",
+      "tagKind": "lightweight"
+    },
+    {
+      "repository": "github/codeql-action",
+      "path": "init",
+      "reviewTag": "v4.39.3",
+      "commitSha": "33d7b85da1a04171e211befe2c739303b9a4c066",
+      "officialSource": "https://github.com/github/codeql-action",
+      "retrievalDate": "2026-11-11",
+      "license": "MIT",
+      "purpose": "Initialize Python CodeQL with build-mode none.",
+      "authorClass": "github",
+      "tagKind": "annotated"
+    },
+    {
+      "repository": "github/codeql-action",
+      "path": "analyze",
+      "reviewTag": "v4.39.3",
+      "commitSha": "33d7b85da1a04171e211befe2c739303b9a4c066",
+      "officialSource": "https://github.com/github/codeql-action",
+      "retrievalDate": "2026-11-11",
+      "license": "MIT",
+      "purpose": "Analyze Python and upload code-scanning results.",
+      "authorClass": "github",
+      "tagKind": "annotated"
+    },
+    {
+      "repository": "actions/dependency-review-action",
+      "path": "",
+      "reviewTag": "v5.0.0",
+      "commitSha": "a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+      "officialSource": "https://github.com/actions/dependency-review-action",
+      "retrievalDate": "2026-11-11",
+      "license": "MIT",
+      "purpose": "Fail a pull request on high or critical dependency advisories.",
+      "authorClass": "github",
+      "tagKind": "lightweight"
+    }
+  ],
+  "manualOperatorSteps": [
+    "Open the hardening pull request and wait for the new check runs.",
+    "Read check-run names from the commits API before choosing ruleset contexts.",
+    "Edit ruleset 26864084 only. Do not create a second ruleset.",
+    "Replace context validate with the observed names.",
+    "Enable strict up-to-date checks and stale review dismissal.",
+    "Keep pull requests, conversation resolution, and deletion blocking.",
+    "Keep force-push blocking and an empty bypass list.",
+    "Leave the approving review count at 0 and keep the current merge methods.",
+    "Do not enable linear history or a merge queue.",
+    "Read the branch rules back before merging.",
+    "Leave rulesetApplicationStatus at not-applied until a later reviewed record."
+  ]
+}

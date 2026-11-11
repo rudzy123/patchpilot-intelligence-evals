@@ -52,6 +52,10 @@ A future ONNX Runtime archive would be staged outside this repository, outside t
 
 Track 6D acquisition readiness is `not-ready`. The record does not authorize runtime installation, model or tokenizer acquisition, model conversion, candidate selection, or real inference. Validation reads local records only.
 
+## GitHub Actions
+
+Workflows read repository contents. CodeQL may also write code-scanning results. They do not receive secrets, persist checkout credentials, or use `pull_request_target`. Action pins and the dependency rules are in [docs/security/github-actions-supply-chain.md](docs/security/github-actions-supply-chain.md). A workflow does not change branch protection or repository rulesets. The operator procedure is [docs/operations/main-ruleset-procedure.md](docs/operations/main-ruleset-procedure.md). `productionReady` stays false.
+
 ## Supported use
 
 Offline harness checks and future offline candidate runs inside this repository. Do not use these fixtures for production decisions.
