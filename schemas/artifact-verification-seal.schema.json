@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:artifact-verification-seal:v1",
+  "title": "Artifact verification seal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "locallyObservedArtifactDigests",
+    "sealState",
+    "attemptId",
+    "executionEligibility",
+    "laterSessionEligibility",
+    "logicalInventoryBytes",
+    "allocatedInventoryBytes",
+    "transientAcquisitionAuthorized",
+    "transientAcquisitionOverheadBytes",
+    "sameFilesystem",
+    "syncSteps",
+    "failureCategory",
+    "inventoryIdentity",
+    "files",
+    "identityDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "sealState": { "enum": ["not-acquired", "sealed", "rejected"] },
+    "attemptId": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,40}$" }
+      ]
+    },
+    "executionEligibility": { "const": "prohibited" },
+    "laterSessionEligibility": { "const": "none" },
+    "logicalInventoryBytes": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9223372036854775807
+    },
+    "allocatedInventoryBytes": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "integer", "minimum": 0, "maximum": 9223372036854775807 }
+      ]
+    },
+    "transientAcquisitionAuthorized": { "const": false },
+    "transientAcquisitionOverheadBytes": { "type": "null" },
+    "sameFilesystem": { "oneOf": [{ "type": "null" }, { "type": "boolean" }] },
+    "syncSteps": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "enum": [
+          "manifest-file",
+          "quarantine-directory",
+          "file-data",
+          "rename-noreplace",
+          "verified-parent-directory",
+          "receipt-file",
+          "verified-parent-directory-after-receipt"
+        ]
+      }
+    },
+    "failureCategory": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[a-z0-9-]{3,80}$" }
+      ]
+    },
+    "inventoryIdentity": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      ]
+    },
+    "files": {
+      "type": "array",
+      "maxItems": 32,
+      "items": { "$ref": "#/$defs/file" }
+    },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "sealState": { "const": "not-acquired" } },
+        "required": ["sealState"]
+      },
+      "then": {
+        "properties": {
+          "attemptId": { "type": "null" },
+          "files": { "maxItems": 0 },
+          "logicalInventoryBytes": { "const": 0 },
+          "allocatedInventoryBytes": { "type": "null" },
+          "sameFilesystem": { "type": "null" },
+          "syncSteps": { "maxItems": 0 },
+          "failureCategory": { "type": "null" },
+          "inventoryIdentity": { "type": "null" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "sealState": { "const": "sealed" } },
+        "required": ["sealState"]
+      },
+      "then": {
+        "properties": {
+          "attemptId": { "type": "string" },
+          "files": { "minItems": 1 },
+          "sameFilesystem": { "const": true },
+          "failureCategory": { "type": "null" },
+          "inventoryIdentity": { "type": "string" },
+          "syncSteps": { "minItems": 2 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allocatedBytes", "fileType", "linkCount", "logicalBytes", "mtimeNs"],
+      "properties": {
+        "allocatedBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "fileType": { "const": "regular" },
+        "linkCount": { "const": 1 },
+        "logicalBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "mtimeNs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        }
+      }
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relativeName",
+        "logicalBytes",
+        "allocatedBytes",
+        "sha256",
+        "expectedSha256",
+        "fileType",
+        "linkCount",
+        "mtimeNs",
+        "preVerification",
+        "postVerification",
+        "metadataMatches",
+        "digestMatches"
+      ],
+      "properties": {
+        "relativeName": {
+          "type": "string",
+          "pattern": "^(?:[A-Za-z0-9][A-Za-z0-9._-]{0,80})(?:/(?:[A-Za-z0-9][A-Za-z0-9._-]{0,80})){0,4}$"
+        },
+        "logicalBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "allocatedBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "expectedSha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          ]
+        },
+        "fileType": { "const": "regular" },
+        "linkCount": { "const": 1 },
+        "mtimeNs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "preVerification": { "$ref": "#/$defs/metadata" },
+        "postVerification": { "$ref": "#/$defs/metadata" },
+        "metadataMatches": { "const": true },
+        "digestMatches": { "const": true }
+      }
+    }
+  }
+}

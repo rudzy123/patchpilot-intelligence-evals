@@ -17,6 +17,14 @@ from patchpilot_intelligence_evals.artifact_verification import (
     VerificationError,
     load_verification_manifest,
 )
+from patchpilot_intelligence_evals.atomic_promotion import (
+    PromotionError,
+    load_attempt_template,
+    load_receipt_template,
+    run_synthetic_storage_check,
+)
+from patchpilot_intelligence_evals.cache_cleanup import CleanupError
+from patchpilot_intelligence_evals.cache_recovery import RecoveryError, load_recovery_template
 from patchpilot_intelligence_evals.candidate_discovery import (
     DiscoveryError,
     load_candidate_discovery,
@@ -119,6 +127,7 @@ from patchpilot_intelligence_evals.sandbox_capabilities import (
     load_capability_report,
 )
 from patchpilot_intelligence_evals.schemas import SchemaValidationError, repo_root
+from patchpilot_intelligence_evals.storage_budget import StorageBudgetError, load_storage_policy
 from patchpilot_intelligence_evals.subprocess_compatibility import (
     SubprocessError,
     load_subprocess_compatibility,
@@ -139,10 +148,17 @@ from patchpilot_intelligence_evals.track7_selection import (
     Track7SelectionError,
     load_track7_selection,
 )
+from patchpilot_intelligence_evals.track7a_review import Track7AReviewError, load_track7a_review
 from patchpilot_intelligence_evals.track8_authorization import (
     Track8AuthorizationError,
     load_track8_authorization,
 )
+from patchpilot_intelligence_evals.track8a_readiness import (
+    Track8AReadinessError,
+    load_budget_recalculation,
+    load_track8a_readiness,
+)
+from patchpilot_intelligence_evals.verification_seal import SealError, load_seal_template
 from patchpilot_intelligence_evals.workflow_policy import (
     WorkflowPolicyError,
     validate_workflow_policy,
@@ -199,6 +215,15 @@ def _parser() -> argparse.ArgumentParser:
     commands.add_parser("track7-selection-validation")
     commands.add_parser("track8-acquisition-authorization-validation")
     commands.add_parser("track7-review-validation")
+    commands.add_parser("artifact-storage-policy-validation")
+    commands.add_parser("artifact-verification-seal-validation")
+    commands.add_parser("artifact-promotion-attempt-validation")
+    commands.add_parser("artifact-promotion-receipt-validation")
+    commands.add_parser("artifact-recovery-decision-validation")
+    commands.add_parser("artifact-budget-recalculation-validation")
+    commands.add_parser("track8a-storage-readiness-validation")
+    commands.add_parser("track7a-review-validation")
+    commands.add_parser("storage-safety-synthetic-check")
     commands.add_parser("workflow-policy-validation")
     commands.add_parser("dependency-architecture-policy-validation")
     one_case = commands.add_parser("candidate-execution")
@@ -558,6 +583,107 @@ def main(argv: list[str] | None = None) -> int:
                         "productionReady": False,
                     }
                 )
+            if args.command == "artifact-storage-policy-validation":
+                policy = load_storage_policy()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "copyPromotionStorageOutcome": policy["copyPromotionStorageOutcome"],
+                        "atomicPromotionStorageOutcome": policy["atomicPromotionStorageOutcome"],
+                        "crossFilesystemStorageOutcome": policy["crossFilesystemStorageOutcome"],
+                        "selectionOutcome": policy["selectionOutcome"],
+                        "authorizationOutcome": policy["authorizationOutcome"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "artifact-verification-seal-validation":
+                seal = load_seal_template()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "sealState": seal["sealState"],
+                        "executionEligibility": seal["executionEligibility"],
+                        "acquisitionStatus": seal["acquisitionStatus"],
+                        "executionStatus": seal["executionStatus"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "artifact-promotion-attempt-validation":
+                attempt = load_attempt_template()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "attemptState": attempt["attemptState"],
+                        "executionEligibility": attempt["executionEligibility"],
+                        "copyFallbackUsed": False,
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "artifact-promotion-receipt-validation":
+                receipt = load_receipt_template()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "receiptState": receipt["receiptState"],
+                        "executionEligibility": receipt["executionEligibility"],
+                        "copyFallbackUsed": False,
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "artifact-recovery-decision-validation":
+                decision = load_recovery_template()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "classification": decision["classification"],
+                        "executionEligibility": decision["executionEligibility"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "artifact-budget-recalculation-validation":
+                recalculation = load_budget_recalculation()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "copyStorageOnlyEligibility": recalculation["copyStorageOnlyEligibility"],
+                        "atomicStorageOnlyEligibility": recalculation[
+                            "atomicStorageOnlyEligibility"
+                        ],
+                        "crossFilesystemStorageOnlyEligibility": recalculation[
+                            "crossFilesystemStorageOnlyEligibility"
+                        ],
+                        "selectionOutcome": recalculation["selectionOutcome"],
+                        "authorizationOutcome": recalculation["authorizationOutcome"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "track8a-storage-readiness-validation":
+                readiness = load_track8a_readiness()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "readinessOutcome": readiness["readinessOutcome"],
+                        "storageBlocker": readiness["storageBlocker"],
+                        "authorizationOutcome": readiness["authorizationOutcome"],
+                        "selectionOutcome": readiness["selectionOutcome"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "track7a-review-validation":
+                review = load_track7a_review()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "reviewStatus": review["reviewStatus"],
+                        "storageOnlyBlocker": review["storageOnlyBlocker"],
+                        "candidateDecision": review["candidateDecision"],
+                        "track8Authorization": review["track8Authorization"],
+                        "reviewDigest": review["reviewDigest"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "storage-safety-synthetic-check":
+                return _summary(run_synthetic_storage_check())
             if args.command == "artifact-cache-policy-validation":
                 policy = load_cache_policy()
                 return _summary(
@@ -879,7 +1005,14 @@ def main(argv: list[str] | None = None) -> int:
         SuitabilityError,
         Track7SelectionError,
         Track7ReviewError,
+        Track7AReviewError,
         Track8AuthorizationError,
+        Track8AReadinessError,
+        SealError,
+        PromotionError,
+        CleanupError,
+        RecoveryError,
+        StorageBudgetError,
         EligibilityError,
         TokenizerError,
         OnnxEvidenceError,

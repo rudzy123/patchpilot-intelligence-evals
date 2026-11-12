@@ -20,6 +20,7 @@ from patchpilot_intelligence_evals.schemas import (
     TRACK6B_SCHEMA_NAMES,
     TRACK6C_SCHEMA_NAMES,
     TRACK7_SCHEMA_NAMES,
+    TRACK7A_SCHEMA_NAMES,
     load_schema,
     repo_root,
     validate,
@@ -79,6 +80,10 @@ _DOCUMENTS = (
     "docs/architecture/candidate-pre-screen.md",
     "docs/architecture/direct-onnx-selection.md",
     "docs/architecture/track8-acquisition-boundary.md",
+    "docs/architecture/artifact-budget-model.md",
+    "docs/architecture/atomic-artifact-promotion.md",
+    "docs/architecture/artifact-cache-recovery.md",
+    "docs/architecture/track8a-storage-readiness.md",
     "docs/architecture/protected-repository-validation.md",
     "docs/security/github-actions-supply-chain.md",
     "docs/operations/required-checks.md",
@@ -99,6 +104,8 @@ _DOCUMENTS = (
     "docs/provenance/track7-candidate-evidence.md",
     "docs/provenance/track7-implementation-review.md",
     "docs/provenance/track7-source-register.md",
+    "docs/provenance/track7a-storage-analysis.md",
+    "docs/provenance/track7a-implementation-review.md",
 )
 
 
@@ -193,6 +200,15 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals track7-selection-validation",
         "uv run patchpilot-evals track8-acquisition-authorization-validation",
         "uv run patchpilot-evals track7-review-validation",
+        "uv run patchpilot-evals artifact-storage-policy-validation",
+        "uv run patchpilot-evals artifact-verification-seal-validation",
+        "uv run patchpilot-evals artifact-promotion-attempt-validation",
+        "uv run patchpilot-evals artifact-promotion-receipt-validation",
+        "uv run patchpilot-evals artifact-recovery-decision-validation",
+        "uv run patchpilot-evals artifact-budget-recalculation-validation",
+        "uv run patchpilot-evals track8a-storage-readiness-validation",
+        "uv run patchpilot-evals track7a-review-validation",
+        "uv run patchpilot-evals storage-safety-synthetic-check",
         "uv run patchpilot-evals workflow-policy-validation",
         "uv run patchpilot-evals dependency-architecture-policy-validation",
     ):
@@ -257,6 +273,15 @@ def test_help_lists_commands() -> None:
     assert "track7-selection-validation" in text
     assert "track8-acquisition-authorization-validation" in text
     assert "track7-review-validation" in text
+    assert "artifact-storage-policy-validation" in text
+    assert "artifact-verification-seal-validation" in text
+    assert "artifact-promotion-attempt-validation" in text
+    assert "artifact-promotion-receipt-validation" in text
+    assert "artifact-recovery-decision-validation" in text
+    assert "artifact-budget-recalculation-validation" in text
+    assert "track8a-storage-readiness-validation" in text
+    assert "track7a-review-validation" in text
+    assert "storage-safety-synthetic-check" in text
     assert "workflow-policy-validation" in text
     assert "dependency-architecture-policy-validation" in text
 
@@ -270,6 +295,7 @@ def test_committed_json_files_validate() -> None:
         + TRACK6B_SCHEMA_NAMES
         + TRACK6C_SCHEMA_NAMES
         + TRACK7_SCHEMA_NAMES
+        + TRACK7A_SCHEMA_NAMES
     )
     for name in names:
         document = load_schema(name)

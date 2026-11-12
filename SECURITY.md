@@ -56,6 +56,10 @@ Track 6D acquisition readiness is `not-ready`. The record does not authorize run
 
 Track 7 selection is `no-selection`. Track 8 authorization is `not-authorized`. Principal Architect review on 2026-11-11 approves that fail-closed landscape and does not authorize acquisition. Validation reads the local candidate records and does not acquire artifacts, install a runtime, convert a model, or execute inference. `productionReady` stays false.
 
+## Track 7A storage safety
+
+Track 7A storage readiness is `not-ready`. Principal Architect review on 2026-11-12 approves the storage model and same-filesystem atomic promotion with documented residuals. The atomic storage blocker is `resolved`. Copy promotion remains over the ceiling, and cross-filesystem promotion is ineligible. Selection stays `no-selection`. Track 8 authorization stays `not-authorized`. The synthetic CI check creates a temporary file outside the repository and does not download, install, convert, or execute a model. `productionReady` stays false.
+
 ## GitHub Actions
 
 Workflows read repository contents. CodeQL may also write code-scanning results. They do not receive secrets, persist checkout credentials, or use `pull_request_target`. Action pins and the dependency rules are in [docs/security/github-actions-supply-chain.md](docs/security/github-actions-supply-chain.md). A workflow does not change branch protection or repository rulesets. The operator procedure is [docs/operations/main-ruleset-procedure.md](docs/operations/main-ruleset-procedure.md). `productionReady` stays false.

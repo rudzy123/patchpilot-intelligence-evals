@@ -67,6 +67,15 @@ uv run patchpilot-evals finalist-explanation-suitability-validation
 uv run patchpilot-evals track7-selection-validation
 uv run patchpilot-evals track8-acquisition-authorization-validation
 uv run patchpilot-evals track7-review-validation
+uv run patchpilot-evals artifact-storage-policy-validation
+uv run patchpilot-evals artifact-verification-seal-validation
+uv run patchpilot-evals artifact-promotion-attempt-validation
+uv run patchpilot-evals artifact-promotion-receipt-validation
+uv run patchpilot-evals artifact-recovery-decision-validation
+uv run patchpilot-evals artifact-budget-recalculation-validation
+uv run patchpilot-evals track8a-storage-readiness-validation
+uv run patchpilot-evals track7a-review-validation
+uv run patchpilot-evals storage-safety-synthetic-check
 uv run patchpilot-evals workflow-policy-validation
 uv run patchpilot-evals dependency-architecture-policy-validation
 ```
@@ -141,6 +150,10 @@ Intelligence Track 6C reassesses direct ONNX eligibility for the five pinned fam
 
 Intelligence Track 7 refreshes the offline candidate landscape and advances one finalist, `LiquidAI/LFM2.5-1.2B-Instruct`. The finalist fails the artifact budget and has unresolved explanation suitability, so the weighted score stays null. Selection is `no-selection`. Track 8 authorization is `not-authorized`, with verdict `TRACK 8 CONTROLLED ACQUISITION NOT AUTHORIZED`. These commands read local records only. They do not install a runtime, acquire a model or tokenizer, convert a checkpoint, or execute inference. `productionReady` stays false.
 
+Intelligence Track 7A recalculates that finalist under three storage models. Copy promotion stays over the 8 GiB ceiling. Same-filesystem atomic rename passes storage-only. Cross-filesystem promotion is ineligible. Track 8A readiness stays `not-ready`, with verdict `TRACK 8A STORAGE RECALCULATED ACQUISITION NOT AUTHORIZED`. Selection stays `no-selection` and Track 8 authorization stays `not-authorized`. The synthetic check uses a temporary file and prints no host path.
+
+Principal Architect review on 2026-11-12 approves the Track 7A storage model and same-filesystem atomic promotion with documented residuals. The storage-only blocker is `resolved`. That approval leaves selection `no-selection`, Track 8 authorization `not-authorized`, and `productionReady` false. The acceptance record is [docs/provenance/track7a-implementation-review.md](docs/provenance/track7a-implementation-review.md).
+
 - [docs/architecture/candidate-landscape-refresh.md](docs/architecture/candidate-landscape-refresh.md)
 - [docs/architecture/candidate-pre-screen.md](docs/architecture/candidate-pre-screen.md)
 - [docs/architecture/direct-onnx-selection.md](docs/architecture/direct-onnx-selection.md)
@@ -148,6 +161,12 @@ Intelligence Track 7 refreshes the offline candidate landscape and advances one 
 - [docs/provenance/track7-candidate-evidence.md](docs/provenance/track7-candidate-evidence.md)
 - [docs/provenance/track7-implementation-review.md](docs/provenance/track7-implementation-review.md)
 - [docs/provenance/track7-source-register.md](docs/provenance/track7-source-register.md)
+- [docs/architecture/artifact-budget-model.md](docs/architecture/artifact-budget-model.md)
+- [docs/architecture/atomic-artifact-promotion.md](docs/architecture/atomic-artifact-promotion.md)
+- [docs/architecture/artifact-cache-recovery.md](docs/architecture/artifact-cache-recovery.md)
+- [docs/architecture/track8a-storage-readiness.md](docs/architecture/track8a-storage-readiness.md)
+- [docs/provenance/track7a-storage-analysis.md](docs/provenance/track7a-storage-analysis.md)
+- [docs/provenance/track7a-implementation-review.md](docs/provenance/track7a-implementation-review.md)
 
 - [docs/architecture/real-candidate-boundary.md](docs/architecture/real-candidate-boundary.md)
 - [docs/architecture/external-artifact-cache.md](docs/architecture/external-artifact-cache.md)
