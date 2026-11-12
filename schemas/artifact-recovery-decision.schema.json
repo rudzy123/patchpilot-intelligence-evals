@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:artifact-recovery-decision:v1",
+  "title": "Artifact recovery decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "locallyObservedArtifactDigests",
+    "classification",
+    "operatorReviewRequired",
+    "recoveryProof",
+    "attemptId",
+    "observedAttemptState",
+    "inventoryIdentity",
+    "logicalInventoryBytes",
+    "allocatedInventoryBytes",
+    "transientAcquisitionAuthorized",
+    "transientAcquisitionOverheadBytes",
+    "sameFilesystem",
+    "syncSteps",
+    "executionEligibility",
+    "laterSessionEligibility",
+    "copyFallbackUsed",
+    "failureCategory",
+    "preVerificationMetadata",
+    "postVerificationMetadata",
+    "identityDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "classification": {
+      "enum": [
+        "not-acquired",
+        "resumable-quarantine",
+        "rejected",
+        "verified",
+        "indeterminate"
+      ]
+    },
+    "operatorReviewRequired": { "type": "boolean" },
+    "recoveryProof": { "enum": ["none", "explicit", "absent"] },
+    "attemptId": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,40}$" }
+      ]
+    },
+    "observedAttemptState": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "enum": [
+            "not-acquired",
+            "quarantine-open",
+            "quarantine-closed",
+            "verifying",
+            "sealed",
+            "promoting",
+            "verified",
+            "rejected",
+            "indeterminate"
+          ]
+        }
+      ]
+    },
+    "inventoryIdentity": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      ]
+    },
+    "logicalInventoryBytes": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "integer", "minimum": 0, "maximum": 9223372036854775807 }
+      ]
+    },
+    "allocatedInventoryBytes": { "type": "null" },
+    "transientAcquisitionAuthorized": { "const": false },
+    "transientAcquisitionOverheadBytes": { "type": "null" },
+    "sameFilesystem": { "oneOf": [{ "type": "null" }, { "type": "boolean" }] },
+    "syncSteps": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "enum": [
+          "manifest-file",
+          "quarantine-directory",
+          "file-data",
+          "rename-noreplace",
+          "verified-parent-directory",
+          "receipt-file",
+          "verified-parent-directory-after-receipt"
+        ]
+      }
+    },
+    "executionEligibility": { "const": "prohibited" },
+    "laterSessionEligibility": { "enum": ["none", "verified-identity-only"] },
+    "copyFallbackUsed": { "const": false },
+    "failureCategory": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[a-z0-9-]{3,80}$" }
+      ]
+    },
+    "preVerificationMetadata": { "$ref": "#/$defs/metadata" },
+    "postVerificationMetadata": { "$ref": "#/$defs/metadata" },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "classification": { "const": "not-acquired" } },
+        "required": ["classification"]
+      },
+      "then": {
+        "properties": {
+          "attemptId": { "type": "null" },
+          "observedAttemptState": { "type": "null" },
+          "operatorReviewRequired": { "const": false },
+          "recoveryProof": { "const": "none" },
+          "laterSessionEligibility": { "const": "none" },
+          "failureCategory": { "type": "null" },
+          "syncSteps": { "maxItems": 0 }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "classification": { "const": "indeterminate" } },
+        "required": ["classification"]
+      },
+      "then": {
+        "properties": {
+          "operatorReviewRequired": { "const": true },
+          "recoveryProof": { "const": "absent" },
+          "laterSessionEligibility": { "const": "none" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "classification": { "const": "verified" } },
+        "required": ["classification"]
+      },
+      "then": {
+        "properties": {
+          "operatorReviewRequired": { "const": false },
+          "laterSessionEligibility": { "const": "verified-identity-only" },
+          "recoveryProof": { "enum": ["none", "explicit"] }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recorded", "logicalBytes", "fileCount"],
+      "properties": {
+        "recorded": { "type": "boolean" },
+        "logicalBytes": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "integer", "minimum": 0, "maximum": 9223372036854775807 }
+          ]
+        },
+        "fileCount": { "type": "integer", "minimum": 0, "maximum": 32 }
+      }
+    }
+  }
+}

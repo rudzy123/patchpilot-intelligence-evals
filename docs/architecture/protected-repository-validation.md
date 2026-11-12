@@ -10,7 +10,7 @@ The workflows do not apply branch protection or a repository ruleset. The operat
 
 - `Quality` runs formatting, lint, and `mypy`. The timeout is 15 minutes.
 - `Tests` runs `pytest` only. The timeout is 30 minutes.
-- `Repository Contracts` runs the corpus, baseline, fixture, comparison, calibration, and Track 4 through Track 7 validators that the previous single job ran. The Track 7 commands sit before `workflow-policy-validation` and `dependency-architecture-policy-validation`. The timeout is 30 minutes.
+- `Repository Contracts` runs the corpus, baseline, fixture, comparison, calibration, and Track 4 through Track 7A validators that the previous single job ran. The Track 7 and Track 7A commands, including `track7a-review-validation`, sit before `workflow-policy-validation` and `dependency-architecture-policy-validation`. The Track 7A synthetic check uses a temporary file. The timeout is 30 minutes.
 
 `hardened-fixture-execution` stays out of CI. It is an execution probe, not a committed-record validator. No job uploads evaluation bodies or enables an Actions cache.
 

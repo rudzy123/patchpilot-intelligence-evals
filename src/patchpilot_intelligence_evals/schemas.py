@@ -102,6 +102,18 @@ TRACK7_SCHEMA_NAMES: tuple[str, ...] = (
     "track7-implementation-review",
 )
 
+# Track 7A storage-safety documents. They stay outside earlier schema groups.
+TRACK7A_SCHEMA_NAMES: tuple[str, ...] = (
+    "artifact-storage-policy",
+    "artifact-verification-seal",
+    "artifact-promotion-attempt",
+    "artifact-promotion-receipt",
+    "artifact-recovery-decision",
+    "artifact-budget-recalculation",
+    "track8a-storage-readiness",
+    "track7a-implementation-review",
+)
+
 _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     SCHEMA_NAMES
     + CANDIDATE_SCHEMA_NAMES
@@ -111,6 +123,7 @@ _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     + TRACK6B_SCHEMA_NAMES
     + TRACK6C_SCHEMA_NAMES
     + TRACK7_SCHEMA_NAMES
+    + TRACK7A_SCHEMA_NAMES
 )
 
 

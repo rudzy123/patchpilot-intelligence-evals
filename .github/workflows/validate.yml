@@ -188,6 +188,18 @@ jobs:
           uv run patchpilot-evals track8-acquisition-authorization-validation
           uv run patchpilot-evals track7-review-validation
 
+      - name: Validate the Track 7A storage records
+        run: |
+          uv run patchpilot-evals artifact-storage-policy-validation
+          uv run patchpilot-evals artifact-verification-seal-validation
+          uv run patchpilot-evals artifact-promotion-attempt-validation
+          uv run patchpilot-evals artifact-promotion-receipt-validation
+          uv run patchpilot-evals artifact-recovery-decision-validation
+          uv run patchpilot-evals artifact-budget-recalculation-validation
+          uv run patchpilot-evals track8a-storage-readiness-validation
+          uv run patchpilot-evals track7a-review-validation
+          uv run patchpilot-evals storage-safety-synthetic-check
+
       - name: Validate workflow policy
         run: uv run patchpilot-evals workflow-policy-validation
 

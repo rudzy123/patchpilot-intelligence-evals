@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "locallyObservedArtifactDigests": [],
+  "receiptState": "not-acquired",
+  "attemptId": null,
+  "executionEligibility": "prohibited",
+  "laterSessionEligibility": "none",
+  "logicalInventoryBytes": null,
+  "allocatedInventoryBytes": null,
+  "transientAcquisitionAuthorized": false,
+  "transientAcquisitionOverheadBytes": null,
+  "sameFilesystem": null,
+  "syncSteps": [],
+  "copyFallbackUsed": false,
+  "crossDevice": false,
+  "destinationCollision": false,
+  "failureCategory": null,
+  "inventoryIdentity": null,
+  "sealIdentity": null,
+  "recoveryProof": "none",
+  "operatorReviewRequired": false,
+  "preVerificationMetadata": {
+    "recorded": false,
+    "logicalBytes": null,
+    "fileCount": 0
+  },
+  "postVerificationMetadata": {
+    "recorded": false,
+    "logicalBytes": null,
+    "fileCount": 0
+  },
+  "identityDigest": "3c0e9a112c4bf9491dcdf76b98e96896782098a9490cc414df133ce624e28c66"
+}

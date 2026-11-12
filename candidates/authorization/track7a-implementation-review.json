@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "reviewStatus": "accepted-by-principal-systems-architect",
+  "reviewDate": "2026-11-12",
+  "reviewAuthority": "PatchPilot Principal Systems Architect",
+  "decision": "track 7a storage model approved and acquisition withheld",
+  "authorizedScope": "This approval accepts the Track 7A storage model and same-filesystem atomic promotion with documented residuals.",
+  "finalistModelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+  "ceilingUnchanged": true,
+  "storageOnlyBlocker": "resolved",
+  "candidateDecision": "no-selection",
+  "track8Authorization": "not-authorized",
+  "selectionOutcome": "no-selection",
+  "authorizationOutcome": "not-authorized",
+  "weightedScore": null,
+  "qualifyingCandidateCount": 0,
+  "logicalInventoryBytes": 4717588977,
+  "verificationWorkingOverheadBytes": 1228800,
+  "runtimeStagingListedBytes": 11413655,
+  "copyPromotionPeakBytes": 9447820409,
+  "copyPromotionExcessBytes": 857885817,
+  "atomicPromotionPeakBytes": 4730231432,
+  "atomicPromotionHeadroomBytes": 3859703160,
+  "artifactCapBytes": 8589934592,
+  "peakMemoryBasis": "unknown-fp32",
+  "explanationSuitability": "unresolved",
+  "readinessOutcome": "not-ready",
+  "installationAuthorized": false,
+  "conversionAuthorized": false,
+  "quantizationApproved": false,
+  "componentReviews": [
+    {
+      "componentId": "artifact-storage-policy",
+      "disposition": "approved",
+      "statement": "Artifact storage policy is approved."
+    },
+    {
+      "componentId": "verification-sealing",
+      "disposition": "approved",
+      "statement": "Verification sealing is approved."
+    },
+    {
+      "componentId": "mutation-detection",
+      "disposition": "approved",
+      "statement": "Mutation detection is approved."
+    },
+    {
+      "componentId": "same-filesystem-atomic-promotion",
+      "disposition": "approved-with-documented-residuals",
+      "statement": "Same-filesystem atomic promotion is approved with documented residuals."
+    },
+    {
+      "componentId": "copy-promotion",
+      "disposition": "failed",
+      "statement": "Copy promotion failed for the Track 7 finalist."
+    },
+    {
+      "componentId": "cross-filesystem-promotion",
+      "disposition": "ineligible",
+      "statement": "Cross-filesystem promotion is ineligible."
+    },
+    {
+      "componentId": "copy-fallback",
+      "disposition": "prohibited",
+      "statement": "Copy fallback is prohibited."
+    }
+  ],
+  "acceptedResiduals": [
+    {
+      "residualId": "one-proven-filesystem",
+      "statement": "Atomic promotion is supported only on one proven filesystem."
+    },
+    {
+      "residualId": "cross-device-ineligible",
+      "statement": "Cross-device promotion remains ineligible."
+    },
+    {
+      "residualId": "no-copy-and-delete-fallback",
+      "statement": "There is no copy-and-delete fallback."
+    },
+    {
+      "residualId": "post-rename-recovery-proof",
+      "statement": "Interruption after rename may require explicit recovery proof."
+    },
+    {
+      "residualId": "inconsistent-verified-evidence",
+      "statement": "A verified directory with inconsistent journal or seal evidence remains indeterminate."
+    },
+    {
+      "residualId": "verified-mutation-without-kernel-immutability",
+      "statement": "Repository policy detects verified-state mutation but does not claim kernel-enforced immutability."
+    },
+    {
+      "residualId": "transient-acquisition-overhead-unknown",
+      "statement": "Transient acquisition overhead remains unknown."
+    },
+    {
+      "residualId": "no-real-model-artifact",
+      "statement": "No real model artifact has exercised the state machine."
+    },
+    {
+      "residualId": "fp32-peak-memory-unresolved",
+      "statement": "FP32 peak process memory remains unresolved."
+    },
+    {
+      "residualId": "explanation-suitability-unresolved",
+      "statement": "Explanation suitability remains unresolved."
+    }
+  ],
+  "notAuthorized": [
+    "candidate selection",
+    "Track 8 acquisition",
+    "runtime installation",
+    "model, tokenizer, configuration, or ONNX acquisition",
+    "conversion",
+    "quantization",
+    "inference",
+    "evaluation-gate changes",
+    "shadow mode",
+    "PatchPilot production composition"
+  ],
+  "locallyObservedArtifactDigests": [],
+  "artifactStoragePolicy": "approved",
+  "verificationSealing": "approved",
+  "mutationDetection": "approved",
+  "atomicPromotion": "approved-with-documented-residuals",
+  "copyPromotion": "failed",
+  "crossFilesystemPromotion": "ineligible",
+  "copyFallback": "prohibited",
+  "reviewDigest": "a753b70a1fd894aaec86225917d66e238deb8a462778dc1365703d90f4f93d60"
+}

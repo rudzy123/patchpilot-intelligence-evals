@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track7a-implementation-review:v1",
+  "title": "Track 7A implementation review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "reviewStatus",
+    "reviewDate",
+    "reviewAuthority",
+    "decision",
+    "authorizedScope",
+    "finalistModelId",
+    "ceilingUnchanged",
+    "storageOnlyBlocker",
+    "candidateDecision",
+    "track8Authorization",
+    "selectionOutcome",
+    "authorizationOutcome",
+    "weightedScore",
+    "qualifyingCandidateCount",
+    "logicalInventoryBytes",
+    "verificationWorkingOverheadBytes",
+    "runtimeStagingListedBytes",
+    "copyPromotionPeakBytes",
+    "copyPromotionExcessBytes",
+    "atomicPromotionPeakBytes",
+    "atomicPromotionHeadroomBytes",
+    "artifactCapBytes",
+    "peakMemoryBasis",
+    "explanationSuitability",
+    "readinessOutcome",
+    "installationAuthorized",
+    "conversionAuthorized",
+    "quantizationApproved",
+    "artifactStoragePolicy",
+    "verificationSealing",
+    "mutationDetection",
+    "atomicPromotion",
+    "copyPromotion",
+    "crossFilesystemPromotion",
+    "copyFallback",
+    "componentReviews",
+    "acceptedResiduals",
+    "notAuthorized",
+    "locallyObservedArtifactDigests",
+    "reviewDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "reviewStatus": { "const": "accepted-by-principal-systems-architect" },
+    "reviewDate": { "const": "2026-11-12" },
+    "reviewAuthority": { "const": "PatchPilot Principal Systems Architect" },
+    "decision": { "const": "track 7a storage model approved and acquisition withheld" },
+    "authorizedScope": {
+      "const": "This approval accepts the Track 7A storage model and same-filesystem atomic promotion with documented residuals."
+    },
+    "finalistModelId": { "const": "LiquidAI/LFM2.5-1.2B-Instruct" },
+    "ceilingUnchanged": { "const": true },
+    "storageOnlyBlocker": { "const": "resolved" },
+    "candidateDecision": { "const": "no-selection" },
+    "track8Authorization": { "const": "not-authorized" },
+    "selectionOutcome": { "const": "no-selection" },
+    "authorizationOutcome": { "const": "not-authorized" },
+    "weightedScore": { "type": "null" },
+    "qualifyingCandidateCount": { "const": 0 },
+    "logicalInventoryBytes": { "const": 4717588977 },
+    "verificationWorkingOverheadBytes": { "const": 1228800 },
+    "runtimeStagingListedBytes": { "const": 11413655 },
+    "copyPromotionPeakBytes": { "const": 9447820409 },
+    "copyPromotionExcessBytes": { "const": 857885817 },
+    "atomicPromotionPeakBytes": { "const": 4730231432 },
+    "atomicPromotionHeadroomBytes": { "const": 3859703160 },
+    "artifactCapBytes": { "const": 8589934592 },
+    "peakMemoryBasis": { "const": "unknown-fp32" },
+    "explanationSuitability": { "const": "unresolved" },
+    "readinessOutcome": { "const": "not-ready" },
+    "installationAuthorized": { "const": false },
+    "conversionAuthorized": { "const": false },
+    "quantizationApproved": { "const": false },
+    "artifactStoragePolicy": { "const": "approved" },
+    "verificationSealing": { "const": "approved" },
+    "mutationDetection": { "const": "approved" },
+    "atomicPromotion": { "const": "approved-with-documented-residuals" },
+    "copyPromotion": { "const": "failed" },
+    "crossFilesystemPromotion": { "const": "ineligible" },
+    "copyFallback": { "const": "prohibited" },
+    "componentReviews": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": { "$ref": "#/$defs/componentReview" }
+    },
+    "acceptedResiduals": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": { "$ref": "#/$defs/acceptedResidual" }
+    },
+    "notAuthorized": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 3, "maxLength": 80 }
+    },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "reviewDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "componentReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["componentId", "disposition", "statement"],
+      "properties": {
+        "componentId": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "disposition": {
+          "enum": [
+            "approved",
+            "approved-with-documented-residuals",
+            "failed",
+            "ineligible",
+            "prohibited"
+          ]
+        },
+        "statement": { "type": "string", "minLength": 10, "maxLength": 240 }
+      }
+    },
+    "acceptedResidual": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["residualId", "statement"],
+      "properties": {
+        "residualId": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "statement": { "type": "string", "minLength": 10, "maxLength": 240 }
+      }
+    }
+  }
+}
