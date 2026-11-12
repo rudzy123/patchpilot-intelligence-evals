@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "measurementPerformed": false,
+  "reviewStatus": "accepted-by-principal-systems-architect",
+  "reviewDate": "2026-11-12",
+  "reviewAuthority": "PatchPilot Principal Systems Architect",
+  "decision": "track 7b evidence closure approved and measurement authorized in principle with residuals",
+  "authorizedScope": "This approval accepts the Track 7B evidence closure and authorizes a future narrowly controlled measurement Session in principle with documented residuals. Track 8B is ready only for a separately specified and reviewed controlled measurement Session. This review does not authorize operators or Cursor to begin acquisition, installation, or execution. A later Session must separately authorize runtime staging, artifact acquisition, digest verification, atomic promotion, hardened execution, measurement commands, stop conditions, result handling, and cleanup.",
+  "finalistModelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+  "parameterCount": 1170340608,
+  "bytesPerFp32Parameter": 4,
+  "logicalFp32ProductBytes": 4681362432,
+  "logicalProductIncludedInPeak": false,
+  "processMemoryCeilingBytes": 12884901888,
+  "ceilingUnchanged": true,
+  "candidateDecision": "no-selection",
+  "selectionOutcome": "no-selection",
+  "weightedScore": null,
+  "qualifyingCandidateCount": 0,
+  "acquisitionAuthorization": "not-authorized",
+  "installationAuthorized": false,
+  "executionAuthorized": false,
+  "calibrationApprovalStatus": "not-approved",
+  "storageDecision": "unchanged",
+  "track8aReadinessOutcome": "not-ready",
+  "track8bReadiness": "ready-for-controlled-measurement",
+  "unresolvedResidentCategories": [
+    "static_parameter_memory",
+    "graph_and_initializer_overhead",
+    "runtime_process_baseline",
+    "allocator_and_optimization_overhead",
+    "activation_memory",
+    "architecture_state_memory",
+    "input_output_tensor_memory",
+    "tokenizer_and_configuration_memory",
+    "hardened_execution_overhead",
+    "safety_margin"
+  ],
+  "supportedInPrinciple": [
+    "instruction-following",
+    "structured-output",
+    "english-language",
+    "context-capacity"
+  ],
+  "empiricalEvaluationRequired": [
+    "bounded-generation",
+    "deterministic-fact-separation",
+    "evidence-id-reproduction",
+    "missing-evidence-reporting",
+    "uncertainty-expression",
+    "unsupported-request-refusal",
+    "embedded-instruction-resistance",
+    "state-mutation-avoidance",
+    "cross-tenant-nondisclosure",
+    "schema-compatibility"
+  ],
+  "componentReviews": [
+    {
+      "componentId": "memory-model-contract",
+      "disposition": "approved",
+      "statement": "The memory-model contract is approved."
+    },
+    {
+      "componentId": "official-memory-evidence",
+      "disposition": "approved",
+      "statement": "The official memory-evidence review is approved."
+    },
+    {
+      "componentId": "envelope-4096",
+      "disposition": "unresolved",
+      "statement": "The 4096-token FP32 resident envelope remains unresolved."
+    },
+    {
+      "componentId": "envelope-8192",
+      "disposition": "unresolved",
+      "statement": "The 8192-token FP32 resident envelope remains unresolved."
+    },
+    {
+      "componentId": "explanation-suitability-contract",
+      "disposition": "approved",
+      "statement": "The explanation-suitability contract is approved."
+    },
+    {
+      "componentId": "official-suitability-screening",
+      "disposition": "eligible-for-controlled-evaluation",
+      "statement": "Official suitability screening is eligible for controlled evaluation."
+    },
+    {
+      "componentId": "measured-behavioral-quality",
+      "disposition": "not-established",
+      "statement": "Measured behavioral quality is not established."
+    },
+    {
+      "componentId": "controlled-measurement",
+      "disposition": "authorized-in-principle-with-documented-residuals",
+      "statement": "Controlled measurement is authorized in principle with documented residuals."
+    }
+  ],
+  "acceptedResiduals": [
+    {
+      "residualId": "resident-upper-bounds-unavailable",
+      "statement": "Resident upper bounds remain unavailable for both context sizes."
+    },
+    {
+      "residualId": "safety-margin-unset",
+      "statement": "The safety margin remains unset."
+    },
+    {
+      "residualId": "graph-not-parsed",
+      "statement": "The ONNX graph has not been parsed."
+    },
+    {
+      "residualId": "local-digests-empty",
+      "statement": "Local artifact digests are empty."
+    },
+    {
+      "residualId": "runtime-and-allocator-overhead-unmeasured",
+      "statement": "ONNX Runtime resident process and allocator overhead are unmeasured."
+    },
+    {
+      "residualId": "architecture-state-and-activation-unresolved",
+      "statement": "Architecture-state and activation bounds are unresolved."
+    },
+    {
+      "residualId": "behavioral-metrics-unmeasured",
+      "statement": "Behavioral metrics are unmeasured."
+    },
+    {
+      "residualId": "knowledge-intensive-task-caveat",
+      "statement": "The official knowledge-intensive-task caveat remains applicable."
+    },
+    {
+      "residualId": "installation-not-authorized",
+      "statement": "Runtime installation remains unauthorized."
+    },
+    {
+      "residualId": "candidate-artifacts-unacquired",
+      "statement": "Candidate artifacts remain unacquired."
+    },
+    {
+      "residualId": "adapter-executable-state-unavailable",
+      "statement": "The adapter executable state remains unavailable."
+    }
+  ],
+  "laterSessionMustAuthorize": [
+    "runtime staging",
+    "artifact acquisition",
+    "digest verification",
+    "atomic promotion",
+    "hardened execution",
+    "measurement commands",
+    "stop conditions",
+    "result handling",
+    "cleanup"
+  ],
+  "notAuthorized": [
+    "candidate selection",
+    "Track 8 acquisition",
+    "runtime installation",
+    "model, tokenizer, configuration, or ONNX acquisition",
+    "conversion",
+    "quantization",
+    "inference in this Session",
+    "execution in this Session",
+    "evaluation-gate changes",
+    "shadow mode",
+    "PatchPilot production composition",
+    "starting measurement from this review"
+  ],
+  "locallyObservedRuntimeDigests": [],
+  "locallyObservedModelDigests": [],
+  "locallyObservedTokenizerDigests": [],
+  "locallyObservedConfigurationDigests": [],
+  "locallyObservedOnnxArtifactDigests": [],
+  "locallyObservedArtifactDigests": [],
+  "memoryModelContract": "approved",
+  "officialMemoryEvidence": "approved",
+  "envelope4096": "unresolved",
+  "envelope8192": "unresolved",
+  "explanationSuitabilityContract": "approved",
+  "suitabilityScreening": "eligible-for-controlled-evaluation",
+  "measuredBehavioralQuality": "not-established",
+  "controlledMeasurement": "authorized-in-principle-with-documented-residuals",
+  "reviewDigest": "3d9f5aadc60b0f28aa399118a29acb0e3269a9a5d7c41cefee027fd59ae69b5e"
+}

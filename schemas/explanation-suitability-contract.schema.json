@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:explanation-suitability-contract:v1",
+  "title": "Track 7B explanation suitability contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "locallyObservedArtifactDigests",
+    "retrievedOn",
+    "finalistModelId",
+    "sourceRevision",
+    "onnxRevision",
+    "measuredQualityClaimed",
+    "gatesUnchanged",
+    "capabilities"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "retrievedOn": { "const": "2026-11-12" },
+    "finalistModelId": { "const": "LiquidAI/LFM2.5-1.2B-Instruct" },
+    "sourceRevision": { "const": "b9d816ab510f9a28dca37cb182e9da8b0226e13c" },
+    "onnxRevision": { "const": "10f72e70abf67ac0fd7ebf15bc5854726891d864" },
+    "measuredQualityClaimed": { "const": false },
+    "gatesUnchanged": { "const": true },
+    "capabilities": {
+      "type": "array",
+      "minItems": 14,
+      "maxItems": 14,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "capabilityId",
+          "metricName",
+          "corpusCategories",
+          "futureTestCategory",
+          "officialEvidenceRequired",
+          "empiricalEvaluationRequired",
+          "passAuthority",
+          "disqualifyingLimitationRule"
+        ],
+        "properties": {
+          "capabilityId": { "type": "string", "minLength": 3, "maxLength": 80 },
+          "metricName": { "type": ["string", "null"], "minLength": 3, "maxLength": 80 },
+          "corpusCategories": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 6,
+            "items": { "type": "string", "minLength": 3, "maxLength": 80 }
+          },
+          "futureTestCategory": { "type": "string", "minLength": 3, "maxLength": 80 },
+          "officialEvidenceRequired": { "const": true },
+          "empiricalEvaluationRequired": { "type": "boolean" },
+          "passAuthority": { "enum": ["official-statement", "empirical-harness"] },
+          "disqualifyingLimitationRule": { "type": "string", "minLength": 20, "maxLength": 180 }
+        }
+      }
+    }
+  }
+}

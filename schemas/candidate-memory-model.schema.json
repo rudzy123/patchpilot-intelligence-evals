@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:candidate-memory-model:v1",
+  "title": "Track 7B candidate memory model",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "locallyObservedArtifactDigests",
+    "retrievedOn",
+    "finalistModelId",
+    "sourceRevision",
+    "onnxRevision",
+    "precision",
+    "batchSize",
+    "processCount",
+    "executionProvider",
+    "quantizationApproved",
+    "speculativeExecution",
+    "automaticBatching",
+    "ceilingBytes",
+    "gibibyteBytes",
+    "decimalGigabyteRejected",
+    "roundingRule",
+    "overflowDomain",
+    "envelopeContextTokens",
+    "parameterRepresentation",
+    "categories"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "retrievedOn": { "const": "2026-11-12" },
+    "finalistModelId": { "const": "LiquidAI/LFM2.5-1.2B-Instruct" },
+    "sourceRevision": { "const": "b9d816ab510f9a28dca37cb182e9da8b0226e13c" },
+    "onnxRevision": { "const": "10f72e70abf67ac0fd7ebf15bc5854726891d864" },
+    "precision": { "const": "fp32" },
+    "batchSize": { "const": 1 },
+    "processCount": { "const": 1 },
+    "executionProvider": { "const": "cpu" },
+    "quantizationApproved": { "const": false },
+    "speculativeExecution": { "const": false },
+    "automaticBatching": { "const": false },
+    "ceilingBytes": { "const": 12884901888 },
+    "gibibyteBytes": { "const": 1073741824 },
+    "decimalGigabyteRejected": { "const": true },
+    "roundingRule": { "const": "integer-exact" },
+    "overflowDomain": { "const": "signed-int64" },
+    "envelopeContextTokens": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [{ "const": 4096 }, { "const": 8192 }],
+      "items": false
+    },
+    "parameterRepresentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "parameterCount",
+        "bytesPerParameter",
+        "logicalProductBytes",
+        "logicalProductIncludedInPeak",
+        "weightTyingStated"
+      ],
+      "properties": {
+        "parameterCount": { "const": 1170340608 },
+        "bytesPerParameter": { "const": 4 },
+        "logicalProductBytes": { "const": 4681362432 },
+        "logicalProductIncludedInPeak": { "const": false },
+        "weightTyingStated": { "const": false }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "categoryId",
+          "meaning",
+          "unit",
+          "residentDomain",
+          "includedInTotal",
+          "requiredForEnvelope",
+          "countsParameterPayload",
+          "contextDependent",
+          "formula",
+          "unresolvedBehavior",
+          "envelopeContextTokens"
+        ],
+        "properties": {
+          "categoryId": {
+            "enum": [
+              "static_parameter_memory",
+              "graph_and_initializer_overhead",
+              "runtime_process_baseline",
+              "allocator_and_optimization_overhead",
+              "activation_memory",
+              "architecture_state_memory",
+              "input_output_tensor_memory",
+              "tokenizer_and_configuration_memory",
+              "hardened_execution_overhead",
+              "safety_margin"
+            ]
+          },
+          "meaning": { "type": "string", "minLength": 20, "maxLength": 180 },
+          "unit": { "const": "bytes" },
+          "residentDomain": { "const": "resident" },
+          "includedInTotal": { "const": true },
+          "requiredForEnvelope": { "const": true },
+          "countsParameterPayload": { "type": "boolean" },
+          "contextDependent": { "type": "boolean" },
+          "formula": { "type": "string", "minLength": 8, "maxLength": 120 },
+          "unresolvedBehavior": { "const": "null-upper-bound" },
+          "envelopeContextTokens": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "prefixItems": [{ "const": 4096 }, { "const": 8192 }],
+            "items": false
+          }
+        }
+      }
+    }
+  }
+}

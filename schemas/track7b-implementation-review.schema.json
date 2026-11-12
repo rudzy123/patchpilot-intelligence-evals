@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track7b-implementation-review:v1",
+  "title": "Track 7B implementation review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "measurementPerformed",
+    "reviewStatus",
+    "reviewDate",
+    "reviewAuthority",
+    "decision",
+    "authorizedScope",
+    "finalistModelId",
+    "parameterCount",
+    "bytesPerFp32Parameter",
+    "logicalFp32ProductBytes",
+    "logicalProductIncludedInPeak",
+    "processMemoryCeilingBytes",
+    "ceilingUnchanged",
+    "candidateDecision",
+    "selectionOutcome",
+    "weightedScore",
+    "qualifyingCandidateCount",
+    "acquisitionAuthorization",
+    "installationAuthorized",
+    "executionAuthorized",
+    "calibrationApprovalStatus",
+    "storageDecision",
+    "track8aReadinessOutcome",
+    "track8bReadiness",
+    "unresolvedResidentCategories",
+    "supportedInPrinciple",
+    "empiricalEvaluationRequired",
+    "memoryModelContract",
+    "officialMemoryEvidence",
+    "envelope4096",
+    "envelope8192",
+    "explanationSuitabilityContract",
+    "suitabilityScreening",
+    "measuredBehavioralQuality",
+    "controlledMeasurement",
+    "componentReviews",
+    "acceptedResiduals",
+    "laterSessionMustAuthorize",
+    "notAuthorized",
+    "locallyObservedRuntimeDigests",
+    "locallyObservedModelDigests",
+    "locallyObservedTokenizerDigests",
+    "locallyObservedConfigurationDigests",
+    "locallyObservedOnnxArtifactDigests",
+    "locallyObservedArtifactDigests",
+    "reviewDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "measurementPerformed": { "const": false },
+    "reviewStatus": { "const": "accepted-by-principal-systems-architect" },
+    "reviewDate": { "const": "2026-11-12" },
+    "reviewAuthority": { "const": "PatchPilot Principal Systems Architect" },
+    "decision": {
+      "const": "track 7b evidence closure approved and measurement authorized in principle with residuals"
+    },
+    "authorizedScope": {
+      "const": "This approval accepts the Track 7B evidence closure and authorizes a future narrowly controlled measurement Session in principle with documented residuals. Track 8B is ready only for a separately specified and reviewed controlled measurement Session. This review does not authorize operators or Cursor to begin acquisition, installation, or execution. A later Session must separately authorize runtime staging, artifact acquisition, digest verification, atomic promotion, hardened execution, measurement commands, stop conditions, result handling, and cleanup."
+    },
+    "finalistModelId": { "const": "LiquidAI/LFM2.5-1.2B-Instruct" },
+    "parameterCount": { "const": 1170340608 },
+    "bytesPerFp32Parameter": { "const": 4 },
+    "logicalFp32ProductBytes": { "const": 4681362432 },
+    "logicalProductIncludedInPeak": { "const": false },
+    "processMemoryCeilingBytes": { "const": 12884901888 },
+    "ceilingUnchanged": { "const": true },
+    "candidateDecision": { "const": "no-selection" },
+    "selectionOutcome": { "const": "no-selection" },
+    "weightedScore": { "type": "null" },
+    "qualifyingCandidateCount": { "const": 0 },
+    "acquisitionAuthorization": { "const": "not-authorized" },
+    "installationAuthorized": { "const": false },
+    "executionAuthorized": { "const": false },
+    "calibrationApprovalStatus": { "const": "not-approved" },
+    "storageDecision": { "const": "unchanged" },
+    "track8aReadinessOutcome": { "const": "not-ready" },
+    "track8bReadiness": { "const": "ready-for-controlled-measurement" },
+    "unresolvedResidentCategories": {
+      "type": "array",
+      "prefixItems": [
+        { "const": "static_parameter_memory" },
+        { "const": "graph_and_initializer_overhead" },
+        { "const": "runtime_process_baseline" },
+        { "const": "allocator_and_optimization_overhead" },
+        { "const": "activation_memory" },
+        { "const": "architecture_state_memory" },
+        { "const": "input_output_tensor_memory" },
+        { "const": "tokenizer_and_configuration_memory" },
+        { "const": "hardened_execution_overhead" },
+        { "const": "safety_margin" }
+      ],
+      "items": false,
+      "minItems": 10,
+      "maxItems": 10
+    },
+    "supportedInPrinciple": {
+      "type": "array",
+      "prefixItems": [
+        { "const": "instruction-following" },
+        { "const": "structured-output" },
+        { "const": "english-language" },
+        { "const": "context-capacity" }
+      ],
+      "items": false,
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "empiricalEvaluationRequired": {
+      "type": "array",
+      "prefixItems": [
+        { "const": "bounded-generation" },
+        { "const": "deterministic-fact-separation" },
+        { "const": "evidence-id-reproduction" },
+        { "const": "missing-evidence-reporting" },
+        { "const": "uncertainty-expression" },
+        { "const": "unsupported-request-refusal" },
+        { "const": "embedded-instruction-resistance" },
+        { "const": "state-mutation-avoidance" },
+        { "const": "cross-tenant-nondisclosure" },
+        { "const": "schema-compatibility" }
+      ],
+      "items": false,
+      "minItems": 10,
+      "maxItems": 10
+    },
+    "memoryModelContract": { "const": "approved" },
+    "officialMemoryEvidence": { "const": "approved" },
+    "envelope4096": { "const": "unresolved" },
+    "envelope8192": { "const": "unresolved" },
+    "explanationSuitabilityContract": { "const": "approved" },
+    "suitabilityScreening": { "const": "eligible-for-controlled-evaluation" },
+    "measuredBehavioralQuality": { "const": "not-established" },
+    "controlledMeasurement": {
+      "const": "authorized-in-principle-with-documented-residuals"
+    },
+    "componentReviews": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": { "$ref": "#/$defs/componentReview" }
+    },
+    "acceptedResiduals": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": { "$ref": "#/$defs/acceptedResidual" }
+    },
+    "laterSessionMustAuthorize": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": { "type": "string", "minLength": 3, "maxLength": 80 }
+    },
+    "notAuthorized": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 3, "maxLength": 80 }
+    },
+    "locallyObservedRuntimeDigests": { "type": "array", "maxItems": 0 },
+    "locallyObservedModelDigests": { "type": "array", "maxItems": 0 },
+    "locallyObservedTokenizerDigests": { "type": "array", "maxItems": 0 },
+    "locallyObservedConfigurationDigests": { "type": "array", "maxItems": 0 },
+    "locallyObservedOnnxArtifactDigests": { "type": "array", "maxItems": 0 },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "reviewDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "componentReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["componentId", "disposition", "statement"],
+      "properties": {
+        "componentId": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "disposition": {
+          "enum": [
+            "approved",
+            "unresolved",
+            "eligible-for-controlled-evaluation",
+            "not-established",
+            "authorized-in-principle-with-documented-residuals"
+          ]
+        },
+        "statement": { "type": "string", "minLength": 10, "maxLength": 240 }
+      }
+    },
+    "acceptedResidual": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["residualId", "statement"],
+      "properties": {
+        "residualId": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "statement": { "type": "string", "minLength": 10, "maxLength": 240 }
+      }
+    }
+  }
+}

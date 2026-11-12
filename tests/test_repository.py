@@ -21,6 +21,7 @@ from patchpilot_intelligence_evals.schemas import (
     TRACK6C_SCHEMA_NAMES,
     TRACK7_SCHEMA_NAMES,
     TRACK7A_SCHEMA_NAMES,
+    TRACK7B_SCHEMA_NAMES,
     load_schema,
     repo_root,
     validate,
@@ -106,6 +107,13 @@ _DOCUMENTS = (
     "docs/provenance/track7-source-register.md",
     "docs/provenance/track7a-storage-analysis.md",
     "docs/provenance/track7a-implementation-review.md",
+    "docs/architecture/candidate-memory-budget.md",
+    "docs/architecture/explanation-suitability-contract.md",
+    "docs/architecture/empirical-measurement-boundary.md",
+    "docs/architecture/track8b-measurement-readiness.md",
+    "docs/provenance/finalist-memory-evidence.md",
+    "docs/provenance/finalist-suitability-evidence.md",
+    "docs/provenance/track7b-implementation-review.md",
 )
 
 
@@ -209,6 +217,14 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals track8a-storage-readiness-validation",
         "uv run patchpilot-evals track7a-review-validation",
         "uv run patchpilot-evals storage-safety-synthetic-check",
+        "uv run patchpilot-evals candidate-memory-model-validation",
+        "uv run patchpilot-evals candidate-memory-evidence-validation",
+        "uv run patchpilot-evals candidate-memory-budget-validation",
+        "uv run patchpilot-evals explanation-suitability-contract-validation",
+        "uv run patchpilot-evals explanation-suitability-evidence-validation",
+        "uv run patchpilot-evals controlled-measurement-authorization-validation",
+        "uv run patchpilot-evals track8b-readiness-validation",
+        "uv run patchpilot-evals track7b-review-validation",
         "uv run patchpilot-evals workflow-policy-validation",
         "uv run patchpilot-evals dependency-architecture-policy-validation",
     ):
@@ -282,6 +298,14 @@ def test_help_lists_commands() -> None:
     assert "track8a-storage-readiness-validation" in text
     assert "track7a-review-validation" in text
     assert "storage-safety-synthetic-check" in text
+    assert "candidate-memory-model-validation" in text
+    assert "candidate-memory-evidence-validation" in text
+    assert "candidate-memory-budget-validation" in text
+    assert "explanation-suitability-contract-validation" in text
+    assert "explanation-suitability-evidence-validation" in text
+    assert "controlled-measurement-authorization-validation" in text
+    assert "track8b-readiness-validation" in text
+    assert "track7b-review-validation" in text
     assert "workflow-policy-validation" in text
     assert "dependency-architecture-policy-validation" in text
 
@@ -296,6 +320,7 @@ def test_committed_json_files_validate() -> None:
         + TRACK6C_SCHEMA_NAMES
         + TRACK7_SCHEMA_NAMES
         + TRACK7A_SCHEMA_NAMES
+        + TRACK7B_SCHEMA_NAMES
     )
     for name in names:
         document = load_schema(name)

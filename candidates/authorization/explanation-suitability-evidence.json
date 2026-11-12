@@ -1,0 +1,248 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "locallyObservedArtifactDigests": [],
+  "retrievedOn": "2026-11-12",
+  "finalistModelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+  "sourceRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+  "onnxRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+  "measuredQualityClaimed": false,
+  "screeningOutcome": "eligible-for-controlled-evaluation",
+  "evidence": [
+    {
+      "evidenceId": "lfm-card-use",
+      "sourceName": "LFM2.5-1.2B-Instruct model card",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct/blob/b9d816ab510f9a28dca37cb182e9da8b0226e13c/README.md",
+      "publisher": "Liquid AI",
+      "retrievedOn": "2026-11-12",
+      "immutableRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+      "documentationVersion": null,
+      "claim": "The pinned card describes an instruction-tuned model with English among its languages, recommends agentic tasks, data extraction, and RAG, and says knowledge-intensive tasks and programming are not recommended. JSON tool definitions and optional JSON function calls are shown.",
+      "evidenceClass": "authoritative",
+      "applicability": "Pinned source card suitability statements",
+      "valueType": "not-provided",
+      "units": "not-applicable",
+      "conflictDisposition": "restrictive-reading"
+    },
+    {
+      "evidenceId": "lfm-card-shape",
+      "sourceName": "LFM2.5-1.2B-Instruct model card",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct/blob/b9d816ab510f9a28dca37cb182e9da8b0226e13c/README.md",
+      "publisher": "Liquid AI",
+      "retrievedOn": "2026-11-12",
+      "immutableRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+      "documentationVersion": null,
+      "claim": "The pinned card states a 32768-token context and a 65536-token vocabulary. It does not state a 400-character or 1200-word output guarantee.",
+      "evidenceClass": "authoritative",
+      "applicability": "Pinned source card context and vocabulary",
+      "valueType": "not-provided",
+      "units": "not-applicable",
+      "conflictDisposition": "none"
+    },
+    {
+      "evidenceId": "lfm-docs-overview",
+      "sourceName": "Liquid AI LFM2.5-1.2B-Instruct page",
+      "url": "https://docs.liquid.ai/lfm/models/lfm25-1.2b-instruct",
+      "publisher": "Liquid AI",
+      "retrievedOn": "2026-11-12",
+      "immutableRevision": null,
+      "documentationVersion": "retrieved-2026-11-12",
+      "claim": "The Liquid AI model page states an instruction-tuned dense model with a 32K context and native tool calling. It does not measure refusal, citation, or tenant behavior.",
+      "evidenceClass": "authoritative",
+      "applicability": "Official model page for the same model id",
+      "valueType": "not-provided",
+      "units": "not-applicable",
+      "conflictDisposition": "none"
+    },
+    {
+      "evidenceId": "lfm-onnx-deployment",
+      "sourceName": "LFM2.5-1.2B-Instruct-ONNX model card",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/blob/10f72e70abf67ac0fd7ebf15bc5854726891d864/README.md",
+      "publisher": "Liquid AI",
+      "retrievedOn": "2026-11-12",
+      "immutableRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+      "documentationVersion": null,
+      "claim": "The pinned ONNX card recommends Q4 for most uses and shows a quickstart for that variant. It does not measure citation, refusal, or schema validity.",
+      "evidenceClass": "authoritative",
+      "applicability": "Pinned ONNX card deployment notes, not measured behavior",
+      "valueType": "not-provided",
+      "units": "not-applicable",
+      "conflictDisposition": "restrictive-reading"
+    }
+  ],
+  "capabilities": [
+    {
+      "capabilityId": "instruction-following",
+      "result": "supported-in-principle",
+      "metricName": null,
+      "empiricalEvaluationRequired": true,
+      "disqualifyingLimitation": false,
+      "evidenceIds": [
+        "lfm-card-use",
+        "lfm-card-shape"
+      ],
+      "rationale": "The card calls the model instruction-tuned. Actual following is unmeasured."
+    },
+    {
+      "capabilityId": "structured-output",
+      "result": "supported-in-principle",
+      "metricName": "outputSchemaValidity",
+      "empiricalEvaluationRequired": true,
+      "disqualifyingLimitation": false,
+      "evidenceIds": [
+        "lfm-card-use",
+        "lfm-card-shape"
+      ],
+      "rationale": "The card shows JSON tool calls. Finding-explanation schema validity is unmeasured."
+    },
+    {
+      "capabilityId": "english-language",
+      "result": "supported-in-principle",
+      "metricName": null,
+      "empiricalEvaluationRequired": false,
+      "disqualifyingLimitation": false,
+      "evidenceIds": [
+        "lfm-card-use",
+        "lfm-card-shape"
+      ],
+      "rationale": "The card lists English among the supported languages."
+    },
+    {
+      "capabilityId": "context-capacity",
+      "result": "supported-in-principle",
+      "metricName": null,
+      "empiricalEvaluationRequired": false,
+      "disqualifyingLimitation": false,
+      "evidenceIds": [
+        "lfm-card-use",
+        "lfm-card-shape"
+      ],
+      "rationale": "The published 32768-token context covers the 8192 evaluation cap. Memory fit is separate."
+    },
+    {
+      "capabilityId": "bounded-generation",
+      "result": "requires-empirical-evaluation",
+      "metricName": null,
+      "empiricalEvaluationRequired": true,
+      "disqualifyingLimitation": false,
+      "evidenceIds": [
+        "lfm-card-use",
+        "lfm-card-shape"
+      ],
+      "rationale": "The card does not guarantee the 400-character or 1200-word output bounds."
+    },
+    {
+      "capabilityId": "deterministic-fact-separation",
+      "result": "requires-empirical-evaluation",
+      "metricName": "affectednessOrPriorityChange",
+      "empiricalEvaluationRequired": true,
+      "disqualifyingLimitation": false,
+      "evidenceIds": [
+        "lfm-card-use",
+        "lfm-card-shape"
+      ],
+      "rationale": "The knowledge-task caveat is not a prohibition of supplied-evidence explanation. Fact separation is unmeasured."
+    },
+    {
+      "capabilityId": "evidence-id-reproduction",
+      "result": "requires-empirical-evaluation",
+      "metricName": "citationValidity",
+      "empiricalEvaluationRequired": true,
+      "disqualifyingLimitation": false,
+      "evidenceIds": [
+        "lfm-card-use",
+        "lfm-card-shape"
+      ],
+      "rationale": "The card does not state evidence-identifier reproduction."
+    },
+    {
+      "capabilityId": "missing-evidence-reporting",
+      "result": "requires-empirical-evaluation",
+      "metricName": null,
+      "empiricalEvaluationRequired": true,
+      "disqualifyingLimitation": false,
+      "evidenceIds": [
+        "lfm-card-use",
+        "lfm-card-shape"
+      ],
+      "rationale": "The card does not state missing-evidence reporting."
+    },
+    {
+      "capabilityId": "uncertainty-expression",
+      "result": "requires-empirical-evaluation",
+      "metricName": "correctUncertainty",
+      "empiricalEvaluationRequired": true,
+      "disqualifyingLimitation": false,
+      "evidenceIds": [
+        "lfm-card-use",
+        "lfm-card-shape"
+      ],
+      "rationale": "The card does not state uncertainty behavior."
+    },
+    {
+      "capabilityId": "unsupported-request-refusal",
+      "result": "requires-empirical-evaluation",
+      "metricName": "correctRefusal",
+      "empiricalEvaluationRequired": true,
+      "disqualifyingLimitation": false,
+      "evidenceIds": [
+        "lfm-card-use",
+        "lfm-card-shape"
+      ],
+      "rationale": "The card does not state refusal behavior."
+    },
+    {
+      "capabilityId": "embedded-instruction-resistance",
+      "result": "requires-empirical-evaluation",
+      "metricName": "promptInjectionResistance",
+      "empiricalEvaluationRequired": true,
+      "disqualifyingLimitation": false,
+      "evidenceIds": [
+        "lfm-card-use",
+        "lfm-card-shape"
+      ],
+      "rationale": "The card does not state resistance to embedded instructions."
+    },
+    {
+      "capabilityId": "state-mutation-avoidance",
+      "result": "requires-empirical-evaluation",
+      "metricName": "unauthorizedStateMutation",
+      "empiricalEvaluationRequired": true,
+      "disqualifyingLimitation": false,
+      "evidenceIds": [
+        "lfm-card-use",
+        "lfm-card-shape"
+      ],
+      "rationale": "The card does not state state-mutation behavior."
+    },
+    {
+      "capabilityId": "cross-tenant-nondisclosure",
+      "result": "requires-empirical-evaluation",
+      "metricName": "crossTenantDisclosure",
+      "empiricalEvaluationRequired": true,
+      "disqualifyingLimitation": false,
+      "evidenceIds": [
+        "lfm-card-use",
+        "lfm-card-shape"
+      ],
+      "rationale": "The card does not state cross-tenant behavior."
+    },
+    {
+      "capabilityId": "schema-compatibility",
+      "result": "requires-empirical-evaluation",
+      "metricName": "outputSchemaValidity",
+      "empiricalEvaluationRequired": true,
+      "disqualifyingLimitation": false,
+      "evidenceIds": [
+        "lfm-card-use",
+        "lfm-card-shape"
+      ],
+      "rationale": "JSON tool guidance is not finding-explanation schema validity."
+    }
+  ]
+}

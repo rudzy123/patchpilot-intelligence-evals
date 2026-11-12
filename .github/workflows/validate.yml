@@ -200,6 +200,17 @@ jobs:
           uv run patchpilot-evals track7a-review-validation
           uv run patchpilot-evals storage-safety-synthetic-check
 
+      - name: Validate the Track 7B evidence records
+        run: |
+          uv run patchpilot-evals candidate-memory-model-validation
+          uv run patchpilot-evals candidate-memory-evidence-validation
+          uv run patchpilot-evals candidate-memory-budget-validation
+          uv run patchpilot-evals explanation-suitability-contract-validation
+          uv run patchpilot-evals explanation-suitability-evidence-validation
+          uv run patchpilot-evals controlled-measurement-authorization-validation
+          uv run patchpilot-evals track8b-readiness-validation
+          uv run patchpilot-evals track7b-review-validation
+
       - name: Validate workflow policy
         run: uv run patchpilot-evals workflow-policy-validation
 

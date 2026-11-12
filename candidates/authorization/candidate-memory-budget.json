@@ -1,0 +1,569 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "locallyObservedArtifactDigests": [],
+  "retrievedOn": "2026-11-12",
+  "finalistModelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+  "sourceRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+  "onnxRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+  "runtimeId": "onnxruntime",
+  "runtimeVersionTag": "v1.31.1",
+  "runtimeRevision": "6af1a932e2286d5c58166085d24c68783033edee",
+  "precision": "fp32",
+  "batchSize": 1,
+  "processCount": 1,
+  "executionProvider": "cpu",
+  "quantizationApproved": false,
+  "speculativeExecution": false,
+  "automaticBatching": false,
+  "ceilingBytes": 12884901888,
+  "gibibyteBytes": 1073741824,
+  "roundingRule": "integer-exact",
+  "overflowDomain": "signed-int64",
+  "measurementPerformed": false,
+  "envelopes": [
+    {
+      "contextTokens": 4096,
+      "classification": "unresolved",
+      "lowerBoundBytes": null,
+      "upperBoundBytes": null,
+      "ceilingBytes": 12884901888,
+      "ceilingComparison": "unresolved",
+      "bytesRelativeToCeiling": null,
+      "unresolvedCategoryIds": [
+        "static_parameter_memory",
+        "graph_and_initializer_overhead",
+        "runtime_process_baseline",
+        "allocator_and_optimization_overhead",
+        "activation_memory",
+        "architecture_state_memory",
+        "input_output_tensor_memory",
+        "tokenizer_and_configuration_memory",
+        "hardened_execution_overhead",
+        "safety_margin"
+      ],
+      "categories": [
+        {
+          "categoryId": "static_parameter_memory",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": true,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": 4681362432,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "parameter_count * bytes_per_fp32_parameter",
+          "inputs": [
+            "parameterCount=1170340608",
+            "bytesPerParameter=4",
+            "logicalProductIncludedInPeak=false"
+          ],
+          "evidenceIds": [
+            "lfm-card-shape",
+            "lfm-onnx-fp32",
+            "fp32-logical-product"
+          ],
+          "uncertainty": "Weight tying is not stated. The logical product of 1170340608 parameters at 4 bytes is not a resident upper bound.",
+          "contextTokens": 4096
+        },
+        {
+          "categoryId": "graph_and_initializer_overhead",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "resident_initializer_bytes_excluding_counted_parameter_payload",
+          "inputs": [
+            "contextIndependent=true",
+            "residentBytes=unknown"
+          ],
+          "evidenceIds": [
+            "lfm-onnx-fp32",
+            "onnx-external-data",
+            "ort-session-defaults"
+          ],
+          "uncertainty": "External-data layout and optional mmap do not establish resident initializer bytes.",
+          "contextTokens": 4096
+        },
+        {
+          "categoryId": "runtime_process_baseline",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "runtime_process_resident_bytes",
+          "inputs": [
+            "contextIndependent=true",
+            "residentBytes=unknown"
+          ],
+          "evidenceIds": [
+            "ort-session-defaults",
+            "ort-memory-page"
+          ],
+          "uncertainty": "No publisher states resident bytes for the CPU process, libraries, or session.",
+          "contextTokens": 4096
+        },
+        {
+          "categoryId": "allocator_and_optimization_overhead",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "arena_pattern_optimizer_and_thread_pool_resident_bytes",
+          "inputs": [
+            "contextIndependent=true",
+            "residentBytes=unknown"
+          ],
+          "evidenceIds": [
+            "ort-session-defaults",
+            "ort-graph-opt",
+            "ort-memory-page"
+          ],
+          "uncertainty": "Default arena, memory pattern, and MaxLevel optimizations have no byte bound here.",
+          "contextTokens": 4096
+        },
+        {
+          "categoryId": "activation_memory",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "batch_size * sequence_tokens * activation_bytes_per_token",
+          "inputs": [
+            "batchSize=1",
+            "contextTokens=4096",
+            "precision=fp32",
+            "width=unknown"
+          ],
+          "evidenceIds": [
+            "lfm-card-shape"
+          ],
+          "uncertainty": "Hidden size and activation width are not stated, so the sequence formula has no bytes.",
+          "contextTokens": 4096
+        },
+        {
+          "categoryId": "architecture_state_memory",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "attention_state_bytes + convolution_state_bytes",
+          "inputs": [
+            "batchSize=1",
+            "contextTokens=4096",
+            "precision=fp32",
+            "width=unknown"
+          ],
+          "evidenceIds": [
+            "lfm-card-shape",
+            "lfm-onnx-state"
+          ],
+          "uncertainty": "Attention and convolution state are named, but their byte sizes are not stated.",
+          "contextTokens": 4096
+        },
+        {
+          "categoryId": "input_output_tensor_memory",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "input_id_bytes + mask_bytes + logits_bytes",
+          "inputs": [
+            "batchSize=1",
+            "contextTokens=4096",
+            "precision=fp32",
+            "width=unknown"
+          ],
+          "evidenceIds": [
+            "lfm-card-shape",
+            "lfm-onnx-state"
+          ],
+          "uncertainty": "Vocabulary size is stated, but FP32 logits shape and dtype are not stated.",
+          "contextTokens": 4096
+        },
+        {
+          "categoryId": "tokenizer_and_configuration_memory",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "resident_tokenizer_bytes + resident_configuration_bytes",
+          "inputs": [
+            "contextIndependent=true",
+            "residentBytes=unknown"
+          ],
+          "evidenceIds": [
+            "lfm-card-shape"
+          ],
+          "uncertainty": "Logical tokenizer and configuration file sizes are storage, not resident bytes.",
+          "contextTokens": 4096
+        },
+        {
+          "categoryId": "hardened_execution_overhead",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "launcher_ipc_and_attestation_resident_bytes",
+          "inputs": [
+            "contextIndependent=true",
+            "residentBytes=unknown"
+          ],
+          "evidenceIds": [
+            "ort-memory-page"
+          ],
+          "uncertainty": "Launcher, IPC, and attestation resident bytes are unpublished. Address space is excluded.",
+          "contextTokens": 4096
+        },
+        {
+          "categoryId": "safety_margin",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "explicit_margin_bytes_after_complete_upper_bounds",
+          "inputs": [
+            "explicitMarginBytes=null",
+            "completeUpperBounds=false"
+          ],
+          "evidenceIds": [
+            "margin-not-applied"
+          ],
+          "uncertainty": "The margin stays unset while any required upper bound is unknown.",
+          "contextTokens": 4096
+        }
+      ]
+    },
+    {
+      "contextTokens": 8192,
+      "classification": "unresolved",
+      "lowerBoundBytes": null,
+      "upperBoundBytes": null,
+      "ceilingBytes": 12884901888,
+      "ceilingComparison": "unresolved",
+      "bytesRelativeToCeiling": null,
+      "unresolvedCategoryIds": [
+        "static_parameter_memory",
+        "graph_and_initializer_overhead",
+        "runtime_process_baseline",
+        "allocator_and_optimization_overhead",
+        "activation_memory",
+        "architecture_state_memory",
+        "input_output_tensor_memory",
+        "tokenizer_and_configuration_memory",
+        "hardened_execution_overhead",
+        "safety_margin"
+      ],
+      "categories": [
+        {
+          "categoryId": "static_parameter_memory",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": true,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": 4681362432,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "parameter_count * bytes_per_fp32_parameter",
+          "inputs": [
+            "parameterCount=1170340608",
+            "bytesPerParameter=4",
+            "logicalProductIncludedInPeak=false"
+          ],
+          "evidenceIds": [
+            "lfm-card-shape",
+            "lfm-onnx-fp32",
+            "fp32-logical-product"
+          ],
+          "uncertainty": "Weight tying is not stated. The logical product of 1170340608 parameters at 4 bytes is not a resident upper bound.",
+          "contextTokens": 8192
+        },
+        {
+          "categoryId": "graph_and_initializer_overhead",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "resident_initializer_bytes_excluding_counted_parameter_payload",
+          "inputs": [
+            "contextIndependent=true",
+            "residentBytes=unknown"
+          ],
+          "evidenceIds": [
+            "lfm-onnx-fp32",
+            "onnx-external-data",
+            "ort-session-defaults"
+          ],
+          "uncertainty": "External-data layout and optional mmap do not establish resident initializer bytes.",
+          "contextTokens": 8192
+        },
+        {
+          "categoryId": "runtime_process_baseline",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "runtime_process_resident_bytes",
+          "inputs": [
+            "contextIndependent=true",
+            "residentBytes=unknown"
+          ],
+          "evidenceIds": [
+            "ort-session-defaults",
+            "ort-memory-page"
+          ],
+          "uncertainty": "No publisher states resident bytes for the CPU process, libraries, or session.",
+          "contextTokens": 8192
+        },
+        {
+          "categoryId": "allocator_and_optimization_overhead",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "arena_pattern_optimizer_and_thread_pool_resident_bytes",
+          "inputs": [
+            "contextIndependent=true",
+            "residentBytes=unknown"
+          ],
+          "evidenceIds": [
+            "ort-session-defaults",
+            "ort-graph-opt",
+            "ort-memory-page"
+          ],
+          "uncertainty": "Default arena, memory pattern, and MaxLevel optimizations have no byte bound here.",
+          "contextTokens": 8192
+        },
+        {
+          "categoryId": "activation_memory",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "batch_size * sequence_tokens * activation_bytes_per_token",
+          "inputs": [
+            "batchSize=1",
+            "contextTokens=8192",
+            "precision=fp32",
+            "width=unknown"
+          ],
+          "evidenceIds": [
+            "lfm-card-shape"
+          ],
+          "uncertainty": "Hidden size and activation width are not stated, so the sequence formula has no bytes.",
+          "contextTokens": 8192
+        },
+        {
+          "categoryId": "architecture_state_memory",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "attention_state_bytes + convolution_state_bytes",
+          "inputs": [
+            "batchSize=1",
+            "contextTokens=8192",
+            "precision=fp32",
+            "width=unknown"
+          ],
+          "evidenceIds": [
+            "lfm-card-shape",
+            "lfm-onnx-state"
+          ],
+          "uncertainty": "Attention and convolution state are named, but their byte sizes are not stated.",
+          "contextTokens": 8192
+        },
+        {
+          "categoryId": "input_output_tensor_memory",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "input_id_bytes + mask_bytes + logits_bytes",
+          "inputs": [
+            "batchSize=1",
+            "contextTokens=8192",
+            "precision=fp32",
+            "width=unknown"
+          ],
+          "evidenceIds": [
+            "lfm-card-shape",
+            "lfm-onnx-state"
+          ],
+          "uncertainty": "Vocabulary size is stated, but FP32 logits shape and dtype are not stated.",
+          "contextTokens": 8192
+        },
+        {
+          "categoryId": "tokenizer_and_configuration_memory",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "resident_tokenizer_bytes + resident_configuration_bytes",
+          "inputs": [
+            "contextIndependent=true",
+            "residentBytes=unknown"
+          ],
+          "evidenceIds": [
+            "lfm-card-shape"
+          ],
+          "uncertainty": "Logical tokenizer and configuration file sizes are storage, not resident bytes.",
+          "contextTokens": 8192
+        },
+        {
+          "categoryId": "hardened_execution_overhead",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "launcher_ipc_and_attestation_resident_bytes",
+          "inputs": [
+            "contextIndependent=true",
+            "residentBytes=unknown"
+          ],
+          "evidenceIds": [
+            "ort-memory-page"
+          ],
+          "uncertainty": "Launcher, IPC, and attestation resident bytes are unpublished. Address space is excluded.",
+          "contextTokens": 8192
+        },
+        {
+          "categoryId": "safety_margin",
+          "unit": "bytes",
+          "memoryDomain": "resident",
+          "includedInTotal": true,
+          "countsParameterPayload": false,
+          "evidenceStatus": "unresolved",
+          "valueType": "not-provided",
+          "lowerBoundBytes": null,
+          "upperBoundBytes": null,
+          "logicalBytes": null,
+          "logicalBytesIncludedInPeak": false,
+          "formula": "explicit_margin_bytes_after_complete_upper_bounds",
+          "inputs": [
+            "explicitMarginBytes=null",
+            "completeUpperBounds=false"
+          ],
+          "evidenceIds": [
+            "margin-not-applied"
+          ],
+          "uncertainty": "The margin stays unset while any required upper bound is unknown.",
+          "contextTokens": 8192
+        }
+      ]
+    }
+  ]
+}

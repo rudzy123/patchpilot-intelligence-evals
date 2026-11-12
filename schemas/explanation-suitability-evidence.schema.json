@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:explanation-suitability-evidence:v1",
+  "title": "Track 7B explanation suitability evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceId",
+        "sourceName",
+        "url",
+        "publisher",
+        "retrievedOn",
+        "immutableRevision",
+        "documentationVersion",
+        "claim",
+        "evidenceClass",
+        "applicability",
+        "valueType",
+        "units",
+        "conflictDisposition"
+      ],
+      "properties": {
+        "evidenceId": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "sourceName": { "type": "string", "minLength": 3, "maxLength": 120 },
+        "url": {
+          "type": "string",
+          "pattern": "^https://[A-Za-z0-9.-]+(?:/[A-Za-z0-9._~:/?#\\[\\]!$&'()*+,;=%-]*)?$"
+        },
+        "publisher": { "const": "Liquid AI" },
+        "retrievedOn": { "const": "2026-11-12" },
+        "immutableRevision": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/sha" }] },
+        "documentationVersion": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[A-Za-z0-9._-]{1,40}$" }
+          ]
+        },
+        "claim": { "type": "string", "pattern": "^[^\"']{20,400}$" },
+        "evidenceClass": {
+          "enum": ["authoritative", "secondary", "conflicting", "unresolved"]
+        },
+        "applicability": { "type": "string", "minLength": 3, "maxLength": 160 },
+        "valueType": { "const": "not-provided" },
+        "units": { "const": "not-applicable" },
+        "conflictDisposition": {
+          "enum": ["none", "restrictive-reading", "rejected-unofficial", "unresolved"]
+        }
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "locallyObservedArtifactDigests",
+    "retrievedOn",
+    "finalistModelId",
+    "sourceRevision",
+    "onnxRevision",
+    "measuredQualityClaimed",
+    "screeningOutcome",
+    "evidence",
+    "capabilities"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "retrievedOn": { "const": "2026-11-12" },
+    "finalistModelId": { "const": "LiquidAI/LFM2.5-1.2B-Instruct" },
+    "sourceRevision": { "const": "b9d816ab510f9a28dca37cb182e9da8b0226e13c" },
+    "onnxRevision": { "const": "10f72e70abf67ac0fd7ebf15bc5854726891d864" },
+    "measuredQualityClaimed": { "const": false },
+    "screeningOutcome": {
+      "enum": [
+        "evidence-closed",
+        "eligible-for-controlled-evaluation",
+        "disqualified",
+        "unresolved"
+      ]
+    },
+    "evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidence" } },
+    "capabilities": {
+      "type": "array",
+      "minItems": 14,
+      "maxItems": 14,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "capabilityId",
+          "result",
+          "metricName",
+          "empiricalEvaluationRequired",
+          "disqualifyingLimitation",
+          "evidenceIds",
+          "rationale"
+        ],
+        "properties": {
+          "capabilityId": { "type": "string", "minLength": 3, "maxLength": 80 },
+          "result": {
+            "enum": [
+              "supported-in-principle",
+              "unsupported",
+              "unresolved",
+              "requires-empirical-evaluation"
+            ]
+          },
+          "metricName": { "type": ["string", "null"], "minLength": 3, "maxLength": 80 },
+          "empiricalEvaluationRequired": { "type": "boolean" },
+          "disqualifyingLimitation": { "type": "boolean" },
+          "evidenceIds": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 4,
+            "items": { "type": "string", "minLength": 3, "maxLength": 80 }
+          },
+          "rationale": { "type": "string", "minLength": 20, "maxLength": 240 }
+        }
+      }
+    }
+  }
+}

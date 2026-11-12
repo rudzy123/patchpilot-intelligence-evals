@@ -84,6 +84,13 @@ from patchpilot_intelligence_evals.hardened_execution import (
 )
 from patchpilot_intelligence_evals.implementation_review import ReviewError, load_review
 from patchpilot_intelligence_evals.isolation_profile import IsolationError, load_profile
+from patchpilot_intelligence_evals.measurement_authorization import (
+    MeasurementAuthorizationError,
+    load_measurement_authorization,
+)
+from patchpilot_intelligence_evals.memory_budget import MemoryBudgetError, load_memory_budget
+from patchpilot_intelligence_evals.memory_evidence import MemoryEvidenceError, load_memory_evidence
+from patchpilot_intelligence_evals.memory_model import MemoryModelError, load_memory_model
 from patchpilot_intelligence_evals.network_guard import (
     BoundaryError,
     assert_inside_repository,
@@ -132,6 +139,14 @@ from patchpilot_intelligence_evals.subprocess_compatibility import (
     SubprocessError,
     load_subprocess_compatibility,
 )
+from patchpilot_intelligence_evals.suitability_contract import (
+    SuitabilityContractError,
+    load_suitability_contract,
+)
+from patchpilot_intelligence_evals.suitability_evidence import (
+    SuitabilityEvidenceError,
+    load_suitability_evidence,
+)
 from patchpilot_intelligence_evals.tokenizer_eligibility import (
     TokenizerError,
     load_tokenizer_eligibility,
@@ -149,6 +164,7 @@ from patchpilot_intelligence_evals.track7_selection import (
     load_track7_selection,
 )
 from patchpilot_intelligence_evals.track7a_review import Track7AReviewError, load_track7a_review
+from patchpilot_intelligence_evals.track7b_review import Track7BReviewError, load_track7b_review
 from patchpilot_intelligence_evals.track8_authorization import (
     Track8AuthorizationError,
     load_track8_authorization,
@@ -157,6 +173,10 @@ from patchpilot_intelligence_evals.track8a_readiness import (
     Track8AReadinessError,
     load_budget_recalculation,
     load_track8a_readiness,
+)
+from patchpilot_intelligence_evals.track8b_readiness import (
+    Track8BReadinessError,
+    load_track8b_readiness,
 )
 from patchpilot_intelligence_evals.verification_seal import SealError, load_seal_template
 from patchpilot_intelligence_evals.workflow_policy import (
@@ -223,6 +243,14 @@ def _parser() -> argparse.ArgumentParser:
     commands.add_parser("artifact-budget-recalculation-validation")
     commands.add_parser("track8a-storage-readiness-validation")
     commands.add_parser("track7a-review-validation")
+    commands.add_parser("candidate-memory-model-validation")
+    commands.add_parser("candidate-memory-evidence-validation")
+    commands.add_parser("candidate-memory-budget-validation")
+    commands.add_parser("explanation-suitability-contract-validation")
+    commands.add_parser("explanation-suitability-evidence-validation")
+    commands.add_parser("controlled-measurement-authorization-validation")
+    commands.add_parser("track8b-readiness-validation")
+    commands.add_parser("track7b-review-validation")
     commands.add_parser("storage-safety-synthetic-check")
     commands.add_parser("workflow-policy-validation")
     commands.add_parser("dependency-architecture-policy-validation")
@@ -682,6 +710,93 @@ def main(argv: list[str] | None = None) -> int:
                         "productionReady": False,
                     }
                 )
+            if args.command == "candidate-memory-model-validation":
+                model = load_memory_model()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "categoryCount": len(model["categories"]),
+                        "ceilingBytes": model["ceilingBytes"],
+                        "logicalProductIncludedInPeak": model["parameterRepresentation"][
+                            "logicalProductIncludedInPeak"
+                        ],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "candidate-memory-evidence-validation":
+                memory_evidence = load_memory_evidence()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "graphParsed": memory_evidence["graphParsed"],
+                        "categoryCount": len(memory_evidence["categories"]),
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "candidate-memory-budget-validation":
+                budget = load_memory_budget()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "classifications": [row["classification"] for row in budget["envelopes"]],
+                        "measurementPerformed": budget["measurementPerformed"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "explanation-suitability-contract-validation":
+                contract = load_suitability_contract()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "capabilityCount": len(contract["capabilities"]),
+                        "gatesUnchanged": contract["gatesUnchanged"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "explanation-suitability-evidence-validation":
+                suitability = load_suitability_evidence()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "screeningOutcome": suitability["screeningOutcome"],
+                        "measuredQualityClaimed": suitability["measuredQualityClaimed"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "controlled-measurement-authorization-validation":
+                measurement = load_measurement_authorization()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "authorizationOutcome": measurement["authorizationOutcome"],
+                        "reason": measurement["reason"],
+                        "selectionOutcome": measurement["selectionOutcome"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "track8b-readiness-validation":
+                track8b = load_track8b_readiness()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "readinessOutcome": track8b["readinessOutcome"],
+                        "verdict": track8b["verdict"],
+                        "selectionOutcome": track8b["selectionOutcome"],
+                        "productionReady": False,
+                    }
+                )
+            if args.command == "track7b-review-validation":
+                track7b_review = load_track7b_review()
+                return _summary(
+                    {
+                        "status": "ok",
+                        "reviewStatus": track7b_review["reviewStatus"],
+                        "controlledMeasurement": track7b_review["controlledMeasurement"],
+                        "selectionOutcome": track7b_review["selectionOutcome"],
+                        "reviewDigest": track7b_review["reviewDigest"],
+                        "productionReady": False,
+                    }
+                )
             if args.command == "storage-safety-synthetic-check":
                 return _summary(run_synthetic_storage_check())
             if args.command == "artifact-cache-policy-validation":
@@ -1006,8 +1121,16 @@ def main(argv: list[str] | None = None) -> int:
         Track7SelectionError,
         Track7ReviewError,
         Track7AReviewError,
+        Track7BReviewError,
         Track8AuthorizationError,
         Track8AReadinessError,
+        Track8BReadinessError,
+        MeasurementAuthorizationError,
+        MemoryBudgetError,
+        MemoryEvidenceError,
+        MemoryModelError,
+        SuitabilityContractError,
+        SuitabilityEvidenceError,
         SealError,
         PromotionError,
         CleanupError,

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "locallyObservedArtifactDigests": [],
+  "retrievedOn": "2026-11-12",
+  "finalistModelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+  "sourceRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+  "onnxRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+  "runtimeId": "onnxruntime",
+  "runtimeVersionTag": "v1.31.1",
+  "runtimeRevision": "6af1a932e2286d5c58166085d24c68783033edee",
+  "adapterId": "patchpilot-onnxruntime-adapter",
+  "adapterVersion": "1.0.0",
+  "profileId": "linux-bwrap-systemd-v1",
+  "profileVersion": "1.0.0",
+  "installationAuthorized": false,
+  "measurementPerformed": false,
+  "quantizationApproved": false,
+  "selectionOutcome": "no-selection",
+  "weightedScore": null,
+  "qualifyingCandidateCount": 0,
+  "acquisitionAuthorization": "not-authorized",
+  "authorizationOutcome": "authorized-with-documented-residuals",
+  "verdict": "TRACK 8B CONTROLLED MEASUREMENT AUTHORIZED WITH DOCUMENTED RESIDUALS",
+  "reason": "measurement-required",
+  "memoryClassifications": [
+    "unresolved",
+    "unresolved"
+  ],
+  "suitabilityScreening": "eligible-for-controlled-evaluation",
+  "scope": [
+    "fp32-resident-peak-at-4096-tokens",
+    "fp32-resident-peak-at-8192-tokens",
+    "existing-synthetic-corpus-metrics"
+  ],
+  "stopConditions": [
+    "ceiling-byte-exceeded",
+    "official-disqualifier",
+    "artifact-identity-drift",
+    "graph-or-external-data-mismatch",
+    "network-egress",
+    "conversion-or-quantization",
+    "production-use"
+  ],
+  "residuals": [
+    "resident-upper-bound-unknown",
+    "safety-margin-unset",
+    "graph-not-parsed",
+    "local-digests-empty",
+    "behavioral-metrics-unmeasured",
+    "knowledge-task-caveat",
+    "installation-not-authorized",
+    "adapter-executable-state-unavailable"
+  ]
+}

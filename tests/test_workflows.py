@@ -371,7 +371,16 @@ def test_validation_jobs_keep_existing_coverage() -> None:
     assert "track7-review-validation" in contracts
     assert "track7a-review-validation" in contracts
     assert "storage-safety-synthetic-check" in contracts
+    assert "candidate-memory-model-validation" in contracts
+    assert "track8b-readiness-validation" in contracts
     assert contracts.index("storage-safety-synthetic-check") < contracts.index(
+        "candidate-memory-model-validation"
+    )
+    assert "track7b-review-validation" in contracts
+    assert contracts.index("track8b-readiness-validation") < contracts.index(
+        "track7b-review-validation"
+    )
+    assert contracts.index("track7b-review-validation") < contracts.index(
         "workflow-policy-validation"
     )
     assert "workflow-policy-validation" in contracts

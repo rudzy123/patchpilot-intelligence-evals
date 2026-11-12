@@ -1,0 +1,225 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "locallyObservedArtifactDigests": [],
+  "retrievedOn": "2026-11-12",
+  "finalistModelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+  "sourceRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+  "onnxRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+  "measuredQualityClaimed": false,
+  "gatesUnchanged": true,
+  "capabilities": [
+    {
+      "capabilityId": "instruction-following",
+      "metricName": null,
+      "corpusCategories": [
+        "grounding-citation",
+        "insufficient-evidence-refusal",
+        "prompt-injection",
+        "cross-tenant-negative-control",
+        "contradiction",
+        "stale-unavailable-incomparable"
+      ],
+      "futureTestCategory": "all-cases",
+      "officialEvidenceRequired": true,
+      "empiricalEvaluationRequired": true,
+      "passAuthority": "empirical-harness",
+      "disqualifyingLimitationRule": "An official prohibition of evidence-bounded explanation disqualifies this capability."
+    },
+    {
+      "capabilityId": "structured-output",
+      "metricName": "outputSchemaValidity",
+      "corpusCategories": [
+        "grounding-citation",
+        "insufficient-evidence-refusal",
+        "prompt-injection",
+        "cross-tenant-negative-control",
+        "contradiction",
+        "stale-unavailable-incomparable"
+      ],
+      "futureTestCategory": "all-cases",
+      "officialEvidenceRequired": true,
+      "empiricalEvaluationRequired": true,
+      "passAuthority": "empirical-harness",
+      "disqualifyingLimitationRule": "An official prohibition of evidence-bounded explanation disqualifies this capability."
+    },
+    {
+      "capabilityId": "english-language",
+      "metricName": null,
+      "corpusCategories": [
+        "grounding-citation",
+        "insufficient-evidence-refusal",
+        "prompt-injection",
+        "cross-tenant-negative-control",
+        "contradiction",
+        "stale-unavailable-incomparable"
+      ],
+      "futureTestCategory": "all-cases",
+      "officialEvidenceRequired": true,
+      "empiricalEvaluationRequired": false,
+      "passAuthority": "official-statement",
+      "disqualifyingLimitationRule": "An official prohibition of evidence-bounded explanation disqualifies this capability."
+    },
+    {
+      "capabilityId": "context-capacity",
+      "metricName": null,
+      "corpusCategories": [
+        "grounding-citation",
+        "insufficient-evidence-refusal",
+        "prompt-injection",
+        "cross-tenant-negative-control",
+        "contradiction",
+        "stale-unavailable-incomparable"
+      ],
+      "futureTestCategory": "context-cap-8192",
+      "officialEvidenceRequired": true,
+      "empiricalEvaluationRequired": false,
+      "passAuthority": "official-statement",
+      "disqualifyingLimitationRule": "An official prohibition of evidence-bounded explanation disqualifies this capability."
+    },
+    {
+      "capabilityId": "bounded-generation",
+      "metricName": null,
+      "corpusCategories": [
+        "grounding-citation",
+        "insufficient-evidence-refusal",
+        "prompt-injection",
+        "cross-tenant-negative-control",
+        "contradiction",
+        "stale-unavailable-incomparable"
+      ],
+      "futureTestCategory": "output-bound",
+      "officialEvidenceRequired": true,
+      "empiricalEvaluationRequired": true,
+      "passAuthority": "empirical-harness",
+      "disqualifyingLimitationRule": "An official prohibition of evidence-bounded explanation disqualifies this capability."
+    },
+    {
+      "capabilityId": "deterministic-fact-separation",
+      "metricName": "affectednessOrPriorityChange",
+      "corpusCategories": [
+        "grounding-citation",
+        "contradiction"
+      ],
+      "futureTestCategory": "grounding-citation",
+      "officialEvidenceRequired": true,
+      "empiricalEvaluationRequired": true,
+      "passAuthority": "empirical-harness",
+      "disqualifyingLimitationRule": "An official prohibition of evidence-bounded explanation disqualifies this capability."
+    },
+    {
+      "capabilityId": "evidence-id-reproduction",
+      "metricName": "citationValidity",
+      "corpusCategories": [
+        "grounding-citation"
+      ],
+      "futureTestCategory": "grounding-citation",
+      "officialEvidenceRequired": true,
+      "empiricalEvaluationRequired": true,
+      "passAuthority": "empirical-harness",
+      "disqualifyingLimitationRule": "An official prohibition of evidence-bounded explanation disqualifies this capability."
+    },
+    {
+      "capabilityId": "missing-evidence-reporting",
+      "metricName": null,
+      "corpusCategories": [
+        "insufficient-evidence-refusal",
+        "stale-unavailable-incomparable"
+      ],
+      "futureTestCategory": "insufficient-evidence-refusal",
+      "officialEvidenceRequired": true,
+      "empiricalEvaluationRequired": true,
+      "passAuthority": "empirical-harness",
+      "disqualifyingLimitationRule": "An official prohibition of evidence-bounded explanation disqualifies this capability."
+    },
+    {
+      "capabilityId": "uncertainty-expression",
+      "metricName": "correctUncertainty",
+      "corpusCategories": [
+        "contradiction",
+        "insufficient-evidence-refusal",
+        "stale-unavailable-incomparable"
+      ],
+      "futureTestCategory": "contradiction",
+      "officialEvidenceRequired": true,
+      "empiricalEvaluationRequired": true,
+      "passAuthority": "empirical-harness",
+      "disqualifyingLimitationRule": "An official prohibition of evidence-bounded explanation disqualifies this capability."
+    },
+    {
+      "capabilityId": "unsupported-request-refusal",
+      "metricName": "correctRefusal",
+      "corpusCategories": [
+        "insufficient-evidence-refusal"
+      ],
+      "futureTestCategory": "insufficient-evidence-refusal",
+      "officialEvidenceRequired": true,
+      "empiricalEvaluationRequired": true,
+      "passAuthority": "empirical-harness",
+      "disqualifyingLimitationRule": "An official prohibition of evidence-bounded explanation disqualifies this capability."
+    },
+    {
+      "capabilityId": "embedded-instruction-resistance",
+      "metricName": "promptInjectionResistance",
+      "corpusCategories": [
+        "prompt-injection"
+      ],
+      "futureTestCategory": "prompt-injection",
+      "officialEvidenceRequired": true,
+      "empiricalEvaluationRequired": true,
+      "passAuthority": "empirical-harness",
+      "disqualifyingLimitationRule": "An official prohibition of evidence-bounded explanation disqualifies this capability."
+    },
+    {
+      "capabilityId": "state-mutation-avoidance",
+      "metricName": "unauthorizedStateMutation",
+      "corpusCategories": [
+        "grounding-citation",
+        "insufficient-evidence-refusal",
+        "prompt-injection",
+        "cross-tenant-negative-control",
+        "contradiction",
+        "stale-unavailable-incomparable"
+      ],
+      "futureTestCategory": "all-cases",
+      "officialEvidenceRequired": true,
+      "empiricalEvaluationRequired": true,
+      "passAuthority": "empirical-harness",
+      "disqualifyingLimitationRule": "An official prohibition of evidence-bounded explanation disqualifies this capability."
+    },
+    {
+      "capabilityId": "cross-tenant-nondisclosure",
+      "metricName": "crossTenantDisclosure",
+      "corpusCategories": [
+        "cross-tenant-negative-control"
+      ],
+      "futureTestCategory": "cross-tenant-negative-control",
+      "officialEvidenceRequired": true,
+      "empiricalEvaluationRequired": true,
+      "passAuthority": "empirical-harness",
+      "disqualifyingLimitationRule": "An official prohibition of evidence-bounded explanation disqualifies this capability."
+    },
+    {
+      "capabilityId": "schema-compatibility",
+      "metricName": "outputSchemaValidity",
+      "corpusCategories": [
+        "grounding-citation",
+        "insufficient-evidence-refusal",
+        "prompt-injection",
+        "cross-tenant-negative-control",
+        "contradiction",
+        "stale-unavailable-incomparable"
+      ],
+      "futureTestCategory": "all-cases",
+      "officialEvidenceRequired": true,
+      "empiricalEvaluationRequired": true,
+      "passAuthority": "empirical-harness",
+      "disqualifyingLimitationRule": "An official prohibition of evidence-bounded explanation disqualifies this capability."
+    }
+  ]
+}

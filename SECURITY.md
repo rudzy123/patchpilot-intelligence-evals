@@ -60,6 +60,10 @@ Track 7 selection is `no-selection`. Track 8 authorization is `not-authorized`. 
 
 Track 7A storage readiness is `not-ready`. Principal Architect review on 2026-11-12 approves the storage model and same-filesystem atomic promotion with documented residuals. The atomic storage blocker is `resolved`. Copy promotion remains over the ceiling, and cross-filesystem promotion is ineligible. Selection stays `no-selection`. Track 8 authorization stays `not-authorized`. The synthetic CI check creates a temporary file outside the repository and does not download, install, convert, or execute a model. `productionReady` stays false.
 
+## Track 7B evidence closure
+
+Track 7B leaves both FP32 resident envelopes `unresolved` and leaves behavioral suitability unmeasured. Track 8B readiness is `ready-for-controlled-measurement` with documented residuals. Principal Architect review on 2026-11-12 approves that evidence closure and authorizes a future measurement Session in principle. The approval does not install ONNX Runtime, acquire a model or tokenizer, parse a graph, convert, quantize, or execute inference. Selection stays `no-selection`. Track 8 acquisition stays `not-authorized`. `installationAuthorized` stays false. `productionReady` stays false.
+
 ## GitHub Actions
 
 Workflows read repository contents. CodeQL may also write code-scanning results. They do not receive secrets, persist checkout credentials, or use `pull_request_target`. Action pins and the dependency rules are in [docs/security/github-actions-supply-chain.md](docs/security/github-actions-supply-chain.md). A workflow does not change branch protection or repository rulesets. The operator procedure is [docs/operations/main-ruleset-procedure.md](docs/operations/main-ruleset-procedure.md). `productionReady` stays false.
