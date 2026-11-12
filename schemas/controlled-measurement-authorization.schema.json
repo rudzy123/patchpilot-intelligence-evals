@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:controlled-measurement-authorization:v1",
+  "title": "Track 7B controlled measurement authorization",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "locallyObservedArtifactDigests",
+    "retrievedOn",
+    "finalistModelId",
+    "sourceRevision",
+    "onnxRevision",
+    "runtimeId",
+    "runtimeVersionTag",
+    "runtimeRevision",
+    "adapterId",
+    "adapterVersion",
+    "profileId",
+    "profileVersion",
+    "installationAuthorized",
+    "measurementPerformed",
+    "quantizationApproved",
+    "selectionOutcome",
+    "weightedScore",
+    "qualifyingCandidateCount",
+    "acquisitionAuthorization",
+    "authorizationOutcome",
+    "verdict",
+    "reason",
+    "memoryClassifications",
+    "suitabilityScreening",
+    "scope",
+    "stopConditions",
+    "residuals"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "retrievedOn": { "const": "2026-11-12" },
+    "finalistModelId": { "const": "LiquidAI/LFM2.5-1.2B-Instruct" },
+    "sourceRevision": { "const": "b9d816ab510f9a28dca37cb182e9da8b0226e13c" },
+    "onnxRevision": { "const": "10f72e70abf67ac0fd7ebf15bc5854726891d864" },
+    "runtimeId": { "const": "onnxruntime" },
+    "runtimeVersionTag": { "const": "v1.31.1" },
+    "runtimeRevision": { "const": "6af1a932e2286d5c58166085d24c68783033edee" },
+    "adapterId": { "const": "patchpilot-onnxruntime-adapter" },
+    "adapterVersion": { "const": "1.0.0" },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "profileVersion": { "const": "1.0.0" },
+    "installationAuthorized": { "const": false },
+    "measurementPerformed": { "const": false },
+    "quantizationApproved": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "weightedScore": { "type": "null" },
+    "qualifyingCandidateCount": { "const": 0 },
+    "acquisitionAuthorization": { "const": "not-authorized" },
+    "authorizationOutcome": {
+      "enum": [
+        "authorized",
+        "authorized-with-documented-residuals",
+        "not-authorized",
+        "blocked-by-unresolved-authority"
+      ]
+    },
+    "verdict": {
+      "enum": [
+        "TRACK 8B CONTROLLED MEASUREMENT AUTHORIZED",
+        "TRACK 8B CONTROLLED MEASUREMENT AUTHORIZED WITH DOCUMENTED RESIDUALS",
+        "TRACK 8B CONTROLLED MEASUREMENT NOT AUTHORIZED",
+        "BLOCKED BY UNRESOLVED AUTHORITY"
+      ]
+    },
+    "reason": {
+      "enum": [
+        "measurement-required",
+        "evidence-closed",
+        "disqualified",
+        "unresolved-without-justification",
+        "prerequisite-failed",
+        "unresolved-authority"
+      ]
+    },
+    "memoryClassifications": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "enum": ["proven-pass", "proven-fail", "unresolved"] }
+    },
+    "suitabilityScreening": {
+      "enum": [
+        "evidence-closed",
+        "eligible-for-controlled-evaluation",
+        "disqualified",
+        "unresolved"
+      ]
+    },
+    "scope": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "type": "string", "minLength": 3, "maxLength": 80 }
+    },
+    "stopConditions": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": { "type": "string", "minLength": 3, "maxLength": 80 }
+    },
+    "residuals": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 12,
+      "items": { "type": "string", "minLength": 3, "maxLength": 80 }
+    }
+  }
+}

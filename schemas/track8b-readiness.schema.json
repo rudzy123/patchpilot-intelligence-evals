@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track8b-readiness:v1",
+  "title": "Track 8B measurement readiness",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "locallyObservedArtifactDigests",
+    "retrievedOn",
+    "finalistModelId",
+    "readinessOutcome",
+    "verdict",
+    "measurementAuthorization",
+    "measurementReason",
+    "measurementPerformed",
+    "installationAuthorized",
+    "quantizationApproved",
+    "selectionOutcome",
+    "selectedModelId",
+    "weightedScore",
+    "qualifyingCandidateCount",
+    "acquisitionAuthorization",
+    "track8aReadinessOutcome",
+    "storageBlocker",
+    "memoryClassifications",
+    "suitabilityScreening"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "retrievedOn": { "const": "2026-11-12" },
+    "finalistModelId": { "const": "LiquidAI/LFM2.5-1.2B-Instruct" },
+    "readinessOutcome": {
+      "enum": ["ready-for-controlled-measurement", "not-ready"]
+    },
+    "verdict": {
+      "enum": [
+        "TRACK 8B CONTROLLED MEASUREMENT AUTHORIZED",
+        "TRACK 8B CONTROLLED MEASUREMENT AUTHORIZED WITH DOCUMENTED RESIDUALS",
+        "TRACK 8B CONTROLLED MEASUREMENT NOT AUTHORIZED",
+        "BLOCKED BY UNRESOLVED AUTHORITY"
+      ]
+    },
+    "measurementAuthorization": {
+      "enum": [
+        "authorized",
+        "authorized-with-documented-residuals",
+        "not-authorized",
+        "blocked-by-unresolved-authority"
+      ]
+    },
+    "measurementReason": { "type": "string", "minLength": 3, "maxLength": 80 },
+    "measurementPerformed": { "const": false },
+    "installationAuthorized": { "const": false },
+    "quantizationApproved": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "selectedModelId": { "type": "null" },
+    "weightedScore": { "type": "null" },
+    "qualifyingCandidateCount": { "const": 0 },
+    "acquisitionAuthorization": { "const": "not-authorized" },
+    "track8aReadinessOutcome": { "const": "not-ready" },
+    "storageBlocker": { "const": "resolved" },
+    "memoryClassifications": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "enum": ["proven-pass", "proven-fail", "unresolved"] }
+    },
+    "suitabilityScreening": {
+      "enum": [
+        "evidence-closed",
+        "eligible-for-controlled-evaluation",
+        "disqualified",
+        "unresolved"
+      ]
+    }
+  }
+}

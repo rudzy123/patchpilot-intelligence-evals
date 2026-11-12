@@ -15,6 +15,7 @@ Contributions to this repository must be original work for PatchPilot evaluation
 - Track 6D acquisition readiness is `not-ready` and does not authorize installation, acquisition, conversion, inference, or selection.
 - Track 7 validation does not install a runtime, download a model, convert a checkpoint, or execute inference. Track 8 authorization is `not-authorized`. The Principal Architect review approves that outcome and does not authorize acquisition.
 - Track 7A validation recalculates storage, checks the implementation review, and runs one temporary synthetic promotion. The 2026-11-12 review approves the storage model with documented residuals. It does not authorize acquisition, install a runtime, or execute inference. Track 8A readiness is `not-ready`.
+- Track 7B validation reads committed memory, suitability, measurement, and implementation-review records. The 2026-11-12 review approves the evidence closure and authorizes a future measurement Session in principle with documented residuals. It does not authorize acquisition, runtime installation, conversion, quantization, inference, or selection. Track 8 acquisition stays `not-authorized`.
 - Candidate fixtures are deterministic test doubles. Do not describe them as models or give them network access.
 - Do not put secrets in cases, tests, logs, or commits.
 - Tests and evaluation commands must stay offline. Package installation is the only step that may use a package index.

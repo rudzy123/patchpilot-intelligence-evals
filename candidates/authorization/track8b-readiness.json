@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "locallyObservedArtifactDigests": [],
+  "retrievedOn": "2026-11-12",
+  "finalistModelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+  "readinessOutcome": "ready-for-controlled-measurement",
+  "verdict": "TRACK 8B CONTROLLED MEASUREMENT AUTHORIZED WITH DOCUMENTED RESIDUALS",
+  "measurementAuthorization": "authorized-with-documented-residuals",
+  "measurementReason": "measurement-required",
+  "measurementPerformed": false,
+  "installationAuthorized": false,
+  "quantizationApproved": false,
+  "selectionOutcome": "no-selection",
+  "selectedModelId": null,
+  "weightedScore": null,
+  "qualifyingCandidateCount": 0,
+  "acquisitionAuthorization": "not-authorized",
+  "track8aReadinessOutcome": "not-ready",
+  "storageBlocker": "resolved",
+  "memoryClassifications": [
+    "unresolved",
+    "unresolved"
+  ],
+  "suitabilityScreening": "eligible-for-controlled-evaluation"
+}

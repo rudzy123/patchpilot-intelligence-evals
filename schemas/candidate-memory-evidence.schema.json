@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:candidate-memory-evidence:v1",
+  "title": "Track 7B candidate memory evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceId",
+        "sourceName",
+        "url",
+        "publisher",
+        "retrievedOn",
+        "immutableRevision",
+        "documentationVersion",
+        "claim",
+        "evidenceClass",
+        "applicability",
+        "valueType",
+        "units",
+        "conflictDisposition",
+        "byteBoundPermitted"
+      ],
+      "properties": {
+        "evidenceId": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "sourceName": { "type": "string", "minLength": 3, "maxLength": 120 },
+        "url": {
+          "type": "string",
+          "pattern": "^https://[A-Za-z0-9.-]+(?:/[A-Za-z0-9._~:/?#\\[\\]!$&'()*+,;=%-]*)?$"
+        },
+        "publisher": { "type": "string", "minLength": 2, "maxLength": 80 },
+        "retrievedOn": { "const": "2026-11-12" },
+        "immutableRevision": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/sha" }] },
+        "documentationVersion": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[A-Za-z0-9._-]{1,40}$" }
+          ]
+        },
+        "claim": { "type": "string", "pattern": "^[^\"']{20,400}$" },
+        "evidenceClass": {
+          "enum": ["authoritative", "secondary", "conflicting", "unresolved"]
+        },
+        "applicability": { "type": "string", "minLength": 3, "maxLength": 160 },
+        "valueType": {
+          "enum": [
+            "published-measurement",
+            "published-bound",
+            "calculated",
+            "assumption",
+            "not-provided"
+          ]
+        },
+        "units": {
+          "enum": [
+            "bytes",
+            "tokens",
+            "parameters",
+            "count",
+            "boolean",
+            "decimal-gigabytes",
+            "not-applicable"
+          ]
+        },
+        "conflictDisposition": {
+          "enum": ["none", "restrictive-reading", "rejected-unofficial", "unresolved"]
+        },
+        "byteBoundPermitted": { "type": "boolean" }
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "productionReady",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "acquisitionStatus",
+    "conversionStatus",
+    "executionStatus",
+    "locallyObservedArtifactDigests",
+    "retrievedOn",
+    "finalistModelId",
+    "sourceRevision",
+    "onnxRevision",
+    "runtimeId",
+    "runtimeVersionTag",
+    "runtimeRevision",
+    "graphParsed",
+    "evidence",
+    "categories"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "locallyObservedArtifactDigests": { "type": "array", "maxItems": 0 },
+    "retrievedOn": { "const": "2026-11-12" },
+    "finalistModelId": { "const": "LiquidAI/LFM2.5-1.2B-Instruct" },
+    "sourceRevision": { "const": "b9d816ab510f9a28dca37cb182e9da8b0226e13c" },
+    "onnxRevision": { "const": "10f72e70abf67ac0fd7ebf15bc5854726891d864" },
+    "runtimeId": { "const": "onnxruntime" },
+    "runtimeVersionTag": { "const": "v1.31.1" },
+    "runtimeRevision": { "const": "6af1a932e2286d5c58166085d24c68783033edee" },
+    "graphParsed": { "const": false },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/evidence" }
+    },
+    "categories": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "categoryId",
+          "evidenceStatus",
+          "valueType",
+          "unit",
+          "lowerBoundBytes",
+          "upperBoundBytes",
+          "logicalBytes",
+          "logicalBytesIncludedInPeak",
+          "evidenceIds",
+          "uncertainty"
+        ],
+        "properties": {
+          "categoryId": { "type": "string", "minLength": 3, "maxLength": 80 },
+          "evidenceStatus": {
+            "enum": [
+              "authoritative-measured",
+              "authoritative-published-bound",
+              "deterministic-calculation",
+              "conservative-assumption",
+              "unresolved"
+            ]
+          },
+          "valueType": {
+            "enum": [
+              "published-measurement",
+              "published-bound",
+              "calculated",
+              "assumption",
+              "not-provided"
+            ]
+          },
+          "unit": { "const": "bytes" },
+          "lowerBoundBytes": { "type": ["integer", "null"], "minimum": 0 },
+          "upperBoundBytes": { "type": ["integer", "null"], "minimum": 0 },
+          "logicalBytes": { "type": ["integer", "null"], "minimum": 0 },
+          "logicalBytesIncludedInPeak": { "const": false },
+          "evidenceIds": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 4,
+            "items": { "type": "string", "minLength": 3, "maxLength": 80 }
+          },
+          "uncertainty": { "type": "string", "minLength": 10, "maxLength": 240 }
+        }
+      }
+    }
+  }
+}

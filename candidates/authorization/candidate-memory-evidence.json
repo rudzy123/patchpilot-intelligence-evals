@@ -1,0 +1,363 @@
+{
+  "schemaVersion": "1.0.0",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "acquisitionStatus": "not-acquired",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "locallyObservedArtifactDigests": [],
+  "retrievedOn": "2026-11-12",
+  "finalistModelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+  "sourceRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+  "onnxRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+  "runtimeId": "onnxruntime",
+  "runtimeVersionTag": "v1.31.1",
+  "runtimeRevision": "6af1a932e2286d5c58166085d24c68783033edee",
+  "graphParsed": false,
+  "evidence": [
+    {
+      "evidenceId": "lfm-card-shape",
+      "sourceName": "LFM2.5-1.2B-Instruct model card",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct/blob/b9d816ab510f9a28dca37cb182e9da8b0226e13c/README.md",
+      "publisher": "Liquid AI",
+      "retrievedOn": "2026-11-12",
+      "immutableRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+      "documentationVersion": null,
+      "claim": "The pinned card states a 1.17B parameter count, 16 layers with 10 double-gated convolution blocks and 6 GQA blocks, a 32768-token context, and a 65536-token vocabulary. Hidden size, head count, and weight tying are not stated.",
+      "evidenceClass": "authoritative",
+      "applicability": "Pinned source card for LiquidAI/LFM2.5-1.2B-Instruct",
+      "valueType": "not-provided",
+      "units": "not-applicable",
+      "conflictDisposition": "none",
+      "byteBoundPermitted": false
+    },
+    {
+      "evidenceId": "lfm-card-use",
+      "sourceName": "LFM2.5-1.2B-Instruct model card",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct/blob/b9d816ab510f9a28dca37cb182e9da8b0226e13c/README.md",
+      "publisher": "Liquid AI",
+      "retrievedOn": "2026-11-12",
+      "immutableRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+      "documentationVersion": null,
+      "claim": "The pinned card describes an instruction-tuned model with English among its languages, recommends agentic tasks, data extraction, and RAG, and says knowledge-intensive tasks and programming are not recommended. JSON tool definitions and optional JSON function calls are shown.",
+      "evidenceClass": "authoritative",
+      "applicability": "Pinned source card suitability statements",
+      "valueType": "not-provided",
+      "units": "not-applicable",
+      "conflictDisposition": "restrictive-reading",
+      "byteBoundPermitted": false
+    },
+    {
+      "evidenceId": "lfm-card-memory",
+      "sourceName": "LFM2.5-1.2B-Instruct model card",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct/blob/b9d816ab510f9a28dca37cb182e9da8b0226e13c/README.md",
+      "publisher": "Liquid AI",
+      "retrievedOn": "2026-11-12",
+      "immutableRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+      "documentationVersion": null,
+      "claim": "The pinned card says the model runs under 1GB of memory and lists 0.9GB for NPU NexaML rows and 719MB for a llama.cpp Q4_0 CPU row. Those figures are not an FP32 ONNX CPU resident peak.",
+      "evidenceClass": "conflicting",
+      "applicability": "NPU NexaML and llama.cpp Q4_0 rows only",
+      "valueType": "published-measurement",
+      "units": "decimal-gigabytes",
+      "conflictDisposition": "restrictive-reading",
+      "byteBoundPermitted": false
+    },
+    {
+      "evidenceId": "lfm-onnx-fp32",
+      "sourceName": "LFM2.5-1.2B-Instruct-ONNX model card",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/blob/10f72e70abf67ac0fd7ebf15bc5854726891d864/README.md",
+      "publisher": "Liquid AI",
+      "retrievedOn": "2026-11-12",
+      "immutableRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+      "documentationVersion": null,
+      "claim": "The pinned ONNX card labels model.onnx as the FP32 graph and the model.onnx_data files as FP32 weights. Q4, FP16, and Q8 size rows are separate, and no FP32 resident peak is stated.",
+      "evidenceClass": "authoritative",
+      "applicability": "Pinned FP32 ONNX files, not Q4 FP16 or Q8 rows",
+      "valueType": "not-provided",
+      "units": "bytes",
+      "conflictDisposition": "restrictive-reading",
+      "byteBoundPermitted": false
+    },
+    {
+      "evidenceId": "lfm-onnx-state",
+      "sourceName": "LFM2.5-1.2B-Instruct-ONNX model card",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/blob/10f72e70abf67ac0fd7ebf15bc5854726891d864/README.md",
+      "publisher": "Liquid AI",
+      "retrievedOn": "2026-11-12",
+      "immutableRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+      "documentationVersion": null,
+      "claim": "The pinned ONNX quickstart names past_key_values and past_conv cache tensors for the caller to supply. It does not state shapes, dtypes, or byte sizes at 4096 or 8192 tokens.",
+      "evidenceClass": "authoritative",
+      "applicability": "Pinned ONNX interface, without parsing the graph",
+      "valueType": "not-provided",
+      "units": "bytes",
+      "conflictDisposition": "none",
+      "byteBoundPermitted": false
+    },
+    {
+      "evidenceId": "lfm-docs-overview",
+      "sourceName": "Liquid AI LFM2.5-1.2B-Instruct page",
+      "url": "https://docs.liquid.ai/lfm/models/lfm25-1.2b-instruct",
+      "publisher": "Liquid AI",
+      "retrievedOn": "2026-11-12",
+      "immutableRevision": null,
+      "documentationVersion": "retrieved-2026-11-12",
+      "claim": "The Liquid AI model page states an instruction-tuned dense LFM2.5 model with a 32K context and native tool calling. It does not state FP32 ONNX resident memory or hidden dimensions.",
+      "evidenceClass": "authoritative",
+      "applicability": "Official model page, not a hidden-size or memory bound",
+      "valueType": "not-provided",
+      "units": "tokens",
+      "conflictDisposition": "none",
+      "byteBoundPermitted": false
+    },
+    {
+      "evidenceId": "ort-session-defaults",
+      "sourceName": "ONNX Runtime v1.31.1 SessionOptions header",
+      "url": "https://raw.githubusercontent.com/microsoft/onnxruntime/v1.31.1/onnxruntime/core/framework/session_options.h",
+      "publisher": "Microsoft",
+      "retrievedOn": "2026-11-12",
+      "immutableRevision": "6af1a932e2286d5c58166085d24c68783033edee",
+      "documentationVersion": "v1.31.1",
+      "claim": "The v1.31.1 session header defaults enable_mem_pattern, enable_mem_reuse, and enable_cpu_mem_arena to true, and graph_optimization_level to MaxLevel. The arena may preallocate. No byte bound for this model is stated.",
+      "evidenceClass": "authoritative",
+      "applicability": "onnxruntime v1.31.1 CPU session defaults, not this graph",
+      "valueType": "not-provided",
+      "units": "bytes",
+      "conflictDisposition": "none",
+      "byteBoundPermitted": false
+    },
+    {
+      "evidenceId": "ort-memory-page",
+      "sourceName": "ONNX Runtime memory consumption page",
+      "url": "https://onnxruntime.ai/docs/performance/tune-performance/memory.html",
+      "publisher": "Microsoft",
+      "retrievedOn": "2026-11-12",
+      "immutableRevision": null,
+      "documentationVersion": "retrieved-2026-11-12",
+      "claim": "The ONNX Runtime memory page describes a shared arena and optional mimalloc. It states no Linux resident byte bound for this FP32 model. Linux mimalloc is not given a special provision there.",
+      "evidenceClass": "authoritative",
+      "applicability": "General ONNX Runtime allocator guidance",
+      "valueType": "not-provided",
+      "units": "bytes",
+      "conflictDisposition": "none",
+      "byteBoundPermitted": false
+    },
+    {
+      "evidenceId": "ort-graph-opt",
+      "sourceName": "ONNX Runtime graph optimizations page",
+      "url": "https://onnxruntime.ai/docs/performance/model-optimizations/graph-optimizations.html",
+      "publisher": "Microsoft",
+      "retrievedOn": "2026-11-12",
+      "immutableRevision": null,
+      "documentationVersion": "retrieved-2026-11-12",
+      "claim": "The graph optimization page says all optimization levels are enabled by default and describes constant folding and fusions. It states no resident byte bound for this FP32 CPU session.",
+      "evidenceClass": "authoritative",
+      "applicability": "General ONNX Runtime graph optimizations",
+      "valueType": "not-provided",
+      "units": "bytes",
+      "conflictDisposition": "none",
+      "byteBoundPermitted": false
+    },
+    {
+      "evidenceId": "onnx-external-data",
+      "sourceName": "ONNX external data specification",
+      "url": "https://onnx.ai/onnx/repo-docs/ExternalData.html",
+      "publisher": "ONNX",
+      "retrievedOn": "2026-11-12",
+      "immutableRevision": null,
+      "documentationVersion": "1.24.0",
+      "claim": "The ONNX external-data page says large initializer bytes may live in a separate file and that offsets should be page aligned to enable mmap. It does not require a runtime to map those bytes or state a resident size.",
+      "evidenceClass": "authoritative",
+      "applicability": "ONNX external-data layout, not ONNX Runtime resident use",
+      "valueType": "not-provided",
+      "units": "bytes",
+      "conflictDisposition": "restrictive-reading",
+      "byteBoundPermitted": false
+    },
+    {
+      "evidenceId": "fp32-logical-product",
+      "sourceName": "Logical FP32 parameter product",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct/blob/b9d816ab510f9a28dca37cb182e9da8b0226e13c/README.md",
+      "publisher": "Liquid AI",
+      "retrievedOn": "2026-11-12",
+      "immutableRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+      "documentationVersion": null,
+      "claim": "Multiplying the committed parameter count 1170340608 by 4 gives 4681362432 logical FP32 bytes. Weight tying is not stated, so this product is not a resident upper bound.",
+      "evidenceClass": "authoritative",
+      "applicability": "Logical FP32 width for the committed parameter count",
+      "valueType": "calculated",
+      "units": "bytes",
+      "conflictDisposition": "restrictive-reading",
+      "byteBoundPermitted": false
+    },
+    {
+      "evidenceId": "margin-not-applied",
+      "sourceName": "Safety margin absence",
+      "url": "https://onnxruntime.ai/docs/performance/tune-performance/memory.html",
+      "publisher": "Microsoft",
+      "retrievedOn": "2026-11-12",
+      "immutableRevision": null,
+      "documentationVersion": "retrieved-2026-11-12",
+      "claim": "No official page states a safety-margin percentage or byte allowance for this FP32 CPU session. The margin stays unset while any required upper bound is unknown.",
+      "evidenceClass": "unresolved",
+      "applicability": "No applicable safety-margin bound for this FP32 session",
+      "valueType": "not-provided",
+      "units": "bytes",
+      "conflictDisposition": "unresolved",
+      "byteBoundPermitted": false
+    }
+  ],
+  "categories": [
+    {
+      "categoryId": "static_parameter_memory",
+      "evidenceStatus": "unresolved",
+      "valueType": "not-provided",
+      "unit": "bytes",
+      "lowerBoundBytes": null,
+      "upperBoundBytes": null,
+      "logicalBytes": 4681362432,
+      "logicalBytesIncludedInPeak": false,
+      "evidenceIds": [
+        "lfm-card-shape",
+        "lfm-onnx-fp32",
+        "fp32-logical-product"
+      ],
+      "uncertainty": "Weight tying is not stated. The logical product of 1170340608 parameters at 4 bytes is not a resident upper bound."
+    },
+    {
+      "categoryId": "graph_and_initializer_overhead",
+      "evidenceStatus": "unresolved",
+      "valueType": "not-provided",
+      "unit": "bytes",
+      "lowerBoundBytes": null,
+      "upperBoundBytes": null,
+      "logicalBytes": null,
+      "logicalBytesIncludedInPeak": false,
+      "evidenceIds": [
+        "lfm-onnx-fp32",
+        "onnx-external-data",
+        "ort-session-defaults"
+      ],
+      "uncertainty": "External-data layout and optional mmap do not establish resident initializer bytes."
+    },
+    {
+      "categoryId": "runtime_process_baseline",
+      "evidenceStatus": "unresolved",
+      "valueType": "not-provided",
+      "unit": "bytes",
+      "lowerBoundBytes": null,
+      "upperBoundBytes": null,
+      "logicalBytes": null,
+      "logicalBytesIncludedInPeak": false,
+      "evidenceIds": [
+        "ort-session-defaults",
+        "ort-memory-page"
+      ],
+      "uncertainty": "No publisher states resident bytes for the CPU process, libraries, or session."
+    },
+    {
+      "categoryId": "allocator_and_optimization_overhead",
+      "evidenceStatus": "unresolved",
+      "valueType": "not-provided",
+      "unit": "bytes",
+      "lowerBoundBytes": null,
+      "upperBoundBytes": null,
+      "logicalBytes": null,
+      "logicalBytesIncludedInPeak": false,
+      "evidenceIds": [
+        "ort-session-defaults",
+        "ort-graph-opt",
+        "ort-memory-page"
+      ],
+      "uncertainty": "Default arena, memory pattern, and MaxLevel optimizations have no byte bound here."
+    },
+    {
+      "categoryId": "activation_memory",
+      "evidenceStatus": "unresolved",
+      "valueType": "not-provided",
+      "unit": "bytes",
+      "lowerBoundBytes": null,
+      "upperBoundBytes": null,
+      "logicalBytes": null,
+      "logicalBytesIncludedInPeak": false,
+      "evidenceIds": [
+        "lfm-card-shape"
+      ],
+      "uncertainty": "Hidden size and activation width are not stated, so the sequence formula has no bytes."
+    },
+    {
+      "categoryId": "architecture_state_memory",
+      "evidenceStatus": "unresolved",
+      "valueType": "not-provided",
+      "unit": "bytes",
+      "lowerBoundBytes": null,
+      "upperBoundBytes": null,
+      "logicalBytes": null,
+      "logicalBytesIncludedInPeak": false,
+      "evidenceIds": [
+        "lfm-card-shape",
+        "lfm-onnx-state"
+      ],
+      "uncertainty": "Attention and convolution state are named, but their byte sizes are not stated."
+    },
+    {
+      "categoryId": "input_output_tensor_memory",
+      "evidenceStatus": "unresolved",
+      "valueType": "not-provided",
+      "unit": "bytes",
+      "lowerBoundBytes": null,
+      "upperBoundBytes": null,
+      "logicalBytes": null,
+      "logicalBytesIncludedInPeak": false,
+      "evidenceIds": [
+        "lfm-card-shape",
+        "lfm-onnx-state"
+      ],
+      "uncertainty": "Vocabulary size is stated, but FP32 logits shape and dtype are not stated."
+    },
+    {
+      "categoryId": "tokenizer_and_configuration_memory",
+      "evidenceStatus": "unresolved",
+      "valueType": "not-provided",
+      "unit": "bytes",
+      "lowerBoundBytes": null,
+      "upperBoundBytes": null,
+      "logicalBytes": null,
+      "logicalBytesIncludedInPeak": false,
+      "evidenceIds": [
+        "lfm-card-shape"
+      ],
+      "uncertainty": "Logical tokenizer and configuration file sizes are storage, not resident bytes."
+    },
+    {
+      "categoryId": "hardened_execution_overhead",
+      "evidenceStatus": "unresolved",
+      "valueType": "not-provided",
+      "unit": "bytes",
+      "lowerBoundBytes": null,
+      "upperBoundBytes": null,
+      "logicalBytes": null,
+      "logicalBytesIncludedInPeak": false,
+      "evidenceIds": [
+        "ort-memory-page"
+      ],
+      "uncertainty": "Launcher, IPC, and attestation resident bytes are unpublished. Address space is excluded."
+    },
+    {
+      "categoryId": "safety_margin",
+      "evidenceStatus": "unresolved",
+      "valueType": "not-provided",
+      "unit": "bytes",
+      "lowerBoundBytes": null,
+      "upperBoundBytes": null,
+      "logicalBytes": null,
+      "logicalBytesIncludedInPeak": false,
+      "evidenceIds": [
+        "margin-not-applied"
+      ],
+      "uncertainty": "The margin stays unset while any required upper bound is unknown."
+    }
+  ]
+}

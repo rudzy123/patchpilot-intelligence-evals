@@ -114,6 +114,18 @@ TRACK7A_SCHEMA_NAMES: tuple[str, ...] = (
     "track7a-implementation-review",
 )
 
+# Track 7B memory and suitability documents. They stay outside earlier schema groups.
+TRACK7B_SCHEMA_NAMES: tuple[str, ...] = (
+    "candidate-memory-model",
+    "candidate-memory-evidence",
+    "candidate-memory-budget",
+    "explanation-suitability-contract",
+    "explanation-suitability-evidence",
+    "controlled-measurement-authorization",
+    "track8b-readiness",
+    "track7b-implementation-review",
+)
+
 _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     SCHEMA_NAMES
     + CANDIDATE_SCHEMA_NAMES
@@ -124,6 +136,7 @@ _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     + TRACK6C_SCHEMA_NAMES
     + TRACK7_SCHEMA_NAMES
     + TRACK7A_SCHEMA_NAMES
+    + TRACK7B_SCHEMA_NAMES
 )
 
 

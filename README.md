@@ -76,6 +76,14 @@ uv run patchpilot-evals artifact-budget-recalculation-validation
 uv run patchpilot-evals track8a-storage-readiness-validation
 uv run patchpilot-evals track7a-review-validation
 uv run patchpilot-evals storage-safety-synthetic-check
+uv run patchpilot-evals candidate-memory-model-validation
+uv run patchpilot-evals candidate-memory-evidence-validation
+uv run patchpilot-evals candidate-memory-budget-validation
+uv run patchpilot-evals explanation-suitability-contract-validation
+uv run patchpilot-evals explanation-suitability-evidence-validation
+uv run patchpilot-evals controlled-measurement-authorization-validation
+uv run patchpilot-evals track8b-readiness-validation
+uv run patchpilot-evals track7b-review-validation
 uv run patchpilot-evals workflow-policy-validation
 uv run patchpilot-evals dependency-architecture-policy-validation
 ```
@@ -154,6 +162,10 @@ Intelligence Track 7A recalculates that finalist under three storage models. Cop
 
 Principal Architect review on 2026-11-12 approves the Track 7A storage model and same-filesystem atomic promotion with documented residuals. The storage-only blocker is `resolved`. That approval leaves selection `no-selection`, Track 8 authorization `not-authorized`, and `productionReady` false. The acceptance record is [docs/provenance/track7a-implementation-review.md](docs/provenance/track7a-implementation-review.md).
 
+Intelligence Track 7B records a closed resident-memory model and an explanation-suitability contract for the same finalist. Both the 4,096-token and 8,192-token FP32 envelopes stay `unresolved` against the `12,884,901,888` byte process ceiling because required resident upper bounds are unpublished. Suitability screening is `eligible-for-controlled-evaluation`. Track 8B readiness is `ready-for-controlled-measurement`, with verdict `TRACK 8B CONTROLLED MEASUREMENT AUTHORIZED WITH DOCUMENTED RESIDUALS`. That recommendation does not install a runtime, acquire artifacts, convert or quantize a model, execute inference, or select a candidate. Selection stays `no-selection`. Track 8 acquisition stays `not-authorized`. `installationAuthorized` stays false. `productionReady` stays false.
+
+Principal Architect review on 2026-11-12 approves the Track 7B evidence closure and authorizes a future narrowly controlled measurement Session in principle, with documented residuals. The approval does not authorize operators or automated agents to begin acquisition, installation, or execution. A later Session must separately authorize runtime staging, artifact acquisition, digest verification, atomic promotion, hardened execution, measurement commands, stop conditions, result handling, and cleanup. The acceptance record is [docs/provenance/track7b-implementation-review.md](docs/provenance/track7b-implementation-review.md).
+
 - [docs/architecture/candidate-landscape-refresh.md](docs/architecture/candidate-landscape-refresh.md)
 - [docs/architecture/candidate-pre-screen.md](docs/architecture/candidate-pre-screen.md)
 - [docs/architecture/direct-onnx-selection.md](docs/architecture/direct-onnx-selection.md)
@@ -167,6 +179,13 @@ Principal Architect review on 2026-11-12 approves the Track 7A storage model and
 - [docs/architecture/track8a-storage-readiness.md](docs/architecture/track8a-storage-readiness.md)
 - [docs/provenance/track7a-storage-analysis.md](docs/provenance/track7a-storage-analysis.md)
 - [docs/provenance/track7a-implementation-review.md](docs/provenance/track7a-implementation-review.md)
+- [docs/architecture/candidate-memory-budget.md](docs/architecture/candidate-memory-budget.md)
+- [docs/architecture/explanation-suitability-contract.md](docs/architecture/explanation-suitability-contract.md)
+- [docs/architecture/empirical-measurement-boundary.md](docs/architecture/empirical-measurement-boundary.md)
+- [docs/architecture/track8b-measurement-readiness.md](docs/architecture/track8b-measurement-readiness.md)
+- [docs/provenance/finalist-memory-evidence.md](docs/provenance/finalist-memory-evidence.md)
+- [docs/provenance/finalist-suitability-evidence.md](docs/provenance/finalist-suitability-evidence.md)
+- [docs/provenance/track7b-implementation-review.md](docs/provenance/track7b-implementation-review.md)
 
 - [docs/architecture/real-candidate-boundary.md](docs/architecture/real-candidate-boundary.md)
 - [docs/architecture/external-artifact-cache.md](docs/architecture/external-artifact-cache.md)
