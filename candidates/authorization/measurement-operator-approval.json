@@ -1,0 +1,12 @@
+{
+  "approvalStatus": "not-approved",
+  "calibrationStatus": "not-approved",
+  "installationAuthorized": false,
+  "measurementPerformed": false,
+  "planDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "identityDigest": "507f64153ad7afd6c90da0d6627bcb902ed94e9e4eee9f84bb19ee3834462dee"
+}

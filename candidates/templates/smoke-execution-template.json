@@ -1,0 +1,37 @@
+{
+  "calibrationStatus": "not-approved",
+  "installationAuthorized": false,
+  "productionReady": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "exitClassification": "not-executed",
+  "generationTokens": null,
+  "inputTokens": null,
+  "maxNewTokens": 1,
+  "memory": {
+    "addressSpaceLimitBytes": 25769803776,
+    "cgroupCurrentBytes": null,
+    "cgroupPeakBytes": null,
+    "oomEvents": null,
+    "processRssBytes": null,
+    "processTreeRssBytes": null,
+    "residentCeilingBytes": 12884901888,
+    "telemetry": "not-observed",
+    "virtualAddressBytes": null
+  },
+  "networkResult": "not-performed",
+  "outputDigest": null,
+  "phase": "not-executed",
+  "planDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "processCleanup": "not-performed",
+  "realModelExecuted": false,
+  "repositoryCommit": "not-executed",
+  "stopCause": null,
+  "timing": {
+    "firstTokenSeconds": null,
+    "generationSeconds": null,
+    "loadSeconds": null,
+    "wallSeconds": null
+  },
+  "identityDigest": "dc370c763004acb25280f0accdec3d1ecd5d8e01c5f991f1f81fd145b7829e40"
+}

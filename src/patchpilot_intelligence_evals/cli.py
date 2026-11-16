@@ -94,6 +94,11 @@ from patchpilot_intelligence_evals.measurement_authorization import (
     MeasurementAuthorizationError,
     load_measurement_authorization,
 )
+from patchpilot_intelligence_evals.measurement_cli import EXECUTE as MEASUREMENT_EXECUTE
+from patchpilot_intelligence_evals.measurement_cli import VALIDATION as MEASUREMENT_VALIDATION
+from patchpilot_intelligence_evals.measurement_cli import handle as handle_measurement
+from patchpilot_intelligence_evals.measurement_cli import register as register_measurement
+from patchpilot_intelligence_evals.measurement_plan import MeasurementError
 from patchpilot_intelligence_evals.memory_budget import MemoryBudgetError, load_memory_budget
 from patchpilot_intelligence_evals.memory_evidence import MemoryEvidenceError, load_memory_evidence
 from patchpilot_intelligence_evals.memory_model import MemoryModelError, load_memory_model
@@ -310,6 +315,7 @@ def _parser() -> argparse.ArgumentParser:
     comparison.add_argument("--output-dir", default=None)
     calibration = commands.add_parser("calibration")
     calibration.add_argument("--output-dir", required=True)
+    register_measurement(commands)
     return parser
 
 
@@ -357,7 +363,13 @@ def main(argv: list[str] | None = None) -> int:
             return 0 if summary["status"] == "ok" else 1
         if args.command in OUTSIDE_GUARD:
             return _summary(handle_track8a(args.command, args))
+        if args.command in MEASUREMENT_EXECUTE:
+            payload = handle_measurement(args.command, args)
+            _summary(payload)
+            return 0 if payload.get("status") == "ok" else 1
         with network_guard():
+            if args.command in MEASUREMENT_VALIDATION:
+                return _summary(handle_measurement(args.command, args))
             if args.command == "corpus-validation":
                 return _summary(validate_corpus())
             if args.command == "baseline-evaluation":
@@ -1222,6 +1234,7 @@ def main(argv: list[str] | None = None) -> int:
         LoadProofError,
         CloseoutError,
         PrerequisiteError,
+        MeasurementError,
     ):
         return _fail()
 

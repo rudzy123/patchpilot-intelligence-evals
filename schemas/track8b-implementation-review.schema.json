@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track8b-implementation-review:v1",
+  "title": "Track 8B implementation review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "authorizedScope",
+    "calibrationDecisionChanged",
+    "calibrationRemainedNotApproved",
+    "calibrationStatus",
+    "candidateMetrics",
+    "componentReviews",
+    "context4096",
+    "context8192",
+    "corpusEvaluation",
+    "decision",
+    "historicalPreflightOmittedCalibrationStatus",
+    "installationAuthorized",
+    "measurementPerformed",
+    "notAuthorized",
+    "planDigest",
+    "planDisposition",
+    "productionReady",
+    "realModelExecuted",
+    "replacementPlanDigest",
+    "reviewAuthority",
+    "reviewDate",
+    "reviewDigest",
+    "reviewStatus",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionCreated",
+    "shortGeneration",
+    "stopCause",
+    "track9Readiness"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "installationAuthorized": { "const": false },
+    "measurementPerformed": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runInvoked": { "const": false },
+    "sessionCreated": { "const": false },
+    "stopCause": { "const": "tokenizer-failure" },
+    "shortGeneration": { "const": "not-executed" },
+    "context4096": { "const": "not-executed" },
+    "context8192": { "const": "withheld" },
+    "corpusEvaluation": { "const": "not-executed" },
+    "candidateMetrics": { "const": "not-produced" },
+    "track9Readiness": { "const": "not-ready" },
+    "planDisposition": { "const": "consumed" },
+    "replacementPlanDigest": { "const": "not-issued" },
+    "historicalPreflightOmittedCalibrationStatus": { "const": true },
+    "calibrationRemainedNotApproved": { "const": true },
+    "calibrationDecisionChanged": { "const": false },
+    "reviewStatus": {
+      "const": "stopped-attempt-accepted-corrections-prepared"
+    },
+    "reviewDate": { "const": "2026-11-16" },
+    "reviewAuthority": { "const": "PatchPilot Principal Systems Architect" },
+    "decision": {
+      "const": "stopped attempt accepted as fail-closed evidence and corrections prepared for review before commit"
+    },
+    "authorizedScope": {
+      "const": "This record accepts the stopped Track 8B attempt as fail-closed evidence and prepares the template and preflight corrections for review. It does not authorize another Run, candidate selection, calibration, or production use."
+    },
+    "planDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "componentReviews": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": { "$ref": "#/$defs/component" }
+    },
+    "notAuthorized": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+    },
+    "reviewDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["componentId", "disposition", "statement"],
+      "properties": {
+        "componentId": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "disposition": {
+          "enum": ["accepted", "corrected-before-commit", "recorded"]
+        },
+        "statement": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    }
+  }
+}

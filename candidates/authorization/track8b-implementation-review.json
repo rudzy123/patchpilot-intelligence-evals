@@ -1,0 +1,59 @@
+{
+  "calibrationStatus": "not-approved",
+  "installationAuthorized": false,
+  "productionReady": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "authorizedScope": "This record accepts the stopped Track 8B attempt as fail-closed evidence and prepares the template and preflight corrections for review. It does not authorize another Run, candidate selection, calibration, or production use.",
+  "calibrationDecisionChanged": false,
+  "calibrationRemainedNotApproved": true,
+  "candidateMetrics": "not-produced",
+  "componentReviews": [
+    {
+      "componentId": "stopped-attempt",
+      "disposition": "accepted",
+      "statement": "The 2026-11-16 attempt stopped with tokenizer-failure before a session and before Run. That fail-closed evidence is accepted. Later phases were not executed. The 8192-token phase stays withheld."
+    },
+    {
+      "componentId": "template-compatibility",
+      "disposition": "corrected-before-commit",
+      "statement": "Compatibility checks the verified template digest and an explicit template subset. It does not require one operator spelling. The verified template bytes stay unchanged."
+    },
+    {
+      "componentId": "preflight-authority",
+      "disposition": "corrected-before-commit",
+      "statement": "The historical preflight omitted calibrationStatus. Calibration remained not-approved in every authority-bearing record. No calibration decision changed. Future preflight records include the frozen authority fields."
+    },
+    {
+      "componentId": "plan-disposition",
+      "disposition": "recorded",
+      "statement": "The approved plan is consumed and is not reusable. Another Run requires a new plan and a new operator approval. No replacement plan digest is issued."
+    }
+  ],
+  "context4096": "not-executed",
+  "context8192": "withheld",
+  "corpusEvaluation": "not-executed",
+  "decision": "stopped attempt accepted as fail-closed evidence and corrections prepared for review before commit",
+  "historicalPreflightOmittedCalibrationStatus": true,
+  "measurementPerformed": false,
+  "notAuthorized": [
+    "another Run on the consumed plan",
+    "candidate selection",
+    "calibration approval",
+    "model or tokenizer acquisition",
+    "production use"
+  ],
+  "planDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "planDisposition": "consumed",
+  "realModelExecuted": false,
+  "replacementPlanDigest": "not-issued",
+  "reviewAuthority": "PatchPilot Principal Systems Architect",
+  "reviewDate": "2026-11-16",
+  "reviewStatus": "stopped-attempt-accepted-corrections-prepared",
+  "runInvoked": false,
+  "sessionCreated": false,
+  "shortGeneration": "not-executed",
+  "stopCause": "tokenizer-failure",
+  "track9Readiness": "not-ready",
+  "reviewDigest": "4707bf4a50b393fb068c7a8b01cc569e5e41278b4cfabc38e79dd89b67ea6c4c"
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:measurement-closeout:v1",
+  "title": "Measurement closeout",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationStatus",
+    "cleanup",
+    "closeoutState",
+    "identityDigest",
+    "installationAuthorized",
+    "phases",
+    "planDigest",
+    "productionReady",
+    "realModelExecuted",
+    "retainedResultClass",
+    "schemaVersion",
+    "selectionOutcome",
+    "stopCause"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "installationAuthorized": { "const": false },
+    "realModelExecuted": { "type": "boolean" },
+    "planDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "closeoutState": { "enum": ["not-closed", "closed", "stopped"] },
+    "stopCause": { "type": ["string", "null"] },
+    "cleanup": { "enum": ["not-performed", "reaped", "failed"] },
+    "retainedResultClass": { "const": "measurement-result" },
+    "phases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["phase", "status"],
+        "properties": {
+          "phase": { "type": "string", "minLength": 1, "maxLength": 40 },
+          "status": {
+            "enum": ["not-executed", "passed", "failed", "withheld"]
+          }
+        }
+      }
+    },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "historicalPreflightOmittedCalibrationStatus": { "const": true },
+    "calibrationRemainedNotApproved": { "const": true },
+    "calibrationDecisionChanged": { "const": false }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track9-readiness:v1",
+  "title": "Track 9 readiness recommendation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationStatus",
+    "identityDigest",
+    "installationAuthorized",
+    "measurementPerformed",
+    "productionReady",
+    "readinessOutcome",
+    "reason",
+    "realModelExecuted",
+    "schemaVersion",
+    "selectionOutcome",
+    "verdict"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "installationAuthorized": { "const": false },
+    "measurementPerformed": { "type": "boolean" },
+    "realModelExecuted": { "type": "boolean" },
+    "readinessOutcome": {
+      "enum": ["not-ready", "ready", "ready-with-documented-residuals", "blocked"]
+    },
+    "verdict": {
+      "enum": [
+        "TRACK 9 EVALUATION REVIEW READY",
+        "TRACK 9 EVALUATION REVIEW READY WITH DOCUMENTED RESIDUALS",
+        "TRACK 9 EVALUATION REVIEW NOT READY",
+        "BLOCKED BY UNRESOLVED AUTHORITY"
+      ]
+    },
+    "reason": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

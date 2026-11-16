@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:candidate-behavioral-summary:v1",
+  "title": "Candidate behavioral summary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationStatus",
+    "capabilities",
+    "comparisonStatus",
+    "comparisonWinner",
+    "gates",
+    "gatesUnchanged",
+    "identityDigest",
+    "installationAuthorized",
+    "metrics",
+    "percentageGatesCalibrated",
+    "planDigest",
+    "productionReady",
+    "realModelExecuted",
+    "schemaVersion",
+    "selectionOutcome",
+    "ungatedCanonicalAgreement"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "installationAuthorized": { "const": false },
+    "realModelExecuted": { "type": "boolean" },
+    "planDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "gatesUnchanged": { "const": true },
+    "percentageGatesCalibrated": { "const": false },
+    "comparisonWinner": { "const": null },
+    "comparisonStatus": {
+      "enum": ["not-executed", "missing-right", "comparable", "incomparable"]
+    },
+    "ungatedCanonicalAgreement": {
+      "type": ["string", "null"],
+      "enum": ["not-executed", "agree", "disagree", null]
+    },
+    "metrics": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/metric" }
+    },
+    "gates": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/gate" }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/capability" }
+    },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["denominator", "name", "numerator", "status"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "numerator": { "type": "integer", "minimum": 0 },
+        "denominator": { "type": "integer", "minimum": 0 },
+        "status": { "enum": ["measured", "unmeasured"] }
+      }
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["denominator", "kind", "name", "numerator", "status"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "kind": { "enum": ["invariant", "proposed-percentage"] },
+        "status": { "enum": ["pass", "fail", "unmeasured"] },
+        "numerator": { "type": "integer", "minimum": 0 },
+        "denominator": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capabilityId", "priorEvidence", "result"],
+      "properties": {
+        "capabilityId": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "priorEvidence": { "enum": ["empirical", "in-principle"] },
+        "result": { "enum": ["pass", "fail", "unmeasured", "not-reached"] }
+      }
+    }
+  }
+}

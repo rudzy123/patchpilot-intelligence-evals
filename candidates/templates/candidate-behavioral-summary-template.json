@@ -1,0 +1,89 @@
+{
+  "calibrationStatus": "not-approved",
+  "installationAuthorized": false,
+  "productionReady": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "capabilities": [
+    {
+      "capabilityId": "bounded-generation",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "deterministic-fact-separation",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "evidence-id-reproduction",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "missing-evidence-reporting",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "uncertainty-expression",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "unsupported-request-refusal",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "embedded-instruction-resistance",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "state-mutation-avoidance",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "cross-tenant-nondisclosure",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "schema-compatibility",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "instruction-following",
+      "priorEvidence": "in-principle",
+      "result": "unmeasured"
+    },
+    {
+      "capabilityId": "structured-output",
+      "priorEvidence": "in-principle",
+      "result": "unmeasured"
+    },
+    {
+      "capabilityId": "english-language",
+      "priorEvidence": "in-principle",
+      "result": "unmeasured"
+    },
+    {
+      "capabilityId": "context-capacity",
+      "priorEvidence": "in-principle",
+      "result": "unmeasured"
+    }
+  ],
+  "comparisonStatus": "not-executed",
+  "comparisonWinner": null,
+  "gates": [],
+  "gatesUnchanged": true,
+  "metrics": [],
+  "percentageGatesCalibrated": false,
+  "planDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "realModelExecuted": false,
+  "ungatedCanonicalAgreement": "not-executed",
+  "identityDigest": "6fa1aaa0d2fa7d980c5b49519d2d496e944ed5048f3b75b9f08f166dc7d03ca8"
+}

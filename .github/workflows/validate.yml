@@ -224,6 +224,22 @@ jobs:
           uv run patchpilot-evals track8a-review-validation
           uv run patchpilot-evals track8b-measurement-prerequisites-validation
 
+      - name: Validate the Track 8B measurement records
+        run: |
+          uv run patchpilot-evals measurement-plan-validation
+          uv run patchpilot-evals measurement-operator-approval-validation
+          uv run patchpilot-evals smoke-execution-validation
+          uv run patchpilot-evals context-memory-measurement-validation
+          uv run patchpilot-evals candidate-behavioral-run-validation
+          uv run patchpilot-evals candidate-behavioral-summary-validation
+          uv run patchpilot-evals measurement-closeout-validation
+          uv run patchpilot-evals track8b-preflight-validation
+          uv run patchpilot-evals track8b-stopped-attempt-validation
+          uv run patchpilot-evals track8b-plan-disposition-validation
+          uv run patchpilot-evals track8b-template-compatibility-defect-validation
+          uv run patchpilot-evals track8b-review-validation
+          uv run patchpilot-evals track9-readiness-validation
+
       - name: Validate workflow policy
         run: uv run patchpilot-evals workflow-policy-validation
 

@@ -68,6 +68,10 @@ Track 7B leaves both FP32 resident envelopes `unresolved` and leaves behavioral 
 
 Track 8A validators read the committed plan, allowlist, redacted evidence, implementation review, and empty templates. They do not transfer. The manual acquire commands require the plan digest and write only under operator-supplied roots outside this repository, outside home directories, and outside sibling repositories. Quarantine bytes are not executed. Hashing and the offline load proof require bubblewrap's network namespace. The in-process network hook is not that boundary. `RLIMIT_AS` is address space. Cgroup `MemoryMax` is the resident-memory control. The 2026-11-16 review records one external acquisition and does not authorize Track 8B measurement. `measurementPerformed` stays false. `productionReady` stays false.
 
+## Track 8B measurement records
+
+Track 8B validators read the committed plan, the not-approved operator checkpoint, the not-executed templates, the stopped-attempt records, and the Track 9 recommendation. They do not create a session. Manual measurement commands write only under an operator-supplied result root outside this repository. The 2026-11-16 attempt stopped with `tokenizer-failure` before Run. That plan digest is consumed and is not reusable. Another Run requires a new plan and a new operator approval. Historical authorization records stay `not-authorized`. `installationAuthorized` stays false. `selectionOutcome` stays `no-selection`. `calibrationStatus` stays `not-approved`. `productionReady` stays false.
+
 ## GitHub Actions
 
 Workflows read repository contents. CodeQL may also write code-scanning results. They do not receive secrets, persist checkout credentials, or use `pull_request_target`. Action pins and the dependency rules are in [docs/security/github-actions-supply-chain.md](docs/security/github-actions-supply-chain.md). A workflow does not change branch protection or repository rulesets. The operator procedure is [docs/operations/main-ruleset-procedure.md](docs/operations/main-ruleset-procedure.md). `productionReady` stays false.

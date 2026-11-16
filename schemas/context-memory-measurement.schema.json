@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:context-memory-measurement:v1",
+  "title": "Context memory measurement",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "batchSize",
+    "calibrationStatus",
+    "coldMemory",
+    "coldTiming",
+    "contextTokens",
+    "exitClassification",
+    "identityDigest",
+    "installationAuthorized",
+    "maxNewTokens",
+    "networkResult",
+    "outputDigest",
+    "phase",
+    "planDigest",
+    "processCleanup",
+    "productionReady",
+    "promptConstruction",
+    "realModelExecuted",
+    "repeatedTokenId",
+    "repositoryCommit",
+    "schemaVersion",
+    "selectionOutcome",
+    "stopCause",
+    "tokenizerSha256",
+    "warmMemory",
+    "warmTiming"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "installationAuthorized": { "const": false },
+    "realModelExecuted": { "type": "boolean" },
+    "phase": { "enum": ["context-4096", "context-8192", "not-executed"] },
+    "planDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "contextTokens": { "type": ["integer", "null"] },
+    "batchSize": { "const": 1 },
+    "maxNewTokens": { "const": 1 },
+    "repeatedTokenId": { "type": ["integer", "null"] },
+    "promptConstruction": { "enum": ["repeated-token-id", "not-executed"] },
+    "tokenizerSha256": {
+      "const": "0a1f2cb9fc2769030ca1f4207e81c1af493319373d41b8d3cf5be53860c13760"
+    },
+    "exitClassification": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "stopCause": { "type": ["string", "null"] },
+    "outputDigest": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+    "processCleanup": { "enum": ["not-performed", "reaped", "failed"] },
+    "networkResult": { "enum": ["not-performed", "denied", "failed"] },
+    "repositoryCommit": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "coldMemory": { "$ref": "#/$defs/memory" },
+    "warmMemory": { "$ref": "#/$defs/memory" },
+    "coldTiming": { "$ref": "#/$defs/timing" },
+    "warmTiming": { "$ref": "#/$defs/timing" },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "memory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "addressSpaceLimitBytes",
+        "cgroupCurrentBytes",
+        "cgroupPeakBytes",
+        "oomEvents",
+        "processRssBytes",
+        "processTreeRssBytes",
+        "residentCeilingBytes",
+        "telemetry",
+        "virtualAddressBytes"
+      ],
+      "properties": {
+        "cgroupCurrentBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "cgroupPeakBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "processRssBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "processTreeRssBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "virtualAddressBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "oomEvents": { "type": ["integer", "null"], "minimum": 0 },
+        "residentCeilingBytes": { "const": 12884901888 },
+        "addressSpaceLimitBytes": { "const": 25769803776 },
+        "telemetry": {
+          "enum": ["not-observed", "complete", "unresolved", "oom", "exceeded"]
+        }
+      }
+    },
+    "timing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["firstTokenSeconds", "generationSeconds", "loadSeconds", "wallSeconds"],
+      "properties": {
+        "loadSeconds": { "type": ["number", "null"], "minimum": 0 },
+        "firstTokenSeconds": { "type": ["number", "null"], "minimum": 0 },
+        "generationSeconds": { "type": ["number", "null"], "minimum": 0 },
+        "wallSeconds": { "type": ["number", "null"], "minimum": 0 }
+      }
+    }
+  }
+}

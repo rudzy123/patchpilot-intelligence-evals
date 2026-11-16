@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:smoke-execution:v1",
+  "title": "Smoke or short-generation execution",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationStatus",
+    "exitClassification",
+    "generationTokens",
+    "identityDigest",
+    "inputTokens",
+    "installationAuthorized",
+    "maxNewTokens",
+    "memory",
+    "networkResult",
+    "outputDigest",
+    "phase",
+    "planDigest",
+    "processCleanup",
+    "productionReady",
+    "realModelExecuted",
+    "repositoryCommit",
+    "schemaVersion",
+    "selectionOutcome",
+    "stopCause",
+    "timing"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "installationAuthorized": { "const": false },
+    "realModelExecuted": { "type": "boolean" },
+    "phase": { "enum": ["one-token-smoke", "short-generation", "not-executed"] },
+    "planDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "maxNewTokens": { "type": "integer", "minimum": 0 },
+    "inputTokens": { "type": ["integer", "null"], "minimum": 0 },
+    "generationTokens": { "type": ["integer", "null"], "minimum": 0 },
+    "exitClassification": {
+      "enum": [
+        "not-executed",
+        "success",
+        "runtime-startup-failure",
+        "model-load-failure",
+        "tokenizer-failure",
+        "inference-failure",
+        "timeout",
+        "oom",
+        "malformed-response",
+        "schema-failure",
+        "excessive-output",
+        "nonzero-exit",
+        "isolation-failure",
+        "network-violation",
+        "cleanup-failure",
+        "telemetry-unresolved",
+        "memory-ceiling"
+      ]
+    },
+    "stopCause": { "type": ["string", "null"] },
+    "outputDigest": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+    "processCleanup": { "enum": ["not-performed", "reaped", "failed"] },
+    "networkResult": { "enum": ["not-performed", "denied", "failed"] },
+    "repositoryCommit": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "memory": { "$ref": "#/$defs/memory" },
+    "timing": { "$ref": "#/$defs/timing" },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "memory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "addressSpaceLimitBytes",
+        "cgroupCurrentBytes",
+        "cgroupPeakBytes",
+        "oomEvents",
+        "processRssBytes",
+        "processTreeRssBytes",
+        "residentCeilingBytes",
+        "telemetry",
+        "virtualAddressBytes"
+      ],
+      "properties": {
+        "cgroupCurrentBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "cgroupPeakBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "processRssBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "processTreeRssBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "virtualAddressBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "oomEvents": { "type": ["integer", "null"], "minimum": 0 },
+        "residentCeilingBytes": { "const": 12884901888 },
+        "addressSpaceLimitBytes": { "const": 25769803776 },
+        "telemetry": {
+          "enum": ["not-observed", "complete", "unresolved", "oom", "exceeded"]
+        }
+      }
+    },
+    "timing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["firstTokenSeconds", "generationSeconds", "loadSeconds", "wallSeconds"],
+      "properties": {
+        "loadSeconds": { "type": ["number", "null"], "minimum": 0 },
+        "firstTokenSeconds": { "type": ["number", "null"], "minimum": 0 },
+        "generationSeconds": { "type": ["number", "null"], "minimum": 0 },
+        "wallSeconds": { "type": ["number", "null"], "minimum": 0 }
+      }
+    }
+  }
+}

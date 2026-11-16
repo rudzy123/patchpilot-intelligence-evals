@@ -1,0 +1,16 @@
+{
+  "calibrationStatus": "not-approved",
+  "installationAuthorized": false,
+  "productionReady": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "defectId": "template-compatibility-boundary",
+  "failureBeforeSession": "tokenizer-failure",
+  "rejectedSpellingProof": "messages | length",
+  "runInvoked": false,
+  "sessionCreated": false,
+  "status": "corrected-before-commit",
+  "templateBytesChanged": false,
+  "verifiedTemplateDigest": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176",
+  "identityDigest": "657a22d553828bc8128a993211eacd92a64502818426f147e5b37e914fe3cc19"
+}

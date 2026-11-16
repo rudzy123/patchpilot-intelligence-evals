@@ -94,6 +94,19 @@ uv run patchpilot-evals acquisition-closeout-validation
 uv run patchpilot-evals track8a-acquisition-evidence-validation
 uv run patchpilot-evals track8a-review-validation
 uv run patchpilot-evals track8b-measurement-prerequisites-validation
+uv run patchpilot-evals measurement-plan-validation
+uv run patchpilot-evals measurement-operator-approval-validation
+uv run patchpilot-evals smoke-execution-validation
+uv run patchpilot-evals context-memory-measurement-validation
+uv run patchpilot-evals candidate-behavioral-run-validation
+uv run patchpilot-evals candidate-behavioral-summary-validation
+uv run patchpilot-evals measurement-closeout-validation
+uv run patchpilot-evals track8b-preflight-validation
+uv run patchpilot-evals track8b-stopped-attempt-validation
+uv run patchpilot-evals track8b-plan-disposition-validation
+uv run patchpilot-evals track8b-template-compatibility-defect-validation
+uv run patchpilot-evals track8b-review-validation
+uv run patchpilot-evals track9-readiness-validation
 uv run patchpilot-evals workflow-policy-validation
 uv run patchpilot-evals dependency-architecture-policy-validation
 ```
@@ -177,6 +190,8 @@ Intelligence Track 7B records a closed resident-memory model and an explanation-
 Principal Architect review on 2026-11-12 approves the Track 7B evidence closure and authorizes a future narrowly controlled measurement Session in principle, with documented residuals. The approval does not authorize operators or automated agents to begin acquisition, installation, or execution. A later Session must separately authorize runtime staging, artifact acquisition, digest verification, atomic promotion, hardened execution, measurement commands, stop conditions, result handling, and cleanup. The acceptance record is [docs/provenance/track7b-implementation-review.md](docs/provenance/track7b-implementation-review.md).
 
 Track 8A adds the acquisition plan, allowlist, staging checks, and offline-load attestation. The committed plan stays a preflight record with `acquisitionStatus` `not-acquired`. Principal Architect review on 2026-11-16 approves the external acquisition, verification, same-filesystem atomic promotion, and hardened offline-load proof with documented residuals. That approval does not authorize Track 8B measurement. `acquire-runtime`, `acquire-candidate`, and `hardened-offline-load-proof` are manual commands and are not Repository Contracts steps. `installationAuthorized` stays false. `selectionOutcome` stays `no-selection`. `measurementPerformed` stays false. `realModelExecuted` stays false under the committed no-inference semantics. `productionReady` stays false. The evidence record is [docs/provenance/track8a-acquisition-evidence.md](docs/provenance/track8a-acquisition-evidence.md). The acceptance record is [docs/provenance/track8a-implementation-review.md](docs/provenance/track8a-implementation-review.md).
+
+Track 8B adds a sealed measurement plan, a not-approved operator checkpoint, and validators for the smoke, context, behavioral, closeout, stopped-attempt, and Track 9 records. Those validators read committed documents. `measurement-preflight` and `measurement-execute` are manual commands and are not Repository Contracts steps. The 2026-11-16 attempt stopped with `tokenizer-failure` before Run. That plan digest is consumed and is not reusable. Another Run requires a new plan and a new operator approval. The committed plan file stays `not-executed`. Historical `measurementAuthorization` stays `not-authorized`. `installationAuthorized` stays false. `selectionOutcome` stays `no-selection`. `calibrationStatus` stays `not-approved`. `productionReady` stays false. The evidence note is [docs/provenance/track8b-measurement-evidence.md](docs/provenance/track8b-measurement-evidence.md). The stopped attempt is [docs/provenance/track8b-stopped-attempt.md](docs/provenance/track8b-stopped-attempt.md).
 
 - [docs/architecture/candidate-landscape-refresh.md](docs/architecture/candidate-landscape-refresh.md)
 - [docs/architecture/candidate-pre-screen.md](docs/architecture/candidate-pre-screen.md)

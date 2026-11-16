@@ -1,0 +1,40 @@
+{
+  "calibrationStatus": "not-approved",
+  "installationAuthorized": false,
+  "productionReady": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "cleanup": "not-performed",
+  "closeoutState": "not-closed",
+  "phases": [
+    {
+      "phase": "preflight",
+      "status": "not-executed"
+    },
+    {
+      "phase": "one-token-smoke",
+      "status": "not-executed"
+    },
+    {
+      "phase": "short-generation",
+      "status": "not-executed"
+    },
+    {
+      "phase": "context-4096",
+      "status": "not-executed"
+    },
+    {
+      "phase": "context-8192",
+      "status": "not-executed"
+    },
+    {
+      "phase": "corpus-evaluation",
+      "status": "not-executed"
+    }
+  ],
+  "planDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "realModelExecuted": false,
+  "retainedResultClass": "measurement-result",
+  "stopCause": null,
+  "identityDigest": "63918f11e07bbd1bf17f7f0bfb1b186bf0754061a5e617b5f71851835d24fc6f"
+}

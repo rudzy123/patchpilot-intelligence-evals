@@ -1,0 +1,57 @@
+{
+  "calibrationStatus": "not-approved",
+  "installationAuthorized": false,
+  "productionReady": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "batchSize": 1,
+  "coldMemory": {
+    "addressSpaceLimitBytes": 25769803776,
+    "cgroupCurrentBytes": null,
+    "cgroupPeakBytes": null,
+    "oomEvents": null,
+    "processRssBytes": null,
+    "processTreeRssBytes": null,
+    "residentCeilingBytes": 12884901888,
+    "telemetry": "not-observed",
+    "virtualAddressBytes": null
+  },
+  "coldTiming": {
+    "firstTokenSeconds": null,
+    "generationSeconds": null,
+    "loadSeconds": null,
+    "wallSeconds": null
+  },
+  "contextTokens": null,
+  "exitClassification": "not-executed",
+  "maxNewTokens": 1,
+  "networkResult": "not-performed",
+  "outputDigest": null,
+  "phase": "not-executed",
+  "planDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "processCleanup": "not-performed",
+  "promptConstruction": "not-executed",
+  "realModelExecuted": false,
+  "repeatedTokenId": null,
+  "repositoryCommit": "not-executed",
+  "stopCause": null,
+  "tokenizerSha256": "0a1f2cb9fc2769030ca1f4207e81c1af493319373d41b8d3cf5be53860c13760",
+  "warmMemory": {
+    "addressSpaceLimitBytes": 25769803776,
+    "cgroupCurrentBytes": null,
+    "cgroupPeakBytes": null,
+    "oomEvents": null,
+    "processRssBytes": null,
+    "processTreeRssBytes": null,
+    "residentCeilingBytes": 12884901888,
+    "telemetry": "not-observed",
+    "virtualAddressBytes": null
+  },
+  "warmTiming": {
+    "firstTokenSeconds": null,
+    "generationSeconds": null,
+    "loadSeconds": null,
+    "wallSeconds": null
+  },
+  "identityDigest": "d291c585a3e2babdc6fc18aa8374cc1f46064398c37064b4a7ebdd4e6186b4b6"
+}

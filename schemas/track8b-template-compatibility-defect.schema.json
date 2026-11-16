@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track8b-template-compatibility-defect:v1",
+  "title": "Track 8B template compatibility defect",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationStatus",
+    "defectId",
+    "failureBeforeSession",
+    "identityDigest",
+    "installationAuthorized",
+    "productionReady",
+    "rejectedSpellingProof",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionCreated",
+    "status",
+    "templateBytesChanged",
+    "verifiedTemplateDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "calibrationStatus": { "const": "not-approved" },
+    "installationAuthorized": { "const": false },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "defectId": { "const": "template-compatibility-boundary" },
+    "status": { "const": "corrected-before-commit" },
+    "verifiedTemplateDigest": {
+      "const": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176"
+    },
+    "templateBytesChanged": { "const": false },
+    "rejectedSpellingProof": { "const": "messages | length" },
+    "failureBeforeSession": { "const": "tokenizer-failure" },
+    "runInvoked": { "const": false },
+    "sessionCreated": { "const": false },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}
