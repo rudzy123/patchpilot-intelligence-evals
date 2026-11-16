@@ -227,6 +227,47 @@ def prepare_attempt(
     return source
 
 
+def close_populated_attempt(
+    cache: Path,
+    attempt_id: str,
+    *,
+    repository: Path | None = None,
+) -> Path:
+    """Close a quarantine directory that already holds payload files."""
+    root = validate_cache_root(cache, repository=repository)
+    source = _require_source(root, attempt_id)
+    if (source / JOURNAL_FILENAME).exists() or (source / SEAL_FILENAME).exists():
+        raise PromotionError("destination-collision")
+    found = False
+    for path in sorted(source.rglob("*"), key=lambda item: item.as_posix()):
+        if path.is_symlink():
+            raise PromotionError("symlink")
+        if not path.is_file():
+            continue
+        relative = path.relative_to(source).as_posix()
+        try:
+            check_relative_name(relative)
+        except SealError as exc:
+            raise PromotionError(exc.code) from exc
+        found = True
+    if not found:
+        raise PromotionError("missing-file")
+    _save_attempt(
+        source,
+        attempt_id=attempt_id,
+        attempt_state="quarantine-open",
+        interruption_point="before-hashing",
+    )
+    transition("quarantine-open", "quarantine-closed")
+    _save_attempt(
+        source,
+        attempt_id=attempt_id,
+        attempt_state="quarantine-closed",
+        interruption_point="before-hashing",
+    )
+    return source
+
+
 def seal_closed_attempt(
     cache: Path,
     attempt_id: str,

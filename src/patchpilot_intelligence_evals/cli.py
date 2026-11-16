@@ -7,10 +7,14 @@ import json
 import sys
 from typing import Any
 
+from patchpilot_intelligence_evals.acquired_artifact_validation import ArtifactValidationError
 from patchpilot_intelligence_evals.acquisition_authorization import (
     AcquisitionError,
     load_track6_authorization,
 )
+from patchpilot_intelligence_evals.acquisition_closeout import CloseoutError
+from patchpilot_intelligence_evals.acquisition_plan import PlanError
+from patchpilot_intelligence_evals.acquisition_runner import TransferError
 from patchpilot_intelligence_evals.artifact_budget import BudgetError, load_artifact_budget
 from patchpilot_intelligence_evals.artifact_cache import CacheError, load_cache_policy
 from patchpilot_intelligence_evals.artifact_verification import (
@@ -39,6 +43,7 @@ from patchpilot_intelligence_evals.candidate_format_resolution import (
     load_format_resolution,
 )
 from patchpilot_intelligence_evals.candidate_manifest import ManifestError, load_manifest
+from patchpilot_intelligence_evals.candidate_staging import CandidateStagingError
 from patchpilot_intelligence_evals.comparison import compare_results
 from patchpilot_intelligence_evals.conversion_plan import ConversionPlanError, load_conversion_plan
 from patchpilot_intelligence_evals.corpus import CorpusError, canonical_dumps, validate_corpus
@@ -82,6 +87,7 @@ from patchpilot_intelligence_evals.hardened_execution import (
     HardenedExecutionError,
     visibility_summary,
 )
+from patchpilot_intelligence_evals.hardened_load_proof import LoadProofError
 from patchpilot_intelligence_evals.implementation_review import ReviewError, load_review
 from patchpilot_intelligence_evals.isolation_profile import IsolationError, load_profile
 from patchpilot_intelligence_evals.measurement_authorization import (
@@ -129,6 +135,7 @@ from patchpilot_intelligence_evals.runtime_security import (
 from patchpilot_intelligence_evals.runtime_security import (
     load_authorization as load_runtime_authorization_v2,
 )
+from patchpilot_intelligence_evals.runtime_staging import RuntimeStagingError
 from patchpilot_intelligence_evals.sandbox_capabilities import (
     SandboxCapabilityError,
     load_capability_report,
@@ -169,11 +176,16 @@ from patchpilot_intelligence_evals.track8_authorization import (
     Track8AuthorizationError,
     load_track8_authorization,
 )
+from patchpilot_intelligence_evals.track8a_cli import OUTSIDE_GUARD
+from patchpilot_intelligence_evals.track8a_cli import handle as handle_track8a
+from patchpilot_intelligence_evals.track8a_evidence import EvidenceError as Track8AEvidenceError
 from patchpilot_intelligence_evals.track8a_readiness import (
     Track8AReadinessError,
     load_budget_recalculation,
     load_track8a_readiness,
 )
+from patchpilot_intelligence_evals.track8a_review import Track8AReviewError
+from patchpilot_intelligence_evals.track8b_prerequisites import PrerequisiteError
 from patchpilot_intelligence_evals.track8b_readiness import (
     Track8BReadinessError,
     load_track8b_readiness,
@@ -251,6 +263,31 @@ def _parser() -> argparse.ArgumentParser:
     commands.add_parser("controlled-measurement-authorization-validation")
     commands.add_parser("track8b-readiness-validation")
     commands.add_parser("track7b-review-validation")
+    commands.add_parser("acquisition-plan-validation")
+    commands.add_parser("acquisition-allowlist-validation")
+    commands.add_parser("acquired-runtime-manifest-validation")
+    commands.add_parser("acquired-candidate-manifest-validation")
+    commands.add_parser("local-artifact-digests-validation")
+    commands.add_parser("hardened-load-attestation-validation")
+    commands.add_parser("acquisition-closeout-validation")
+    commands.add_parser("track8a-acquisition-evidence-validation")
+    commands.add_parser("track8a-review-validation")
+    commands.add_parser("track8b-measurement-prerequisites-validation")
+    preflight = commands.add_parser("acquisition-preflight")
+    preflight.add_argument("--runtime-cache", default=None)
+    preflight.add_argument("--model-cache", default=None)
+    acquire_runtime_command = commands.add_parser("acquire-runtime")
+    acquire_runtime_command.add_argument("--runtime-cache", required=True)
+    acquire_runtime_command.add_argument("--operator-approval", required=True)
+    acquire_candidate_command = commands.add_parser("acquire-candidate")
+    acquire_candidate_command.add_argument("--runtime-cache", required=True)
+    acquire_candidate_command.add_argument("--model-cache", required=True)
+    acquire_candidate_command.add_argument("--operator-approval", required=True)
+    load_proof = commands.add_parser("hardened-offline-load-proof")
+    load_proof.add_argument("--runtime-cache", required=True)
+    load_proof.add_argument("--model-cache", required=True)
+    load_proof.add_argument("--api-header", required=True)
+    commands.add_parser("acquisition-closeout")
     commands.add_parser("storage-safety-synthetic-check")
     commands.add_parser("workflow-policy-validation")
     commands.add_parser("dependency-architecture-policy-validation")
@@ -318,6 +355,8 @@ def main(argv: list[str] | None = None) -> int:
             summary = visibility_summary()
             _summary(dict(summary))
             return 0 if summary["status"] == "ok" else 1
+        if args.command in OUTSIDE_GUARD:
+            return _summary(handle_track8a(args.command, args))
         with network_guard():
             if args.command == "corpus-validation":
                 return _summary(validate_corpus())
@@ -797,6 +836,21 @@ def main(argv: list[str] | None = None) -> int:
                         "productionReady": False,
                     }
                 )
+            if args.command in {
+                "acquisition-allowlist-validation",
+                "acquisition-closeout",
+                "acquisition-closeout-validation",
+                "acquisition-plan-validation",
+                "acquisition-preflight",
+                "acquired-candidate-manifest-validation",
+                "acquired-runtime-manifest-validation",
+                "hardened-load-attestation-validation",
+                "local-artifact-digests-validation",
+                "track8a-acquisition-evidence-validation",
+                "track8a-review-validation",
+                "track8b-measurement-prerequisites-validation",
+            }:
+                return _summary(handle_track8a(args.command, args))
             if args.command == "storage-safety-synthetic-check":
                 return _summary(run_synthetic_storage_check())
             if args.command == "artifact-cache-policy-validation":
@@ -1124,6 +1178,8 @@ def main(argv: list[str] | None = None) -> int:
         Track7BReviewError,
         Track8AuthorizationError,
         Track8AReadinessError,
+        Track8AEvidenceError,
+        Track8AReviewError,
         Track8BReadinessError,
         MeasurementAuthorizationError,
         MemoryBudgetError,
@@ -1158,6 +1214,14 @@ def main(argv: list[str] | None = None) -> int:
         DependencyPolicyError,
         WorkflowPolicyError,
         json.JSONDecodeError,
+        PlanError,
+        TransferError,
+        RuntimeStagingError,
+        CandidateStagingError,
+        ArtifactValidationError,
+        LoadProofError,
+        CloseoutError,
+        PrerequisiteError,
     ):
         return _fail()
 

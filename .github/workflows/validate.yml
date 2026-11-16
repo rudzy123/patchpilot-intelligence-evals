@@ -211,6 +211,19 @@ jobs:
           uv run patchpilot-evals track8b-readiness-validation
           uv run patchpilot-evals track7b-review-validation
 
+      - name: Validate the Track 8A acquisition records
+        run: |
+          uv run patchpilot-evals acquisition-plan-validation
+          uv run patchpilot-evals acquisition-allowlist-validation
+          uv run patchpilot-evals acquired-runtime-manifest-validation
+          uv run patchpilot-evals acquired-candidate-manifest-validation
+          uv run patchpilot-evals local-artifact-digests-validation
+          uv run patchpilot-evals hardened-load-attestation-validation
+          uv run patchpilot-evals acquisition-closeout-validation
+          uv run patchpilot-evals track8a-acquisition-evidence-validation
+          uv run patchpilot-evals track8a-review-validation
+          uv run patchpilot-evals track8b-measurement-prerequisites-validation
+
       - name: Validate workflow policy
         run: uv run patchpilot-evals workflow-policy-validation
 

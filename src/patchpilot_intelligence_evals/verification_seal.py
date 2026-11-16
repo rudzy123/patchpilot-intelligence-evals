@@ -28,7 +28,14 @@ from patchpilot_intelligence_evals.filesystem_identity import (
 from patchpilot_intelligence_evals.schemas import SchemaValidationError, repo_root, validate
 
 APPROVED_SUFFIXES: tuple[str, ...] = (".onnx", ".json", ".jinja", ".md", ".txt", ".safetensors")
-APPROVED_EXACT_NAMES: tuple[str, ...] = ("LICENSE", "README.md")
+APPROVED_EXACT_NAMES: tuple[str, ...] = (
+    "LICENSE",
+    "README.md",
+)
+_TRACK8A_EXACT_NAMES: tuple[str, ...] = (
+    "libonnxruntime.so.1.31.1",
+    "onnxruntime-linux-x64-1.31.1.tgz",
+)
 SEAL_FILENAME = "verification-seal.json"
 JOURNAL_FILENAME = "promotion-journal.json"
 SEAL_TEMPORARY = ".verification-seal.json.tmp"
@@ -553,7 +560,7 @@ def _required_size(value: object) -> int:
 
 def _approved(name: str) -> bool:
     base = name.rsplit("/", 1)[-1]
-    if base in APPROVED_EXACT_NAMES:
+    if base in APPROVED_EXACT_NAMES or base in _TRACK8A_EXACT_NAMES:
         return True
     if _ONNX_DATA.fullmatch(base):
         return True

@@ -126,6 +126,20 @@ TRACK7B_SCHEMA_NAMES: tuple[str, ...] = (
     "track7b-implementation-review",
 )
 
+# Track 8A acquisition documents. They stay outside earlier schema groups.
+TRACK8A_SCHEMA_NAMES: tuple[str, ...] = (
+    "acquisition-plan",
+    "acquisition-allowlist",
+    "acquired-runtime-manifest",
+    "acquired-candidate-manifest",
+    "local-artifact-digests",
+    "hardened-load-attestation",
+    "acquisition-closeout",
+    "track8a-acquisition-evidence",
+    "track8a-implementation-review",
+    "track8b-measurement-prerequisites",
+)
+
 _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     SCHEMA_NAMES
     + CANDIDATE_SCHEMA_NAMES
@@ -137,6 +151,7 @@ _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     + TRACK7_SCHEMA_NAMES
     + TRACK7A_SCHEMA_NAMES
     + TRACK7B_SCHEMA_NAMES
+    + TRACK8A_SCHEMA_NAMES
 )
 
 

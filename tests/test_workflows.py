@@ -381,8 +381,18 @@ def test_validation_jobs_keep_existing_coverage() -> None:
         "track7b-review-validation"
     )
     assert contracts.index("track7b-review-validation") < contracts.index(
+        "acquisition-plan-validation"
+    )
+    assert "track8b-measurement-prerequisites-validation" in contracts
+    assert contracts.index("track8a-review-validation") < contracts.index(
+        "track8b-measurement-prerequisites-validation"
+    )
+    assert contracts.index("track8b-measurement-prerequisites-validation") < contracts.index(
         "workflow-policy-validation"
     )
+    assert "acquire-runtime" not in text
+    assert "acquire-candidate" not in text
+    assert "hardened-offline-load-proof" not in text
     assert "workflow-policy-validation" in contracts
     assert "dependency-architecture-policy-validation" in contracts
     assert "hardened-fixture-execution" not in text

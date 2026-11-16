@@ -1,0 +1,269 @@
+{
+  "acquisitionStatus": "not-acquired",
+  "allowedHosts": [
+    "github.com",
+    "huggingface.co"
+  ],
+  "allowedUrls": [
+    "https://github.com/microsoft/onnxruntime/releases/download/v1.31.1/onnxruntime-linux-x64-1.31.1.tgz",
+    "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/resolve/10f72e70abf67ac0fd7ebf15bc5854726891d864/onnx/model.onnx",
+    "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/resolve/10f72e70abf67ac0fd7ebf15bc5854726891d864/onnx/model.onnx_data",
+    "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/resolve/10f72e70abf67ac0fd7ebf15bc5854726891d864/onnx/model.onnx_data_1",
+    "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/resolve/10f72e70abf67ac0fd7ebf15bc5854726891d864/onnx/model.onnx_data_2",
+    "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/resolve/10f72e70abf67ac0fd7ebf15bc5854726891d864/tokenizer.json",
+    "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/resolve/10f72e70abf67ac0fd7ebf15bc5854726891d864/config.json",
+    "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/resolve/10f72e70abf67ac0fd7ebf15bc5854726891d864/generation_config.json",
+    "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/resolve/10f72e70abf67ac0fd7ebf15bc5854726891d864/tokenizer_config.json",
+    "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/resolve/10f72e70abf67ac0fd7ebf15bc5854726891d864/chat_template.jinja",
+    "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/resolve/10f72e70abf67ac0fd7ebf15bc5854726891d864/LICENSE",
+    "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-ONNX/resolve/10f72e70abf67ac0fd7ebf15bc5854726891d864/README.md"
+  ],
+  "calibrationStatus": "not-approved",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "followRedirects": "plan-scoped-delivery-hosts",
+  "installationAuthorized": false,
+  "maxRedirects": 2,
+  "measurementPerformed": false,
+  "networkPhase": "preflight",
+  "planScopedDeliveryHosts": [
+    {
+      "artifacts": [
+        "onnxruntime-linux-x64-1.31.1.tgz"
+      ],
+      "host": "release-assets.githubusercontent.com",
+      "scope": "track8a-acquisition-plan"
+    },
+    {
+      "artifacts": [
+        "onnx/model.onnx",
+        "onnx/model.onnx_data",
+        "onnx/model.onnx_data_1",
+        "onnx/model.onnx_data_2"
+      ],
+      "host": "us.aws.cdn.hf.co",
+      "scope": "track8a-acquisition-plan"
+    }
+  ],
+  "productionReady": false,
+  "prohibitedRedirectHosts": [
+    "cas-bridge.xethub.hf.co",
+    "cdn-lfs.huggingface.co",
+    "objects.githubusercontent.com"
+  ],
+  "redirectObservations": [
+    {
+      "artifact": "onnxruntime-linux-x64-1.31.1.tgz",
+      "bodyBytesSaved": 0,
+      "finalHost": "release-assets.githubusercontent.com",
+      "hops": [
+        {
+          "host": "github.com",
+          "status": 302
+        },
+        {
+          "host": "release-assets.githubusercontent.com",
+          "status": 200
+        }
+      ],
+      "identityPreserved": true,
+      "observedBytes": 11413655
+    },
+    {
+      "artifact": "onnx/model.onnx",
+      "bodyBytesSaved": 0,
+      "finalHost": "us.aws.cdn.hf.co",
+      "hops": [
+        {
+          "host": "huggingface.co",
+          "status": 302
+        },
+        {
+          "host": "us.aws.cdn.hf.co",
+          "status": 200
+        }
+      ],
+      "identityPreserved": true,
+      "observedBytes": 140810
+    },
+    {
+      "artifact": "onnx/model.onnx_data",
+      "bodyBytesSaved": 0,
+      "finalHost": "us.aws.cdn.hf.co",
+      "hops": [
+        {
+          "host": "huggingface.co",
+          "status": 302
+        },
+        {
+          "host": "us.aws.cdn.hf.co",
+          "status": 200
+        }
+      ],
+      "identityPreserved": true,
+      "observedBytes": 2063007744
+    },
+    {
+      "artifact": "onnx/model.onnx_data_1",
+      "bodyBytesSaved": 0,
+      "finalHost": "us.aws.cdn.hf.co",
+      "hops": [
+        {
+          "host": "huggingface.co",
+          "status": 302
+        },
+        {
+          "host": "us.aws.cdn.hf.co",
+          "status": 200
+        }
+      ],
+      "identityPreserved": true,
+      "observedBytes": 2072240128
+    },
+    {
+      "artifact": "onnx/model.onnx_data_2",
+      "bodyBytesSaved": 0,
+      "finalHost": "us.aws.cdn.hf.co",
+      "hops": [
+        {
+          "host": "huggingface.co",
+          "status": 302
+        },
+        {
+          "host": "us.aws.cdn.hf.co",
+          "status": 200
+        }
+      ],
+      "identityPreserved": true,
+      "observedBytes": 578879488
+    },
+    {
+      "artifact": "tokenizer.json",
+      "bodyBytesSaved": 0,
+      "finalHost": "huggingface.co",
+      "hops": [
+        {
+          "host": "huggingface.co",
+          "status": 307
+        },
+        {
+          "host": "huggingface.co",
+          "status": 200
+        }
+      ],
+      "identityPreserved": true,
+      "observedBytes": 3297799
+    },
+    {
+      "artifact": "config.json",
+      "bodyBytesSaved": 0,
+      "finalHost": "huggingface.co",
+      "hops": [
+        {
+          "host": "huggingface.co",
+          "status": 307
+        },
+        {
+          "host": "huggingface.co",
+          "status": 200
+        }
+      ],
+      "identityPreserved": true,
+      "observedBytes": 1599
+    },
+    {
+      "artifact": "generation_config.json",
+      "bodyBytesSaved": 0,
+      "finalHost": "huggingface.co",
+      "hops": [
+        {
+          "host": "huggingface.co",
+          "status": 307
+        },
+        {
+          "host": "huggingface.co",
+          "status": 200
+        }
+      ],
+      "identityPreserved": true,
+      "observedBytes": 131
+    },
+    {
+      "artifact": "tokenizer_config.json",
+      "bodyBytesSaved": 0,
+      "finalHost": "huggingface.co",
+      "hops": [
+        {
+          "host": "huggingface.co",
+          "status": 307
+        },
+        {
+          "host": "huggingface.co",
+          "status": 200
+        }
+      ],
+      "identityPreserved": true,
+      "observedBytes": 2391
+    },
+    {
+      "artifact": "chat_template.jinja",
+      "bodyBytesSaved": 0,
+      "finalHost": "huggingface.co",
+      "hops": [
+        {
+          "host": "huggingface.co",
+          "status": 307
+        },
+        {
+          "host": "huggingface.co",
+          "status": 200
+        }
+      ],
+      "identityPreserved": true,
+      "observedBytes": 1783
+    },
+    {
+      "artifact": "LICENSE",
+      "bodyBytesSaved": 0,
+      "finalHost": "huggingface.co",
+      "hops": [
+        {
+          "host": "huggingface.co",
+          "status": 307
+        },
+        {
+          "host": "huggingface.co",
+          "status": 200
+        }
+      ],
+      "identityPreserved": true,
+      "observedBytes": 10596
+    },
+    {
+      "artifact": "README.md",
+      "bodyBytesSaved": 0,
+      "finalHost": "huggingface.co",
+      "hops": [
+        {
+          "host": "huggingface.co",
+          "status": 307
+        },
+        {
+          "host": "huggingface.co",
+          "status": 200
+        }
+      ],
+      "identityPreserved": true,
+      "observedBytes": 6508
+    }
+  ],
+  "quantizationApproved": false,
+  "realModelExecuted": false,
+  "referenceUrls": [
+    "https://github.com/microsoft/onnxruntime/releases/tag/v1.31.1"
+  ],
+  "runtimeInstallationStatus": "not-installed",
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "allowlistDigest": "cce59885779e2a0e41761205fde5275df5606bea040fc9366a839017fdf4108e"
+}

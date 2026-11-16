@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:acquired-candidate-manifest:v1",
+  "title": "Acquired candidate manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "acquisitionStatus",
+    "calibrationStatus",
+    "conversionStatus",
+    "executionFromQuarantine",
+    "executionStatus",
+    "expectedFiles",
+    "identityDigest",
+    "installationAuthorized",
+    "licenseName",
+    "locallyObservedArtifactDigests",
+    "manifestState",
+    "measurementPerformed",
+    "modelId",
+    "noticePresent",
+    "observedFiles",
+    "onnxRevision",
+    "productionReady",
+    "promotion",
+    "quantizationApproved",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "schemaVersion",
+    "selectionOutcome",
+    "sourceRevision"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "enum": ["not-acquired", "acquired", "rejected"] },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "measurementPerformed": { "const": false },
+    "installationAuthorized": { "const": false },
+    "quantizationApproved": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "modelId": { "const": "LiquidAI/LFM2.5-1.2B-Instruct" },
+    "sourceRevision": { "const": "b9d816ab510f9a28dca37cb182e9da8b0226e13c" },
+    "onnxRevision": { "const": "10f72e70abf67ac0fd7ebf15bc5854726891d864" },
+    "licenseName": { "const": "LFM Open License v1.0" },
+    "noticePresent": { "const": false },
+    "promotion": { "const": "rename-noreplace" },
+    "executionFromQuarantine": { "const": "prohibited" },
+    "manifestState": { "enum": ["not-acquired", "verified", "rejected"] },
+    "expectedFiles": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": { "$ref": "#/$defs/expectedFile" }
+    },
+    "observedFiles": {
+      "type": "array",
+      "maxItems": 11,
+      "items": { "$ref": "#/$defs/observedFile" }
+    },
+    "locallyObservedArtifactDigests": {
+      "type": "array",
+      "maxItems": 11,
+      "items": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+    },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "manifestState": { "const": "not-acquired" } },
+        "required": ["manifestState"]
+      },
+      "then": {
+        "properties": {
+          "acquisitionStatus": { "const": "not-acquired" },
+          "observedFiles": { "maxItems": 0 },
+          "locallyObservedArtifactDigests": { "maxItems": 0 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "expectedFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["expectedBytes", "path", "role", "upstreamSha256"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "role": {
+          "enum": ["configuration", "external-data", "graph", "metadata", "tokenizer"]
+        },
+        "expectedBytes": { "type": "integer", "minimum": 1 },
+        "upstreamSha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          ]
+        }
+      }
+    },
+    "observedFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observedBytes", "path", "sha256", "upstreamComparison"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "observedBytes": { "type": "integer", "minimum": 0 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "upstreamComparison": { "enum": ["matched", "mismatch", "not-provided"] }
+      }
+    }
+  }
+}

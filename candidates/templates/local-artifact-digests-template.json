@@ -1,0 +1,22 @@
+{
+  "acquisitionStatus": "not-acquired",
+  "calibrationStatus": "not-approved",
+  "configurationDigests": [],
+  "conversionStatus": "not-performed",
+  "digestAuthority": "local-sha256",
+  "executionStatus": "not-executed",
+  "installationAuthorized": false,
+  "licenseDigests": [],
+  "measurementPerformed": false,
+  "modelDigests": [],
+  "noticeDigests": [],
+  "productionReady": false,
+  "quantizationApproved": false,
+  "realModelExecuted": false,
+  "runtimeDigests": [],
+  "runtimeInstallationStatus": "not-installed",
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "tokenizerDigests": [],
+  "identityDigest": "5dfc023f7216bcba4246fbcb1f0f6d1529b3077d8d1512ea6622f9f99de55307"
+}

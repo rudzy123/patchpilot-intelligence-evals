@@ -9,6 +9,7 @@ dist/
 *.egg-info/
 artifact-cache/
 runtime-cache/
+candidates/local-records/
 *.safetensors
 *.gguf
 *.onnx

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:acquisition-closeout:v1",
+  "title": "Acquisition closeout",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "acquisitionStatus",
+    "attempts",
+    "calibrationStatus",
+    "closeoutState",
+    "conversionStatus",
+    "executionStatus",
+    "gitTrackedArtifact",
+    "identityDigest",
+    "installationAuthorized",
+    "measurementPerformed",
+    "operatorApproval",
+    "productionReady",
+    "promotedIdentities",
+    "quantizationApproved",
+    "realModelExecuted",
+    "runtimeInstallationStatus",
+    "schemaVersion",
+    "selectionOutcome",
+    "storageReclaimedBytes"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "enum": ["not-acquired", "acquired", "rejected"] },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "measurementPerformed": { "const": false },
+    "installationAuthorized": { "const": false },
+    "quantizationApproved": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "closeoutState": { "enum": ["not-closed", "closed"] },
+    "operatorApproval": { "enum": ["required", "accepted"] },
+    "gitTrackedArtifact": { "const": false },
+    "storageReclaimedBytes": { "type": "integer", "minimum": 0 },
+    "promotedIdentities": {
+      "type": "array",
+      "maxItems": 4,
+      "items": { "enum": ["candidate", "runtime"] }
+    },
+    "attempts": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "outcome", "reason"],
+        "properties": {
+          "kind": { "enum": ["candidate", "runtime"] },
+          "outcome": { "enum": ["incomplete", "promoted", "rejected"] },
+          "reason": { "type": "string", "minLength": 1, "maxLength": 80 }
+        }
+      }
+    },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

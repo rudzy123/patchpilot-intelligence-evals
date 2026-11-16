@@ -84,6 +84,16 @@ uv run patchpilot-evals explanation-suitability-evidence-validation
 uv run patchpilot-evals controlled-measurement-authorization-validation
 uv run patchpilot-evals track8b-readiness-validation
 uv run patchpilot-evals track7b-review-validation
+uv run patchpilot-evals acquisition-plan-validation
+uv run patchpilot-evals acquisition-allowlist-validation
+uv run patchpilot-evals acquired-runtime-manifest-validation
+uv run patchpilot-evals acquired-candidate-manifest-validation
+uv run patchpilot-evals local-artifact-digests-validation
+uv run patchpilot-evals hardened-load-attestation-validation
+uv run patchpilot-evals acquisition-closeout-validation
+uv run patchpilot-evals track8a-acquisition-evidence-validation
+uv run patchpilot-evals track8a-review-validation
+uv run patchpilot-evals track8b-measurement-prerequisites-validation
 uv run patchpilot-evals workflow-policy-validation
 uv run patchpilot-evals dependency-architecture-policy-validation
 ```
@@ -165,6 +175,8 @@ Principal Architect review on 2026-11-12 approves the Track 7A storage model and
 Intelligence Track 7B records a closed resident-memory model and an explanation-suitability contract for the same finalist. Both the 4,096-token and 8,192-token FP32 envelopes stay `unresolved` against the `12,884,901,888` byte process ceiling because required resident upper bounds are unpublished. Suitability screening is `eligible-for-controlled-evaluation`. Track 8B readiness is `ready-for-controlled-measurement`, with verdict `TRACK 8B CONTROLLED MEASUREMENT AUTHORIZED WITH DOCUMENTED RESIDUALS`. That recommendation does not install a runtime, acquire artifacts, convert or quantize a model, execute inference, or select a candidate. Selection stays `no-selection`. Track 8 acquisition stays `not-authorized`. `installationAuthorized` stays false. `productionReady` stays false.
 
 Principal Architect review on 2026-11-12 approves the Track 7B evidence closure and authorizes a future narrowly controlled measurement Session in principle, with documented residuals. The approval does not authorize operators or automated agents to begin acquisition, installation, or execution. A later Session must separately authorize runtime staging, artifact acquisition, digest verification, atomic promotion, hardened execution, measurement commands, stop conditions, result handling, and cleanup. The acceptance record is [docs/provenance/track7b-implementation-review.md](docs/provenance/track7b-implementation-review.md).
+
+Track 8A adds the acquisition plan, allowlist, staging checks, and offline-load attestation. The committed plan stays a preflight record with `acquisitionStatus` `not-acquired`. Principal Architect review on 2026-11-16 approves the external acquisition, verification, same-filesystem atomic promotion, and hardened offline-load proof with documented residuals. That approval does not authorize Track 8B measurement. `acquire-runtime`, `acquire-candidate`, and `hardened-offline-load-proof` are manual commands and are not Repository Contracts steps. `installationAuthorized` stays false. `selectionOutcome` stays `no-selection`. `measurementPerformed` stays false. `realModelExecuted` stays false under the committed no-inference semantics. `productionReady` stays false. The evidence record is [docs/provenance/track8a-acquisition-evidence.md](docs/provenance/track8a-acquisition-evidence.md). The acceptance record is [docs/provenance/track8a-implementation-review.md](docs/provenance/track8a-implementation-review.md).
 
 - [docs/architecture/candidate-landscape-refresh.md](docs/architecture/candidate-landscape-refresh.md)
 - [docs/architecture/candidate-pre-screen.md](docs/architecture/candidate-pre-screen.md)

@@ -1,0 +1,234 @@
+{
+  "allowlistDigest": "cce59885779e2a0e41761205fde5275df5606bea040fc9366a839017fdf4108e",
+  "authorizedScope": "This approval accepts the Track 8A controlled acquisition, verification, same-filesystem atomic promotion, and hardened offline-load proof with documented residuals. It does not authorize Track 8B measurement, candidate selection, calibration, inference, generation, corpus execution, long-context measurement, or production use. Historical pre-Track-8A authorization records stay unchanged.",
+  "calibrationApprovalStatus": "not-approved",
+  "candidateAcquisition": "acquired-and-verified",
+  "candidateAtomicPromotion": "passed",
+  "candidateFiles": [
+    {
+      "fileName": "onnx/model.onnx",
+      "logicalBytes": 140810,
+      "localSha256": "240b836266733940519db3893df325b4cfac8bb87222acbfa0f05dd8c87a6639",
+      "role": "graph",
+      "upstreamSha256": "240b836266733940519db3893df325b4cfac8bb87222acbfa0f05dd8c87a6639"
+    },
+    {
+      "fileName": "onnx/model.onnx_data",
+      "logicalBytes": 2063007744,
+      "localSha256": "04339fb19070d30e0b5523dfecf21b5a469dd3056a43ccd050ce6e756f039ebe",
+      "role": "external-data",
+      "upstreamSha256": "04339fb19070d30e0b5523dfecf21b5a469dd3056a43ccd050ce6e756f039ebe"
+    },
+    {
+      "fileName": "onnx/model.onnx_data_1",
+      "logicalBytes": 2072240128,
+      "localSha256": "cf2d2083fb09ebc8dfcdc46709ed1b9bc978dd7a08a83a6993f30c078b3e6fc5",
+      "role": "external-data",
+      "upstreamSha256": "cf2d2083fb09ebc8dfcdc46709ed1b9bc978dd7a08a83a6993f30c078b3e6fc5"
+    },
+    {
+      "fileName": "onnx/model.onnx_data_2",
+      "logicalBytes": 578879488,
+      "localSha256": "5817c9c46604164ef96aa9524e34422edc3ffa86e480bafbbcc80de38c0a7759",
+      "role": "external-data",
+      "upstreamSha256": "5817c9c46604164ef96aa9524e34422edc3ffa86e480bafbbcc80de38c0a7759"
+    },
+    {
+      "fileName": "tokenizer.json",
+      "logicalBytes": 3297799,
+      "localSha256": "0a1f2cb9fc2769030ca1f4207e81c1af493319373d41b8d3cf5be53860c13760",
+      "role": "tokenizer",
+      "upstreamSha256": null
+    },
+    {
+      "fileName": "config.json",
+      "logicalBytes": 1599,
+      "localSha256": "dd5d4c6e32a992ad7ddac5c07f5e4711e42c69125f2b94287af7a8ec19963be5",
+      "role": "configuration",
+      "upstreamSha256": null
+    },
+    {
+      "fileName": "generation_config.json",
+      "logicalBytes": 131,
+      "localSha256": "25f750b7e6a790f86ed01cd6f128f905152cb60bbfe2e6618ceca833b452cf80",
+      "role": "configuration",
+      "upstreamSha256": null
+    },
+    {
+      "fileName": "tokenizer_config.json",
+      "logicalBytes": 2391,
+      "localSha256": "0f11f4ffa5750369414bb24e41f26e2bbf23f1d01def533cad5f584e59ae3bef",
+      "role": "configuration",
+      "upstreamSha256": null
+    },
+    {
+      "fileName": "chat_template.jinja",
+      "logicalBytes": 1783,
+      "localSha256": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176",
+      "role": "configuration",
+      "upstreamSha256": null
+    },
+    {
+      "fileName": "LICENSE",
+      "logicalBytes": 10596,
+      "localSha256": "5188f2b355da20647257a3156db5834c794e5fb5e6d8dc4d4cdbb3180e75b85b",
+      "role": "license",
+      "upstreamSha256": null
+    },
+    {
+      "fileName": "README.md",
+      "logicalBytes": 6508,
+      "localSha256": "262795fd562da67904b5d5c638b15d5ca394053b13dc4d8cda9a372b5798ea14",
+      "role": "readme",
+      "upstreamSha256": null
+    }
+  ],
+  "copyFallbackUsed": false,
+  "corpusExecuted": false,
+  "decision": "track 8a controlled acquisition approved with documented residuals",
+  "evidenceIdentityDigest": "6c99c0f6101e39b83bd9ebace14252ac3534880a57d10ec7f100496c0a2ca89b",
+  "generationPerformed": false,
+  "hardenedOfflineLoad": "passed",
+  "inferencePerformed": false,
+  "installationAuthorized": false,
+  "longContextMeasurementPerformed": false,
+  "measurementPerformed": false,
+  "networkDenial": "passed",
+  "operatorApproval": "accepted",
+  "planDigest": "349c1d666bb4106e284cd0b41f6bac6b4ea65b9d2c5edee8eb358dfc006aec92",
+  "processCleanup": "passed",
+  "productionReady": false,
+  "providerSharedLibraryDisposition": "not required for the authorized CPU-only path",
+  "realModelExecuted": false,
+  "reviewAuthority": "PatchPilot Principal Systems Architect",
+  "reviewDate": "2026-11-16",
+  "reviewStatus": "accepted-by-principal-systems-architect",
+  "runtimeAcquisition": "acquired-and-verified",
+  "runtimeArchive": {
+    "fileName": "onnxruntime-linux-x64-1.31.1.tgz",
+    "localSha256": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9",
+    "logicalBytes": 11413655,
+    "upstreamSha256": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9"
+  },
+  "runtimeAtomicPromotion": "passed",
+  "runtimeFiles": [
+    {
+      "fileName": "libonnxruntime.so.1.31.1",
+      "logicalBytes": 29345384,
+      "localSha256": "a96f132e5eb5ca04e23a7d2fc1078fb95aa591e8d71d0f237702ece3a1e0f4ea",
+      "role": "runtime-library",
+      "upstreamSha256": null
+    },
+    {
+      "fileName": "LICENSE",
+      "logicalBytes": 1073,
+      "localSha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c",
+      "role": "license",
+      "upstreamSha256": null
+    },
+    {
+      "fileName": "ThirdPartyNotices.txt",
+      "logicalBytes": 338088,
+      "localSha256": "143764b952fdb1a7c69ce653bfba74a7744d6a8a573bfb73e235fba356c83de3",
+      "role": "notice",
+      "upstreamSha256": null
+    },
+    {
+      "fileName": "runtime-identity.json",
+      "logicalBytes": 100,
+      "localSha256": "7acf64c903f72486d2ae596d4b8343ba03b245155573998e8d4380a23f752028",
+      "role": "runtime-identity",
+      "upstreamSha256": null
+    }
+  ],
+  "sameFilesystemPromotion": true,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "track8bMeasurementAuthorization": "not-authorized",
+  "acceptedResiduals": [
+    {
+      "residualId": "resident-envelopes-unresolved",
+      "statement": "The 4096-token and 8192-token FP32 resident envelopes remain unresolved."
+    },
+    {
+      "residualId": "load-observation-is-not-resident-measurement",
+      "statement": "The offline-load resident observation is not a weight-resident measurement."
+    },
+    {
+      "residualId": "behavioral-quality-unmeasured",
+      "statement": "Behavioral quality remains unmeasured."
+    },
+    {
+      "residualId": "installation-not-authorized",
+      "statement": "Runtime installation remains unauthorized."
+    },
+    {
+      "residualId": "historical-authorization-unchanged",
+      "statement": "Historical pre-Track-8A authorization records stay not-authorized."
+    },
+    {
+      "residualId": "archive-retained-as-digest-evidence",
+      "statement": "The runtime archive remains quarantined digest evidence and is not an execution dependency."
+    }
+  ],
+  "componentReviews": [
+    {
+      "componentId": "runtime-acquisition",
+      "disposition": "approved",
+      "statement": "Runtime acquisition is acquired and verified."
+    },
+    {
+      "componentId": "candidate-acquisition",
+      "disposition": "approved",
+      "statement": "Candidate acquisition is acquired and verified."
+    },
+    {
+      "componentId": "atomic-promotion",
+      "disposition": "approved",
+      "statement": "Same-filesystem atomic promotion passed and copy fallback was not used."
+    },
+    {
+      "componentId": "hardened-offline-load",
+      "disposition": "approved",
+      "statement": "The hardened offline load passed without inference or generation."
+    },
+    {
+      "componentId": "network-denial",
+      "disposition": "approved",
+      "statement": "Operating-system network denial passed."
+    },
+    {
+      "componentId": "process-cleanup",
+      "disposition": "approved",
+      "statement": "Process cleanup passed."
+    },
+    {
+      "componentId": "provider-shared-library",
+      "disposition": "not-required",
+      "statement": "libonnxruntime_providers_shared.so is not required for the authorized CPU-only path."
+    },
+    {
+      "componentId": "superseded-attempt-cleanup",
+      "disposition": "closed",
+      "statement": "Rejected and superseded payload handling is closed."
+    },
+    {
+      "componentId": "track8b-measurement",
+      "disposition": "not-authorized",
+      "statement": "Track 8B measurement is not authorized."
+    }
+  ],
+  "notAuthorized": [
+    "Track 8B measurement",
+    "candidate selection",
+    "calibration approval",
+    "inference",
+    "generation",
+    "corpus execution",
+    "long-context measurement",
+    "production use",
+    "project dependency changes",
+    "copy promotion"
+  ],
+  "reviewDigest": "343ea2a0cc64dc37b38673db55cd99863640b0a965dc6b711d5150eaee59f0fb"
+}
