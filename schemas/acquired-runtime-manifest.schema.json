@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:acquired-runtime-manifest:v1",
+  "title": "Acquired runtime manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "acquisitionStatus",
+    "archiveMembers",
+    "calibrationStatus",
+    "conversionStatus",
+    "executionFromQuarantine",
+    "executionStatus",
+    "expectedArchive",
+    "identityDigest",
+    "installationAuthorized",
+    "licenseName",
+    "locallyObservedArtifactDigests",
+    "manifestState",
+    "measurementPerformed",
+    "noticePresent",
+    "observedArchive",
+    "productionReady",
+    "promotion",
+    "promotionFiles",
+    "quantizationApproved",
+    "realModelExecuted",
+    "runtimeId",
+    "runtimeInstallationStatus",
+    "runtimeRevision",
+    "schemaVersion",
+    "selectionOutcome",
+    "telemetry",
+    "upstreamDigestComparison",
+    "versionTag"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "enum": ["not-acquired", "acquired", "rejected"] },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "measurementPerformed": { "const": false },
+    "installationAuthorized": { "const": false },
+    "quantizationApproved": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "runtimeId": { "const": "onnxruntime" },
+    "versionTag": { "const": "v1.31.1" },
+    "runtimeRevision": { "const": "6af1a932e2286d5c58166085d24c68783033edee" },
+    "licenseName": { "const": "MIT" },
+    "promotion": { "const": "rename-noreplace" },
+    "executionFromQuarantine": { "const": "prohibited" },
+    "manifestState": { "enum": ["not-acquired", "verified", "rejected"] },
+    "noticePresent": { "type": "boolean" },
+    "telemetry": { "enum": ["absent", "disabled", "enabled"] },
+    "upstreamDigestComparison": {
+      "enum": ["not-compared", "matched", "mismatch", "not-provided"]
+    },
+    "expectedArchive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["expectedBytes", "fileName", "upstreamSha256"],
+      "properties": {
+        "fileName": { "const": "onnxruntime-linux-x64-1.31.1.tgz" },
+        "expectedBytes": { "const": 11413655 },
+        "upstreamSha256": {
+          "const": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9"
+        }
+      }
+    },
+    "observedArchive": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["fileName", "observedBytes", "sha256"],
+          "properties": {
+            "fileName": { "const": "onnxruntime-linux-x64-1.31.1.tgz" },
+            "observedBytes": { "type": "integer", "minimum": 0 },
+            "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        }
+      ]
+    },
+    "archiveMembers": {
+      "type": "array",
+      "maxItems": 64,
+      "items": { "$ref": "#/$defs/member" }
+    },
+    "promotionFiles": {
+      "type": "array",
+      "maxItems": 4,
+      "items": { "$ref": "#/$defs/member" }
+    },
+    "locallyObservedArtifactDigests": {
+      "type": "array",
+      "maxItems": 64,
+      "items": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+    },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "manifestState": { "const": "not-acquired" } },
+        "required": ["manifestState"]
+      },
+      "then": {
+        "properties": {
+          "acquisitionStatus": { "const": "not-acquired" },
+          "archiveMembers": { "maxItems": 0 },
+          "promotionFiles": { "maxItems": 0 },
+          "locallyObservedArtifactDigests": { "maxItems": 0 },
+          "observedArchive": { "type": "null" },
+          "noticePresent": { "const": false },
+          "telemetry": { "const": "absent" },
+          "upstreamDigestComparison": { "const": "not-compared" }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "member": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["disposition", "fileName", "kind", "logicalBytes", "sha256"],
+      "properties": {
+        "fileName": { "type": "string", "minLength": 1, "maxLength": 180 },
+        "kind": { "enum": ["regular", "symlink", "other"] },
+        "logicalBytes": { "type": "integer", "minimum": 0 },
+        "sha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          ]
+        },
+        "disposition": {
+          "enum": [
+            "excluded",
+            "promotion-library",
+            "promotion-license",
+            "promotion-notice",
+            "rejected"
+          ]
+        }
+      }
+    }
+  }
+}

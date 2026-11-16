@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:acquisition-allowlist:v1",
+  "title": "Track 8A source allowlist",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "acquisitionStatus",
+    "allowedHosts",
+    "allowedUrls",
+    "allowlistDigest",
+    "calibrationStatus",
+    "conversionStatus",
+    "executionStatus",
+    "followRedirects",
+    "installationAuthorized",
+    "maxRedirects",
+    "measurementPerformed",
+    "networkPhase",
+    "planScopedDeliveryHosts",
+    "productionReady",
+    "prohibitedRedirectHosts",
+    "quantizationApproved",
+    "redirectObservations",
+    "realModelExecuted",
+    "referenceUrls",
+    "runtimeInstallationStatus",
+    "schemaVersion",
+    "selectionOutcome"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "measurementPerformed": { "const": false },
+    "installationAuthorized": { "const": false },
+    "quantizationApproved": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "networkPhase": { "const": "preflight" },
+    "followRedirects": { "const": "plan-scoped-delivery-hosts" },
+    "maxRedirects": { "const": 2 },
+    "allowedHosts": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "enum": ["github.com", "huggingface.co"] }
+    },
+    "prohibitedRedirectHosts": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "enum": [
+          "cas-bridge.xethub.hf.co",
+          "cdn-lfs.huggingface.co",
+          "objects.githubusercontent.com"
+        ]
+      }
+    },
+    "planScopedDeliveryHosts": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "$ref": "#/$defs/deliveryHost" }
+    },
+    "redirectObservations": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": { "$ref": "#/$defs/observation" }
+    },
+    "allowedUrls": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 20, "maxLength": 240 }
+    },
+    "referenceUrls": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "items": {
+        "const": "https://github.com/microsoft/onnxruntime/releases/tag/v1.31.1"
+      }
+    },
+    "allowlistDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "deliveryHost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifacts", "host", "scope"],
+      "properties": {
+        "host": {
+          "enum": ["release-assets.githubusercontent.com", "us.aws.cdn.hf.co"]
+        },
+        "scope": { "const": "track8a-acquisition-plan" },
+        "artifacts": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 7, "maxLength": 80 }
+        }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact",
+        "bodyBytesSaved",
+        "finalHost",
+        "hops",
+        "identityPreserved",
+        "observedBytes"
+      ],
+      "properties": {
+        "artifact": { "type": "string", "minLength": 7, "maxLength": 80 },
+        "bodyBytesSaved": { "const": 0 },
+        "identityPreserved": { "const": true },
+        "observedBytes": { "type": "integer", "minimum": 1, "maximum": 4717588977 },
+        "finalHost": {
+          "enum": [
+            "huggingface.co",
+            "release-assets.githubusercontent.com",
+            "us.aws.cdn.hf.co"
+          ]
+        },
+        "hops": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["host", "status"],
+            "properties": {
+              "host": {
+                "enum": [
+                  "github.com",
+                  "huggingface.co",
+                  "release-assets.githubusercontent.com",
+                  "us.aws.cdn.hf.co"
+                ]
+              },
+              "status": { "enum": [200, 302, 307] }
+            }
+          }
+        }
+      }
+    }
+  }
+}

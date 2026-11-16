@@ -46,7 +46,7 @@ The launcher mounts a staged interpreter, the fixture, read-only synthetic input
 
 ## External runtime root
 
-A future ONNX Runtime archive would be staged outside this repository, outside the model-artifact cache, and outside the output directory. The committed policy stores no host path. Quarantine and rejected trees cannot be executed. Promotion requires a verified inventory. Shared libraries must be ELF. Other staged files must not be executable. `malwareDetectionClaimed` stays false. These checks are not an operating-system sandbox. No runtime archive is present, and installation stays unauthorized.
+A future ONNX Runtime archive is staged outside this repository, outside the model-artifact cache, and outside the output directory. The committed policy stores no host path. Quarantine and rejected trees cannot be executed. Promotion requires a verified inventory. Shared libraries must be ELF. Other staged files must not be executable. `malwareDetectionClaimed` stays false. These checks are not an operating-system sandbox. This repository contains no runtime archive. Installation stays unauthorized.
 
 ## Track 6D readiness
 
@@ -63,6 +63,10 @@ Track 7A storage readiness is `not-ready`. Principal Architect review on 2026-11
 ## Track 7B evidence closure
 
 Track 7B leaves both FP32 resident envelopes `unresolved` and leaves behavioral suitability unmeasured. Track 8B readiness is `ready-for-controlled-measurement` with documented residuals. Principal Architect review on 2026-11-12 approves that evidence closure and authorizes a future measurement Session in principle. The approval does not install ONNX Runtime, acquire a model or tokenizer, parse a graph, convert, quantize, or execute inference. Selection stays `no-selection`. Track 8 acquisition stays `not-authorized`. `installationAuthorized` stays false. `productionReady` stays false.
+
+## Track 8A acquisition tooling
+
+Track 8A validators read the committed plan, allowlist, redacted evidence, implementation review, and empty templates. They do not transfer. The manual acquire commands require the plan digest and write only under operator-supplied roots outside this repository, outside home directories, and outside sibling repositories. Quarantine bytes are not executed. Hashing and the offline load proof require bubblewrap's network namespace. The in-process network hook is not that boundary. `RLIMIT_AS` is address space. Cgroup `MemoryMax` is the resident-memory control. The 2026-11-16 review records one external acquisition and does not authorize Track 8B measurement. `measurementPerformed` stays false. `productionReady` stays false.
 
 ## GitHub Actions
 

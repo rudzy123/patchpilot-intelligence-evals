@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:local-artifact-digests:v1",
+  "title": "Local artifact digests",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "acquisitionStatus",
+    "calibrationStatus",
+    "configurationDigests",
+    "conversionStatus",
+    "digestAuthority",
+    "executionStatus",
+    "identityDigest",
+    "installationAuthorized",
+    "licenseDigests",
+    "measurementPerformed",
+    "modelDigests",
+    "noticeDigests",
+    "productionReady",
+    "quantizationApproved",
+    "realModelExecuted",
+    "runtimeDigests",
+    "runtimeInstallationStatus",
+    "schemaVersion",
+    "selectionOutcome",
+    "tokenizerDigests"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "enum": ["not-acquired", "acquired"] },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "measurementPerformed": { "const": false },
+    "installationAuthorized": { "const": false },
+    "quantizationApproved": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "digestAuthority": { "const": "local-sha256" },
+    "runtimeDigests": { "$ref": "#/$defs/rows" },
+    "modelDigests": { "$ref": "#/$defs/rows" },
+    "tokenizerDigests": { "$ref": "#/$defs/rows" },
+    "configurationDigests": { "$ref": "#/$defs/rows" },
+    "licenseDigests": { "$ref": "#/$defs/rows" },
+    "noticeDigests": { "$ref": "#/$defs/rows" },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "rows": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["fileName", "localSha256", "logicalBytes", "upstreamSha256"],
+        "properties": {
+          "fileName": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "logicalBytes": { "type": "integer", "minimum": 0 },
+          "localSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "upstreamSha256": {
+            "oneOf": [
+              { "type": "null" },
+              { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -23,6 +23,7 @@ from typing import Any, cast
 from patchpilot_intelligence_evals.filesystem_policy import (
     FilesystemPolicyError,
     Mount,
+    assert_mounts_safe,
     bwrap_mount_arguments,
     runtime_mounts,
     sandbox_python,
@@ -121,6 +122,7 @@ def execute_hardened(
     config_dir: Path | None = None,
     executable: Path | None = None,
     environment: tuple[tuple[str, str], ...] = (),
+    extra_mounts: tuple[Mount, ...] = (),
 ) -> ExecutionResult:
     """Run one fixture inside the boundary. ``attempts`` is always 1."""
     if not sys.platform.startswith("linux"):
@@ -133,6 +135,9 @@ def execute_hardened(
     interpreter = executable if executable is not None else Path(sys.executable)
     try:
         mounts, work = _stage(fixture, artifact_dir, config_dir, interpreter)
+        if extra_mounts:
+            assert_mounts_safe(extra_mounts)
+            mounts = (*mounts, *extra_mounts)
     except FilesystemPolicyError as exc:
         raise HardenedExecutionError(exc.code) from None
     unit = f"patchpilot-h{token_hex(8)}"

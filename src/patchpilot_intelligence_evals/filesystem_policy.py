@@ -11,6 +11,7 @@ import os
 import shutil
 import subprocess
 from pathlib import Path
+from secrets import token_hex
 from typing import NamedTuple
 
 _STAGE: Path | None = None
@@ -73,6 +74,16 @@ def runtime_mounts(executable: Path) -> tuple[Mount, ...]:
     mounts.append(Mount(str(prlimit_copy), "/usr/bin/prlimit", True))
     binary = Path(os.path.realpath(python))
     mounts.extend(_library_mounts(binary, stage, "python"))
+    unique = _dedupe(tuple(mounts))
+    assert_mounts_safe(unique)
+    return unique
+
+
+def dependency_mounts(binary: Path) -> tuple[Mount, ...]:
+    """Copy one binary's dynamic dependencies and return read-only binds."""
+    stage = Path("/tmp") / f"patchpilot-deps-{os.getpid()}-{token_hex(4)}"
+    stage.mkdir()
+    mounts = _library_mounts(binary, stage, "deps")
     unique = _dedupe(tuple(mounts))
     assert_mounts_safe(unique)
     return unique

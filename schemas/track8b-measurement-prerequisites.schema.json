@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track8b-measurement-prerequisites:v1",
+  "title": "Track 8B measurement prerequisites",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifactMismatch",
+    "atomicPromotionPassed",
+    "calibrationStatus",
+    "configurationVerified",
+    "executionDependencyOutsideVerifiedRuntime",
+    "hardenedLoadPassed",
+    "identityDigest",
+    "installationAuthorized",
+    "localDigestsPresent",
+    "measurementAuthorization",
+    "measurementPerformed",
+    "modelVerified",
+    "networkDenialPassed",
+    "productionReady",
+    "projectDependencyChanged",
+    "providerSharedLibraryBlocking",
+    "quantizationApproved",
+    "readinessOutcome",
+    "realModelExecuted",
+    "runtimeVerified",
+    "schemaVersion",
+    "selectionOutcome",
+    "supersededPayloadClosed",
+    "tokenizerVerified",
+    "verdict"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "measurementPerformed": { "const": false },
+    "installationAuthorized": { "const": false },
+    "quantizationApproved": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "runtimeVerified": { "type": "boolean" },
+    "modelVerified": { "type": "boolean" },
+    "tokenizerVerified": { "type": "boolean" },
+    "configurationVerified": { "type": "boolean" },
+    "executionDependencyOutsideVerifiedRuntime": { "type": "boolean" },
+    "measurementAuthorization": { "const": "not-authorized" },
+    "providerSharedLibraryBlocking": { "type": "boolean" },
+    "supersededPayloadClosed": { "type": "boolean" },
+    "localDigestsPresent": { "type": "boolean" },
+    "atomicPromotionPassed": { "type": "boolean" },
+    "hardenedLoadPassed": { "type": "boolean" },
+    "networkDenialPassed": { "type": "boolean" },
+    "artifactMismatch": { "type": "boolean" },
+    "projectDependencyChanged": { "type": "boolean" },
+    "readinessOutcome": {
+      "enum": ["blocked", "not-ready", "ready-with-documented-residuals"]
+    },
+    "verdict": {
+      "enum": [
+        "BLOCKED BY UNRESOLVED AUTHORITY",
+        "TRACK 8B CONTROLLED MEASUREMENT NOT READY",
+        "TRACK 8B CONTROLLED MEASUREMENT READY WITH DOCUMENTED RESIDUALS"
+      ]
+    },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

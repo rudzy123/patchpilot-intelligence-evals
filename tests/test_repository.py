@@ -22,6 +22,7 @@ from patchpilot_intelligence_evals.schemas import (
     TRACK7_SCHEMA_NAMES,
     TRACK7A_SCHEMA_NAMES,
     TRACK7B_SCHEMA_NAMES,
+    TRACK8A_SCHEMA_NAMES,
     load_schema,
     repo_root,
     validate,
@@ -114,6 +115,16 @@ _DOCUMENTS = (
     "docs/provenance/finalist-memory-evidence.md",
     "docs/provenance/finalist-suitability-evidence.md",
     "docs/provenance/track7b-implementation-review.md",
+    "docs/architecture/controlled-artifact-acquisition.md",
+    "docs/architecture/external-runtime-installation.md",
+    "docs/architecture/hardened-offline-load-proof.md",
+    "docs/architecture/track8b-measurement-prerequisites.md",
+    "docs/operations/runtime-acquisition-runbook.md",
+    "docs/operations/candidate-acquisition-runbook.md",
+    "docs/operations/acquisition-recovery.md",
+    "docs/operations/artifact-cleanup.md",
+    "docs/provenance/track8a-acquisition-evidence.md",
+    "docs/provenance/track8a-implementation-review.md",
 )
 
 
@@ -225,6 +236,16 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals controlled-measurement-authorization-validation",
         "uv run patchpilot-evals track8b-readiness-validation",
         "uv run patchpilot-evals track7b-review-validation",
+        "uv run patchpilot-evals acquisition-plan-validation",
+        "uv run patchpilot-evals acquisition-allowlist-validation",
+        "uv run patchpilot-evals acquired-runtime-manifest-validation",
+        "uv run patchpilot-evals acquired-candidate-manifest-validation",
+        "uv run patchpilot-evals local-artifact-digests-validation",
+        "uv run patchpilot-evals hardened-load-attestation-validation",
+        "uv run patchpilot-evals acquisition-closeout-validation",
+        "uv run patchpilot-evals track8a-acquisition-evidence-validation",
+        "uv run patchpilot-evals track8a-review-validation",
+        "uv run patchpilot-evals track8b-measurement-prerequisites-validation",
         "uv run patchpilot-evals workflow-policy-validation",
         "uv run patchpilot-evals dependency-architecture-policy-validation",
     ):
@@ -306,6 +327,21 @@ def test_help_lists_commands() -> None:
     assert "controlled-measurement-authorization-validation" in text
     assert "track8b-readiness-validation" in text
     assert "track7b-review-validation" in text
+    assert "acquisition-plan-validation" in text
+    assert "acquisition-allowlist-validation" in text
+    assert "acquired-runtime-manifest-validation" in text
+    assert "acquired-candidate-manifest-validation" in text
+    assert "local-artifact-digests-validation" in text
+    assert "hardened-load-attestation-validation" in text
+    assert "acquisition-closeout-validation" in text
+    assert "track8a-acquisition-evidence-validation" in text
+    assert "track8a-review-validation" in text
+    assert "track8b-measurement-prerequisites-validation" in text
+    assert "acquisition-preflight" in text
+    assert "acquire-runtime" in text
+    assert "acquire-candidate" in text
+    assert "hardened-offline-load-proof" in text
+    assert "acquisition-closeout" in text
     assert "workflow-policy-validation" in text
     assert "dependency-architecture-policy-validation" in text
 
@@ -321,6 +357,7 @@ def test_committed_json_files_validate() -> None:
         + TRACK7_SCHEMA_NAMES
         + TRACK7A_SCHEMA_NAMES
         + TRACK7B_SCHEMA_NAMES
+        + TRACK8A_SCHEMA_NAMES
     )
     for name in names:
         document = load_schema(name)

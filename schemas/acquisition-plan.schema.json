@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:acquisition-plan:v1",
+  "title": "Track 8A acquisition plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "acquisitionStatus",
+    "calibrationStatus",
+    "artifactBytesSaved",
+    "candidateFiles",
+    "candidateFilesystemMinimumBytes",
+    "candidateLicenseName",
+    "candidateNoticeFileName",
+    "candidateTransferTimeoutSeconds",
+    "connectTimeoutSeconds",
+    "conversionStatus",
+    "copyFallback",
+    "executionStatus",
+    "freeSpaceMinimumBytes",
+    "installationAuthorized",
+    "logicalArtifactCeilingBytes",
+    "maxRedirects",
+    "measurementPerformed",
+    "modelId",
+    "networkPhase",
+    "onnxRepository",
+    "onnxRevision",
+    "operatorApproval",
+    "planDigest",
+    "processMemoryCeilingBytes",
+    "productionReady",
+    "profileId",
+    "profileVersion",
+    "promotion",
+    "quantizationApproved",
+    "realModelExecuted",
+    "redirectDiscovery",
+    "retryConditions",
+    "retryLimit",
+    "rootClasses",
+    "runtimeId",
+    "runtimeInstallationStatus",
+    "runtimeLicenseName",
+    "runtimeNoticeFileName",
+    "runtimePackageBytes",
+    "runtimePackageFileName",
+    "runtimePackagePublishedSha256",
+    "runtimeReleasePageUrl",
+    "runtimeRevision",
+    "runtimeSharedLibrary",
+    "runtimeTransferTimeoutSeconds",
+    "runtimeTransferUrl",
+    "runtimeVersionTag",
+    "schemaVersion",
+    "selectedInventoryBytes",
+    "selectionOutcome",
+    "sourceRevision",
+    "stallTimeoutSeconds",
+    "unpackAllowanceBytes",
+    "verificationOverheadBytes"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactBytesSaved": { "const": 0 },
+    "redirectDiscovery": { "const": "metadata-only" },
+    "candidateFilesystemMinimumBytes": { "const": 6442450944 },
+    "logicalArtifactCeilingBytes": { "const": 8589934592 },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runtimeInstallationStatus": { "const": "not-installed" },
+    "acquisitionStatus": { "const": "not-acquired" },
+    "conversionStatus": { "const": "not-performed" },
+    "executionStatus": { "const": "not-executed" },
+    "measurementPerformed": { "const": false },
+    "installationAuthorized": { "const": false },
+    "quantizationApproved": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "operatorApproval": { "const": "required" },
+    "networkPhase": { "const": "preflight" },
+    "copyFallback": { "const": false },
+    "promotion": { "const": "rename-noreplace" },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "profileVersion": { "const": "1.0.0" },
+    "runtimeId": { "const": "onnxruntime" },
+    "runtimeVersionTag": { "const": "v1.31.1" },
+    "runtimeRevision": { "const": "6af1a932e2286d5c58166085d24c68783033edee" },
+    "runtimePackageFileName": { "const": "onnxruntime-linux-x64-1.31.1.tgz" },
+    "runtimePackageBytes": { "const": 11413655 },
+    "runtimePackagePublishedSha256": {
+      "const": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9"
+    },
+    "runtimeLicenseName": { "const": "MIT" },
+    "runtimeNoticeFileName": { "const": "ThirdPartyNotices.txt" },
+    "runtimeSharedLibrary": { "const": "libonnxruntime.so.1.31.1" },
+    "runtimeTransferUrl": {
+      "const": "https://github.com/microsoft/onnxruntime/releases/download/v1.31.1/onnxruntime-linux-x64-1.31.1.tgz"
+    },
+    "runtimeReleasePageUrl": {
+      "const": "https://github.com/microsoft/onnxruntime/releases/tag/v1.31.1"
+    },
+    "modelId": { "const": "LiquidAI/LFM2.5-1.2B-Instruct" },
+    "sourceRevision": { "const": "b9d816ab510f9a28dca37cb182e9da8b0226e13c" },
+    "onnxRevision": { "const": "10f72e70abf67ac0fd7ebf15bc5854726891d864" },
+    "onnxRepository": { "const": "LiquidAI/LFM2.5-1.2B-Instruct-ONNX" },
+    "candidateLicenseName": { "const": "LFM Open License v1.0" },
+    "candidateNoticeFileName": { "type": "null" },
+    "selectedInventoryBytes": { "const": 4717588977 },
+    "verificationOverheadBytes": { "const": 1228800 },
+    "unpackAllowanceBytes": { "const": 268435456 },
+    "freeSpaceMinimumBytes": { "const": 4998666888 },
+    "processMemoryCeilingBytes": { "const": 12884901888 },
+    "connectTimeoutSeconds": { "const": 30 },
+    "stallTimeoutSeconds": { "const": 120 },
+    "runtimeTransferTimeoutSeconds": { "const": 600 },
+    "candidateTransferTimeoutSeconds": { "const": 2700 },
+    "retryLimit": { "const": 2 },
+    "maxRedirects": { "const": 2 },
+    "retryConditions": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "enum": ["connection-reset", "timeout"] }
+    },
+    "rootClasses": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "enum": [
+          "model-quarantine",
+          "model-verified",
+          "runtime-quarantine",
+          "runtime-verified"
+        ]
+      }
+    },
+    "candidateFiles": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": { "$ref": "#/$defs/candidateFile" }
+    },
+    "planDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "candidateFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expectedBytes",
+        "localDigestRequired",
+        "path",
+        "quantized",
+        "reducedPrecision",
+        "role",
+        "upstreamSha256"
+      ],
+      "properties": {
+        "path": {
+          "enum": [
+            "LICENSE",
+            "README.md",
+            "chat_template.jinja",
+            "config.json",
+            "generation_config.json",
+            "onnx/model.onnx",
+            "onnx/model.onnx_data",
+            "onnx/model.onnx_data_1",
+            "onnx/model.onnx_data_2",
+            "tokenizer.json",
+            "tokenizer_config.json"
+          ]
+        },
+        "role": {
+          "enum": ["configuration", "external-data", "graph", "metadata", "tokenizer"]
+        },
+        "expectedBytes": { "type": "integer", "minimum": 1, "maximum": 4717588977 },
+        "upstreamSha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          ]
+        },
+        "localDigestRequired": { "type": "boolean" },
+        "quantized": { "const": false },
+        "reducedPrecision": { "const": false }
+      }
+    }
+  }
+}

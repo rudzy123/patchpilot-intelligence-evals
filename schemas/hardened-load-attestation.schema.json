@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:hardened-load-attestation:v1",
+  "title": "Hardened offline-load attestation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationStatus",
+    "corpusExecuted",
+    "generationPerformed",
+    "identityDigest",
+    "inferencePerformed",
+    "inputCount",
+    "installationAuthorized",
+    "loadStatus",
+    "longContextMeasurement",
+    "measurementPerformed",
+    "memoryCeilingBytes",
+    "networkDenial",
+    "observedResidentBytes",
+    "outputCount",
+    "processCleanup",
+    "productionReady",
+    "profileId",
+    "profileVersion",
+    "quantizationApproved",
+    "realModelExecuted",
+    "schemaVersion",
+    "selectionOutcome",
+    "tokenizerInitialized"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "measurementPerformed": { "const": false },
+    "installationAuthorized": { "const": false },
+    "quantizationApproved": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "profileVersion": { "const": "1.0.0" },
+    "memoryCeilingBytes": { "const": 12884901888 },
+    "loadStatus": {
+      "enum": ["not-performed", "loaded", "failed"]
+    },
+    "inferencePerformed": { "const": false },
+    "generationPerformed": { "const": false },
+    "corpusExecuted": { "const": false },
+    "longContextMeasurement": { "const": false },
+    "tokenizerInitialized": { "type": "boolean" },
+    "networkDenial": { "enum": ["not-performed", "denied", "failed"] },
+    "processCleanup": { "enum": ["not-performed", "reaped", "failed"] },
+    "inputCount": {
+      "oneOf": [{ "type": "null" }, { "type": "integer", "minimum": 0, "maximum": 64 }]
+    },
+    "outputCount": {
+      "oneOf": [{ "type": "null" }, { "type": "integer", "minimum": 0, "maximum": 64 }]
+    },
+    "observedResidentBytes": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "integer", "minimum": 0, "maximum": 12884901888 }
+      ]
+    },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

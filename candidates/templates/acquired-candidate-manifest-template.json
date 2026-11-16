@@ -1,0 +1,93 @@
+{
+  "acquisitionStatus": "not-acquired",
+  "calibrationStatus": "not-approved",
+  "conversionStatus": "not-performed",
+  "executionFromQuarantine": "prohibited",
+  "executionStatus": "not-executed",
+  "expectedFiles": [
+    {
+      "expectedBytes": 140810,
+      "path": "onnx/model.onnx",
+      "role": "graph",
+      "upstreamSha256": "240b836266733940519db3893df325b4cfac8bb87222acbfa0f05dd8c87a6639"
+    },
+    {
+      "expectedBytes": 2063007744,
+      "path": "onnx/model.onnx_data",
+      "role": "external-data",
+      "upstreamSha256": "04339fb19070d30e0b5523dfecf21b5a469dd3056a43ccd050ce6e756f039ebe"
+    },
+    {
+      "expectedBytes": 2072240128,
+      "path": "onnx/model.onnx_data_1",
+      "role": "external-data",
+      "upstreamSha256": "cf2d2083fb09ebc8dfcdc46709ed1b9bc978dd7a08a83a6993f30c078b3e6fc5"
+    },
+    {
+      "expectedBytes": 578879488,
+      "path": "onnx/model.onnx_data_2",
+      "role": "external-data",
+      "upstreamSha256": "5817c9c46604164ef96aa9524e34422edc3ffa86e480bafbbcc80de38c0a7759"
+    },
+    {
+      "expectedBytes": 3297799,
+      "path": "tokenizer.json",
+      "role": "tokenizer",
+      "upstreamSha256": null
+    },
+    {
+      "expectedBytes": 1599,
+      "path": "config.json",
+      "role": "configuration",
+      "upstreamSha256": null
+    },
+    {
+      "expectedBytes": 131,
+      "path": "generation_config.json",
+      "role": "configuration",
+      "upstreamSha256": null
+    },
+    {
+      "expectedBytes": 2391,
+      "path": "tokenizer_config.json",
+      "role": "configuration",
+      "upstreamSha256": null
+    },
+    {
+      "expectedBytes": 1783,
+      "path": "chat_template.jinja",
+      "role": "configuration",
+      "upstreamSha256": null
+    },
+    {
+      "expectedBytes": 10596,
+      "path": "LICENSE",
+      "role": "metadata",
+      "upstreamSha256": null
+    },
+    {
+      "expectedBytes": 6508,
+      "path": "README.md",
+      "role": "metadata",
+      "upstreamSha256": null
+    }
+  ],
+  "installationAuthorized": false,
+  "licenseName": "LFM Open License v1.0",
+  "locallyObservedArtifactDigests": [],
+  "manifestState": "not-acquired",
+  "measurementPerformed": false,
+  "modelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+  "noticePresent": false,
+  "observedFiles": [],
+  "onnxRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+  "productionReady": false,
+  "promotion": "rename-noreplace",
+  "quantizationApproved": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "sourceRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+  "identityDigest": "e0052bfa92e0dea9ed527b3e5c437d221c0452876dbd32669c74f55bce32961f"
+}

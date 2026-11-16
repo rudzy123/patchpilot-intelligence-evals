@@ -1,0 +1,21 @@
+{
+  "acquisitionStatus": "not-acquired",
+  "attempts": [],
+  "calibrationStatus": "not-approved",
+  "closeoutState": "not-closed",
+  "conversionStatus": "not-performed",
+  "executionStatus": "not-executed",
+  "gitTrackedArtifact": false,
+  "installationAuthorized": false,
+  "measurementPerformed": false,
+  "operatorApproval": "required",
+  "productionReady": false,
+  "promotedIdentities": [],
+  "quantizationApproved": false,
+  "realModelExecuted": false,
+  "runtimeInstallationStatus": "not-installed",
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "storageReclaimedBytes": 0,
+  "identityDigest": "5b9bc30b2c7d2aec72772e3418ebef631e74b1a7339b0888d3dd735f44f1a82a"
+}

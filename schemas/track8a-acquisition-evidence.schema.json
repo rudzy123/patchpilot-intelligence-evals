@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track8a-acquisition-evidence:v1",
+  "title": "Track 8A acquisition evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "allowlistDigest",
+    "attemptDecisions",
+    "calibrationApprovalStatus",
+    "candidateAcquisition",
+    "candidateFiles",
+    "copyFallbackUsed",
+    "corpusExecuted",
+    "evidenceClass",
+    "excludedSharedLibrary",
+    "generationPerformed",
+    "gitTrackedArtifact",
+    "hardenedOfflineLoad",
+    "historicalAcquisitionAuthorization",
+    "identityDigest",
+    "inferencePerformed",
+    "installationAuthorized",
+    "longContextMeasurementPerformed",
+    "measurementPerformed",
+    "networkDenial",
+    "officialProviderEvidence",
+    "operatorApproval",
+    "planDigest",
+    "processCleanup",
+    "productionReady",
+    "providerSharedLibraryDisposition",
+    "realModelExecuted",
+    "retainedIdentities",
+    "runtimeAcquisition",
+    "runtimeArchive",
+    "runtimeFiles",
+    "sameFilesystemPromotion",
+    "schemaVersion",
+    "selectionOutcome",
+    "storageReclaimedBytes",
+    "track8bMeasurementAuthorization"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "evidenceClass": { "const": "track8a-observed-acquisition" },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "measurementPerformed": { "const": false },
+    "inferencePerformed": { "const": false },
+    "generationPerformed": { "const": false },
+    "corpusExecuted": { "const": false },
+    "longContextMeasurementPerformed": { "const": false },
+    "installationAuthorized": { "const": false },
+    "gitTrackedArtifact": { "const": false },
+    "copyFallbackUsed": { "const": false },
+    "sameFilesystemPromotion": { "const": true },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationApprovalStatus": { "const": "not-approved" },
+    "operatorApproval": { "const": "accepted" },
+    "historicalAcquisitionAuthorization": { "const": "not-authorized" },
+    "track8bMeasurementAuthorization": { "const": "not-authorized" },
+    "runtimeAcquisition": { "const": "acquired-and-verified" },
+    "candidateAcquisition": { "const": "acquired-and-verified" },
+    "hardenedOfflineLoad": { "const": "passed" },
+    "networkDenial": { "const": "passed" },
+    "processCleanup": { "const": "passed" },
+    "providerSharedLibraryDisposition": {
+      "const": "not required for the authorized CPU-only path"
+    },
+    "planDigest": {
+      "const": "349c1d666bb4106e284cd0b41f6bac6b4ea65b9d2c5edee8eb358dfc006aec92"
+    },
+    "allowlistDigest": {
+      "const": "cce59885779e2a0e41761205fde5275df5606bea040fc9366a839017fdf4108e"
+    },
+    "storageReclaimedBytes": { "const": 31938441 },
+    "runtimeArchive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fileName", "localSha256", "logicalBytes", "upstreamSha256"],
+      "properties": {
+        "fileName": { "const": "onnxruntime-linux-x64-1.31.1.tgz" },
+        "logicalBytes": { "const": 11413655 },
+        "localSha256": {
+          "const": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9"
+        },
+        "upstreamSha256": {
+          "const": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9"
+        }
+      }
+    },
+    "runtimeFiles": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": { "$ref": "#/$defs/fileRow" }
+    },
+    "candidateFiles": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": { "$ref": "#/$defs/fileRow" }
+    },
+    "excludedSharedLibrary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "disposition",
+        "executableEligibility",
+        "fileName",
+        "localSha256",
+        "logicalBytes",
+        "payloadRetained",
+        "promoted",
+        "verifiedStateEligibility"
+      ],
+      "properties": {
+        "fileName": { "const": "libonnxruntime_providers_shared.so" },
+        "logicalBytes": { "const": 14632 },
+        "localSha256": {
+          "const": "086ec1d5388f64153d9c63470d126693db9a182c8ce236d3a1119068471b8a0d"
+        },
+        "disposition": { "const": "not required for the authorized CPU-only path" },
+        "promoted": { "const": false },
+        "payloadRetained": { "const": false },
+        "executableEligibility": { "const": false },
+        "verifiedStateEligibility": { "const": false }
+      }
+    },
+    "officialProviderEvidence": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/officialEvidence" }
+    },
+    "attemptDecisions": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "prefixItems": [
+        { "$ref": "#/$defs/attempt" },
+        { "$ref": "#/$defs/attempt" },
+        { "$ref": "#/$defs/attempt" },
+        { "$ref": "#/$defs/attempt" },
+        { "$ref": "#/$defs/attempt" }
+      ],
+      "items": false
+    },
+    "retainedIdentities": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/retained" }
+    },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "fileRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fileName", "localSha256", "logicalBytes", "role", "upstreamSha256"],
+      "properties": {
+        "fileName": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_./-]{0,80}$" },
+        "logicalBytes": { "type": "integer", "minimum": 1, "maximum": 8589934592 },
+        "localSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "upstreamSha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          ]
+        },
+        "role": {
+          "enum": [
+            "configuration",
+            "external-data",
+            "graph",
+            "license",
+            "notice",
+            "readme",
+            "runtime-identity",
+            "runtime-library",
+            "tokenizer"
+          ]
+        }
+      }
+    },
+    "officialEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim", "evidenceId", "locator", "revision", "sourceName"],
+      "properties": {
+        "evidenceId": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "sourceName": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "revision": { "type": "string", "pattern": "^[A-Za-z0-9._-]{1,80}$" },
+        "locator": { "type": "string", "pattern": "^[A-Za-z0-9_./-]{1,120}$" },
+        "claim": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    },
+    "attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attemptClass",
+        "attemptId",
+        "cleanupAuthorization",
+        "cleanupStatus",
+        "executableEligibility",
+        "finalState",
+        "reason",
+        "reclaimedBytes",
+        "retainedEvidence",
+        "verifiedStateEligibility"
+      ],
+      "properties": {
+        "attemptId": { "type": "string", "pattern": "^[a-z0-9-]{8,40}$" },
+        "attemptClass": {
+          "enum": [
+            "duplicate-transport",
+            "empty-quarantine",
+            "rejected-promotion",
+            "superseded-transport"
+          ]
+        },
+        "finalState": { "enum": ["rejection-metadata-retained", "removed"] },
+        "reason": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "executableEligibility": { "const": false },
+        "verifiedStateEligibility": { "const": false },
+        "cleanupAuthorization": { "enum": ["quarantine-payload", "rejected-payload"] },
+        "cleanupStatus": { "enum": ["already-clean", "clean"] },
+        "retainedEvidence": { "enum": ["none", "rejection-record"] },
+        "reclaimedBytes": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "retained": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attemptClass",
+        "attemptId",
+        "cleanupAuthorization",
+        "executableEligibility",
+        "finalState",
+        "reason",
+        "verifiedStateEligibility"
+      ],
+      "properties": {
+        "attemptId": { "type": "string", "pattern": "^[a-z0-9-]{8,40}$" },
+        "attemptClass": {
+          "enum": ["runtime-archive", "verified-candidate", "verified-runtime"]
+        },
+        "finalState": { "enum": ["promoted", "retained"] },
+        "reason": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "executableEligibility": { "const": false },
+        "verifiedStateEligibility": { "type": "boolean" },
+        "cleanupAuthorization": { "const": "not-authorized" }
+      }
+    }
+  }
+}
