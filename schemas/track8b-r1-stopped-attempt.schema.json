@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track8b-r1-stopped-attempt:v1",
+  "title": "Track 8B-R1 stopped measurement attempt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "attemptOutcome",
+    "calibrationStatus",
+    "candidateMetrics",
+    "context4096",
+    "context8192",
+    "corpusEvaluation",
+    "failureAuthority",
+    "failureCategory",
+    "identityDigest",
+    "installationAuthorized",
+    "measurementPerformed",
+    "modelSessionCreated",
+    "planDigest",
+    "priorPlanDigest",
+    "productionReady",
+    "realModelExecuted",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "shortGeneration",
+    "track9Readiness"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "sessionId": { "const": "intelligence-track-8b-r1" },
+    "planDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "attemptOutcome": { "const": "stopped" },
+    "failureCategory": { "const": "inference-failure" },
+    "failureAuthority": { "const": "measurement-infrastructure" },
+    "runInvoked": { "const": false },
+    "modelSessionCreated": { "const": false },
+    "realModelExecuted": { "const": false },
+    "shortGeneration": { "const": "withheld" },
+    "context4096": { "const": "withheld" },
+    "context8192": { "const": "withheld" },
+    "corpusEvaluation": { "const": "not-started" },
+    "candidateMetrics": { "const": "not-produced" },
+    "measurementPerformed": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "track9Readiness": { "const": "not-ready" },
+    "productionReady": { "const": false },
+    "installationAuthorized": { "const": false },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

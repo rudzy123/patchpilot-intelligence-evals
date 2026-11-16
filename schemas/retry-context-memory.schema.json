@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:retry-context-memory:v1",
+  "title": "Track 8B-R1 context memory measurement",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "batchSize",
+    "calibrationStatus",
+    "coldMemory",
+    "coldTiming",
+    "contextTokens",
+    "decoding",
+    "exitClassification",
+    "identityDigest",
+    "inputDigest",
+    "installationAuthorized",
+    "maxNewTokens",
+    "measurementCompleted",
+    "measurementPerformed",
+    "modelSessionCreated",
+    "networkResult",
+    "outputDigest",
+    "phase",
+    "planDigest",
+    "priorPlanDigest",
+    "processCleanup",
+    "productionReady",
+    "profileId",
+    "promptConstruction",
+    "realModelExecuted",
+    "repeatedTokenId",
+    "repositoryCommit",
+    "resultRootClass",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "stopCause",
+    "timestamp",
+    "tokenizerSha256",
+    "warmMemory",
+    "warmTiming"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "sessionId": { "const": "intelligence-track-8b-r1" },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "installationAuthorized": { "const": false },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "resultRootClass": { "const": "measurement-retry-result" },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "planDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "phase": { "enum": ["context-4096", "context-8192", "not-executed"] },
+    "decoding": { "$ref": "#/$defs/decoding" },
+    "contextTokens": { "type": ["integer", "null"] },
+    "batchSize": { "const": 1 },
+    "maxNewTokens": { "const": 1 },
+    "repeatedTokenId": { "type": ["integer", "null"] },
+    "promptConstruction": { "enum": ["repeated-token-id", "not-executed"] },
+    "tokenizerSha256": {
+      "const": "0a1f2cb9fc2769030ca1f4207e81c1af493319373d41b8d3cf5be53860c13760"
+    },
+    "inputDigest": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+    "measurementPerformed": { "type": "boolean" },
+    "measurementCompleted": { "type": "boolean" },
+    "runInvoked": { "type": "boolean" },
+    "modelSessionCreated": { "type": "boolean" },
+    "realModelExecuted": { "type": "boolean" },
+    "exitClassification": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "stopCause": { "type": ["string", "null"] },
+    "outputDigest": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+    "processCleanup": { "enum": ["not-performed", "reaped", "failed"] },
+    "networkResult": { "enum": ["not-performed", "denied", "failed"] },
+    "repositoryCommit": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "timestamp": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "coldMemory": { "$ref": "#/$defs/memory" },
+    "warmMemory": { "$ref": "#/$defs/memory" },
+    "coldTiming": { "$ref": "#/$defs/timing" },
+    "warmTiming": { "$ref": "#/$defs/timing" },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "decoding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "repetitionPenalty",
+        "seed",
+        "seedControl",
+        "seedSupport",
+        "temperature",
+        "topK",
+        "topP"
+      ],
+      "properties": {
+        "method": { "const": "greedy-argmax" },
+        "temperature": { "const": 0 },
+        "topP": { "const": 1 },
+        "topK": { "const": 1 },
+        "repetitionPenalty": { "const": 1 },
+        "seed": { "const": 0 },
+        "seedSupport": { "const": false },
+        "seedControl": { "const": "unused" }
+      }
+    },
+    "memory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "addressSpaceLimitBytes",
+        "cgroupCurrentBytes",
+        "cgroupPeakBytes",
+        "memoryEvents",
+        "oomEvents",
+        "processRssBytes",
+        "processTreeRssBytes",
+        "residentCeilingBytes",
+        "telemetry",
+        "virtualAddressBytes"
+      ],
+      "properties": {
+        "cgroupCurrentBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "cgroupPeakBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "processRssBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "processTreeRssBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "virtualAddressBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "oomEvents": { "type": ["integer", "null"], "minimum": 0 },
+        "residentCeilingBytes": { "const": 12884901888 },
+        "addressSpaceLimitBytes": { "const": 25769803776 },
+        "telemetry": {
+          "enum": ["not-observed", "complete", "unresolved", "oom", "exceeded"]
+        },
+        "memoryEvents": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["high", "low", "max", "oom", "oomKill"],
+          "properties": {
+            "high": { "type": ["integer", "null"], "minimum": 0 },
+            "low": { "type": ["integer", "null"], "minimum": 0 },
+            "max": { "type": ["integer", "null"], "minimum": 0 },
+            "oom": { "type": ["integer", "null"], "minimum": 0 },
+            "oomKill": { "type": ["integer", "null"], "minimum": 0 }
+          }
+        }
+      }
+    },
+    "timing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["firstTokenSeconds", "generationSeconds", "loadSeconds", "wallSeconds"],
+      "properties": {
+        "loadSeconds": { "type": ["number", "null"], "minimum": 0 },
+        "firstTokenSeconds": { "type": ["number", "null"], "minimum": 0 },
+        "generationSeconds": { "type": ["number", "null"], "minimum": 0 },
+        "wallSeconds": { "type": ["number", "null"], "minimum": 0 }
+      }
+    }
+  }
+}

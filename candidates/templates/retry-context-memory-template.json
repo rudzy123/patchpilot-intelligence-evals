@@ -1,0 +1,91 @@
+{
+  "batchSize": 1,
+  "calibrationStatus": "not-approved",
+  "coldMemory": {
+    "addressSpaceLimitBytes": 25769803776,
+    "cgroupCurrentBytes": null,
+    "cgroupPeakBytes": null,
+    "memoryEvents": {
+      "high": null,
+      "low": null,
+      "max": null,
+      "oom": null,
+      "oomKill": null
+    },
+    "oomEvents": null,
+    "processRssBytes": null,
+    "processTreeRssBytes": null,
+    "residentCeilingBytes": 12884901888,
+    "telemetry": "not-observed",
+    "virtualAddressBytes": null
+  },
+  "coldTiming": {
+    "firstTokenSeconds": null,
+    "generationSeconds": null,
+    "loadSeconds": null,
+    "wallSeconds": null
+  },
+  "contextTokens": null,
+  "decoding": {
+    "method": "greedy-argmax",
+    "repetitionPenalty": 1,
+    "seed": 0,
+    "seedControl": "unused",
+    "seedSupport": false,
+    "temperature": 0,
+    "topK": 1,
+    "topP": 1
+  },
+  "exitClassification": "not-executed",
+  "identityDigest": "cbcf4969f267adce0adae25a7ef6a036247d592b262acc7cbacd0df51a7b458b",
+  "inputDigest": null,
+  "installationAuthorized": false,
+  "maxNewTokens": 1,
+  "measurementCompleted": false,
+  "measurementPerformed": false,
+  "modelSessionCreated": false,
+  "networkResult": "not-performed",
+  "outputDigest": null,
+  "phase": "not-executed",
+  "planDigest": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b",
+  "priorPlanDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "processCleanup": "not-performed",
+  "productionReady": false,
+  "profileId": "linux-bwrap-systemd-v1",
+  "promptConstruction": "not-executed",
+  "realModelExecuted": false,
+  "repeatedTokenId": null,
+  "repositoryCommit": "not-executed",
+  "resultRootClass": "measurement-retry-result",
+  "runInvoked": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "sessionId": "intelligence-track-8b-r1",
+  "stopCause": null,
+  "timestamp": "not-executed",
+  "tokenizerSha256": "0a1f2cb9fc2769030ca1f4207e81c1af493319373d41b8d3cf5be53860c13760",
+  "warmMemory": {
+    "addressSpaceLimitBytes": 25769803776,
+    "cgroupCurrentBytes": null,
+    "cgroupPeakBytes": null,
+    "memoryEvents": {
+      "high": null,
+      "low": null,
+      "max": null,
+      "oom": null,
+      "oomKill": null
+    },
+    "oomEvents": null,
+    "processRssBytes": null,
+    "processTreeRssBytes": null,
+    "residentCeilingBytes": 12884901888,
+    "telemetry": "not-observed",
+    "virtualAddressBytes": null
+  },
+  "warmTiming": {
+    "firstTokenSeconds": null,
+    "generationSeconds": null,
+    "loadSeconds": null,
+    "wallSeconds": null
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "calibrationStatus": "not-approved",
+  "candidateMetrics": "not-produced",
+  "ceilingBytes": 12884901888,
+  "correctedConclusion": "unavailable",
+  "defectId": "vacuous-memory-conclusion",
+  "emptyPhaseSetWasWithinCeiling": true,
+  "identityDigest": "a70007aee400f531448bd0456dcc52e08ea9a58457d84473de7eeafb3da617ec",
+  "installationAuthorized": false,
+  "modelSessionCreated": false,
+  "planDigest": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "runInvoked": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "sessionId": "intelligence-track-8b-r1",
+  "smokeEstablishesContextEligibility": false,
+  "smokeEvidenceRole": "smoke-only",
+  "smokePeakBytes": 46288896,
+  "status": "corrected-before-commit"
+}

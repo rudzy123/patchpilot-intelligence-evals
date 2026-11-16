@@ -10,9 +10,12 @@ from patchpilot_intelligence_evals.artifact_budget import MEMORY_CAP
 from patchpilot_intelligence_evals.cgroup_memory import (
     ScopeSampler,
     classify_memory,
+    contradictory_resident,
     parse_events,
+    parse_memory_events,
     parse_status,
     read_cgroup_dir,
+    retry_window,
     window,
 )
 from patchpilot_intelligence_evals.measurement_plan import ADDRESS_SPACE_BYTES
@@ -93,3 +96,52 @@ def test_sampler_records_only_the_named_scope(
     assert sampler.directory == scope
     assert len(sampler.samples) == 1
     assert sampler.samples[0]["cgroupPeakBytes"] == 2
+
+
+def test_memory_events_stay_separate_from_virtual_size() -> None:
+    events = parse_memory_events("low 1\nhigh 2\nmax 3\noom 0\noom_kill 0\n")
+    assert events == {"high": 2, "low": 1, "max": 3, "oom": 0, "oomKill": 0}
+    sample = {
+        "phase": "cold",
+        "cgroupCurrentBytes": 4,
+        "cgroupPeakBytes": 8,
+        "oomEvents": 0,
+        "processRssBytes": 1,
+        "processTreeRssBytes": 2,
+        "virtualAddressBytes": 99,
+        "memoryEvents": events,
+    }
+    memory = retry_window([sample], frozenset({"cold"}))
+    assert memory["telemetry"] == "complete"
+    assert memory["cgroupPeakBytes"] == 8
+    assert memory["processRssBytes"] == 1
+    assert memory["virtualAddressBytes"] == 99
+    assert memory["memoryEvents"]["oomKill"] == 0
+    assert memory["addressSpaceLimitBytes"] != memory["residentCeilingBytes"]
+
+
+def test_current_above_peak_is_contradictory() -> None:
+    memory = {
+        "cgroupCurrentBytes": 9,
+        "cgroupPeakBytes": 8,
+        "oomEvents": 0,
+        "telemetry": "complete",
+        "memoryEvents": {"high": 0, "low": 0, "max": 0, "oom": 0, "oomKill": 0},
+    }
+    assert contradictory_resident(memory) is True
+    reduced = retry_window(
+        [
+            {
+                "phase": "warm",
+                "cgroupCurrentBytes": 9,
+                "cgroupPeakBytes": 8,
+                "oomEvents": 0,
+                "processRssBytes": 1,
+                "processTreeRssBytes": 1,
+                "virtualAddressBytes": 3,
+                "memoryEvents": memory["memoryEvents"],
+            }
+        ],
+        frozenset({"warm"}),
+    )
+    assert reduced["telemetry"] == "unresolved"

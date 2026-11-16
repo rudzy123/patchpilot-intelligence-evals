@@ -1,0 +1,64 @@
+{
+  "approvedClosure": [
+    {
+      "basename": "libc.so.6",
+      "classification": "standard-host-runtime",
+      "identity": "361bd98fce164c5b35b49c80a78b635a783870b5e30604015a9068e9abc43fbe"
+    },
+    {
+      "basename": "libdl.so.2",
+      "classification": "standard-host-runtime",
+      "identity": "4c849cbadb15f8a1873a3b7fd15785abcf12ca381fd02a27cdf63ad4b165bf6e"
+    },
+    {
+      "basename": "libgcc_s.so.1",
+      "classification": "standard-host-runtime",
+      "identity": "299aac7aff0d6e17ca11c14ecf43e3c5eaaba4588e862f5e033341357acde648"
+    },
+    {
+      "basename": "libm.so.6",
+      "classification": "standard-host-runtime",
+      "identity": "5ba405f2137ec96457ea62528e020713eee5dad49864524f911e93ca4f9b4568"
+    },
+    {
+      "basename": "libpthread.so.0",
+      "classification": "standard-host-runtime",
+      "identity": "66cf4c1e8dadc86a44ec453046fd9ce9915c05eeb303dc5e328a51e8c5a4dcd6"
+    },
+    {
+      "basename": "librt.so.1",
+      "classification": "standard-host-runtime",
+      "identity": "44e79dd0a8f2f13d0f4c836082fad177c7dd7ed652f4ca000432d7ef20b5c336"
+    },
+    {
+      "basename": "libstdc++.so.6",
+      "classification": "standard-host-runtime",
+      "identity": "86be5ea9d4a647e9f4adab52b9c3f6c68ea0eefaa79e0fdee61687d44a4a4e05"
+    },
+    {
+      "basename": "ld-linux-x86-64.so.2",
+      "classification": "elf-interpreter",
+      "identity": "0981d3cdf0ff10c72fd1b54d9263a5e91a7286f6c513a8706dc72522ced9d99a"
+    }
+  ],
+  "broadDirectoryMounted": false,
+  "calibrationStatus": "not-approved",
+  "defectId": "missing-runtime-dependency-mount",
+  "failureBeforeSession": "before-create-session",
+  "fallbackRetrieval": false,
+  "identityDigest": "29678d3ac6e679585df8ea8e7ab360246e0528f82d6f92f45a9dd493128da3c4",
+  "installationAuthorized": false,
+  "interpreterPolicy": "existing-hardened-execution-policy",
+  "modelSessionCreated": false,
+  "networkUsed": false,
+  "planDigest": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b",
+  "productionReady": false,
+  "providerLibrary": "libonnxruntime_providers_shared.so",
+  "providerMounted": false,
+  "realModelExecuted": false,
+  "runInvoked": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "sessionId": "intelligence-track-8b-r1",
+  "status": "corrected-before-commit"
+}

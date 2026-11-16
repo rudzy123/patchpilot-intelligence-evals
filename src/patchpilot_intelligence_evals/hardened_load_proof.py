@@ -9,7 +9,7 @@ from typing import Any
 from patchpilot_intelligence_evals.acquisition_plan import reject_sensitive, validate_external_root
 from patchpilot_intelligence_evals.artifact_budget import MEMORY_CAP
 from patchpilot_intelligence_evals.corpus import canonical_dumps, sha256_text
-from patchpilot_intelligence_evals.filesystem_policy import Mount, dependency_mounts
+from patchpilot_intelligence_evals.filesystem_policy import Mount
 from patchpilot_intelligence_evals.hardened_execution import (
     ExecutionResult,
     HardenedExecutionError,
@@ -17,6 +17,7 @@ from patchpilot_intelligence_evals.hardened_execution import (
     host_supports_boundary,
 )
 from patchpilot_intelligence_evals.resource_controls import ResourceLimits
+from patchpilot_intelligence_evals.runtime_dependency_closure import approved_runtime_mounts
 from patchpilot_intelligence_evals.runtime_staging import (
     RuntimeStagingError,
     ort_api_indices,
@@ -209,7 +210,7 @@ def launch_offline_load(
     mounts = (
         Mount(str(library.parent), "/verified-runtime", True),
         Mount(str(_verified_model(model)), "/verified-model", True),
-        *dependency_mounts(library),
+        *approved_runtime_mounts(library),
     )
     try:
         result = execute_hardened(

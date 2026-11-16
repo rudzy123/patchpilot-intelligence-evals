@@ -74,24 +74,31 @@ def main() -> int:
         "wallSeconds": None,
     }
     if config is None:
+        _stamp(report, None)
         _finish(report, started)
         return 2
+    config["modelSessionCreated"] = False
+    config["runInvoked"] = False
     if report["network"]["ipv4"] == "reached" or report["network"]["dns"] == "reached":
+        _stamp(report, config)
         _finish(report, started)
         return 5
     try:
         generated = _session(config, report, started)
     except (OSError, ValueError, KeyError):
+        _stamp(report, config)
         _finish(report, started)
         return 4
     if generated is None:
         code = int(report.get("exitCode", 4))
+        _stamp(report, config)
         _finish(report, started)
         return code
     report["status"] = "ok"
     report["newTokenCount"] = len(generated["newTokens"])
     report["inputTokenCount"] = generated["inputTokenCount"]
     report["outputDigest"] = _digest(generated["newTokens"])
+    _stamp(report, config)
     _finish(report, started)
     _emit(config, generated)
     return 0
@@ -206,6 +213,7 @@ def _session(
     ):
         report["exitCode"] = 3
         return None
+    config["modelSessionCreated"] = True
     report["loadSeconds"] = time.monotonic() - load_started
     names = _io_names(slots, config, session)
     if names is None:
@@ -640,6 +648,7 @@ def _invoke(
         ctypes.c_size_t,
         ctypes.POINTER(ctypes.c_void_p),
     )
+    config["runInvoked"] = True
     status = kind(slots[int(config["indexes"]["run"])])(
         session,
         None,
@@ -766,6 +775,16 @@ def _canonical(value: object) -> str:
 
 def _digest(token_ids: list[int]) -> str:
     return hashlib.sha256(_canonical(token_ids).encode("utf-8")).hexdigest()
+
+
+def _stamp(report: dict[str, Any], config: dict[str, Any] | None) -> None:
+    """Copy session flags onto the report. The report still omits prompt text."""
+    if config is None:
+        report["modelSessionCreated"] = False
+        report["runInvoked"] = False
+        return
+    report["modelSessionCreated"] = bool(config.get("modelSessionCreated"))
+    report["runInvoked"] = bool(config.get("runInvoked"))
 
 
 def _finish(report: dict[str, Any], started: float) -> None:

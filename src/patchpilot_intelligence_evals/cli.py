@@ -99,6 +99,10 @@ from patchpilot_intelligence_evals.measurement_cli import VALIDATION as MEASUREM
 from patchpilot_intelligence_evals.measurement_cli import handle as handle_measurement
 from patchpilot_intelligence_evals.measurement_cli import register as register_measurement
 from patchpilot_intelligence_evals.measurement_plan import MeasurementError
+from patchpilot_intelligence_evals.measurement_retry_cli import EXECUTE as RETRY_EXECUTE
+from patchpilot_intelligence_evals.measurement_retry_cli import VALIDATION as RETRY_VALIDATION
+from patchpilot_intelligence_evals.measurement_retry_cli import handle as handle_retry
+from patchpilot_intelligence_evals.measurement_retry_cli import register as register_retry
 from patchpilot_intelligence_evals.memory_budget import MemoryBudgetError, load_memory_budget
 from patchpilot_intelligence_evals.memory_evidence import MemoryEvidenceError, load_memory_evidence
 from patchpilot_intelligence_evals.memory_model import MemoryModelError, load_memory_model
@@ -316,6 +320,7 @@ def _parser() -> argparse.ArgumentParser:
     calibration = commands.add_parser("calibration")
     calibration.add_argument("--output-dir", required=True)
     register_measurement(commands)
+    register_retry(commands)
     return parser
 
 
@@ -367,9 +372,15 @@ def main(argv: list[str] | None = None) -> int:
             payload = handle_measurement(args.command, args)
             _summary(payload)
             return 0 if payload.get("status") == "ok" else 1
+        if args.command in RETRY_EXECUTE:
+            payload = handle_retry(args.command, args)
+            _summary(payload)
+            return 0 if payload.get("status") == "ok" else 1
         with network_guard():
             if args.command in MEASUREMENT_VALIDATION:
                 return _summary(handle_measurement(args.command, args))
+            if args.command in RETRY_VALIDATION:
+                return _summary(handle_retry(args.command, args))
             if args.command == "corpus-validation":
                 return _summary(validate_corpus())
             if args.command == "baseline-evaluation":

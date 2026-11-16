@@ -240,6 +240,25 @@ jobs:
           uv run patchpilot-evals track8b-review-validation
           uv run patchpilot-evals track9-readiness-validation
 
+      - name: Validate the Track 8B-R1 retry records
+        run: |
+          uv run patchpilot-evals measurement-retry-plan-validation
+          uv run patchpilot-evals measurement-retry-approval-validation
+          uv run patchpilot-evals measurement-retry-preflight-validation
+          uv run patchpilot-evals template-compatibility-result-validation
+          uv run patchpilot-evals retry-smoke-execution-validation
+          uv run patchpilot-evals retry-context-memory-validation
+          uv run patchpilot-evals retry-behavioral-run-validation
+          uv run patchpilot-evals retry-closeout-validation
+          uv run patchpilot-evals retry-track9-readiness-validation
+          uv run patchpilot-evals track8b-r1-stopped-attempt-validation
+          uv run patchpilot-evals track8b-r1-dependency-mount-defect-validation
+          uv run patchpilot-evals track8b-r1-memory-conclusion-defect-validation
+          uv run patchpilot-evals track8b-r1-corrected-closeout-validation
+          uv run patchpilot-evals track8b-r1-plan-disposition-validation
+          uv run patchpilot-evals track8b-r1-stopped-track9-validation
+          uv run patchpilot-evals track8b-r1-review-validation
+
       - name: Validate workflow policy
         run: uv run patchpilot-evals workflow-policy-validation
 

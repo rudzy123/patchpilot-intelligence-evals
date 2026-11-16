@@ -169,6 +169,62 @@ class ScopeSampler:
         return len(lines)
 
 
+def empty_memory_events() -> dict[str, int | None]:
+    """Counters from ``memory.events``. Missing lines stay unresolved."""
+    return {"high": None, "low": None, "max": None, "oom": None, "oomKill": None}
+
+
+def parse_memory_events(text: str) -> dict[str, int | None]:
+    """Parse the cgroup ``memory.events`` counters used by the retry."""
+    found = empty_memory_events()
+    names = {"high": "high", "low": "low", "max": "max", "oom": "oom", "oom_kill": "oomKill"}
+    for line in text.splitlines():
+        name, separator, value = line.partition(" ")
+        if separator and name in names and value.isdecimal():
+            found[names[name]] = int(value)
+    return found
+
+
+def contradictory_resident(memory: dict[str, Any]) -> bool:
+    """Return whether resident counters disagree. Virtual size is not an input."""
+    current = memory.get("cgroupCurrentBytes")
+    peak = memory.get("cgroupPeakBytes")
+    if isinstance(current, int) and isinstance(peak, int) and current > peak:
+        return True
+    if memory.get("telemetry") != "complete":
+        return False
+    events = memory.get("memoryEvents")
+    if not isinstance(events, dict):
+        return True
+    oom = events.get("oom")
+    oom_kill = events.get("oomKill")
+    if not isinstance(oom, int) or not isinstance(oom_kill, int):
+        return True
+    return oom_kill != memory.get("oomEvents")
+
+
+def retry_window(samples: list[dict[str, Any]], phases: frozenset[str]) -> dict[str, Any]:
+    """Reduce one window and keep ``memory.events`` beside the resident peak."""
+    memory = window(samples, phases)
+    events = empty_memory_events()
+    for item in samples:
+        if str(item.get("phase")) not in phases:
+            continue
+        raw = item.get("memoryEvents")
+        if not isinstance(raw, dict):
+            continue
+        for key in events:
+            if isinstance(raw.get(key), int):
+                events[key] = raw[key]
+    memory["memoryEvents"] = events
+    if memory["telemetry"] == "complete" and contradictory_resident(memory):
+        memory["telemetry"] = "unresolved"
+    oom_count = events.get("oom")
+    if memory["telemetry"] == "complete" and isinstance(oom_count, int) and oom_count > 0:
+        memory["telemetry"] = "oom"
+    return memory
+
+
 def window(samples: list[dict[str, Any]], phases: frozenset[str]) -> dict[str, Any]:
     """Reduce samples for one cold or warm window."""
     chosen = [item for item in samples if str(item.get("phase")) in phases]

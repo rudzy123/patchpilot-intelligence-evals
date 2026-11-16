@@ -23,6 +23,11 @@ from patchpilot_intelligence_evals.measurement_plan import (
     empty_timing,
 )
 from patchpilot_intelligence_evals.resource_controls import ResourceLimits
+from patchpilot_intelligence_evals.runtime_dependency_closure import (
+    LIBRARY_NAME,
+    ClosureError,
+    approved_runtime_mounts,
+)
 from patchpilot_intelligence_evals.runtime_staging import (
     RuntimeStagingError,
     logging_level_error,
@@ -131,10 +136,25 @@ def launch_child(
     limits: ResourceLimits,
     launcher: Launcher = execute_hardened,
     sampler: ScopeSampler | None = None,
+    retry_approval: str | None = None,
 ) -> tuple[ExecutionResult, ScopeSampler]:
     """Stage one child. The callable is replaceable in synthetic tests."""
+    dependency_mounts: tuple[Mount, ...] = ()
     if launcher is execute_hardened:
-        require_reusable_plan()
+        if retry_approval is None:
+            require_reusable_plan()
+        else:
+            from patchpilot_intelligence_evals.measurement_retry_plan import (
+                require_open_retry_plan,
+                require_retry_approval,
+            )
+
+            require_retry_approval(retry_approval)
+            require_open_retry_plan()
+        try:
+            dependency_mounts = approved_runtime_mounts(runtime_dir / LIBRARY_NAME)
+        except ClosureError as exc:
+            raise MeasurementError("unverified-dependency") from exc
     assert_no_gold(config)
     public = {
         key: value
@@ -152,6 +172,7 @@ def launch_child(
     mounts = (
         Mount(str(runtime_dir), "/verified-runtime", True),
         Mount(str(model_dir), "/verified-candidate", True),
+        *dependency_mounts,
     )
     try:
         result = launcher(

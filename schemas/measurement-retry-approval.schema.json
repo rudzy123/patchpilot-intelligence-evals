@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:measurement-retry-approval:v1",
+  "title": "Track 8B-R1 operator approval",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "approvalStatus",
+    "calibrationStatus",
+    "identityDigest",
+    "installationAuthorized",
+    "measurementCompleted",
+    "measurementPerformed",
+    "modelSessionCreated",
+    "planDigest",
+    "priorPlanDigest",
+    "productionReady",
+    "realModelExecuted",
+    "resultRootClass",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "sessionId": { "const": "intelligence-track-8b-r1" },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "installationAuthorized": { "const": false },
+    "measurementPerformed": { "const": false },
+    "measurementCompleted": { "const": false },
+    "modelSessionCreated": { "const": false },
+    "runInvoked": { "const": false },
+    "realModelExecuted": { "const": false },
+    "approvalStatus": { "const": "not-approved" },
+    "planDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "resultRootClass": { "const": "measurement-retry-result" },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

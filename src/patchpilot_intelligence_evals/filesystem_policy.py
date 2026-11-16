@@ -11,7 +11,6 @@ import os
 import shutil
 import subprocess
 from pathlib import Path
-from secrets import token_hex
 from typing import NamedTuple
 
 _STAGE: Path | None = None
@@ -80,13 +79,12 @@ def runtime_mounts(executable: Path) -> tuple[Mount, ...]:
 
 
 def dependency_mounts(binary: Path) -> tuple[Mount, ...]:
-    """Copy one binary's dynamic dependencies and return read-only binds."""
-    stage = Path("/tmp") / f"patchpilot-deps-{os.getpid()}-{token_hex(4)}"
-    stage.mkdir()
-    mounts = _library_mounts(binary, stage, "deps")
-    unique = _dedupe(tuple(mounts))
-    assert_mounts_safe(unique)
-    return unique
+    """Return the shared read-only closure. Load proof and inference both use it."""
+    from patchpilot_intelligence_evals.runtime_dependency_closure import (
+        approved_runtime_mounts,
+    )
+
+    return approved_runtime_mounts(binary)
 
 
 def sandbox_python() -> str:

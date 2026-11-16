@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track8b-r1-memory-conclusion-defect:v1",
+  "title": "Track 8B-R1 vacuous memory conclusion defect",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationStatus",
+    "candidateMetrics",
+    "ceilingBytes",
+    "correctedConclusion",
+    "defectId",
+    "emptyPhaseSetWasWithinCeiling",
+    "identityDigest",
+    "installationAuthorized",
+    "modelSessionCreated",
+    "planDigest",
+    "productionReady",
+    "realModelExecuted",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "smokeEstablishesContextEligibility",
+    "smokeEvidenceRole",
+    "smokePeakBytes",
+    "status"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "sessionId": { "const": "intelligence-track-8b-r1" },
+    "planDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "defectId": { "const": "vacuous-memory-conclusion" },
+    "status": { "const": "corrected-before-commit" },
+    "emptyPhaseSetWasWithinCeiling": { "const": true },
+    "correctedConclusion": { "const": "unavailable" },
+    "smokePeakBytes": { "const": 46288896 },
+    "smokeEvidenceRole": { "const": "smoke-only" },
+    "smokeEstablishesContextEligibility": { "const": false },
+    "ceilingBytes": { "const": 12884901888 },
+    "runInvoked": { "const": false },
+    "modelSessionCreated": { "const": false },
+    "realModelExecuted": { "const": false },
+    "candidateMetrics": { "const": "not-produced" },
+    "installationAuthorized": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "productionReady": { "const": false },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}
