@@ -380,6 +380,8 @@ def session_stop(cause: str | None) -> bool:
 
 def validate_retry_result_root(root: Path, *, resume: bool) -> Path:
     """Accept a fresh external result root. The historical root stays untouched."""
+    if root.is_absolute() and ".." not in root.parts and _historical(Path(os.path.abspath(root))):
+        raise MeasurementError("result-root-reuse")
     try:
         resolved = validate_external_root(root)
     except PlanError as exc:
@@ -412,8 +414,9 @@ def _historical(resolved: Path) -> bool:
     text = resolved.as_posix()
     if PRIOR_PLAN_DIGEST in text or "track8b-approved" in resolved.name:
         return True
+    lexical = Path(os.path.abspath(resolved))
     for historical in _HISTORICAL_RESULT_ROOTS:
-        if resolved == historical.resolve():
+        if lexical == Path(os.path.abspath(historical)) or resolved == historical.resolve():
             return True
     return False
 

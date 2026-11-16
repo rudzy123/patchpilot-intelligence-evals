@@ -106,10 +106,15 @@ def test_retry_schemas_are_closed() -> None:
         assert document["$id"] == f"urn:patchpilot-intelligence-evals:schema:{name}:v1"
 
 
-def test_historical_result_root_is_rejected() -> None:
+def test_historical_result_root_is_rejected(tmp_path: Path) -> None:
     historical = Path("/var/tmp/patchpilot-evals-track8b-approved-8280ec63")
     with pytest.raises(MeasurementError) as caught:
         validate_retry_result_root(historical, resume=False)
+    assert caught.value.code == "result-root-reuse"
+    absent = tmp_path / "patchpilot-evals-track8b-approved-8280ec63"
+    with pytest.raises(MeasurementError) as caught:
+        validate_retry_result_root(absent, resume=False)
+    assert not absent.exists()
     assert caught.value.code == "result-root-reuse"
 
 
