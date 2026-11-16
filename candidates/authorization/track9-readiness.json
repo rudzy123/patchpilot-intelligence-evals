@@ -1,0 +1,13 @@
+{
+  "calibrationStatus": "not-approved",
+  "installationAuthorized": false,
+  "productionReady": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "measurementPerformed": false,
+  "readinessOutcome": "not-ready",
+  "realModelExecuted": false,
+  "reason": "measurement-not-performed",
+  "verdict": "TRACK 9 EVALUATION REVIEW NOT READY",
+  "identityDigest": "8fc85f5531cc7035d7cd7fa9f2951c6ce898c4e9bcb883fb77185d7517d9c298"
+}

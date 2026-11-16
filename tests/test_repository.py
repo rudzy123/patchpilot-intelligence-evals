@@ -125,6 +125,17 @@ _DOCUMENTS = (
     "docs/operations/artifact-cleanup.md",
     "docs/provenance/track8a-acquisition-evidence.md",
     "docs/provenance/track8a-implementation-review.md",
+    "docs/architecture/controlled-candidate-measurement.md",
+    "docs/architecture/fp32-memory-measurement.md",
+    "docs/architecture/behavioral-evaluation-execution.md",
+    "docs/architecture/track9-promotion-boundary.md",
+    "docs/operations/measurement-runbook.md",
+    "docs/operations/measurement-recovery.md",
+    "docs/operations/measurement-cleanup.md",
+    "docs/provenance/track8b-measurement-evidence.md",
+    "docs/provenance/track8b-stopped-attempt.md",
+    "docs/provenance/track8b-implementation-review.md",
+    "docs/architecture/template-compatibility.md",
 )
 
 
@@ -246,6 +257,19 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals track8a-acquisition-evidence-validation",
         "uv run patchpilot-evals track8a-review-validation",
         "uv run patchpilot-evals track8b-measurement-prerequisites-validation",
+        "uv run patchpilot-evals measurement-plan-validation",
+        "uv run patchpilot-evals measurement-operator-approval-validation",
+        "uv run patchpilot-evals smoke-execution-validation",
+        "uv run patchpilot-evals context-memory-measurement-validation",
+        "uv run patchpilot-evals candidate-behavioral-run-validation",
+        "uv run patchpilot-evals candidate-behavioral-summary-validation",
+        "uv run patchpilot-evals measurement-closeout-validation",
+        "uv run patchpilot-evals track8b-preflight-validation",
+        "uv run patchpilot-evals track8b-stopped-attempt-validation",
+        "uv run patchpilot-evals track8b-plan-disposition-validation",
+        "uv run patchpilot-evals track8b-template-compatibility-defect-validation",
+        "uv run patchpilot-evals track8b-review-validation",
+        "uv run patchpilot-evals track9-readiness-validation",
         "uv run patchpilot-evals workflow-policy-validation",
         "uv run patchpilot-evals dependency-architecture-policy-validation",
     ):
@@ -337,6 +361,19 @@ def test_help_lists_commands() -> None:
     assert "track8a-acquisition-evidence-validation" in text
     assert "track8a-review-validation" in text
     assert "track8b-measurement-prerequisites-validation" in text
+    assert "measurement-plan-validation" in text
+    assert "measurement-preflight" in text
+    assert "measurement-execute" in text
+    assert "measurement-smoke" in text
+    assert "measurement-short-generation" in text
+    assert "measurement-context" in text
+    assert "measurement-corpus" in text
+    assert "track8b-preflight-validation" in text
+    assert "track8b-stopped-attempt-validation" in text
+    assert "track8b-plan-disposition-validation" in text
+    assert "track8b-template-compatibility-defect-validation" in text
+    assert "track8b-review-validation" in text
+    assert "track9-readiness-validation" in text
     assert "acquisition-preflight" in text
     assert "acquire-runtime" in text
     assert "acquire-candidate" in text

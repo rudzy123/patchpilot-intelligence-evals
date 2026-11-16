@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track8b-plan-disposition:v1",
+  "title": "Track 8B plan disposition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationStatus",
+    "identityDigest",
+    "installationAuthorized",
+    "nextRunRequiresNewPlan",
+    "nextRunRequiresOperatorApproval",
+    "planDigest",
+    "planDisposition",
+    "productionReady",
+    "replacementPlanDigest",
+    "reusable",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "calibrationStatus": { "const": "not-approved" },
+    "installationAuthorized": { "const": false },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "planDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "planDisposition": { "const": "consumed" },
+    "reusable": { "const": false },
+    "replacementPlanDigest": { "const": "not-issued" },
+    "nextRunRequiresNewPlan": { "const": true },
+    "nextRunRequiresOperatorApproval": { "const": true },
+    "runInvoked": { "const": false },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

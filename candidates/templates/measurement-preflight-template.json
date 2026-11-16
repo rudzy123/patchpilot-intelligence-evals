@@ -1,0 +1,18 @@
+{
+  "calibrationStatus": "not-approved",
+  "installationAuthorized": false,
+  "productionReady": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "archiveAttemptId": "rt-e791f1518ae46ead",
+  "candidateAttemptId": "cd-20b7ceee37a62cba",
+  "candidateClass": "verified-candidate",
+  "measurementPerformed": false,
+  "planDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "realModelExecuted": false,
+  "runInvoked": false,
+  "runtimeAttemptId": "rp-c2fe1c88f694fc1e",
+  "runtimeClass": "verified-runtime",
+  "status": "not-executed",
+  "identityDigest": "05c4153babcd568ffdddf1b0eb82f0ef1d23608e1589d4b66d70ed898cec0f02"
+}

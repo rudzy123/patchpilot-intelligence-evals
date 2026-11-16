@@ -1,0 +1,258 @@
+{
+  "addressSpaceBytes": 25769803776,
+  "calibrationStatus": "not-approved",
+  "candidateAttemptId": "cd-20b7ceee37a62cba",
+  "candidateFiles": [
+    {
+      "bytes": 140810,
+      "path": "onnx/model.onnx",
+      "sha256": "240b836266733940519db3893df325b4cfac8bb87222acbfa0f05dd8c87a6639"
+    },
+    {
+      "bytes": 2063007744,
+      "path": "onnx/model.onnx_data",
+      "sha256": "04339fb19070d30e0b5523dfecf21b5a469dd3056a43ccd050ce6e756f039ebe"
+    },
+    {
+      "bytes": 2072240128,
+      "path": "onnx/model.onnx_data_1",
+      "sha256": "cf2d2083fb09ebc8dfcdc46709ed1b9bc978dd7a08a83a6993f30c078b3e6fc5"
+    },
+    {
+      "bytes": 578879488,
+      "path": "onnx/model.onnx_data_2",
+      "sha256": "5817c9c46604164ef96aa9524e34422edc3ffa86e480bafbbcc80de38c0a7759"
+    },
+    {
+      "bytes": 3297799,
+      "path": "tokenizer.json",
+      "sha256": "0a1f2cb9fc2769030ca1f4207e81c1af493319373d41b8d3cf5be53860c13760"
+    },
+    {
+      "bytes": 1599,
+      "path": "config.json",
+      "sha256": "dd5d4c6e32a992ad7ddac5c07f5e4711e42c69125f2b94287af7a8ec19963be5"
+    },
+    {
+      "bytes": 131,
+      "path": "generation_config.json",
+      "sha256": "25f750b7e6a790f86ed01cd6f128f905152cb60bbfe2e6618ceca833b452cf80"
+    },
+    {
+      "bytes": 2391,
+      "path": "tokenizer_config.json",
+      "sha256": "0f11f4ffa5750369414bb24e41f26e2bbf23f1d01def533cad5f584e59ae3bef"
+    },
+    {
+      "bytes": 1783,
+      "path": "chat_template.jinja",
+      "sha256": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176"
+    },
+    {
+      "bytes": 10596,
+      "path": "LICENSE",
+      "sha256": "5188f2b355da20647257a3156db5834c794e5fb5e6d8dc4d4cdbb3180e75b85b"
+    },
+    {
+      "bytes": 6508,
+      "path": "README.md",
+      "sha256": "262795fd562da67904b5d5c638b15d5ca394053b13dc4d8cda9a372b5798ea14"
+    }
+  ],
+  "candidateModelId": "LiquidAI/LFM2.5-1.2B-Instruct",
+  "chatTemplateSha256": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176",
+  "corpusDigest": "49fe79544a26de429afe865fbd2666828bf26a6da30efe6d87f3b0fdfbd0989c",
+  "decoding": {
+    "method": "greedy-argmax",
+    "repetitionPenalty": 1,
+    "seed": 0,
+    "seedControl": "unused",
+    "seedSupport": false,
+    "temperature": 0,
+    "topK": 1,
+    "topP": 1
+  },
+  "eosTokenId": 7,
+  "executionStatus": "not-executed",
+  "harnessCandidateId": "fixture-lfm25-instruct",
+  "headerMember": {
+    "bytes": 422790,
+    "member": "onnxruntime-linux-x64-1.31.1/include/onnxruntime_c_api.h",
+    "sha256": "43d584f596ef66820421317df32a79a95fc1d39ee46cb3971a870c08d8ba4baa"
+  },
+  "hostCapabilityClass": "linux-cgroup-v2-user-scope",
+  "installationAuthorized": false,
+  "interOpThreads": 1,
+  "intraOpThreads": 8,
+  "measurementAuthorization": "not-authorized",
+  "measurementPerformed": false,
+  "memoryMaxBytes": 12884901888,
+  "onnxRevision": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+  "operatorApproval": "required",
+  "phases": [
+    {
+      "batchSize": 1,
+      "coldWarm": false,
+      "cpuSeconds": 1,
+      "generationBudgetSeconds": 1,
+      "inputTokens": null,
+      "maxNewTokens": 0,
+      "order": 1,
+      "phase": "preflight",
+      "phaseBoundaryDwellMilliseconds": 150,
+      "prerequisite": null,
+      "promptConstruction": "none",
+      "repetitions": 1,
+      "sampleIntervalMilliseconds": 100,
+      "stderrBytes": 8192,
+      "stdoutBytes": 8192,
+      "wallClockSeconds": 1
+    },
+    {
+      "batchSize": 1,
+      "coldWarm": false,
+      "cpuSeconds": 600,
+      "generationBudgetSeconds": 60,
+      "inputTokens": null,
+      "maxNewTokens": 1,
+      "order": 2,
+      "phase": "one-token-smoke",
+      "phaseBoundaryDwellMilliseconds": 150,
+      "prerequisite": "preflight",
+      "promptConstruction": "chat-template",
+      "repetitions": 1,
+      "sampleIntervalMilliseconds": 100,
+      "stderrBytes": 262144,
+      "stdoutBytes": 8192,
+      "wallClockSeconds": 900
+    },
+    {
+      "batchSize": 1,
+      "coldWarm": true,
+      "cpuSeconds": 600,
+      "generationBudgetSeconds": 120,
+      "inputTokens": null,
+      "maxNewTokens": 32,
+      "order": 3,
+      "phase": "short-generation",
+      "phaseBoundaryDwellMilliseconds": 150,
+      "prerequisite": "one-token-smoke",
+      "promptConstruction": "chat-template",
+      "repetitions": 1,
+      "sampleIntervalMilliseconds": 100,
+      "stderrBytes": 262144,
+      "stdoutBytes": 8192,
+      "wallClockSeconds": 900
+    },
+    {
+      "batchSize": 1,
+      "coldWarm": true,
+      "cpuSeconds": 600,
+      "generationBudgetSeconds": 300,
+      "inputTokens": 4096,
+      "maxNewTokens": 1,
+      "order": 4,
+      "phase": "context-4096",
+      "phaseBoundaryDwellMilliseconds": 150,
+      "prerequisite": "short-generation",
+      "promptConstruction": "repeated-token-id",
+      "repetitions": 1,
+      "sampleIntervalMilliseconds": 100,
+      "stderrBytes": 262144,
+      "stdoutBytes": 8192,
+      "wallClockSeconds": 900
+    },
+    {
+      "batchSize": 1,
+      "coldWarm": true,
+      "cpuSeconds": 600,
+      "generationBudgetSeconds": 600,
+      "inputTokens": 8192,
+      "maxNewTokens": 1,
+      "order": 5,
+      "phase": "context-8192",
+      "phaseBoundaryDwellMilliseconds": 150,
+      "prerequisite": "context-4096",
+      "promptConstruction": "repeated-token-id",
+      "repetitions": 1,
+      "sampleIntervalMilliseconds": 100,
+      "stderrBytes": 262144,
+      "stdoutBytes": 8192,
+      "wallClockSeconds": 900
+    },
+    {
+      "batchSize": 1,
+      "coldWarm": false,
+      "cpuSeconds": 600,
+      "generationBudgetSeconds": 15,
+      "inputTokens": null,
+      "maxNewTokens": 256,
+      "order": 6,
+      "phase": "corpus-evaluation",
+      "phaseBoundaryDwellMilliseconds": 150,
+      "prerequisite": "context-8192",
+      "promptConstruction": "protocol-request",
+      "repetitions": 3,
+      "sampleIntervalMilliseconds": 100,
+      "stderrBytes": 16384,
+      "stdoutBytes": 65536,
+      "wallClockSeconds": 900
+    }
+  ],
+  "productionReady": false,
+  "profileId": "linux-bwrap-systemd-v1",
+  "profileVersion": "1.0.0",
+  "promptTemplateDigest": "62774d0f8b65c959c5b038911af4293d3d774aae3933f0d7a24064691685250a",
+  "protocolCandidateVersion": "10f72e70abf67ac0fd7ebf15bc5854726891d864",
+  "realModelExecuted": false,
+  "repeatedTokenId": 574,
+  "resultRootClass": "measurement-result",
+  "runtimeArchiveSha256": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9",
+  "runtimeAttemptId": "rp-c2fe1c88f694fc1e",
+  "runtimeFiles": [
+    {
+      "bytes": 29345384,
+      "path": "libonnxruntime.so.1.31.1",
+      "sha256": "a96f132e5eb5ca04e23a7d2fc1078fb95aa591e8d71d0f237702ece3a1e0f4ea"
+    },
+    {
+      "bytes": 1073,
+      "path": "LICENSE",
+      "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c"
+    },
+    {
+      "bytes": 338088,
+      "path": "ThirdPartyNotices.txt",
+      "sha256": "143764b952fdb1a7c69ce653bfba74a7744d6a8a573bfb73e235fba356c83de3"
+    },
+    {
+      "bytes": 100,
+      "path": "runtime-identity.json",
+      "sha256": "7acf64c903f72486d2ae596d4b8343ba03b245155573998e8d4380a23f752028"
+    }
+  ],
+  "runtimeRevision": "6af1a932e2286d5c58166085d24c68783033edee",
+  "runtimeVersionTag": "v1.31.1",
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "shortPrompt": "Reply with the single word ready.",
+  "smokePrompt": "Reply with one token.",
+  "sourceRevision": "b9d816ab510f9a28dca37cb182e9da8b0226e13c",
+  "stopConditions": [
+    "digest-mismatch",
+    "missing-root",
+    "approval-required",
+    "isolation-failure",
+    "network-violation",
+    "unverified-dependency",
+    "telemetry-unresolved",
+    "oom",
+    "memory-ceiling",
+    "cleanup-failure",
+    "excessive-output",
+    "prior-phase-failed",
+    "gold-visible"
+  ],
+  "tasksMax": 32,
+  "planDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+}

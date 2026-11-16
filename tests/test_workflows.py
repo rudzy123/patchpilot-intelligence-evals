@@ -388,8 +388,36 @@ def test_validation_jobs_keep_existing_coverage() -> None:
         "track8b-measurement-prerequisites-validation"
     )
     assert contracts.index("track8b-measurement-prerequisites-validation") < contracts.index(
+        "measurement-plan-validation"
+    )
+    assert contracts.index("track9-readiness-validation") < contracts.index(
         "workflow-policy-validation"
     )
+    assert "measurement-plan-validation" in contracts
+    assert "measurement-operator-approval-validation" in contracts
+    assert "smoke-execution-validation" in contracts
+    assert "context-memory-measurement-validation" in contracts
+    assert "candidate-behavioral-run-validation" in contracts
+    assert "candidate-behavioral-summary-validation" in contracts
+    assert "measurement-closeout-validation" in contracts
+    assert "track8b-preflight-validation" in contracts
+    assert "track8b-stopped-attempt-validation" in contracts
+    assert "track8b-plan-disposition-validation" in contracts
+    assert "track8b-template-compatibility-defect-validation" in contracts
+    assert "track8b-review-validation" in contracts
+    assert contracts.index("measurement-closeout-validation") < contracts.index(
+        "track8b-preflight-validation"
+    )
+    assert contracts.index("track8b-review-validation") < contracts.index(
+        "track9-readiness-validation"
+    )
+    assert "track9-readiness-validation" in contracts
+    assert "measurement-preflight" not in text
+    assert "measurement-execute" not in text
+    assert "measurement-smoke" not in text
+    assert "measurement-short-generation" not in text
+    assert "measurement-context" not in text
+    assert "measurement-corpus" not in text
     assert "acquire-runtime" not in text
     assert "acquire-candidate" not in text
     assert "hardened-offline-load-proof" not in text

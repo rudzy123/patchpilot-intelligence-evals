@@ -1,0 +1,15 @@
+{
+  "calibrationStatus": "not-approved",
+  "installationAuthorized": false,
+  "productionReady": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "nextRunRequiresNewPlan": true,
+  "nextRunRequiresOperatorApproval": true,
+  "planDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "planDisposition": "consumed",
+  "replacementPlanDigest": "not-issued",
+  "reusable": false,
+  "runInvoked": false,
+  "identityDigest": "ee3d55af35764bc67df4926060c30a3636c36b0d895119d3342ad12cba2e6238"
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:measurement-preflight:v1",
+  "title": "Measurement preflight",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "archiveAttemptId",
+    "calibrationStatus",
+    "candidateAttemptId",
+    "candidateClass",
+    "identityDigest",
+    "installationAuthorized",
+    "measurementPerformed",
+    "planDigest",
+    "productionReady",
+    "realModelExecuted",
+    "runInvoked",
+    "runtimeAttemptId",
+    "runtimeClass",
+    "schemaVersion",
+    "selectionOutcome",
+    "status"
+  ],
+  "properties": {
+    "archiveAttemptId": { "const": "rt-e791f1518ae46ead" },
+    "candidateAttemptId": { "const": "cd-20b7ceee37a62cba" },
+    "runtimeAttemptId": { "const": "rp-c2fe1c88f694fc1e" },
+    "candidateClass": { "const": "verified-candidate" },
+    "runtimeClass": { "const": "verified-runtime" },
+    "planDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "productionReady": { "const": false },
+    "measurementPerformed": { "const": false },
+    "runInvoked": { "const": false },
+    "realModelExecuted": { "const": false },
+    "status": { "enum": ["not-executed", "ok"] },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "installationAuthorized": { "const": false },
+    "schemaVersion": { "const": "1.0.0" }
+  }
+}

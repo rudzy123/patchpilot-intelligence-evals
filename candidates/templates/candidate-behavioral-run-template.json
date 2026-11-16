@@ -1,0 +1,19 @@
+{
+  "calibrationStatus": "not-approved",
+  "installationAuthorized": false,
+  "productionReady": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "caseId": "not-executed",
+  "exitClassification": "not-executed",
+  "networkResult": "not-performed",
+  "outputDigest": null,
+  "planDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "processCleanup": "not-performed",
+  "realModelExecuted": false,
+  "repetition": 0,
+  "repositoryCommit": "not-executed",
+  "requestDigest": null,
+  "stopCause": null,
+  "identityDigest": "5fc9386e851d49337249128174a51afc0ca3118b014d05a81c9b872606bb1ab8"
+}

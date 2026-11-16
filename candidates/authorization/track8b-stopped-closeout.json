@@ -1,0 +1,43 @@
+{
+  "calibrationStatus": "not-approved",
+  "installationAuthorized": false,
+  "productionReady": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "calibrationDecisionChanged": false,
+  "calibrationRemainedNotApproved": true,
+  "cleanup": "reaped",
+  "closeoutState": "stopped",
+  "historicalPreflightOmittedCalibrationStatus": true,
+  "phases": [
+    {
+      "phase": "preflight",
+      "status": "passed"
+    },
+    {
+      "phase": "one-token-smoke",
+      "status": "failed"
+    },
+    {
+      "phase": "short-generation",
+      "status": "not-executed"
+    },
+    {
+      "phase": "context-4096",
+      "status": "not-executed"
+    },
+    {
+      "phase": "context-8192",
+      "status": "withheld"
+    },
+    {
+      "phase": "corpus-evaluation",
+      "status": "not-executed"
+    }
+  ],
+  "planDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "realModelExecuted": false,
+  "retainedResultClass": "measurement-result",
+  "stopCause": "tokenizer-failure",
+  "identityDigest": "a378e704172adcd18b6716ac07a30b2b2cc9d762031241e22a3bda10c14b6f25"
+}

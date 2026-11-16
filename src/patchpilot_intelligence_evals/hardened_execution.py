@@ -15,6 +15,7 @@ import socket
 import subprocess
 import sys
 import time
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 from secrets import token_hex
@@ -123,6 +124,8 @@ def execute_hardened(
     executable: Path | None = None,
     environment: tuple[tuple[str, str], ...] = (),
     extra_mounts: tuple[Mount, ...] = (),
+    observer: Callable[[int, str, Path], None] | None = None,
+    companions: tuple[Path, ...] = (),
 ) -> ExecutionResult:
     """Run one fixture inside the boundary. ``attempts`` is always 1."""
     if not sys.platform.startswith("linux"):
@@ -134,7 +137,7 @@ def execute_hardened(
     chosen = limits if limits is not None else DEFAULT_LIMITS
     interpreter = executable if executable is not None else Path(sys.executable)
     try:
-        mounts, work = _stage(fixture, artifact_dir, config_dir, interpreter)
+        mounts, work = _stage(fixture, artifact_dir, config_dir, interpreter, companions)
         if extra_mounts:
             assert_mounts_safe(extra_mounts)
             mounts = (*mounts, *extra_mounts)
@@ -157,8 +160,22 @@ def execute_hardened(
         start_new_session=True,
         close_fds=True,
     )
-    limit, stdout, stderr = _capture(proc, chosen.wall_clock_seconds, chosen)
+    limit, stdout, stderr = _capture(
+        proc,
+        chosen.wall_clock_seconds,
+        chosen,
+        observer,
+        unit,
+        work / "results",
+    )
+    if observer is not None:
+        observer(0, unit, work / "results")
     cleanup = _reap(unit, proc)
+    leftover = getattr(observer, "leftover_pids", None)
+    if cleanup == "reaped" and callable(leftover):
+        remaining = leftover()
+        if isinstance(remaining, int) and remaining > 0:
+            cleanup = "failed"
     report = _read_report(work)
     shutil.rmtree(work, ignore_errors=True)
     return ExecutionResult(
@@ -178,12 +195,17 @@ def _stage(
     artifact_dir: Path | None,
     config_dir: Path | None,
     executable: Path,
+    companions: tuple[Path, ...] = (),
 ) -> tuple[tuple[Mount, ...], Path]:
     work = Path("/tmp") / f"patchpilot-run-{os.getpid()}-{token_hex(4)}"
     work.mkdir()
     fixture_dir = work / "fixture"
     fixture_dir.mkdir()
     shutil.copyfile(fixture, fixture_dir / "main.py")
+    for companion in companions:
+        if companion.name == "main.py" or not companion.is_file():
+            raise HardenedExecutionError("fixture")
+        shutil.copyfile(companion, fixture_dir / companion.name)
     _copy_optional(artifact_dir, work / "artifacts")
     _copy_optional(config_dir, work / "config")
     (work / "results").mkdir()
@@ -215,6 +237,9 @@ def _capture(
     proc: subprocess.Popen[bytes],
     timeout: float,
     limits: ResourceLimits,
+    observer: Callable[[int, str, Path], None] | None = None,
+    unit: str = "",
+    results: Path | None = None,
 ) -> tuple[str | None, bytes, bytes]:
     stdout_pipe = proc.stdout
     stderr_pipe = proc.stderr
@@ -234,7 +259,10 @@ def _capture(
             if remaining <= 0:
                 limit = "timeout"
                 break
-            events = selector.select(timeout=remaining)
+            if observer is not None and results is not None:
+                observer(proc.pid, unit, results)
+            wait = min(remaining, 0.1) if observer is not None else remaining
+            events = selector.select(timeout=wait)
             events.sort(key=lambda item: 0 if item[0].data == "stdout" else 1)
             for key, _mask in events:
                 try:

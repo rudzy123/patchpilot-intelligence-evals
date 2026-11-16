@@ -140,6 +140,23 @@ TRACK8A_SCHEMA_NAMES: tuple[str, ...] = (
     "track8b-measurement-prerequisites",
 )
 
+# Track 8B measurement documents. They stay outside earlier schema groups.
+TRACK8B_SCHEMA_NAMES: tuple[str, ...] = (
+    "measurement-plan",
+    "measurement-operator-approval",
+    "measurement-preflight",
+    "smoke-execution",
+    "context-memory-measurement",
+    "candidate-behavioral-run",
+    "candidate-behavioral-summary",
+    "measurement-closeout",
+    "track8b-stopped-attempt",
+    "track8b-plan-disposition",
+    "track8b-template-compatibility-defect",
+    "track8b-implementation-review",
+    "track9-readiness",
+)
+
 _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     SCHEMA_NAMES
     + CANDIDATE_SCHEMA_NAMES
@@ -152,6 +169,7 @@ _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     + TRACK7A_SCHEMA_NAMES
     + TRACK7B_SCHEMA_NAMES
     + TRACK8A_SCHEMA_NAMES
+    + TRACK8B_SCHEMA_NAMES
 )
 
 
