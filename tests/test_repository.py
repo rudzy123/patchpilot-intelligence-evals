@@ -136,6 +136,10 @@ _DOCUMENTS = (
     "docs/provenance/track8b-stopped-attempt.md",
     "docs/provenance/track8b-implementation-review.md",
     "docs/architecture/template-compatibility.md",
+    "docs/architecture/corrected-controlled-measurement.md",
+    "docs/operations/corrected-measurement-runbook.md",
+    "docs/operations/corrected-measurement-recovery.md",
+    "docs/provenance/track8b-r1-measurement-evidence.md",
 )
 
 
@@ -270,6 +274,22 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals track8b-template-compatibility-defect-validation",
         "uv run patchpilot-evals track8b-review-validation",
         "uv run patchpilot-evals track9-readiness-validation",
+        "uv run patchpilot-evals measurement-retry-plan-validation",
+        "uv run patchpilot-evals measurement-retry-approval-validation",
+        "uv run patchpilot-evals measurement-retry-preflight-validation",
+        "uv run patchpilot-evals template-compatibility-result-validation",
+        "uv run patchpilot-evals retry-smoke-execution-validation",
+        "uv run patchpilot-evals retry-context-memory-validation",
+        "uv run patchpilot-evals retry-behavioral-run-validation",
+        "uv run patchpilot-evals retry-closeout-validation",
+        "uv run patchpilot-evals retry-track9-readiness-validation",
+        "uv run patchpilot-evals track8b-r1-stopped-attempt-validation",
+        "uv run patchpilot-evals track8b-r1-dependency-mount-defect-validation",
+        "uv run patchpilot-evals track8b-r1-memory-conclusion-defect-validation",
+        "uv run patchpilot-evals track8b-r1-corrected-closeout-validation",
+        "uv run patchpilot-evals track8b-r1-plan-disposition-validation",
+        "uv run patchpilot-evals track8b-r1-stopped-track9-validation",
+        "uv run patchpilot-evals track8b-r1-review-validation",
         "uv run patchpilot-evals workflow-policy-validation",
         "uv run patchpilot-evals dependency-architecture-policy-validation",
     ):
@@ -374,6 +394,28 @@ def test_help_lists_commands() -> None:
     assert "track8b-template-compatibility-defect-validation" in text
     assert "track8b-review-validation" in text
     assert "track9-readiness-validation" in text
+    assert "measurement-retry-plan-validation" in text
+    assert "measurement-retry-approval-validation" in text
+    assert "measurement-retry-preflight-validation" in text
+    assert "template-compatibility-result-validation" in text
+    assert "retry-smoke-execution-validation" in text
+    assert "retry-context-memory-validation" in text
+    assert "retry-behavioral-run-validation" in text
+    assert "retry-closeout-validation" in text
+    assert "retry-track9-readiness-validation" in text
+    assert "track8b-r1-stopped-attempt-validation" in text
+    assert "track8b-r1-dependency-mount-defect-validation" in text
+    assert "track8b-r1-memory-conclusion-defect-validation" in text
+    assert "track8b-r1-corrected-closeout-validation" in text
+    assert "track8b-r1-plan-disposition-validation" in text
+    assert "track8b-r1-stopped-track9-validation" in text
+    assert "track8b-r1-review-validation" in text
+    assert "measurement-retry-preflight" in text
+    assert "measurement-retry-execute" in text
+    assert "measurement-retry-smoke" in text
+    assert "measurement-retry-short-generation" in text
+    assert "measurement-retry-context" in text
+    assert "measurement-retry-corpus" in text
     assert "acquisition-preflight" in text
     assert "acquire-runtime" in text
     assert "acquire-candidate" in text

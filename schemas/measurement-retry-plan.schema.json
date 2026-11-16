@@ -1,0 +1,258 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:measurement-retry-plan:v1",
+  "title": "Track 8B-R1 measurement retry plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "addressSpaceBytes",
+    "calibrationStatus",
+    "candidateAttemptId",
+    "candidateFiles",
+    "candidateModelId",
+    "chatTemplateSha256",
+    "compatibilityBoundary",
+    "corpusDigest",
+    "decoding",
+    "eosTokenId",
+    "executionStatus",
+    "harnessCandidateId",
+    "headerMember",
+    "hostCapabilityClass",
+    "installationAuthorized",
+    "interOpThreads",
+    "intraOpThreads",
+    "measurementAuthorization",
+    "measurementCompleted",
+    "measurementPerformed",
+    "memoryMaxBytes",
+    "memorySwapMaxBytes",
+    "modelSessionCreated",
+    "onnxRevision",
+    "operatorApproval",
+    "phases",
+    "planDigest",
+    "priorPlanDigest",
+    "priorPlanDisposition",
+    "priorPlanReusable",
+    "productionReady",
+    "profileId",
+    "profileVersion",
+    "promptTemplateDigest",
+    "protocolCandidateVersion",
+    "realModelExecuted",
+    "repeatedTokenId",
+    "replacementPlanDigest",
+    "resultRootClass",
+    "runInvoked",
+    "runtimeArchiveSha256",
+    "runtimeAttemptId",
+    "runtimeFiles",
+    "runtimeRevision",
+    "runtimeVersionTag",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "shortPrompt",
+    "smokePrompt",
+    "sourceRevision",
+    "stopConditions",
+    "syntheticContent",
+    "syntheticRenderedDigest",
+    "tasksMax"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "sessionId": { "const": "intelligence-track-8b-r1" },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "installationAuthorized": { "const": false },
+    "measurementAuthorization": { "const": "not-authorized" },
+    "measurementPerformed": { "const": false },
+    "measurementCompleted": { "const": false },
+    "modelSessionCreated": { "const": false },
+    "runInvoked": { "const": false },
+    "realModelExecuted": { "const": false },
+    "executionStatus": { "const": "not-executed" },
+    "operatorApproval": { "const": "required" },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "profileVersion": { "const": "1.0.0" },
+    "runtimeVersionTag": { "const": "v1.31.1" },
+    "runtimeRevision": { "const": "6af1a932e2286d5c58166085d24c68783033edee" },
+    "runtimeArchiveSha256": {
+      "const": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9"
+    },
+    "runtimeAttemptId": { "const": "rp-c2fe1c88f694fc1e" },
+    "candidateModelId": { "const": "LiquidAI/LFM2.5-1.2B-Instruct" },
+    "sourceRevision": { "const": "b9d816ab510f9a28dca37cb182e9da8b0226e13c" },
+    "onnxRevision": { "const": "10f72e70abf67ac0fd7ebf15bc5854726891d864" },
+    "candidateAttemptId": { "const": "cd-20b7ceee37a62cba" },
+    "harnessCandidateId": { "const": "fixture-lfm25-instruct" },
+    "protocolCandidateVersion": { "const": "10f72e70abf67ac0fd7ebf15bc5854726891d864" },
+    "corpusDigest": {
+      "const": "49fe79544a26de429afe865fbd2666828bf26a6da30efe6d87f3b0fdfbd0989c"
+    },
+    "promptTemplateDigest": {
+      "const": "62774d0f8b65c959c5b038911af4293d3d774aae3933f0d7a24064691685250a"
+    },
+    "chatTemplateSha256": {
+      "const": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176"
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "priorPlanDisposition": { "const": "consumed" },
+    "priorPlanReusable": { "const": false },
+    "replacementPlanDigest": { "const": "not-issued" },
+    "compatibilityBoundary": { "const": "template-compatibility-boundary" },
+    "syntheticContent": { "const": "synthetic-user" },
+    "syntheticRenderedDigest": {
+      "const": "5c61ee0b595fa4c5b295feb233b312c38b779f7840f3f39c82aef51da9061e5d"
+    },
+    "resultRootClass": { "const": "measurement-retry-result" },
+    "repeatedTokenId": { "const": 574 },
+    "memoryMaxBytes": { "const": 12884901888 },
+    "memorySwapMaxBytes": { "const": 0 },
+    "addressSpaceBytes": { "const": 25769803776 },
+    "tasksMax": { "const": 32 },
+    "intraOpThreads": { "const": 8 },
+    "interOpThreads": { "const": 1 },
+    "hostCapabilityClass": { "const": "linux-cgroup-v2-user-scope" },
+    "planDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "eosTokenId": { "const": 7 },
+    "smokePrompt": { "const": "Reply with one token." },
+    "shortPrompt": { "const": "Reply with the single word ready." },
+    "headerMember": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "member", "sha256"],
+      "properties": {
+        "member": { "const": "onnxruntime-linux-x64-1.31.1/include/onnxruntime_c_api.h" },
+        "sha256": {
+          "const": "43d584f596ef66820421317df32a79a95fc1d39ee46cb3971a870c08d8ba4baa"
+        },
+        "bytes": { "const": 422790 }
+      }
+    },
+    "runtimeFiles": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": { "$ref": "#/$defs/file" }
+    },
+    "candidateFiles": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": { "$ref": "#/$defs/file" }
+    },
+    "decoding": { "$ref": "#/$defs/decoding" },
+    "phases": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": { "$ref": "#/$defs/phase" }
+    },
+    "stopConditions": {
+      "type": "array",
+      "minItems": 17,
+      "maxItems": 17,
+      "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+    }
+  },
+  "$defs": {
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "path", "sha256"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "decoding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "repetitionPenalty",
+        "seed",
+        "seedControl",
+        "seedSupport",
+        "temperature",
+        "topK",
+        "topP"
+      ],
+      "properties": {
+        "method": { "const": "greedy-argmax" },
+        "temperature": { "const": 0 },
+        "topP": { "const": 1 },
+        "topK": { "const": 1 },
+        "repetitionPenalty": { "const": 1 },
+        "seed": { "const": 0 },
+        "seedSupport": { "const": false },
+        "seedControl": { "const": "unused" }
+      }
+    },
+    "phase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "batchSize",
+        "coldWarm",
+        "cpuSeconds",
+        "generationBudgetSeconds",
+        "inputTokens",
+        "maxNewTokens",
+        "order",
+        "phase",
+        "phaseBoundaryDwellMilliseconds",
+        "prerequisite",
+        "promptConstruction",
+        "repetitions",
+        "sampleIntervalMilliseconds",
+        "stderrBytes",
+        "stdoutBytes",
+        "wallClockSeconds"
+      ],
+      "properties": {
+        "order": { "type": "integer", "minimum": 1, "maximum": 7 },
+        "phase": {
+          "enum": [
+            "preflight",
+            "template-compatibility",
+            "one-token-smoke",
+            "short-generation",
+            "context-4096",
+            "context-8192",
+            "corpus-evaluation"
+          ]
+        },
+        "prerequisite": { "type": ["string", "null"] },
+        "maxNewTokens": { "type": "integer", "minimum": 0 },
+        "inputTokens": { "type": ["integer", "null"], "minimum": 0 },
+        "batchSize": { "const": 1 },
+        "repetitions": { "type": "integer", "minimum": 1 },
+        "coldWarm": { "type": "boolean" },
+        "promptConstruction": {
+          "enum": [
+            "none",
+            "synthetic-fixture",
+            "chat-template",
+            "repeated-token-id",
+            "protocol-request"
+          ]
+        },
+        "wallClockSeconds": { "type": "integer", "minimum": 1 },
+        "cpuSeconds": { "type": "integer", "minimum": 1 },
+        "generationBudgetSeconds": { "type": "integer", "minimum": 1 },
+        "stdoutBytes": { "type": "integer", "minimum": 1 },
+        "stderrBytes": { "type": "integer", "minimum": 1 },
+        "sampleIntervalMilliseconds": { "const": 100 },
+        "phaseBoundaryDwellMilliseconds": { "const": 150 }
+      }
+    }
+  }
+}

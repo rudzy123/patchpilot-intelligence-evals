@@ -1,0 +1,23 @@
+{
+  "archiveAttemptId": "rt-e791f1518ae46ead",
+  "calibrationStatus": "not-approved",
+  "candidateAttemptId": "cd-20b7ceee37a62cba",
+  "candidateClass": "verified-candidate",
+  "identityDigest": "69e0b3045d4d1ed0f57166ff8ad584513313331de617c7e60a97ce677a0427d7",
+  "installationAuthorized": false,
+  "measurementCompleted": false,
+  "measurementPerformed": false,
+  "modelSessionCreated": false,
+  "planDigest": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b",
+  "priorPlanDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "resultRootClass": "measurement-retry-result",
+  "runInvoked": false,
+  "runtimeAttemptId": "rp-c2fe1c88f694fc1e",
+  "runtimeClass": "verified-runtime",
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "sessionId": "intelligence-track-8b-r1",
+  "status": "not-executed"
+}

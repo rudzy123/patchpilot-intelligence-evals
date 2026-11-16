@@ -157,6 +157,25 @@ TRACK8B_SCHEMA_NAMES: tuple[str, ...] = (
     "track9-readiness",
 )
 
+# Track 8B-R1 retry documents. They stay outside the consumed Track 8B group.
+TRACK8B_R1_SCHEMA_NAMES: tuple[str, ...] = (
+    "measurement-retry-plan",
+    "measurement-retry-approval",
+    "measurement-retry-preflight",
+    "template-compatibility-result",
+    "retry-smoke-execution",
+    "retry-context-memory",
+    "retry-behavioral-run",
+    "retry-closeout",
+    "retry-track9-readiness",
+    "track8b-r1-stopped-attempt",
+    "track8b-r1-dependency-mount-defect",
+    "track8b-r1-memory-conclusion-defect",
+    "track8b-r1-corrected-closeout",
+    "track8b-r1-plan-disposition",
+    "track8b-r1-implementation-review",
+)
+
 _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     SCHEMA_NAMES
     + CANDIDATE_SCHEMA_NAMES
@@ -170,6 +189,7 @@ _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     + TRACK7B_SCHEMA_NAMES
     + TRACK8A_SCHEMA_NAMES
     + TRACK8B_SCHEMA_NAMES
+    + TRACK8B_R1_SCHEMA_NAMES
 )
 
 

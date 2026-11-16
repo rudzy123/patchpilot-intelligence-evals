@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track8b-r1-implementation-review:v1",
+  "title": "Track 8B-R1 implementation review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "attemptOutcome",
+    "authorizedScope",
+    "calibrationStatus",
+    "candidateMetrics",
+    "componentReviews",
+    "context4096",
+    "context8192",
+    "corpusEvaluation",
+    "decision",
+    "failureAuthority",
+    "failureCategory",
+    "installationAuthorized",
+    "measurementPerformed",
+    "memoryConclusion",
+    "modelSessionCreated",
+    "notAuthorized",
+    "planDigest",
+    "planDisposition",
+    "priorPlanDigest",
+    "productionReady",
+    "realModelExecuted",
+    "replacementPlanDigest",
+    "reviewAuthority",
+    "reviewDate",
+    "reviewDigest",
+    "reviewStatus",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "shortGeneration",
+    "track9Readiness"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "installationAuthorized": { "const": false },
+    "measurementPerformed": { "const": false },
+    "realModelExecuted": { "const": false },
+    "runInvoked": { "const": false },
+    "modelSessionCreated": { "const": false },
+    "attemptOutcome": { "const": "stopped" },
+    "failureCategory": { "const": "inference-failure" },
+    "failureAuthority": { "const": "measurement-infrastructure" },
+    "shortGeneration": { "const": "withheld" },
+    "context4096": { "const": "withheld" },
+    "context8192": { "const": "withheld" },
+    "corpusEvaluation": { "const": "not-started" },
+    "candidateMetrics": { "const": "not-produced" },
+    "track9Readiness": { "const": "not-ready" },
+    "memoryConclusion": { "const": "unavailable" },
+    "planDisposition": { "const": "consumed" },
+    "replacementPlanDigest": { "const": "not-issued" },
+    "reviewStatus": {
+      "const": "stopped-attempt-accepted-defects-corrected"
+    },
+    "reviewDate": { "const": "2026-11-16" },
+    "reviewAuthority": { "const": "PatchPilot Principal Systems Architect" },
+    "decision": {
+      "const": "stopped retry accepted as fail-closed evidence and bounded defects corrected for review before commit"
+    },
+    "authorizedScope": {
+      "const": "This record accepts the stopped Track 8B-R1 attempt as fail-closed infrastructure evidence and records the dependency-mount and memory-conclusion corrections. It does not authorize another Run, candidate selection, calibration, or production use."
+    },
+    "planDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "sessionId": { "const": "intelligence-track-8b-r1" },
+    "componentReviews": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": { "$ref": "#/$defs/component" }
+    },
+    "notAuthorized": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+    },
+    "reviewDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["componentId", "disposition", "statement"],
+      "properties": {
+        "componentId": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "disposition": {
+          "enum": ["accepted", "corrected-before-commit", "recorded"]
+        },
+        "statement": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    }
+  }
+}

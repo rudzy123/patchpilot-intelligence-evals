@@ -412,6 +412,45 @@ def test_validation_jobs_keep_existing_coverage() -> None:
         "track9-readiness-validation"
     )
     assert "track9-readiness-validation" in contracts
+    assert contracts.index("track9-readiness-validation") < contracts.index(
+        "measurement-retry-plan-validation"
+    )
+    assert contracts.index("retry-track9-readiness-validation") < contracts.index(
+        "workflow-policy-validation"
+    )
+    for name in (
+        "measurement-retry-plan-validation",
+        "measurement-retry-approval-validation",
+        "measurement-retry-preflight-validation",
+        "template-compatibility-result-validation",
+        "retry-smoke-execution-validation",
+        "retry-context-memory-validation",
+        "retry-behavioral-run-validation",
+        "retry-closeout-validation",
+        "retry-track9-readiness-validation",
+        "track8b-r1-stopped-attempt-validation",
+        "track8b-r1-dependency-mount-defect-validation",
+        "track8b-r1-memory-conclusion-defect-validation",
+        "track8b-r1-corrected-closeout-validation",
+        "track8b-r1-plan-disposition-validation",
+        "track8b-r1-stopped-track9-validation",
+        "track8b-r1-review-validation",
+    ):
+        assert name in contracts
+    workflow_commands = [
+        line.strip().removeprefix("uv run patchpilot-evals ")
+        for line in text.splitlines()
+        if line.strip().startswith("uv run patchpilot-evals ")
+    ]
+    for name in (
+        "measurement-retry-preflight",
+        "measurement-retry-execute",
+        "measurement-retry-smoke",
+        "measurement-retry-short-generation",
+        "measurement-retry-context",
+        "measurement-retry-corpus",
+    ):
+        assert name not in workflow_commands
     assert "measurement-preflight" not in text
     assert "measurement-execute" not in text
     assert "measurement-smoke" not in text

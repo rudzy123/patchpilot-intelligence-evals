@@ -1,0 +1,61 @@
+{
+  "attemptOutcome": "stopped",
+  "authorizedScope": "This record accepts the stopped Track 8B-R1 attempt as fail-closed infrastructure evidence and records the dependency-mount and memory-conclusion corrections. It does not authorize another Run, candidate selection, calibration, or production use.",
+  "calibrationStatus": "not-approved",
+  "candidateMetrics": "not-produced",
+  "componentReviews": [
+    {
+      "componentId": "stopped-attempt",
+      "disposition": "accepted",
+      "statement": "The stopped retry attempt is accepted as fail-closed infrastructure evidence. It ended with inference-failure before CreateSession and before Run. Later phases stayed withheld."
+    },
+    {
+      "componentId": "dependency-mount",
+      "disposition": "corrected-before-commit",
+      "statement": "Load proof and inference now share one dependency closure. Approved standard libraries mount read-only and individually. The ELF interpreter stays in the existing hardened execution policy. Provider libraries and broad host directories stay unmounted."
+    },
+    {
+      "componentId": "memory-conclusion",
+      "disposition": "corrected-before-commit",
+      "statement": "within-ceiling now requires every required context phase, complete noncontradictory peaks at or below 12884901888 bytes, no OOM, and successful isolation and cleanup. An empty phase set is unavailable. The smoke peak stays smoke evidence."
+    },
+    {
+      "componentId": "plan-disposition",
+      "disposition": "recorded",
+      "statement": "The retry plan is consumed and is not reusable. No replacement plan digest is issued. Another real execution needs a new session or reviewed retry authority, a new plan digest, a fresh result root, and a new operator checkpoint."
+    }
+  ],
+  "context4096": "withheld",
+  "context8192": "withheld",
+  "corpusEvaluation": "not-started",
+  "decision": "stopped retry accepted as fail-closed evidence and bounded defects corrected for review before commit",
+  "failureAuthority": "measurement-infrastructure",
+  "failureCategory": "inference-failure",
+  "installationAuthorized": false,
+  "measurementPerformed": false,
+  "memoryConclusion": "unavailable",
+  "modelSessionCreated": false,
+  "notAuthorized": [
+    "another Run on the consumed retry plan",
+    "a replacement plan digest",
+    "candidate selection",
+    "calibration approval",
+    "production use"
+  ],
+  "planDigest": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b",
+  "planDisposition": "consumed",
+  "priorPlanDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "replacementPlanDigest": "not-issued",
+  "reviewAuthority": "PatchPilot Principal Systems Architect",
+  "reviewDate": "2026-11-16",
+  "reviewDigest": "b62a028a3b99600fa702dfe46c9e125a3693e8fadb47819bc2460168f5268add",
+  "reviewStatus": "stopped-attempt-accepted-defects-corrected",
+  "runInvoked": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "sessionId": "intelligence-track-8b-r1",
+  "shortGeneration": "withheld",
+  "track9Readiness": "not-ready"
+}

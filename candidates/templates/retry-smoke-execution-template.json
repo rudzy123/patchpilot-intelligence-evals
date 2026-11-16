@@ -1,0 +1,91 @@
+{
+  "calibrationStatus": "not-approved",
+  "coldMemory": {
+    "addressSpaceLimitBytes": 25769803776,
+    "cgroupCurrentBytes": null,
+    "cgroupPeakBytes": null,
+    "memoryEvents": {
+      "high": null,
+      "low": null,
+      "max": null,
+      "oom": null,
+      "oomKill": null
+    },
+    "oomEvents": null,
+    "processRssBytes": null,
+    "processTreeRssBytes": null,
+    "residentCeilingBytes": 12884901888,
+    "telemetry": "not-observed",
+    "virtualAddressBytes": null
+  },
+  "coldTiming": {
+    "firstTokenSeconds": null,
+    "generationSeconds": null,
+    "loadSeconds": null,
+    "wallSeconds": null
+  },
+  "compatibilityPrecededSession": false,
+  "decoding": {
+    "method": "greedy-argmax",
+    "repetitionPenalty": 1,
+    "seed": 0,
+    "seedControl": "unused",
+    "seedSupport": false,
+    "temperature": 0,
+    "topK": 1,
+    "topP": 1
+  },
+  "exitClassification": "not-executed",
+  "generationTokens": null,
+  "identityDigest": "cc72ffafa9bc48dce410e319abf265fda71683e17f2d272daf30b2da8fd53d2e",
+  "inputDigest": null,
+  "installationAuthorized": false,
+  "maxNewTokens": 1,
+  "measurementCompleted": false,
+  "measurementPerformed": false,
+  "modelSessionCreated": false,
+  "networkResult": "not-performed",
+  "outputDigest": null,
+  "phase": "not-executed",
+  "planDigest": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b",
+  "priorPlanDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "processCleanup": "not-performed",
+  "productionReady": false,
+  "profileId": "linux-bwrap-systemd-v1",
+  "realModelExecuted": false,
+  "renderedDigest": null,
+  "repositoryCommit": "not-executed",
+  "resultRootClass": "measurement-retry-result",
+  "runInvoked": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "sessionId": "intelligence-track-8b-r1",
+  "stopCause": null,
+  "templateDigest": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176",
+  "timestamp": "not-executed",
+  "tokenCount": null,
+  "warmMemory": {
+    "addressSpaceLimitBytes": 25769803776,
+    "cgroupCurrentBytes": null,
+    "cgroupPeakBytes": null,
+    "memoryEvents": {
+      "high": null,
+      "low": null,
+      "max": null,
+      "oom": null,
+      "oomKill": null
+    },
+    "oomEvents": null,
+    "processRssBytes": null,
+    "processTreeRssBytes": null,
+    "residentCeilingBytes": 12884901888,
+    "telemetry": "not-observed",
+    "virtualAddressBytes": null
+  },
+  "warmTiming": {
+    "firstTokenSeconds": null,
+    "generationSeconds": null,
+    "loadSeconds": null,
+    "wallSeconds": null
+  }
+}

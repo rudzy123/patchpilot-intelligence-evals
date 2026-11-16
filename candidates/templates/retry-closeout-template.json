@@ -1,0 +1,55 @@
+{
+  "behavioralConclusion": "not-measured",
+  "calibrationRemainedNotApproved": true,
+  "calibrationStatus": "not-approved",
+  "cleanup": "not-performed",
+  "closeoutState": "not-closed",
+  "comparisonWinner": null,
+  "identityDigest": "5fc4b39766165c7b9b0660408ab579322050b5564db0edd13df72d04a5e94f6c",
+  "installationAuthorized": false,
+  "measurementCompleted": false,
+  "measurementPerformed": false,
+  "memoryConclusion": "unavailable",
+  "modelSessionCreated": false,
+  "phases": [
+    {
+      "phase": "preflight",
+      "status": "not-executed"
+    },
+    {
+      "phase": "template-compatibility",
+      "status": "not-executed"
+    },
+    {
+      "phase": "one-token-smoke",
+      "status": "not-executed"
+    },
+    {
+      "phase": "short-generation",
+      "status": "not-executed"
+    },
+    {
+      "phase": "context-4096",
+      "status": "not-executed"
+    },
+    {
+      "phase": "context-8192",
+      "status": "not-executed"
+    },
+    {
+      "phase": "corpus-evaluation",
+      "status": "not-executed"
+    }
+  ],
+  "planDigest": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b",
+  "priorPlanDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "residuals": [],
+  "resultRootClass": "measurement-retry-result",
+  "runInvoked": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "sessionId": "intelligence-track-8b-r1",
+  "stopCause": null
+}

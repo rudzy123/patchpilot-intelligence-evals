@@ -1,0 +1,22 @@
+{
+  "approvalStatus": "not-approved",
+  "calibrationStatus": "not-approved",
+  "executionStatus": "not-executed",
+  "identityDigest": "6e6f77ee4e535b0897ddf537ec32eca3a245ea7a589d78ac93f8bf15c7f17873",
+  "installationAuthorized": false,
+  "modelSessionCreated": false,
+  "nextRunRequiresFreshResultRoot": true,
+  "nextRunRequiresNewPlan": true,
+  "nextRunRequiresNewSession": true,
+  "nextRunRequiresOperatorApproval": true,
+  "planDigest": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b",
+  "planDisposition": "consumed",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "replacementPlanDigest": "not-issued",
+  "reusable": false,
+  "runInvoked": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "sessionId": "intelligence-track-8b-r1"
+}

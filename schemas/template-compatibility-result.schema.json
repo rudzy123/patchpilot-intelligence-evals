@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:template-compatibility-result:v1",
+  "title": "Track 8B-R1 template compatibility result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationStatus",
+    "compatibility",
+    "contentClass",
+    "identityDigest",
+    "installationAuthorized",
+    "measurementCompleted",
+    "measurementPerformed",
+    "modelSessionCreated",
+    "planDigest",
+    "priorPlanDigest",
+    "productionReady",
+    "realModelExecuted",
+    "renderedDigest",
+    "renderedShape",
+    "resultRootClass",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionCreated",
+    "sessionId",
+    "templateDigest",
+    "timestamp"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "sessionId": { "const": "intelligence-track-8b-r1" },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "installationAuthorized": { "const": false },
+    "measurementPerformed": { "const": false },
+    "measurementCompleted": { "const": false },
+    "modelSessionCreated": { "const": false },
+    "runInvoked": { "const": false },
+    "sessionCreated": { "const": false },
+    "realModelExecuted": { "const": false },
+    "resultRootClass": { "const": "measurement-retry-result" },
+    "planDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "templateDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "renderedDigest": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+    "renderedShape": {
+      "enum": ["user-turn-with-generation-prompt", "not-rendered"]
+    },
+    "contentClass": {
+      "enum": ["synthetic-user", "smoke-prompt", "short-prompt", "not-executed"]
+    },
+    "compatibility": {
+      "enum": [
+        "supported",
+        "not-executed",
+        "identity-mismatch",
+        "invalid-rendered-prompt",
+        "rendering-failure",
+        "tokenizer-failure",
+        "unsupported-template-language"
+      ]
+    },
+    "timestamp": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

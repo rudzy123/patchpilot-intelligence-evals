@@ -107,6 +107,22 @@ uv run patchpilot-evals track8b-plan-disposition-validation
 uv run patchpilot-evals track8b-template-compatibility-defect-validation
 uv run patchpilot-evals track8b-review-validation
 uv run patchpilot-evals track9-readiness-validation
+uv run patchpilot-evals measurement-retry-plan-validation
+uv run patchpilot-evals measurement-retry-approval-validation
+uv run patchpilot-evals measurement-retry-preflight-validation
+uv run patchpilot-evals template-compatibility-result-validation
+uv run patchpilot-evals retry-smoke-execution-validation
+uv run patchpilot-evals retry-context-memory-validation
+uv run patchpilot-evals retry-behavioral-run-validation
+uv run patchpilot-evals retry-closeout-validation
+uv run patchpilot-evals retry-track9-readiness-validation
+uv run patchpilot-evals track8b-r1-stopped-attempt-validation
+uv run patchpilot-evals track8b-r1-dependency-mount-defect-validation
+uv run patchpilot-evals track8b-r1-memory-conclusion-defect-validation
+uv run patchpilot-evals track8b-r1-corrected-closeout-validation
+uv run patchpilot-evals track8b-r1-plan-disposition-validation
+uv run patchpilot-evals track8b-r1-stopped-track9-validation
+uv run patchpilot-evals track8b-r1-review-validation
 uv run patchpilot-evals workflow-policy-validation
 uv run patchpilot-evals dependency-architecture-policy-validation
 ```
@@ -192,6 +208,8 @@ Principal Architect review on 2026-11-12 approves the Track 7B evidence closure 
 Track 8A adds the acquisition plan, allowlist, staging checks, and offline-load attestation. The committed plan stays a preflight record with `acquisitionStatus` `not-acquired`. Principal Architect review on 2026-11-16 approves the external acquisition, verification, same-filesystem atomic promotion, and hardened offline-load proof with documented residuals. That approval does not authorize Track 8B measurement. `acquire-runtime`, `acquire-candidate`, and `hardened-offline-load-proof` are manual commands and are not Repository Contracts steps. `installationAuthorized` stays false. `selectionOutcome` stays `no-selection`. `measurementPerformed` stays false. `realModelExecuted` stays false under the committed no-inference semantics. `productionReady` stays false. The evidence record is [docs/provenance/track8a-acquisition-evidence.md](docs/provenance/track8a-acquisition-evidence.md). The acceptance record is [docs/provenance/track8a-implementation-review.md](docs/provenance/track8a-implementation-review.md).
 
 Track 8B adds a sealed measurement plan, a not-approved operator checkpoint, and validators for the smoke, context, behavioral, closeout, stopped-attempt, and Track 9 records. Those validators read committed documents. `measurement-preflight` and `measurement-execute` are manual commands and are not Repository Contracts steps. The 2026-11-16 attempt stopped with `tokenizer-failure` before Run. That plan digest is consumed and is not reusable. Another Run requires a new plan and a new operator approval. The committed plan file stays `not-executed`. Historical `measurementAuthorization` stays `not-authorized`. `installationAuthorized` stays false. `selectionOutcome` stays `no-selection`. `calibrationStatus` stays `not-approved`. `productionReady` stays false. The evidence note is [docs/provenance/track8b-measurement-evidence.md](docs/provenance/track8b-measurement-evidence.md). The stopped attempt is [docs/provenance/track8b-stopped-attempt.md](docs/provenance/track8b-stopped-attempt.md).
+
+Track 8B-R1 adds a separate retry plan, a not-approved operator record, and validators for the corrected preflight, template-compatibility, smoke, context, behavioral, closeout, stopped-attempt, and retry Track 9 records. Those validators read committed documents and do not call session Run. `measurement-retry-preflight` and `measurement-retry-execute` are manual commands and are not Repository Contracts steps. The 2026-11-16 retry stopped with `inference-failure` before CreateSession and before Run. That retry plan digest is consumed and is not reusable. `replacementPlanDigest` stays `not-issued`. The committed retry plan file stays `not-executed`. The committed retry approval stays `not-approved`. Another real execution requires a new Session or explicitly reviewed retry authority, a new plan digest, a fresh empty result root, and a new operator checkpoint. `installationAuthorized` stays false. `selectionOutcome` stays `no-selection`. `calibrationStatus` stays `not-approved`. `productionReady` stays false. The boundary is [docs/architecture/corrected-controlled-measurement.md](docs/architecture/corrected-controlled-measurement.md). The evidence note is [docs/provenance/track8b-r1-measurement-evidence.md](docs/provenance/track8b-r1-measurement-evidence.md).
 
 - [docs/architecture/candidate-landscape-refresh.md](docs/architecture/candidate-landscape-refresh.md)
 - [docs/architecture/candidate-pre-screen.md](docs/architecture/candidate-pre-screen.md)

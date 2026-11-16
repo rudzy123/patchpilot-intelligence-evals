@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track8b-r1-dependency-mount-defect:v1",
+  "title": "Track 8B-R1 missing dependency mount defect",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "approvedClosure",
+    "broadDirectoryMounted",
+    "calibrationStatus",
+    "defectId",
+    "failureBeforeSession",
+    "fallbackRetrieval",
+    "identityDigest",
+    "installationAuthorized",
+    "interpreterPolicy",
+    "modelSessionCreated",
+    "networkUsed",
+    "planDigest",
+    "productionReady",
+    "providerLibrary",
+    "providerMounted",
+    "realModelExecuted",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "status"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "sessionId": { "const": "intelligence-track-8b-r1" },
+    "planDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "defectId": { "const": "missing-runtime-dependency-mount" },
+    "status": { "const": "corrected-before-commit" },
+    "failureBeforeSession": { "const": "before-create-session" },
+    "runInvoked": { "const": false },
+    "modelSessionCreated": { "const": false },
+    "realModelExecuted": { "const": false },
+    "providerLibrary": { "const": "libonnxruntime_providers_shared.so" },
+    "providerMounted": { "const": false },
+    "broadDirectoryMounted": { "const": false },
+    "interpreterPolicy": { "const": "existing-hardened-execution-policy" },
+    "networkUsed": { "const": false },
+    "fallbackRetrieval": { "const": false },
+    "installationAuthorized": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "productionReady": { "const": false },
+    "approvedClosure": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": { "$ref": "#/$defs/dependency" }
+    },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "dependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["basename", "classification", "identity"],
+      "properties": {
+        "basename": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "classification": {
+          "enum": ["standard-host-runtime", "elf-interpreter"]
+        },
+        "identity": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "calibrationStatus": "not-approved",
+  "identityDigest": "e62c83bd62776202f830309eed985e9982ebe5fee66d356278b42556d2eb2824",
+  "installationAuthorized": false,
+  "measurementPerformed": false,
+  "planDigest": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b",
+  "priorPlanDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "productionReady": false,
+  "readinessOutcome": "not-ready",
+  "realModelExecuted": false,
+  "reason": "inference-failure",
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "sessionId": "intelligence-track-8b-r1",
+  "verdict": "TRACK 9 EVALUATION REVIEW NOT READY"
+}
