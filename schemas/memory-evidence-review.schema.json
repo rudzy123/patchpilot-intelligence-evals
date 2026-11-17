@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:memory-evidence-review:v1",
+  "title": "Track 9 memory evidence review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sessionId",
+    "planDigest",
+    "priorPlanDigest",
+    "consumedRetryPlanDigest",
+    "replacementPlanDigest",
+    "r3Plan",
+    "futurePlanDigest",
+    "candidateModelId",
+    "candidateAttemptId",
+    "candidatePrecision",
+    "runtimeVersionTag",
+    "runtimeAttemptId",
+    "calibrationStatus",
+    "selectionOutcome",
+    "comparisonWinner",
+    "productionReady",
+    "installationAuthorized",
+    "currentExecutionAuthority",
+    "containsExecutionInstructions",
+    "identityDigest",
+    "additionalProviders",
+    "addressSpaceIsResidentCeiling",
+    "batchSize",
+    "ceilingBytes",
+    "cold4096PeakBytes",
+    "cold8192PeakBytes",
+    "concurrency",
+    "differentPrecision",
+    "headroomAssessment",
+    "headroomClass",
+    "largerContext",
+    "longerOutput",
+    "maximumMeasuredPeakBytes",
+    "memoryGate4096",
+    "memoryGate8192",
+    "minimumHeadroomBytes",
+    "oneCandidateProcess",
+    "oom",
+    "productionCapacity",
+    "r1ContextMemory",
+    "r1SmokeEvidenceRole",
+    "r1SmokePeakBytes",
+    "reviewConclusion",
+    "sourceIdentityDigest",
+    "sourceMemoryConclusion",
+    "warm4096PeakBytes",
+    "warm8192PeakBytes",
+    "warmRss"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "sessionId": {
+      "const": "intelligence-track-9"
+    },
+    "planDigest": {
+      "const": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350"
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "replacementPlanDigest": {
+      "const": "not-issued"
+    },
+    "r3Plan": {
+      "const": "not-issued"
+    },
+    "futurePlanDigest": {
+      "const": "not-issued"
+    },
+    "candidateModelId": {
+      "const": "LiquidAI/LFM2.5-1.2B-Instruct"
+    },
+    "candidateAttemptId": {
+      "const": "cd-20b7ceee37a62cba"
+    },
+    "candidatePrecision": {
+      "const": "FP32"
+    },
+    "runtimeVersionTag": {
+      "const": "v1.31.1"
+    },
+    "runtimeAttemptId": {
+      "const": "rp-c2fe1c88f694fc1e"
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "comparisonWinner": {
+      "const": null
+    },
+    "productionReady": {
+      "const": false
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "currentExecutionAuthority": {
+      "const": false
+    },
+    "containsExecutionInstructions": {
+      "const": false
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "additionalProviders": {
+      "const": "not-authorized"
+    },
+    "addressSpaceIsResidentCeiling": {
+      "const": false
+    },
+    "batchSize": {
+      "const": 1
+    },
+    "ceilingBytes": {
+      "const": 12884901888
+    },
+    "cold4096PeakBytes": {
+      "const": 7284371456
+    },
+    "cold8192PeakBytes": {
+      "const": 9816231936
+    },
+    "concurrency": {
+      "const": "prohibited"
+    },
+    "differentPrecision": {
+      "const": "not-authorized"
+    },
+    "headroomAssessment": {
+      "const": "limited"
+    },
+    "headroomClass": {
+      "const": "limited"
+    },
+    "largerContext": {
+      "const": "not-authorized"
+    },
+    "longerOutput": {
+      "const": "not-authorized"
+    },
+    "maximumMeasuredPeakBytes": {
+      "const": 12271669248
+    },
+    "memoryGate4096": {
+      "const": "passed"
+    },
+    "memoryGate8192": {
+      "const": "passed"
+    },
+    "minimumHeadroomBytes": {
+      "const": 613232640
+    },
+    "oneCandidateProcess": {
+      "const": "mandatory"
+    },
+    "oom": {
+      "const": false
+    },
+    "productionCapacity": {
+      "const": "not-established"
+    },
+    "r1ContextMemory": {
+      "const": "unavailable"
+    },
+    "r1SmokeEvidenceRole": {
+      "const": "smoke-only"
+    },
+    "r1SmokePeakBytes": {
+      "const": 46288896
+    },
+    "reviewConclusion": {
+      "const": "within-ceiling-with-limited-headroom"
+    },
+    "sourceIdentityDigest": {
+      "const": "400b520b6d6c404415143ba8f9dbac31a2788f5d2864622281d213d7b24f328b"
+    },
+    "sourceMemoryConclusion": {
+      "const": "within-ceiling"
+    },
+    "warm4096PeakBytes": {
+      "const": 8511131648
+    },
+    "warm8192PeakBytes": {
+      "const": 12271669248
+    },
+    "warmRss": {
+      "const": "unavailable"
+    }
+  }
+}

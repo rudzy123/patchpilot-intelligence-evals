@@ -1,0 +1,807 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track9-implementation-review:v1",
+  "title": "Track 9 implementation review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "acceptedResiduals",
+    "alternativeDecisions",
+    "authorizedScope",
+    "behavioralEvidence",
+    "behavioralEvidenceReview",
+    "calibrationStatus",
+    "candidateAttemptId",
+    "candidateDisposition",
+    "candidateModelId",
+    "candidatePrecision",
+    "comparisonWinner",
+    "componentReviews",
+    "consumedPlans",
+    "consumedRetryPlanDigest",
+    "containsExecutionInstructions",
+    "continuationBoundary",
+    "corpusOnlyContinuation",
+    "currentExecutionAuthority",
+    "decision",
+    "evidenceInventory",
+    "futurePlanDigest",
+    "installationAuthorized",
+    "memoryEvidence",
+    "memoryEvidenceReview",
+    "notAuthorized",
+    "operatorApproval",
+    "planDigest",
+    "priorPlanDigest",
+    "productionReady",
+    "proportionalityAnalysis",
+    "proportionalityJudgment",
+    "r3Plan",
+    "replacementPlanDigest",
+    "resultRootState",
+    "reviewAuthority",
+    "reviewDate",
+    "reviewDigest",
+    "reviewStatus",
+    "runtimeAttemptId",
+    "runtimeVersionTag",
+    "schemaVersion",
+    "selectedAlternative",
+    "selectionOutcome",
+    "sessionId",
+    "sourceDigests",
+    "track9Disposition"
+  ],
+  "properties": {
+    "acceptedResiduals": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "residualId",
+            "statement"
+          ],
+          "properties": {
+            "residualId": {
+              "const": "limited-headroom"
+            },
+            "statement": {
+              "const": "The measured resident headroom is limited."
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "residualId",
+            "statement"
+          ],
+          "properties": {
+            "residualId": {
+              "const": "unresolved-schema-failure-authority"
+            },
+            "statement": {
+              "const": "Schema-failure authority remains unresolved."
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "residualId",
+            "statement"
+          ],
+          "properties": {
+            "residualId": {
+              "const": "partial-behavioral-evidence"
+            },
+            "statement": {
+              "const": "Behavioral evidence remains partial and is not scored."
+            }
+          }
+        }
+      ],
+      "items": false
+    },
+    "alternativeDecisions": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "alternativeId",
+            "decision",
+            "reason",
+            "selected"
+          ],
+          "properties": {
+            "alternativeId": {
+              "const": "reject-now"
+            },
+            "decision": {
+              "const": "withheld"
+            },
+            "reason": {
+              "const": "no-supported-mandatory-candidate-failure"
+            },
+            "selected": {
+              "const": false
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "alternativeId",
+            "decision",
+            "reason",
+            "selected"
+          ],
+          "properties": {
+            "alternativeId": {
+              "const": "remaining-19"
+            },
+            "decision": {
+              "const": "rejected"
+            },
+            "reason": {
+              "const": "not-one-uniform-comparable-result"
+            },
+            "selected": {
+              "const": false
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "alternativeId",
+            "decision",
+            "reason",
+            "selected"
+          ],
+          "properties": {
+            "alternativeId": {
+              "const": "clean-24-case-corpus-only-rerun"
+            },
+            "decision": {
+              "const": "selected"
+            },
+            "reason": {
+              "const": "uniform-complete-corpus"
+            },
+            "selected": {
+              "const": true
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "alternativeId",
+            "decision",
+            "reason",
+            "selected"
+          ],
+          "properties": {
+            "alternativeId": {
+              "const": "narrow-forensics"
+            },
+            "decision": {
+              "const": "rejected"
+            },
+            "reason": {
+              "const": "missing-raw-output-cannot-be-recovered"
+            },
+            "selected": {
+              "const": false
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "alternativeId",
+            "decision",
+            "reason",
+            "selected"
+          ],
+          "properties": {
+            "alternativeId": {
+              "const": "stop-investment"
+            },
+            "decision": {
+              "const": "permissible"
+            },
+            "reason": {
+              "const": "not-selected"
+            },
+            "selected": {
+              "const": false
+            }
+          }
+        }
+      ],
+      "items": false
+    },
+    "authorizedScope": {
+      "const": "This approval accepts the Track 9 evidence review and authorizes one future clean 24-case corpus-only Session in principle. It does not authorize current execution, a measurement or execution plan, a plan digest, a result root, candidate selection, calibration approval, PatchPilot integration, shadow mode, production use, release, or deployment."
+    },
+    "behavioralEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "behavioralConclusion",
+        "behavioralMeasurementAttempted",
+        "behavioralMeasurementCompleted",
+        "candidateEvaluatedCompletely",
+        "candidateMetricsProduced",
+        "completeCaseGroups",
+        "empiricalCapabilityConclusions",
+        "missingCompleteCases",
+        "schemaComplianceConclusion",
+        "schemaFailureAuthority",
+        "sealedRunRecords",
+        "unsealedLaunchCount"
+      ],
+      "properties": {
+        "behavioralConclusion": {
+          "const": "partial-inconclusive"
+        },
+        "behavioralMeasurementAttempted": {
+          "const": true
+        },
+        "behavioralMeasurementCompleted": {
+          "const": false
+        },
+        "candidateEvaluatedCompletely": {
+          "const": false
+        },
+        "candidateMetricsProduced": {
+          "const": false
+        },
+        "completeCaseGroups": {
+          "const": 5
+        },
+        "empiricalCapabilityConclusions": {
+          "const": "unavailable"
+        },
+        "missingCompleteCases": {
+          "const": 19
+        },
+        "schemaComplianceConclusion": {
+          "const": "unavailable"
+        },
+        "schemaFailureAuthority": {
+          "const": "unresolved"
+        },
+        "sealedRunRecords": {
+          "const": 15
+        },
+        "unsealedLaunchCount": {
+          "const": 1
+        }
+      }
+    },
+    "behavioralEvidenceReview": {
+      "const": "approved"
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "candidateAttemptId": {
+      "const": "cd-20b7ceee37a62cba"
+    },
+    "candidateDisposition": {
+      "const": "evaluation-incomplete-continuation-authorized-in-principle"
+    },
+    "candidateModelId": {
+      "const": "LiquidAI/LFM2.5-1.2B-Instruct"
+    },
+    "candidatePrecision": {
+      "const": "FP32"
+    },
+    "comparisonWinner": {
+      "const": null
+    },
+    "componentReviews": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "componentId",
+            "disposition",
+            "statement"
+          ],
+          "properties": {
+            "componentId": {
+              "const": "evidence-inventory"
+            },
+            "disposition": {
+              "const": "approved"
+            },
+            "statement": {
+              "const": "The evidence inventory is approved."
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "componentId",
+            "disposition",
+            "statement"
+          ],
+          "properties": {
+            "componentId": {
+              "const": "memory-evidence-review"
+            },
+            "disposition": {
+              "const": "approved"
+            },
+            "statement": {
+              "const": "The memory evidence review is approved."
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "componentId",
+            "disposition",
+            "statement"
+          ],
+          "properties": {
+            "componentId": {
+              "const": "behavioral-evidence-review"
+            },
+            "disposition": {
+              "const": "approved"
+            },
+            "statement": {
+              "const": "The behavioral evidence review is approved."
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "componentId",
+            "disposition",
+            "statement"
+          ],
+          "properties": {
+            "componentId": {
+              "const": "proportionality-analysis"
+            },
+            "disposition": {
+              "const": "approved"
+            },
+            "statement": {
+              "const": "The proportionality analysis is approved."
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "componentId",
+            "disposition",
+            "statement"
+          ],
+          "properties": {
+            "componentId": {
+              "const": "corpus-only-continuation"
+            },
+            "disposition": {
+              "const": "authorized-in-principle"
+            },
+            "statement": {
+              "const": "The corpus-only continuation is authorized in principle."
+            }
+          }
+        }
+      ],
+      "items": false
+    },
+    "consumedPlans": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "planDigest",
+            "reusable"
+          ],
+          "properties": {
+            "planDigest": {
+              "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+            },
+            "reusable": {
+              "const": false
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "planDigest",
+            "reusable"
+          ],
+          "properties": {
+            "planDigest": {
+              "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+            },
+            "reusable": {
+              "const": false
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "planDigest",
+            "reusable"
+          ],
+          "properties": {
+            "planDigest": {
+              "const": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350"
+            },
+            "reusable": {
+              "const": false
+            }
+          }
+        }
+      ],
+      "items": false
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "containsExecutionInstructions": {
+      "const": false
+    },
+    "continuationBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "batchSize",
+        "caseCount",
+        "decodingConfigurationUnchanged",
+        "diagnosticsRecordedSeparately",
+        "failureAuthorityRecordedPerRun",
+        "futureOperatorApproval",
+        "futureOperatorApprovalRequired",
+        "futurePlanDigest",
+        "futurePlanRequired",
+        "futureResultRoot",
+        "futureResultRootRequired",
+        "futureSpecification",
+        "gatesUnchanged",
+        "goldAndEvaluatorHidden",
+        "maxNewTokens",
+        "metricsUnchanged",
+        "plannedRuns",
+        "promptsUnchanged",
+        "rawOutputRetention",
+        "repeatContext4096",
+        "repeatContext8192",
+        "repetitionsPerCase",
+        "responseSchemaUnchanged",
+        "reuseAcceptedMemoryEvidence",
+        "sameHardenedExecutionBoundary",
+        "sameVerifiedRuntimeAndCandidate"
+      ],
+      "properties": {
+        "batchSize": {
+          "const": 1
+        },
+        "caseCount": {
+          "const": 24
+        },
+        "decodingConfigurationUnchanged": {
+          "const": true
+        },
+        "diagnosticsRecordedSeparately": {
+          "const": true
+        },
+        "failureAuthorityRecordedPerRun": {
+          "const": true
+        },
+        "futureOperatorApproval": {
+          "const": "not-issued"
+        },
+        "futureOperatorApprovalRequired": {
+          "const": true
+        },
+        "futurePlanDigest": {
+          "const": "not-issued"
+        },
+        "futurePlanRequired": {
+          "const": true
+        },
+        "futureResultRoot": {
+          "const": "not-created"
+        },
+        "futureResultRootRequired": {
+          "const": true
+        },
+        "futureSpecification": {
+          "const": "required"
+        },
+        "gatesUnchanged": {
+          "const": true
+        },
+        "goldAndEvaluatorHidden": {
+          "const": true
+        },
+        "maxNewTokens": {
+          "const": 256
+        },
+        "metricsUnchanged": {
+          "const": true
+        },
+        "plannedRuns": {
+          "const": 72
+        },
+        "promptsUnchanged": {
+          "const": true
+        },
+        "rawOutputRetention": {
+          "const": "required"
+        },
+        "repeatContext4096": {
+          "const": false
+        },
+        "repeatContext8192": {
+          "const": false
+        },
+        "repetitionsPerCase": {
+          "const": 3
+        },
+        "responseSchemaUnchanged": {
+          "const": true
+        },
+        "reuseAcceptedMemoryEvidence": {
+          "const": true
+        },
+        "sameHardenedExecutionBoundary": {
+          "const": true
+        },
+        "sameVerifiedRuntimeAndCandidate": {
+          "const": true
+        }
+      }
+    },
+    "corpusOnlyContinuation": {
+      "const": "authorized-in-principle"
+    },
+    "currentExecutionAuthority": {
+      "const": false
+    },
+    "decision": {
+      "const": "corpus-only continuation authorized in principle"
+    },
+    "evidenceInventory": {
+      "const": "approved"
+    },
+    "futurePlanDigest": {
+      "const": "not-issued"
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "memoryEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ceilingBytes",
+        "cold4096PeakBytes",
+        "cold8192PeakBytes",
+        "concurrency",
+        "headroomAssessment",
+        "largerContext",
+        "memoryGate",
+        "minimumHeadroomBytes",
+        "productionCapacity",
+        "warm4096PeakBytes",
+        "warm8192PeakBytes"
+      ],
+      "properties": {
+        "ceilingBytes": {
+          "const": 12884901888
+        },
+        "cold4096PeakBytes": {
+          "const": 7284371456
+        },
+        "cold8192PeakBytes": {
+          "const": 9816231936
+        },
+        "concurrency": {
+          "const": "prohibited"
+        },
+        "headroomAssessment": {
+          "const": "limited"
+        },
+        "largerContext": {
+          "const": "not-authorized"
+        },
+        "memoryGate": {
+          "const": "passed"
+        },
+        "minimumHeadroomBytes": {
+          "const": 613232640
+        },
+        "productionCapacity": {
+          "const": "not-established"
+        },
+        "warm4096PeakBytes": {
+          "const": 8511131648
+        },
+        "warm8192PeakBytes": {
+          "const": 12271669248
+        }
+      }
+    },
+    "memoryEvidenceReview": {
+      "const": "approved"
+    },
+    "notAuthorized": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "prefixItems": [
+        {
+          "const": "current-execution"
+        },
+        {
+          "const": "measurement-or-execution-plan"
+        },
+        {
+          "const": "plan-digest"
+        },
+        {
+          "const": "result-root"
+        },
+        {
+          "const": "candidate-selection"
+        },
+        {
+          "const": "calibration-approval"
+        },
+        {
+          "const": "patchpilot-integration"
+        },
+        {
+          "const": "shadow-mode"
+        },
+        {
+          "const": "production-use"
+        },
+        {
+          "const": "release-or-deployment"
+        }
+      ],
+      "items": false
+    },
+    "operatorApproval": {
+      "const": "not-issued"
+    },
+    "planDigest": {
+      "const": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350"
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "productionReady": {
+      "const": false
+    },
+    "proportionalityAnalysis": {
+      "const": "approved"
+    },
+    "proportionalityJudgment": {
+      "const": "proportionate"
+    },
+    "r3Plan": {
+      "const": "not-issued"
+    },
+    "replacementPlanDigest": {
+      "const": "not-issued"
+    },
+    "resultRootState": {
+      "const": "not-created"
+    },
+    "reviewAuthority": {
+      "const": "PatchPilot Principal Systems Architect"
+    },
+    "reviewDate": {
+      "const": "2026-11-17"
+    },
+    "reviewDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "reviewStatus": {
+      "const": "accepted-by-principal-systems-architect"
+    },
+    "runtimeAttemptId": {
+      "const": "rp-c2fe1c88f694fc1e"
+    },
+    "runtimeVersionTag": {
+      "const": "v1.31.1"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "selectedAlternative": {
+      "const": "clean-24-case-corpus-only-rerun"
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "sessionId": {
+      "const": "intelligence-track-9"
+    },
+    "sourceDigests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "behavioralEvidenceReview",
+        "candidateDisposition",
+        "corpusContinuationAuthorization",
+        "evidenceInventory",
+        "memoryEvidenceReview",
+        "proportionalityDecision"
+      ],
+      "properties": {
+        "behavioralEvidenceReview": {
+          "const": "b2acfc1152cceecf701ac28d1f43431e5850a377526fe7f5adb17583a707b004"
+        },
+        "candidateDisposition": {
+          "const": "311ffd0f1d55cc02b56a146ff4d8a7d8899a8f825f74680229e42b3dd3e1efd4"
+        },
+        "corpusContinuationAuthorization": {
+          "const": "e7325c76745505e533afaf12b108470fb6a2a2c765e5f7335b3b1ce1ef6c7477"
+        },
+        "evidenceInventory": {
+          "const": "70eac29a0c1e9ded2fbd6c4f5bdc3455fc374ec3d1815a86df1072b9de7f978b"
+        },
+        "memoryEvidenceReview": {
+          "const": "47d8dc74f738d043a3fa58c40f936e3c9148ba88c45bb9e2cf1b23c0172796f2"
+        },
+        "proportionalityDecision": {
+          "const": "9f2365132ea9bf97a0d84df779d743650ed96380683444580e7141ada52f48d5"
+        }
+      }
+    },
+    "track9Disposition": {
+      "const": "corpus-only-continuation-authorized-in-principle"
+    }
+  }
+}

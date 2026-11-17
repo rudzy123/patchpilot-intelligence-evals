@@ -456,8 +456,24 @@ def test_validation_jobs_keep_existing_coverage() -> None:
         "track8b-r2-proportionality-review-validation",
         "track8b-r2-stopped-track9-validation",
         "track8b-r2-review-validation",
+        "evaluation-evidence-inventory-validation",
+        "memory-evidence-review-validation",
+        "behavioral-evidence-review-validation",
+        "proportionality-decision-validation",
+        "corpus-continuation-authorization-validation",
+        "candidate-disposition-validation",
+        "track9-implementation-review-validation",
     ):
         assert name in contracts
+    assert contracts.index("track8b-r2-review-validation") < contracts.index(
+        "evaluation-evidence-inventory-validation"
+    )
+    assert contracts.index("candidate-disposition-validation") < contracts.index(
+        "track9-implementation-review-validation"
+    )
+    assert contracts.index("track9-implementation-review-validation") < contracts.index(
+        "workflow-policy-validation"
+    )
     workflow_commands = [
         line.strip().removeprefix("uv run patchpilot-evals ")
         for line in text.splitlines()

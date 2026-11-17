@@ -198,6 +198,17 @@ TRACK8B_R2_SCHEMA_NAMES: tuple[str, ...] = (
     "track8b-r2-implementation-review",
 )
 
+# Track 9 evidence-review documents. They do not authorize execution.
+TRACK9_SCHEMA_NAMES: tuple[str, ...] = (
+    "evaluation-evidence-inventory",
+    "memory-evidence-review",
+    "behavioral-evidence-review",
+    "proportionality-decision",
+    "corpus-continuation-authorization",
+    "candidate-disposition",
+    "track9-implementation-review",
+)
+
 _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     SCHEMA_NAMES
     + CANDIDATE_SCHEMA_NAMES
@@ -213,6 +224,7 @@ _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     + TRACK8B_SCHEMA_NAMES
     + TRACK8B_R1_SCHEMA_NAMES
     + TRACK8B_R2_SCHEMA_NAMES
+    + TRACK9_SCHEMA_NAMES
 )
 
 
