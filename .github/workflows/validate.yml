@@ -259,6 +259,27 @@ jobs:
           uv run patchpilot-evals track8b-r1-stopped-track9-validation
           uv run patchpilot-evals track8b-r1-review-validation
 
+      - name: Validate the Track 8B-R2 inference retry records
+        run: |
+          uv run patchpilot-evals inference-retry-plan-validation
+          uv run patchpilot-evals inference-retry-approval-validation
+          uv run patchpilot-evals inference-retry-preflight-validation
+          uv run patchpilot-evals dynamic-link-precheck-validation
+          uv run patchpilot-evals inference-retry-smoke-validation
+          uv run patchpilot-evals inference-retry-context-memory-validation
+          uv run patchpilot-evals inference-retry-behavioral-run-validation
+          uv run patchpilot-evals inference-retry-closeout-validation
+          uv run patchpilot-evals inference-retry-track9-readiness-validation
+          uv run patchpilot-evals track8b-r2-stopped-attempt-validation
+          uv run patchpilot-evals track8b-r2-cgroup-sampling-defect-validation
+          uv run patchpilot-evals track8b-r2-schema-forensics-validation
+          uv run patchpilot-evals track8b-r2-behavioral-interpretation-validation
+          uv run patchpilot-evals track8b-r2-memory-conclusion-validation
+          uv run patchpilot-evals track8b-r2-plan-disposition-validation
+          uv run patchpilot-evals track8b-r2-proportionality-review-validation
+          uv run patchpilot-evals track8b-r2-stopped-track9-validation
+          uv run patchpilot-evals track8b-r2-review-validation
+
       - name: Validate workflow policy
         run: uv run patchpilot-evals workflow-policy-validation
 

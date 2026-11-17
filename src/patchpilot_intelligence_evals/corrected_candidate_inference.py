@@ -15,11 +15,10 @@ from patchpilot_intelligence_evals.candidate_inference import (
 from patchpilot_intelligence_evals.cgroup_memory import (
     ScopeSampler,
     contradictory_resident,
-    empty_memory_events,
     parse_memory_events,
     retry_window,
 )
-from patchpilot_intelligence_evals.hardened_execution import ExecutionResult
+from patchpilot_intelligence_evals.hardened_execution import ExecutionResult, execute_hardened
 from patchpilot_intelligence_evals.measurement_plan import MeasurementError
 from patchpilot_intelligence_evals.measurement_retry_plan import empty_retry_memory
 from patchpilot_intelligence_evals.template_compatibility import (
@@ -33,14 +32,17 @@ class RetrySampler(ScopeSampler):
     """Sample resident counters and keep ``memory.events`` on the same row."""
 
     def __call__(self, pid: int, unit: str, results: Path) -> None:
+        before = len(self.samples)
         super().__call__(pid, unit, results)
-        if not self.samples:
+        if len(self.samples) == before or self.directory is None:
             return
-        events = empty_memory_events()
-        if self.directory is not None:
-            path = self.directory / "memory.events"
-            if path.is_file():
-                events = parse_memory_events(path.read_text(encoding="utf-8"))
+        path = self.directory / "memory.events"
+        try:
+            if not path.is_file():
+                return
+            events = parse_memory_events(path.read_text(encoding="utf-8"))
+        except OSError:
+            return
         self.samples[-1]["memoryEvents"] = events
 
 
@@ -65,8 +67,21 @@ def launch_retry(
     limits: Any,
     launcher: Launcher,
     executed: bool,
+    inference_retry: bool = False,
+    result_root: Path | None = None,
 ) -> tuple[dict[str, Any], bool, bool]:
     """Launch one child after the caller has rendered any chat prompt."""
+    if executed and inference_retry:
+        from patchpilot_intelligence_evals.inference_retry_plan import (
+            require_inference_retry_approval,
+        )
+        from patchpilot_intelligence_evals.inference_retry_preflight import require_passed_precheck
+
+        require_inference_retry_approval(approval)
+        if launcher is execute_hardened:
+            if result_root is None:
+                raise MeasurementError("missing-root")
+            require_passed_precheck(result_root)
     sampler: ScopeSampler = RetrySampler()
     result, observer = launch_child(
         config,
@@ -75,7 +90,8 @@ def launch_retry(
         limits=limits,
         launcher=launcher,
         sampler=sampler,
-        retry_approval=approval if executed else None,
+        retry_approval=None if inference_retry or not executed else approval,
+        inference_retry_approval=approval if executed and inference_retry else None,
     )
     cold_warm = bool(config.get("coldWarm"))
     classified = classify_execution(result, observer, cold_warm=cold_warm)

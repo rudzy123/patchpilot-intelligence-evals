@@ -1,0 +1,446 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:inference-retry-smoke:v1",
+  "title": "Track 8B-R2 smoke or short generation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationStatus",
+    "coldMemory",
+    "coldTiming",
+    "compatibilityPrecededSession",
+    "decoding",
+    "exitClassification",
+    "generationTokens",
+    "identityDigest",
+    "inputDigest",
+    "installationAuthorized",
+    "maxNewTokens",
+    "measurementCompleted",
+    "measurementPerformed",
+    "modelSessionCreated",
+    "networkResult",
+    "outputDigest",
+    "phase",
+    "planDigest",
+    "consumedRetryPlanDigest",
+    "dependencyClosureDigest",
+    "dynamicLinkPrecheckDigest",
+    "priorPlanDigest",
+    "processCleanup",
+    "productionReady",
+    "profileId",
+    "realModelExecuted",
+    "renderedDigest",
+    "repositoryCommit",
+    "resultRootClass",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "stopCause",
+    "templateDigest",
+    "timestamp",
+    "tokenCount",
+    "warmMemory",
+    "warmTiming"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "sessionId": {
+      "const": "intelligence-track-8b-r2"
+    },
+    "productionReady": {
+      "const": false
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "profileId": {
+      "const": "linux-bwrap-systemd-v1"
+    },
+    "resultRootClass": {
+      "const": "inference-retry-result"
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "planDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "templateDigest": {
+      "const": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176"
+    },
+    "phase": {
+      "enum": [
+        "one-token-smoke",
+        "short-generation",
+        "not-executed"
+      ]
+    },
+    "decoding": {
+      "$ref": "#/$defs/decoding"
+    },
+    "compatibilityPrecededSession": {
+      "type": "boolean"
+    },
+    "measurementPerformed": {
+      "type": "boolean"
+    },
+    "measurementCompleted": {
+      "type": "boolean"
+    },
+    "runInvoked": {
+      "type": "boolean"
+    },
+    "modelSessionCreated": {
+      "type": "boolean"
+    },
+    "realModelExecuted": {
+      "type": "boolean"
+    },
+    "maxNewTokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "tokenCount": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "generationTokens": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "inputDigest": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "renderedDigest": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "outputDigest": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "exitClassification": {
+      "$ref": "#/$defs/exit"
+    },
+    "stopCause": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "processCleanup": {
+      "enum": [
+        "not-performed",
+        "reaped",
+        "failed"
+      ]
+    },
+    "networkResult": {
+      "enum": [
+        "not-performed",
+        "denied",
+        "failed"
+      ]
+    },
+    "repositoryCommit": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40
+    },
+    "timestamp": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40
+    },
+    "coldMemory": {
+      "$ref": "#/$defs/memory"
+    },
+    "warmMemory": {
+      "$ref": "#/$defs/memory"
+    },
+    "coldTiming": {
+      "$ref": "#/$defs/timing"
+    },
+    "warmTiming": {
+      "$ref": "#/$defs/timing"
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "dependencyClosureDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "dynamicLinkPrecheckDigest": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "const": "not-executed"
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "decoding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "repetitionPenalty",
+        "seed",
+        "seedControl",
+        "seedSupport",
+        "temperature",
+        "topK",
+        "topP"
+      ],
+      "properties": {
+        "method": {
+          "const": "greedy-argmax"
+        },
+        "temperature": {
+          "const": 0
+        },
+        "topP": {
+          "const": 1
+        },
+        "topK": {
+          "const": 1
+        },
+        "repetitionPenalty": {
+          "const": 1
+        },
+        "seed": {
+          "const": 0
+        },
+        "seedSupport": {
+          "const": false
+        },
+        "seedControl": {
+          "const": "unused"
+        }
+      }
+    },
+    "exit": {
+      "enum": [
+        "not-executed",
+        "success",
+        "runtime-startup-failure",
+        "model-load-failure",
+        "tokenizer-failure",
+        "inference-failure",
+        "timeout",
+        "oom",
+        "malformed-response",
+        "schema-failure",
+        "excessive-output",
+        "nonzero-exit",
+        "isolation-failure",
+        "network-violation",
+        "cleanup-failure",
+        "telemetry-unresolved",
+        "memory-ceiling",
+        "compatibility-failure",
+        "infrastructure-failure"
+      ]
+    },
+    "memory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "addressSpaceLimitBytes",
+        "cgroupCurrentBytes",
+        "cgroupPeakBytes",
+        "memoryEvents",
+        "oomEvents",
+        "processRssBytes",
+        "processTreeRssBytes",
+        "residentCeilingBytes",
+        "telemetry",
+        "virtualAddressBytes"
+      ],
+      "properties": {
+        "cgroupCurrentBytes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "cgroupPeakBytes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "processRssBytes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "processTreeRssBytes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "virtualAddressBytes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "oomEvents": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "residentCeilingBytes": {
+          "const": 12884901888
+        },
+        "addressSpaceLimitBytes": {
+          "const": 25769803776
+        },
+        "telemetry": {
+          "enum": [
+            "not-observed",
+            "complete",
+            "unresolved",
+            "oom",
+            "exceeded"
+          ]
+        },
+        "memoryEvents": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "high",
+            "low",
+            "max",
+            "oom",
+            "oomKill"
+          ],
+          "properties": {
+            "high": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "low": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "max": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "oom": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "oomKill": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    "timing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "firstTokenSeconds",
+        "generationSeconds",
+        "loadSeconds",
+        "wallSeconds"
+      ],
+      "properties": {
+        "loadSeconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "firstTokenSeconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "generationSeconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "wallSeconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

@@ -176,6 +176,28 @@ TRACK8B_R1_SCHEMA_NAMES: tuple[str, ...] = (
     "track8b-r1-implementation-review",
 )
 
+# Track 8B-R2 inference retry documents. They stay outside both consumed plans.
+TRACK8B_R2_SCHEMA_NAMES: tuple[str, ...] = (
+    "inference-retry-plan",
+    "inference-retry-approval",
+    "inference-retry-preflight",
+    "dynamic-link-precheck",
+    "inference-retry-smoke",
+    "inference-retry-context-memory",
+    "inference-retry-behavioral-run",
+    "inference-retry-closeout",
+    "inference-retry-track9-readiness",
+    "inference-retry-unclassified-launch",
+    "track8b-r2-stopped-attempt",
+    "track8b-r2-cgroup-sampling-defect",
+    "track8b-r2-schema-forensics",
+    "track8b-r2-behavioral-interpretation",
+    "track8b-r2-memory-conclusion",
+    "track8b-r2-plan-disposition",
+    "track8b-r2-proportionality-review",
+    "track8b-r2-implementation-review",
+)
+
 _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     SCHEMA_NAMES
     + CANDIDATE_SCHEMA_NAMES
@@ -190,6 +212,7 @@ _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     + TRACK8A_SCHEMA_NAMES
     + TRACK8B_SCHEMA_NAMES
     + TRACK8B_R1_SCHEMA_NAMES
+    + TRACK8B_R2_SCHEMA_NAMES
 )
 
 

@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:inference-retry-track9-readiness:v1",
+  "title": "Track 8B-R2 Track 9 readiness",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationStatus",
+    "identityDigest",
+    "installationAuthorized",
+    "measurementPerformed",
+    "planDigest",
+    "consumedRetryPlanDigest",
+    "dependencyClosureDigest",
+    "dynamicLinkPrecheckDigest",
+    "priorPlanDigest",
+    "productionReady",
+    "readinessOutcome",
+    "reason",
+    "realModelExecuted",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "verdict"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "sessionId": {
+      "const": "intelligence-track-8b-r2"
+    },
+    "productionReady": {
+      "const": false
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "planDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "measurementPerformed": {
+      "type": "boolean"
+    },
+    "realModelExecuted": {
+      "type": "boolean"
+    },
+    "readinessOutcome": {
+      "enum": [
+        "not-ready",
+        "ready",
+        "ready-with-documented-residuals",
+        "blocked"
+      ]
+    },
+    "verdict": {
+      "enum": [
+        "TRACK 9 EVALUATION REVIEW READY",
+        "TRACK 9 EVALUATION REVIEW READY WITH DOCUMENTED RESIDUALS",
+        "TRACK 9 EVALUATION REVIEW NOT READY",
+        "BLOCKED BY UNRESOLVED AUTHORITY"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "dependencyClosureDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "dynamicLinkPrecheckDigest": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "const": "not-executed"
+        }
+      ]
+    }
+  }
+}

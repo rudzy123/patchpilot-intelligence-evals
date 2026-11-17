@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:inference-retry-unclassified-launch:v1",
+  "title": "Unclassified inference launch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationStatus",
+    "caseId",
+    "consumedRetryPlanDigest",
+    "dependencyClosureDigest",
+    "dynamicLinkPrecheckDigest",
+    "identityDigest",
+    "installationAuthorized",
+    "measurementCompleted",
+    "measurementPerformed",
+    "modelSessionCreated",
+    "outputByteCount",
+    "outputDigest",
+    "planDigest",
+    "priorPlanDigest",
+    "productionReady",
+    "realModelExecuted",
+    "reason",
+    "recordKind",
+    "repetition",
+    "repositoryCommit",
+    "resultRootClass",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "timestamp"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "recordKind": { "const": "unclassified-launch" },
+    "reason": { "const": "run-record-unsealable" },
+    "caseId": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "repetition": { "type": "integer", "minimum": 1, "maximum": 3 },
+    "outputDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "outputByteCount": { "type": "integer", "minimum": 1 },
+    "calibrationStatus": { "const": "not-approved" },
+    "installationAuthorized": { "const": false },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "measurementPerformed": { "type": "boolean" },
+    "measurementCompleted": { "type": "boolean" },
+    "modelSessionCreated": { "type": "boolean" },
+    "realModelExecuted": { "const": false },
+    "runInvoked": { "type": "boolean" },
+    "planDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "dependencyClosureDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "dynamicLinkPrecheckDigest": {
+      "anyOf": [
+        { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        { "const": "not-executed" }
+      ]
+    },
+    "repositoryCommit": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "resultRootClass": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "sessionId": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "timestamp": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

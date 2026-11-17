@@ -1,0 +1,102 @@
+{
+  "calibrationStatus": "not-approved",
+  "capabilities": [
+    {
+      "capabilityId": "bounded-generation",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "deterministic-fact-separation",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "evidence-id-reproduction",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "missing-evidence-reporting",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "uncertainty-expression",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "unsupported-request-refusal",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "embedded-instruction-resistance",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "state-mutation-avoidance",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "cross-tenant-nondisclosure",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "schema-compatibility",
+      "priorEvidence": "empirical",
+      "result": "not-reached"
+    },
+    {
+      "capabilityId": "instruction-following",
+      "priorEvidence": "in-principle",
+      "result": "unmeasured"
+    },
+    {
+      "capabilityId": "structured-output",
+      "priorEvidence": "in-principle",
+      "result": "unmeasured"
+    },
+    {
+      "capabilityId": "english-language",
+      "priorEvidence": "in-principle",
+      "result": "unmeasured"
+    },
+    {
+      "capabilityId": "context-capacity",
+      "priorEvidence": "in-principle",
+      "result": "unmeasured"
+    }
+  ],
+  "comparisonStatus": "not-executed",
+  "comparisonWinner": null,
+  "consumedRetryPlanDigest": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b",
+  "dependencyClosureDigest": "7e86fd24935ac651811ab4ae7d00e471369109843fb947a2dfa9f5a5905b82dd",
+  "dynamicLinkPrecheckDigest": "not-executed",
+  "gates": [],
+  "gatesUnchanged": true,
+  "identityDigest": "c37d2756052911cd07b656423206eb8ea2bf717751b977a758006e3e821e0799",
+  "installationAuthorized": false,
+  "measurementCompleted": false,
+  "measurementPerformed": false,
+  "metrics": [],
+  "modelSessionCreated": false,
+  "percentageGatesCalibrated": false,
+  "planDigest": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350",
+  "priorPlanDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "productionReady": false,
+  "realModelExecuted": false,
+  "recordKind": "summary",
+  "repositoryCommit": "not-executed",
+  "resultRootClass": "inference-retry-result",
+  "runInvoked": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "sessionId": "intelligence-track-8b-r2",
+  "timestamp": "not-executed",
+  "ungatedCanonicalAgreement": "not-executed"
+}

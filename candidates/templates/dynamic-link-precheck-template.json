@@ -1,0 +1,77 @@
+{
+  "apiVersion": null,
+  "broadHostLibraryMounted": false,
+  "calibrationStatus": "not-approved",
+  "consumedRetryPlanDigest": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b",
+  "createSessionCalled": false,
+  "dependencies": [
+    {
+      "basename": "libc.so.6",
+      "classification": "standard-host-runtime",
+      "identity": "361bd98fce164c5b35b49c80a78b635a783870b5e30604015a9068e9abc43fbe"
+    },
+    {
+      "basename": "libdl.so.2",
+      "classification": "standard-host-runtime",
+      "identity": "4c849cbadb15f8a1873a3b7fd15785abcf12ca381fd02a27cdf63ad4b165bf6e"
+    },
+    {
+      "basename": "libgcc_s.so.1",
+      "classification": "standard-host-runtime",
+      "identity": "299aac7aff0d6e17ca11c14ecf43e3c5eaaba4588e862f5e033341357acde648"
+    },
+    {
+      "basename": "libm.so.6",
+      "classification": "standard-host-runtime",
+      "identity": "5ba405f2137ec96457ea62528e020713eee5dad49864524f911e93ca4f9b4568"
+    },
+    {
+      "basename": "libpthread.so.0",
+      "classification": "standard-host-runtime",
+      "identity": "66cf4c1e8dadc86a44ec453046fd9ce9915c05eeb303dc5e328a51e8c5a4dcd6"
+    },
+    {
+      "basename": "librt.so.1",
+      "classification": "standard-host-runtime",
+      "identity": "44e79dd0a8f2f13d0f4c836082fad177c7dd7ed652f4ca000432d7ef20b5c336"
+    },
+    {
+      "basename": "libstdc++.so.6",
+      "classification": "standard-host-runtime",
+      "identity": "86be5ea9d4a647e9f4adab52b9c3f6c68ea0eefaa79e0fdee61687d44a4a4e05"
+    },
+    {
+      "basename": "ld-linux-x86-64.so.2",
+      "classification": "elf-interpreter",
+      "identity": "0981d3cdf0ff10c72fd1b54d9263a5e91a7286f6c513a8706dc72522ced9d99a"
+    }
+  ],
+  "dependencyClosureDigest": "7e86fd24935ac651811ab4ae7d00e471369109843fb947a2dfa9f5a5905b82dd",
+  "exportedSymbols": [],
+  "getApiCalled": false,
+  "identityDigest": "2c48683c539e678ed7f674aa4c0b3c0f977f9fed7c2d3d788cdc7ce57a21ba8f",
+  "installationAuthorized": false,
+  "libraryClosed": false,
+  "mappedBasenames": [],
+  "measurementCompleted": false,
+  "measurementPerformed": false,
+  "modelSessionCreated": false,
+  "networkResult": "not-performed",
+  "planDigest": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350",
+  "priorPlanDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "processCleanup": "not-performed",
+  "productionReady": false,
+  "profileId": "linux-bwrap-systemd-v1",
+  "providerLoaded": false,
+  "realModelExecuted": false,
+  "resultRootClass": "inference-retry-result",
+  "runInvoked": false,
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "sessionId": "intelligence-track-8b-r2",
+  "status": "not-executed",
+  "stopCause": null,
+  "symbolBoundary": "not-executed",
+  "timestamp": "not-executed",
+  "unexpectedPath": false
+}

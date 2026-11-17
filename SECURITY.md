@@ -76,6 +76,10 @@ Track 8B validators read the committed plan, the not-approved operator checkpoin
 
 Track 8B-R1 validators read the committed retry plan, the not-approved operator checkpoint, the not-executed templates, the stopped-attempt records, and the advisory Track 9 recommendation. They do not create a session. Manual retry commands write only under a fresh operator-supplied result root outside this repository. The consumed Track 8B plan and the consumed retry plan are refused before Run. `replacementPlanDigest` stays `not-issued`. `installationAuthorized` stays false. `selectionOutcome` stays `no-selection`. `calibrationStatus` stays `not-approved`. `productionReady` stays false.
 
+## Track 8B-R2 inference retry
+
+Track 8B-R2 validators read the committed inference-retry plan, the not-approved operator checkpoint, the not-executed templates, and the consumed-plan disposition. They do not create a session and they do not call Run. Manual commands write only under a fresh result root outside this repository. The R2 plan digest and both earlier plan digests are refused before Run. No R3 digest is issued. The dynamic-link precheck may load the verified runtime library and resolve `OrtGetApiBase`. It does not create a model session. `installationAuthorized` stays false. `selectionOutcome` stays `no-selection`. `calibrationStatus` stays `not-approved`. `productionReady` stays false.
+
 ## GitHub Actions
 
 Workflows read repository contents. CodeQL may also write code-scanning results. They do not receive secrets, persist checkout credentials, or use `pull_request_target`. Action pins and the dependency rules are in [docs/security/github-actions-supply-chain.md](docs/security/github-actions-supply-chain.md). A workflow does not change branch protection or repository rulesets. The operator procedure is [docs/operations/main-ruleset-procedure.md](docs/operations/main-ruleset-procedure.md). `productionReady` stays false.
