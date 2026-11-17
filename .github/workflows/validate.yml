@@ -280,6 +280,16 @@ jobs:
           uv run patchpilot-evals track8b-r2-stopped-track9-validation
           uv run patchpilot-evals track8b-r2-review-validation
 
+      - name: Validate the Track 9 evidence review
+        run: |
+          uv run patchpilot-evals evaluation-evidence-inventory-validation
+          uv run patchpilot-evals memory-evidence-review-validation
+          uv run patchpilot-evals behavioral-evidence-review-validation
+          uv run patchpilot-evals proportionality-decision-validation
+          uv run patchpilot-evals corpus-continuation-authorization-validation
+          uv run patchpilot-evals candidate-disposition-validation
+          uv run patchpilot-evals track9-implementation-review-validation
+
       - name: Validate workflow policy
         run: uv run patchpilot-evals workflow-policy-validation
 

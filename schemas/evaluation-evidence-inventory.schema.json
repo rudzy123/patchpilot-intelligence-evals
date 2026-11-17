@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:evaluation-evidence-inventory:v1",
+  "title": "Track 9 evaluation evidence inventory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sessionId",
+    "planDigest",
+    "priorPlanDigest",
+    "consumedRetryPlanDigest",
+    "replacementPlanDigest",
+    "r3Plan",
+    "futurePlanDigest",
+    "candidateModelId",
+    "candidateAttemptId",
+    "candidatePrecision",
+    "runtimeVersionTag",
+    "runtimeAttemptId",
+    "calibrationStatus",
+    "selectionOutcome",
+    "comparisonWinner",
+    "productionReady",
+    "installationAuthorized",
+    "currentExecutionAuthority",
+    "containsExecutionInstructions",
+    "identityDigest",
+    "evidenceClassCounts",
+    "externalResultRootsModified",
+    "externalResultRootsRead",
+    "itemCount",
+    "items",
+    "r1SmokePeakCitedAsContext",
+    "sealedRunFilesCommitted"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "sessionId": {
+      "const": "intelligence-track-9"
+    },
+    "planDigest": {
+      "const": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350"
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "replacementPlanDigest": {
+      "const": "not-issued"
+    },
+    "r3Plan": {
+      "const": "not-issued"
+    },
+    "futurePlanDigest": {
+      "const": "not-issued"
+    },
+    "candidateModelId": {
+      "const": "LiquidAI/LFM2.5-1.2B-Instruct"
+    },
+    "candidateAttemptId": {
+      "const": "cd-20b7ceee37a62cba"
+    },
+    "candidatePrecision": {
+      "const": "FP32"
+    },
+    "runtimeVersionTag": {
+      "const": "v1.31.1"
+    },
+    "runtimeAttemptId": {
+      "const": "rp-c2fe1c88f694fc1e"
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "comparisonWinner": {
+      "const": null
+    },
+    "productionReady": {
+      "const": false
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "currentExecutionAuthority": {
+      "const": false
+    },
+    "containsExecutionInstructions": {
+      "const": false
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "evidenceClassCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate-evidence",
+        "measurement-infrastructure-evidence",
+        "security-boundary-evidence",
+        "unresolved",
+        "not-applicable"
+      ],
+      "properties": {
+        "candidate-evidence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "measurement-infrastructure-evidence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "security-boundary-evidence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "unresolved": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "not-applicable": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "externalResultRootsModified": {
+      "const": false
+    },
+    "externalResultRootsRead": {
+      "const": false
+    },
+    "itemCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidenceClass",
+          "itemId",
+          "sourceIdentityDigest",
+          "sourceRecord",
+          "supportsBehavior",
+          "supportsContinuation",
+          "supportsDisposition",
+          "supportsExecution",
+          "supportsMemory"
+        ],
+        "properties": {
+          "evidenceClass": {
+            "enum": [
+              "candidate-evidence",
+              "measurement-infrastructure-evidence",
+              "security-boundary-evidence",
+              "unresolved",
+              "not-applicable"
+            ]
+          },
+          "itemId": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "sourceIdentityDigest": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "sourceRecord": {
+            "type": "string",
+            "pattern": "^(candidates/authorization/[a-z0-9-]+\\.json|docs/provenance/[a-z0-9-]+\\.md)$"
+          },
+          "supportsBehavior": {
+            "type": "boolean"
+          },
+          "supportsContinuation": {
+            "type": "boolean"
+          },
+          "supportsDisposition": {
+            "type": "boolean"
+          },
+          "supportsExecution": {
+            "type": "boolean"
+          },
+          "supportsMemory": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "r1SmokePeakCitedAsContext": {
+      "const": false
+    },
+    "sealedRunFilesCommitted": {
+      "const": false
+    }
+  }
+}

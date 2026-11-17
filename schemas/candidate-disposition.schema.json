@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:candidate-disposition:v1",
+  "title": "Track 9 candidate disposition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sessionId",
+    "planDigest",
+    "priorPlanDigest",
+    "consumedRetryPlanDigest",
+    "replacementPlanDigest",
+    "r3Plan",
+    "futurePlanDigest",
+    "candidateModelId",
+    "candidateAttemptId",
+    "candidatePrecision",
+    "runtimeVersionTag",
+    "runtimeAttemptId",
+    "calibrationStatus",
+    "selectionOutcome",
+    "comparisonWinner",
+    "productionReady",
+    "installationAuthorized",
+    "currentExecutionAuthority",
+    "containsExecutionInstructions",
+    "identityDigest",
+    "authorizesCalibration",
+    "authorizesCandidateSelection",
+    "authorizesCurrentExecution",
+    "authorizesPatchPilotIntegration",
+    "authorizesProduction",
+    "authorizesShadowMode",
+    "candidateDisposition",
+    "continuationIsNotSelection",
+    "operatorApproval",
+    "resultRootState",
+    "selectedAlternative",
+    "track9Disposition"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "sessionId": {
+      "const": "intelligence-track-9"
+    },
+    "planDigest": {
+      "const": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350"
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "replacementPlanDigest": {
+      "const": "not-issued"
+    },
+    "r3Plan": {
+      "const": "not-issued"
+    },
+    "futurePlanDigest": {
+      "const": "not-issued"
+    },
+    "candidateModelId": {
+      "const": "LiquidAI/LFM2.5-1.2B-Instruct"
+    },
+    "candidateAttemptId": {
+      "const": "cd-20b7ceee37a62cba"
+    },
+    "candidatePrecision": {
+      "const": "FP32"
+    },
+    "runtimeVersionTag": {
+      "const": "v1.31.1"
+    },
+    "runtimeAttemptId": {
+      "const": "rp-c2fe1c88f694fc1e"
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "comparisonWinner": {
+      "const": null
+    },
+    "productionReady": {
+      "const": false
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "currentExecutionAuthority": {
+      "const": false
+    },
+    "containsExecutionInstructions": {
+      "const": false
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "authorizesCalibration": {
+      "const": false
+    },
+    "authorizesCandidateSelection": {
+      "const": false
+    },
+    "authorizesCurrentExecution": {
+      "const": false
+    },
+    "authorizesPatchPilotIntegration": {
+      "const": false
+    },
+    "authorizesProduction": {
+      "const": false
+    },
+    "authorizesShadowMode": {
+      "const": false
+    },
+    "candidateDisposition": {
+      "enum": [
+        "evaluation-incomplete-continuation-authorized-in-principle",
+        "candidate-rejected",
+        "further-forensics-required",
+        "further-investment-stopped",
+        "blocked-by-unresolved-authority"
+      ]
+    },
+    "continuationIsNotSelection": {
+      "const": true
+    },
+    "operatorApproval": {
+      "const": "not-issued"
+    },
+    "resultRootState": {
+      "const": "not-created"
+    },
+    "selectedAlternative": {
+      "enum": [
+        "clean-24-case-corpus-only-rerun",
+        "reject-now",
+        "narrow-forensics",
+        "stop-investment",
+        "none"
+      ]
+    },
+    "track9Disposition": {
+      "enum": [
+        "corpus-only-continuation-authorized-in-principle",
+        "candidate-rejected",
+        "narrow-forensic-session-required",
+        "further-investment-stopped",
+        "blocked-by-unresolved-authority"
+      ]
+    }
+  }
+}

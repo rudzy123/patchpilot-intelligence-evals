@@ -140,6 +140,12 @@ _DOCUMENTS = (
     "docs/operations/corrected-measurement-runbook.md",
     "docs/operations/corrected-measurement-recovery.md",
     "docs/provenance/track8b-r1-measurement-evidence.md",
+    "docs/architecture/evaluation-evidence-review.md",
+    "docs/architecture/corpus-continuation-boundary.md",
+    "docs/architecture/candidate-disposition-authority.md",
+    "docs/provenance/track9-evidence-review.md",
+    "docs/provenance/track9-implementation-review.md",
+    "docs/operations/corpus-only-continuation-prerequisites.md",
 )
 
 
@@ -308,6 +314,13 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals track8b-r2-proportionality-review-validation",
         "uv run patchpilot-evals track8b-r2-stopped-track9-validation",
         "uv run patchpilot-evals track8b-r2-review-validation",
+        "uv run patchpilot-evals evaluation-evidence-inventory-validation",
+        "uv run patchpilot-evals memory-evidence-review-validation",
+        "uv run patchpilot-evals behavioral-evidence-review-validation",
+        "uv run patchpilot-evals proportionality-decision-validation",
+        "uv run patchpilot-evals corpus-continuation-authorization-validation",
+        "uv run patchpilot-evals candidate-disposition-validation",
+        "uv run patchpilot-evals track9-implementation-review-validation",
         "uv run patchpilot-evals workflow-policy-validation",
         "uv run patchpilot-evals dependency-architecture-policy-validation",
     ):
@@ -446,6 +459,13 @@ def test_help_lists_commands() -> None:
     assert "track8b-r2-proportionality-review-validation" in text
     assert "track8b-r2-stopped-track9-validation" in text
     assert "track8b-r2-review-validation" in text
+    assert "evaluation-evidence-inventory-validation" in text
+    assert "memory-evidence-review-validation" in text
+    assert "behavioral-evidence-review-validation" in text
+    assert "proportionality-decision-validation" in text
+    assert "corpus-continuation-authorization-validation" in text
+    assert "candidate-disposition-validation" in text
+    assert "track9-implementation-review-validation" in text
     assert "inference-retry-preflight" in text
     assert "inference-retry-precheck" in text
     assert "inference-retry-execute" in text

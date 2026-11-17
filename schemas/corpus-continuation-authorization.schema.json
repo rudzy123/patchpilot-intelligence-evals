@@ -1,0 +1,341 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:corpus-continuation-authorization:v1",
+  "title": "Track 9 corpus continuation authorization",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sessionId",
+    "planDigest",
+    "priorPlanDigest",
+    "consumedRetryPlanDigest",
+    "replacementPlanDigest",
+    "r3Plan",
+    "futurePlanDigest",
+    "candidateModelId",
+    "candidateAttemptId",
+    "candidatePrecision",
+    "runtimeVersionTag",
+    "runtimeAttemptId",
+    "calibrationStatus",
+    "selectionOutcome",
+    "comparisonWinner",
+    "productionReady",
+    "installationAuthorized",
+    "currentExecutionAuthority",
+    "containsExecutionInstructions",
+    "identityDigest",
+    "artifactsUnchanged",
+    "authorizationStatus",
+    "batchSize",
+    "caseCount",
+    "chatTemplateDigest",
+    "corpusDigest",
+    "dependencyClosureDigest",
+    "dynamicLinkPrecheckDigest",
+    "futureOperatorCheckpoint",
+    "futureSpecification",
+    "gatesUnchanged",
+    "goldIsolation",
+    "hardenedExecution",
+    "maxNewTokens",
+    "metricsUnchanged",
+    "omittedPhases",
+    "operatorApproval",
+    "plannedRuns",
+    "promptTemplateDigest",
+    "promptsUnchanged",
+    "rawOutputRetention",
+    "repeatContext4096",
+    "repeatContext8192",
+    "repetitionsPerCase",
+    "responseSchemaUnchanged",
+    "resultRootState",
+    "reuseAcceptedMemoryEvidence",
+    "stdoutLimitBytes",
+    "stopConditions",
+    "tokenizerDigest",
+    "withheldReason"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "sessionId": {
+      "const": "intelligence-track-9"
+    },
+    "planDigest": {
+      "const": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350"
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "replacementPlanDigest": {
+      "const": "not-issued"
+    },
+    "r3Plan": {
+      "const": "not-issued"
+    },
+    "futurePlanDigest": {
+      "const": "not-issued"
+    },
+    "candidateModelId": {
+      "const": "LiquidAI/LFM2.5-1.2B-Instruct"
+    },
+    "candidateAttemptId": {
+      "const": "cd-20b7ceee37a62cba"
+    },
+    "candidatePrecision": {
+      "const": "FP32"
+    },
+    "runtimeVersionTag": {
+      "const": "v1.31.1"
+    },
+    "runtimeAttemptId": {
+      "const": "rp-c2fe1c88f694fc1e"
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "comparisonWinner": {
+      "const": null
+    },
+    "productionReady": {
+      "const": false
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "currentExecutionAuthority": {
+      "const": false
+    },
+    "containsExecutionInstructions": {
+      "const": false
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "artifactsUnchanged": {
+      "const": true
+    },
+    "authorizationStatus": {
+      "enum": [
+        "authorized-in-principle",
+        "withheld"
+      ]
+    },
+    "batchSize": {
+      "const": 1
+    },
+    "caseCount": {
+      "enum": [
+        0,
+        24
+      ]
+    },
+    "chatTemplateDigest": {
+      "const": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176"
+    },
+    "corpusDigest": {
+      "const": "49fe79544a26de429afe865fbd2666828bf26a6da30efe6d87f3b0fdfbd0989c"
+    },
+    "dependencyClosureDigest": {
+      "const": "7e86fd24935ac651811ab4ae7d00e471369109843fb947a2dfa9f5a5905b82dd"
+    },
+    "dynamicLinkPrecheckDigest": {
+      "const": "ecb67d19b6ad0bfcdf5cd42724ebd8e0652790d79f00c6a149c4d8a49c772748"
+    },
+    "futureOperatorCheckpoint": {
+      "enum": [
+        "mandatory",
+        "not-required"
+      ]
+    },
+    "futureSpecification": {
+      "enum": [
+        "mandatory",
+        "not-required"
+      ]
+    },
+    "gatesUnchanged": {
+      "const": true
+    },
+    "goldIsolation": {
+      "enum": [
+        "mandatory",
+        "not-applicable"
+      ]
+    },
+    "hardenedExecution": {
+      "enum": [
+        "required",
+        "not-authorized"
+      ]
+    },
+    "maxNewTokens": {
+      "const": 256
+    },
+    "metricsUnchanged": {
+      "const": true
+    },
+    "omittedPhases": {
+      "const": [
+        "context-4096",
+        "context-8192"
+      ]
+    },
+    "operatorApproval": {
+      "const": "not-issued"
+    },
+    "plannedRuns": {
+      "enum": [
+        0,
+        72
+      ]
+    },
+    "promptTemplateDigest": {
+      "const": "62774d0f8b65c959c5b038911af4293d3d774aae3933f0d7a24064691685250a"
+    },
+    "promptsUnchanged": {
+      "const": true
+    },
+    "rawOutputRetention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "associatedWithCaseAndRepetition",
+        "availableToCandidate",
+        "availableToLaterRuns",
+        "boundedByStdoutLimit",
+        "classifyFailureAuthority",
+        "digestIdentified",
+        "distinguishesRawFromParsed",
+        "externalDuringExecution",
+        "freeOfGold",
+        "hostIdentityExcluded",
+        "immutable",
+        "recordOutputLimit",
+        "recordParseErrors",
+        "recordSchemaErrors",
+        "recordTruncation",
+        "redaction",
+        "status"
+      ],
+      "properties": {
+        "associatedWithCaseAndRepetition": {
+          "type": "boolean"
+        },
+        "availableToCandidate": {
+          "const": false
+        },
+        "availableToLaterRuns": {
+          "const": false
+        },
+        "boundedByStdoutLimit": {
+          "type": "boolean"
+        },
+        "classifyFailureAuthority": {
+          "type": "boolean"
+        },
+        "digestIdentified": {
+          "type": "boolean"
+        },
+        "distinguishesRawFromParsed": {
+          "type": "boolean"
+        },
+        "externalDuringExecution": {
+          "type": "boolean"
+        },
+        "freeOfGold": {
+          "const": true
+        },
+        "hostIdentityExcluded": {
+          "const": true
+        },
+        "immutable": {
+          "type": "boolean"
+        },
+        "recordOutputLimit": {
+          "type": "boolean"
+        },
+        "recordParseErrors": {
+          "type": "boolean"
+        },
+        "recordSchemaErrors": {
+          "type": "boolean"
+        },
+        "recordTruncation": {
+          "type": "boolean"
+        },
+        "redaction": {
+          "const": "synthetic-data-rules"
+        },
+        "status": {
+          "enum": [
+            "required",
+            "withheld"
+          ]
+        }
+      }
+    },
+    "repeatContext4096": {
+      "const": false
+    },
+    "repeatContext8192": {
+      "const": false
+    },
+    "repetitionsPerCase": {
+      "enum": [
+        0,
+        3
+      ]
+    },
+    "responseSchemaUnchanged": {
+      "const": true
+    },
+    "resultRootState": {
+      "const": "not-created"
+    },
+    "reuseAcceptedMemoryEvidence": {
+      "type": "boolean"
+    },
+    "stdoutLimitBytes": {
+      "const": 65536
+    },
+    "stopConditions": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "cleanup-failure",
+          "digest-mismatch",
+          "excessive-output",
+          "isolation-failure",
+          "memory-ceiling",
+          "network-violation",
+          "oom",
+          "telemetry-unresolved"
+        ]
+      }
+    },
+    "tokenizerDigest": {
+      "const": "0a1f2cb9fc2769030ca1f4207e81c1af493319373d41b8d3cf5be53860c13760"
+    },
+    "withheldReason": {
+      "enum": [
+        "not-applicable",
+        "proportionality-stop",
+        "unresolved-authority",
+        "candidate-rejected",
+        "forensics-required"
+      ]
+    }
+  }
+}
