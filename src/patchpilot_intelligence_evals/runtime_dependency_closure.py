@@ -1,7 +1,7 @@
 """Shared dynamic-dependency closure for the verified ONNX Runtime library.
 
-Track 8A offline load and Track 8B-R1 inference both use this module. It does
-not create a model session and it does not call Run.
+Track 8A offline load, Track 8B-R1 inference, and Track 8B-R2 inference use
+this module. It does not create a model session and it does not call Run.
 """
 
 from __future__ import annotations
@@ -66,6 +66,13 @@ def public_dependency(item: ResolvedDependency) -> dict[str, str]:
         "classification": item.classification,
         "identity": item.identity,
     }
+
+
+def closure_digest() -> str:
+    """Digest the public closure. The digest covers no host path and no file bytes."""
+    from patchpilot_intelligence_evals.corpus import canonical_dumps, sha256_text
+
+    return sha256_text(canonical_dumps(approved_public_closure()))
 
 
 def approved_public_closure() -> list[dict[str, str]]:

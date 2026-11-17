@@ -1,0 +1,19 @@
+{
+  "calibrationStatus": "not-approved",
+  "consumedRetryPlanDigest": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b",
+  "dependencyClosureDigest": "7e86fd24935ac651811ab4ae7d00e471369109843fb947a2dfa9f5a5905b82dd",
+  "dynamicLinkPrecheckDigest": "not-executed",
+  "identityDigest": "2b9e4b238af00dabea717ed95ff8fd5f79cd6af0f57553100f42692bfd8e72e2",
+  "installationAuthorized": false,
+  "measurementPerformed": false,
+  "planDigest": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350",
+  "priorPlanDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+  "productionReady": false,
+  "readinessOutcome": "not-ready",
+  "realModelExecuted": false,
+  "reason": "measurement-not-performed",
+  "schemaVersion": "1.0.0",
+  "selectionOutcome": "no-selection",
+  "sessionId": "intelligence-track-8b-r2",
+  "verdict": "TRACK 9 EVALUATION REVIEW NOT READY"
+}

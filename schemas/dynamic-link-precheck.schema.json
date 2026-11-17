@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:dynamic-link-precheck:v1",
+  "title": "Track 8B-R2 exact-sandbox dynamic-link precheck",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "broadHostLibraryMounted",
+    "calibrationStatus",
+    "consumedRetryPlanDigest",
+    "createSessionCalled",
+    "dependencies",
+    "dependencyClosureDigest",
+    "exportedSymbols",
+    "getApiCalled",
+    "identityDigest",
+    "installationAuthorized",
+    "libraryClosed",
+    "mappedBasenames",
+    "measurementCompleted",
+    "measurementPerformed",
+    "modelSessionCreated",
+    "networkResult",
+    "planDigest",
+    "priorPlanDigest",
+    "processCleanup",
+    "productionReady",
+    "profileId",
+    "providerLoaded",
+    "realModelExecuted",
+    "resultRootClass",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "status",
+    "stopCause",
+    "symbolBoundary",
+    "timestamp",
+    "unexpectedPath"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "sessionId": { "const": "intelligence-track-8b-r2" },
+    "productionReady": { "const": false },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "installationAuthorized": { "const": false },
+    "measurementPerformed": { "const": false },
+    "measurementCompleted": { "const": false },
+    "modelSessionCreated": { "const": false },
+    "runInvoked": { "const": false },
+    "realModelExecuted": { "const": false },
+    "createSessionCalled": { "const": false },
+    "getApiCalled": { "const": false },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "resultRootClass": { "const": "inference-retry-result" },
+    "planDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "dependencyClosureDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "status": { "enum": ["not-executed", "passed", "failed"] },
+    "symbolBoundary": { "enum": ["not-executed", "held", "violated"] },
+    "stopCause": { "type": ["string", "null"] },
+    "apiVersion": {
+      "anyOf": [{ "type": "null" }, { "type": "string", "minLength": 1, "maxLength": 40 }]
+    },
+    "providerLoaded": { "type": "boolean" },
+    "libraryClosed": { "type": "boolean" },
+    "unexpectedPath": { "type": "boolean" },
+    "broadHostLibraryMounted": { "type": "boolean" },
+    "exportedSymbols": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+    },
+    "mappedBasenames": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/dependency" }
+    },
+    "networkResult": { "enum": ["not-performed", "denied", "failed"] },
+    "processCleanup": { "enum": ["not-performed", "reaped", "failed"] },
+    "timestamp": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "dependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["basename", "classification", "identity"],
+      "properties": {
+        "basename": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "classification": {
+          "enum": ["standard-host-runtime", "elf-interpreter"]
+        },
+        "identity": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    }
+  }
+}

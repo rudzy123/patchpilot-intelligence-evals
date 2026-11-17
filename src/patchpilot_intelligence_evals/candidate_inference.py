@@ -137,11 +137,20 @@ def launch_child(
     launcher: Launcher = execute_hardened,
     sampler: ScopeSampler | None = None,
     retry_approval: str | None = None,
+    inference_retry_approval: str | None = None,
 ) -> tuple[ExecutionResult, ScopeSampler]:
     """Stage one child. The callable is replaceable in synthetic tests."""
     dependency_mounts: tuple[Mount, ...] = ()
     if launcher is execute_hardened:
-        if retry_approval is None:
+        if inference_retry_approval is not None and retry_approval is not None:
+            raise MeasurementError("approval-required")
+        if inference_retry_approval is not None:
+            from patchpilot_intelligence_evals.inference_retry_plan import (
+                require_inference_retry_approval,
+            )
+
+            require_inference_retry_approval(inference_retry_approval)
+        elif retry_approval is None:
             require_reusable_plan()
         else:
             from patchpilot_intelligence_evals.measurement_retry_plan import (
@@ -249,6 +258,11 @@ def classify_execution(
     if result.cleanup not in {"reaped", "failed"}:
         cleanup = "failed"
     classification = _classification(result, cold, warm, network, cleanup, cold_warm)
+    blocked = getattr(sampler, "blocked_classification", None)
+    if blocked == "infrastructure-failure":
+        classification = "infrastructure-failure"
+    elif blocked == "telemetry-unresolved" and classification == "success":
+        classification = "telemetry-unresolved"
     stop = classification if classification != "success" else None
     return {
         "cleanup": cleanup,

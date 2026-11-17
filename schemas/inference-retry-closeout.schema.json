@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:inference-retry-closeout:v1",
+  "title": "Track 8B-R2 inference retry closeout",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "behavioralConclusion",
+    "calibrationRemainedNotApproved",
+    "calibrationStatus",
+    "cleanup",
+    "closeoutState",
+    "comparisonWinner",
+    "identityDigest",
+    "installationAuthorized",
+    "measurementCompleted",
+    "measurementPerformed",
+    "memoryConclusion",
+    "modelSessionCreated",
+    "phases",
+    "planDigest",
+    "consumedRetryPlanDigest",
+    "dependencyClosureDigest",
+    "dynamicLinkPrecheckDigest",
+    "priorPlanDigest",
+    "productionReady",
+    "realModelExecuted",
+    "residuals",
+    "resultRootClass",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "stopCause",
+    "furtherRetryAssumed",
+    "proportionalityRecommendation",
+    "proportionalityRationale"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "sessionId": {
+      "const": "intelligence-track-8b-r2"
+    },
+    "productionReady": {
+      "const": false
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "calibrationRemainedNotApproved": {
+      "const": true
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "comparisonWinner": {
+      "const": null
+    },
+    "resultRootClass": {
+      "const": "inference-retry-result"
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "planDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "closeoutState": {
+      "enum": [
+        "not-closed",
+        "closed",
+        "stopped"
+      ]
+    },
+    "stopCause": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "cleanup": {
+      "enum": [
+        "not-performed",
+        "reaped",
+        "failed"
+      ]
+    },
+    "memoryConclusion": {
+      "enum": [
+        "not-measured",
+        "unavailable",
+        "within-ceiling",
+        "exceeded",
+        "unresolved",
+        "oom"
+      ]
+    },
+    "behavioralConclusion": {
+      "enum": [
+        "not-measured",
+        "measured",
+        "withheld"
+      ]
+    },
+    "measurementPerformed": {
+      "type": "boolean"
+    },
+    "measurementCompleted": {
+      "type": "boolean"
+    },
+    "runInvoked": {
+      "type": "boolean"
+    },
+    "modelSessionCreated": {
+      "type": "boolean"
+    },
+    "realModelExecuted": {
+      "type": "boolean"
+    },
+    "residuals": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 80
+      }
+    },
+    "phases": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "phase",
+          "status"
+        ],
+        "properties": {
+          "phase": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40
+          },
+          "status": {
+            "enum": [
+              "not-executed",
+              "passed",
+              "failed",
+              "withheld"
+            ]
+          }
+        }
+      }
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "dependencyClosureDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "dynamicLinkPrecheckDigest": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "const": "not-executed"
+        }
+      ]
+    },
+    "furtherRetryAssumed": {
+      "const": false
+    },
+    "proportionalityRecommendation": {
+      "enum": [
+        "not-applicable",
+        "review-required"
+      ]
+    },
+    "proportionalityRationale": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    }
+  }
+}

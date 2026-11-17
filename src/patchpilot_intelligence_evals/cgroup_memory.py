@@ -15,6 +15,13 @@ from patchpilot_intelligence_evals.measurement_plan import ADDRESS_SPACE_BYTES, 
 _CGROUP_ROOT = Path("/sys/fs/cgroup")
 
 
+class CgroupReadError(OSError):
+    """A cgroup file disappeared or could not be read."""
+
+    def __init__(self, errno: int | None) -> None:
+        super().__init__(errno or 0, "cgroup-read")
+
+
 def parse_status(text: str) -> tuple[int | None, int | None]:
     """Return VmRSS and VmSize in bytes from one ``/proc`` status file."""
     rss: int | None = None
@@ -81,10 +88,14 @@ def read_cgroup_dir(
     if directory is None:
         memory["telemetry"] = "unresolved"
         return memory
-    current = _read_int(directory / "memory.current")
-    peak = _read_int(directory / "memory.peak")
-    events_path = directory / "memory.events"
-    oom = parse_events(events_path.read_text(encoding="utf-8")) if events_path.is_file() else None
+    try:
+        current = _read_int(directory / "memory.current")
+        peak = _read_int(directory / "memory.peak")
+        events_path = directory / "memory.events"
+        events_text = events_path.read_text(encoding="utf-8") if events_path.is_file() else None
+    except OSError as exc:
+        raise CgroupReadError(exc.errno) from exc
+    oom = parse_events(events_text) if events_text is not None else None
     memory["cgroupCurrentBytes"] = current
     memory["cgroupPeakBytes"] = peak
     memory["oomEvents"] = oom
@@ -138,25 +149,136 @@ def _process_memory(directory: Path | None, pid: int) -> tuple[int | None, int |
     return main_rss, tree, virtual_sum
 
 
+def sample_complete(sample: dict[str, Any] | None) -> bool:
+    """Return whether one sample has a usable resident peak and current."""
+    if not isinstance(sample, dict) or sample.get("telemetry") != "complete":
+        return False
+    current = sample.get("cgroupCurrentBytes")
+    peak = sample.get("cgroupPeakBytes")
+    oom = sample.get("oomEvents")
+    if not isinstance(current, int) or not isinstance(peak, int) or not isinstance(oom, int):
+        return False
+    return current <= peak and oom >= 0
+
+
+def resolve_scope_observation(
+    *,
+    child_state: str,
+    read_error: str | None,
+    sample: dict[str, Any] | None,
+    last_complete: dict[str, Any] | None,
+) -> dict[str, Any]:
+    """Classify one cgroup read against the child state and the last complete sample.
+
+    A scope that disappears after the child has exited keeps the last complete
+    sample. A scope that disappears while the child is active is an
+    infrastructure failure. A final read that returns incomplete or
+    contradictory counters stays unresolved.
+    """
+    if read_error is None and sample_complete(sample):
+        return _decision("present", sample, sample, None)
+    if _scope_gone(read_error, sample):
+        if child_state == "active" and (read_error is not None or sample_complete(last_complete)):
+            return _decision(
+                "disappeared-while-active", None, last_complete, "infrastructure-failure"
+            )
+        if child_state == "exited" and sample_complete(last_complete):
+            return _decision("post-exit-scope-removed", None, last_complete, None)
+        if child_state == "exited":
+            return _decision("unresolved", _unresolved_sample(), None, "telemetry-unresolved")
+        return _decision("unresolved", sample or _unresolved_sample(), None, None)
+    if child_state == "exited":
+        return _decision("present", sample, last_complete, "telemetry-unresolved")
+    return _decision("present", sample, last_complete, None)
+
+
+def _scope_gone(read_error: str | None, sample: dict[str, Any] | None) -> bool:
+    if read_error is not None or sample is None:
+        return True
+    return sample.get("cgroupCurrentBytes") is None
+
+
+def _unresolved_sample() -> dict[str, Any]:
+    memory = empty_memory()
+    memory["telemetry"] = "unresolved"
+    return memory
+
+
+def _decision(
+    disposition: str,
+    appended: dict[str, Any] | None,
+    retained: dict[str, Any] | None,
+    classification: str | None,
+) -> dict[str, Any]:
+    return {
+        "append": appended,
+        "classification": classification,
+        "disposition": disposition,
+        "retain": retained,
+    }
+
+
 class ScopeSampler:
     """Sample one systemd user scope while its process is alive."""
 
     def __init__(self) -> None:
         self.samples: list[dict[str, Any]] = []
         self.directory: Path | None = None
+        self.child_state = "active"
+        self.last_complete: dict[str, Any] | None = None
+        self.disposition = "pending"
+        self.blocked_classification: str | None = None
 
     def __call__(self, pid: int, unit: str, results: Path) -> None:
+        self.child_state = "active" if pid > 0 else "exited"
         expected = f"{unit}.scope" if unit else ""
         if pid > 0:
             located = cgroup_directory(pid)
             if located is not None and (not expected or located.name == expected):
                 self.directory = located
         if expected and (self.directory is None or self.directory.name != expected):
+            if self.child_state == "exited":
+                self._observe(read_error="disappeared", sample=None, results=results)
             return
-        rss, tree, virtual = _process_memory(self.directory, pid)
-        sample = read_cgroup_dir(self.directory, rss=rss, tree=tree, virtual=virtual)
-        sample["phase"] = phase_marker(results)
-        self.samples.append(sample)
+        sample: dict[str, Any] | None = None
+        read_error: str | None = None
+        try:
+            rss, tree, virtual = _process_memory(self.directory, pid)
+            sample = read_cgroup_dir(self.directory, rss=rss, tree=tree, virtual=virtual)
+        except OSError as exc:
+            read_error = "enxio" if exc.errno == 19 else "disappeared"
+        self._observe(read_error=read_error, sample=sample, results=results)
+
+    def _observe(
+        self,
+        *,
+        read_error: str | None,
+        sample: dict[str, Any] | None,
+        results: Path,
+    ) -> None:
+        decision = resolve_scope_observation(
+            child_state=self.child_state,
+            read_error=read_error,
+            sample=sample,
+            last_complete=self.last_complete,
+        )
+        self.disposition = str(decision["disposition"])
+        classification = decision["classification"]
+        if classification == "infrastructure-failure":
+            self.blocked_classification = "infrastructure-failure"
+        elif (
+            classification == "telemetry-unresolved"
+            and self.blocked_classification != "infrastructure-failure"
+        ):
+            self.blocked_classification = "telemetry-unresolved"
+        retained = decision["retain"]
+        if isinstance(retained, dict):
+            self.last_complete = retained
+        appended = decision["append"]
+        if isinstance(appended, dict):
+            copied = dict(appended)
+            copied["phase"] = phase_marker(results)
+            self.samples.append(copied)
 
     def leftover_pids(self) -> int | None:
         """Return remaining cgroup tasks after the scope should be gone."""

@@ -18,6 +18,7 @@ from patchpilot_intelligence_evals.hardened_execution import (
     command_uses_shell,
     execute_hardened,
     host_supports_boundary,
+    observe_then_reap,
 )
 from patchpilot_intelligence_evals.resource_controls import DEFAULT_LIMITS
 from patchpilot_intelligence_evals.schemas import repo_root
@@ -37,6 +38,20 @@ def test_missing_bubblewrap_fails_closed(monkeypatch: pytest.MonkeyPatch) -> Non
     with pytest.raises(HardenedExecutionError) as caught:
         execute_hardened(_FIXTURE, ("ok",))
     assert caught.value.code == "unsupported-capability"
+
+
+def test_post_exit_oserror_still_reaps() -> None:
+    calls: list[str] = []
+
+    def observe() -> None:
+        raise OSError(19, "No such device")
+
+    def reap() -> str:
+        calls.append("reap")
+        return "reaped"
+
+    assert observe_then_reap(observe, reap) == "reaped"
+    assert calls == ["reap"]
 
 
 def test_launch_vector_has_no_shell() -> None:

@@ -290,6 +290,24 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals track8b-r1-plan-disposition-validation",
         "uv run patchpilot-evals track8b-r1-stopped-track9-validation",
         "uv run patchpilot-evals track8b-r1-review-validation",
+        "uv run patchpilot-evals inference-retry-plan-validation",
+        "uv run patchpilot-evals inference-retry-approval-validation",
+        "uv run patchpilot-evals inference-retry-preflight-validation",
+        "uv run patchpilot-evals dynamic-link-precheck-validation",
+        "uv run patchpilot-evals inference-retry-smoke-validation",
+        "uv run patchpilot-evals inference-retry-context-memory-validation",
+        "uv run patchpilot-evals inference-retry-behavioral-run-validation",
+        "uv run patchpilot-evals inference-retry-closeout-validation",
+        "uv run patchpilot-evals inference-retry-track9-readiness-validation",
+        "uv run patchpilot-evals track8b-r2-stopped-attempt-validation",
+        "uv run patchpilot-evals track8b-r2-cgroup-sampling-defect-validation",
+        "uv run patchpilot-evals track8b-r2-schema-forensics-validation",
+        "uv run patchpilot-evals track8b-r2-behavioral-interpretation-validation",
+        "uv run patchpilot-evals track8b-r2-memory-conclusion-validation",
+        "uv run patchpilot-evals track8b-r2-plan-disposition-validation",
+        "uv run patchpilot-evals track8b-r2-proportionality-review-validation",
+        "uv run patchpilot-evals track8b-r2-stopped-track9-validation",
+        "uv run patchpilot-evals track8b-r2-review-validation",
         "uv run patchpilot-evals workflow-policy-validation",
         "uv run patchpilot-evals dependency-architecture-policy-validation",
     ):
@@ -410,6 +428,31 @@ def test_help_lists_commands() -> None:
     assert "track8b-r1-plan-disposition-validation" in text
     assert "track8b-r1-stopped-track9-validation" in text
     assert "track8b-r1-review-validation" in text
+    assert "inference-retry-plan-validation" in text
+    assert "inference-retry-approval-validation" in text
+    assert "inference-retry-preflight-validation" in text
+    assert "dynamic-link-precheck-validation" in text
+    assert "inference-retry-smoke-validation" in text
+    assert "inference-retry-context-memory-validation" in text
+    assert "inference-retry-behavioral-run-validation" in text
+    assert "inference-retry-closeout-validation" in text
+    assert "inference-retry-track9-readiness-validation" in text
+    assert "track8b-r2-stopped-attempt-validation" in text
+    assert "track8b-r2-cgroup-sampling-defect-validation" in text
+    assert "track8b-r2-schema-forensics-validation" in text
+    assert "track8b-r2-behavioral-interpretation-validation" in text
+    assert "track8b-r2-memory-conclusion-validation" in text
+    assert "track8b-r2-plan-disposition-validation" in text
+    assert "track8b-r2-proportionality-review-validation" in text
+    assert "track8b-r2-stopped-track9-validation" in text
+    assert "track8b-r2-review-validation" in text
+    assert "inference-retry-preflight" in text
+    assert "inference-retry-precheck" in text
+    assert "inference-retry-execute" in text
+    assert "inference-retry-smoke" in text
+    assert "inference-retry-short-generation" in text
+    assert "inference-retry-context" in text
+    assert "inference-retry-corpus" in text
     assert "measurement-retry-preflight" in text
     assert "measurement-retry-execute" in text
     assert "measurement-retry-smoke" in text

@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track8b-r2-schema-forensics:v1",
+  "title": "Track 8B-R2 schema-failure forensics",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "anyCandidateOutputValid",
+    "authorityCounts",
+    "candidateCharacterizedAsSchemaNoncompliant",
+    "casesWithoutResults",
+    "completedRunCount",
+    "consumedRetryPlanDigest",
+    "correctableWithoutContractChange",
+    "correctionBlocker",
+    "evidenceBasis",
+    "identityDigest",
+    "planDigest",
+    "priorPlanDigest",
+    "productionReady",
+    "repetitionsAgree",
+    "runs",
+    "sameMalformedShape",
+    "schemaErrorCounts",
+    "schemaVersion",
+    "sessionId"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "sessionId": { "const": "intelligence-track-8b-r2" },
+    "planDigest": {
+      "const": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350"
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "productionReady": { "const": false },
+    "evidenceBasis": { "const": "immutable-run-record-without-stdout" },
+    "completedRunCount": { "const": 15 },
+    "casesWithoutResults": { "const": 19 },
+    "repetitionsAgree": { "const": true },
+    "sameMalformedShape": { "const": "unresolved" },
+    "anyCandidateOutputValid": { "const": false },
+    "candidateCharacterizedAsSchemaNoncompliant": { "const": false },
+    "correctableWithoutContractChange": { "const": false },
+    "correctionBlocker": { "const": "raw-output-not-retained" },
+    "authorityCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adapter",
+        "candidate-output",
+        "evaluator",
+        "protocol",
+        "unresolved"
+      ],
+      "properties": {
+        "adapter": { "const": 0 },
+        "candidate-output": { "const": 0 },
+        "evaluator": { "const": 0 },
+        "protocol": { "const": 0 },
+        "unresolved": { "const": 15 }
+      }
+    },
+    "schemaErrorCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unavailable"],
+      "properties": { "unavailable": { "const": 15 } }
+    },
+    "runs": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 15,
+      "items": { "$ref": "#/$defs/run" }
+    },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "caseId",
+        "evidenceIdFormat",
+        "failureAuthority",
+        "jsonParseResult",
+        "missingRequiredFields",
+        "outputExtractionResult",
+        "outputLimitStatus",
+        "rawOutputByteCount",
+        "rawOutputDigest",
+        "repetition",
+        "schemaErrors",
+        "truncationStatus",
+        "unexpectedFields"
+      ],
+      "properties": {
+        "caseId": {
+          "enum": [
+            "case-contra-001",
+            "case-contra-002",
+            "case-contra-003",
+            "case-ground-001",
+            "case-ground-002"
+          ]
+        },
+        "repetition": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "rawOutputDigest": { "const": null },
+        "rawOutputByteCount": { "const": null },
+        "outputExtractionResult": { "const": "not-retained" },
+        "jsonParseResult": { "const": "not-retained" },
+        "schemaErrors": { "type": "array", "maxItems": 0 },
+        "missingRequiredFields": { "type": "array", "maxItems": 0 },
+        "unexpectedFields": { "type": "array", "maxItems": 0 },
+        "evidenceIdFormat": { "const": "not-retained" },
+        "truncationStatus": { "const": "unresolved" },
+        "outputLimitStatus": { "const": "within-limit" },
+        "failureAuthority": { "const": "unresolved" }
+      }
+    }
+  }
+}

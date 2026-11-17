@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track8b-r2-cgroup-sampling-defect:v1",
+  "title": "Track 8B-R2 cgroup sampling defect",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "childModelSessionCreated",
+    "childRunInvoked",
+    "childStatus",
+    "completedRunRecords",
+    "consumedRetryPlanDigest",
+    "contextPassRequiresCompletePeak",
+    "correctedDisposition",
+    "defect",
+    "identityDigest",
+    "inputTokenCount",
+    "networkResult",
+    "newTokenCount",
+    "observedErrno",
+    "observedRead",
+    "omittedLaunch",
+    "productionReady",
+    "omittedLaunchSealed",
+    "planDigest",
+    "priorPlanDigest",
+    "schemaVersion",
+    "sessionId",
+    "stdoutRetained",
+    "tokenOutputDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "sessionId": { "const": "intelligence-track-8b-r2" },
+    "planDigest": {
+      "const": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350"
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "productionReady": { "const": false },
+    "defect": { "const": "post-exit-scope-removal" },
+    "observedErrno": { "const": 19 },
+    "observedRead": { "const": "memory.events" },
+    "correctedDisposition": { "const": "post-exit-scope-removed" },
+    "contextPassRequiresCompletePeak": { "const": true },
+    "completedRunRecords": { "const": 15 },
+    "omittedLaunch": { "const": true },
+    "omittedLaunchSealed": { "const": false },
+    "stdoutRetained": { "const": false },
+    "childStatus": { "const": "ok" },
+    "childRunInvoked": { "const": true },
+    "childModelSessionCreated": { "const": true },
+    "inputTokenCount": { "const": 796 },
+    "newTokenCount": { "const": 41 },
+    "tokenOutputDigest": {
+      "const": "c5f4cd95ea0de4e7502580fee8363b9ad1b0ba38145ab514b7bc8893acd3a978"
+    },
+    "networkResult": { "const": "denied" },
+    "identityDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

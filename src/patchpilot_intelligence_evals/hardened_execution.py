@@ -114,6 +114,21 @@ def command_uses_shell(argv: list[str] | tuple[str, ...]) -> bool:
     return any(Path(item).name in shells or item == "-c" for item in argv)
 
 
+def observe_then_reap(observe: Callable[[], None], reap: Callable[[], str]) -> str:
+    """Reap after the post-exit sample. A disappeared scope does not skip cleanup."""
+    cleanup = "failed"
+    try:
+        try:
+            observe()
+        except OSError:
+            pass
+        cleanup = reap()
+    finally:
+        if cleanup != "reaped":
+            cleanup = reap()
+    return cleanup
+
+
 def execute_hardened(
     fixture: Path,
     arguments: tuple[str, ...] = (),
@@ -168,16 +183,27 @@ def execute_hardened(
         unit,
         work / "results",
     )
-    if observer is not None:
-        observer(0, unit, work / "results")
-    cleanup = _reap(unit, proc)
-    leftover = getattr(observer, "leftover_pids", None)
-    if cleanup == "reaped" and callable(leftover):
-        remaining = leftover()
-        if isinstance(remaining, int) and remaining > 0:
-            cleanup = "failed"
-    report = _read_report(work)
-    shutil.rmtree(work, ignore_errors=True)
+    cleanup = "failed"
+    report = b""
+    try:
+        cleanup = observe_then_reap(
+            lambda: observer(0, unit, work / "results") if observer is not None else None,
+            lambda: _reap(unit, proc),
+        )
+        leftover = getattr(observer, "leftover_pids", None)
+        if cleanup == "reaped" and callable(leftover):
+            try:
+                remaining = leftover()
+            except OSError:
+                cleanup = "failed"
+            else:
+                if isinstance(remaining, int) and remaining > 0:
+                    cleanup = "failed"
+        report = _read_report(work)
+    finally:
+        if cleanup != "reaped":
+            cleanup = _reap(unit, proc)
+        shutil.rmtree(work, ignore_errors=True)
     return ExecutionResult(
         exit_classification=_classify(limit, proc.returncode),
         return_code=proc.returncode,

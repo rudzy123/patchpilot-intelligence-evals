@@ -1,0 +1,360 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:inference-retry-behavioral-run:v1",
+  "title": "Track 8B-R2 behavioral run or summary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationStatus",
+    "identityDigest",
+    "installationAuthorized",
+    "measurementCompleted",
+    "measurementPerformed",
+    "modelSessionCreated",
+    "planDigest",
+    "consumedRetryPlanDigest",
+    "dependencyClosureDigest",
+    "dynamicLinkPrecheckDigest",
+    "priorPlanDigest",
+    "productionReady",
+    "realModelExecuted",
+    "recordKind",
+    "repositoryCommit",
+    "resultRootClass",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "timestamp"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "sessionId": {
+      "const": "intelligence-track-8b-r2"
+    },
+    "productionReady": {
+      "const": false
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "resultRootClass": {
+      "const": "inference-retry-result"
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "planDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "recordKind": {
+      "enum": [
+        "run",
+        "summary"
+      ]
+    },
+    "measurementPerformed": {
+      "type": "boolean"
+    },
+    "measurementCompleted": {
+      "type": "boolean"
+    },
+    "runInvoked": {
+      "type": "boolean"
+    },
+    "modelSessionCreated": {
+      "type": "boolean"
+    },
+    "realModelExecuted": {
+      "type": "boolean"
+    },
+    "repositoryCommit": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40
+    },
+    "timestamp": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40
+    },
+    "caseId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "repetition": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "exitClassification": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40
+    },
+    "networkResult": {
+      "enum": [
+        "not-performed",
+        "denied",
+        "failed"
+      ]
+    },
+    "outputDigest": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "processCleanup": {
+      "enum": [
+        "not-performed",
+        "reaped",
+        "failed"
+      ]
+    },
+    "requestDigest": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "stopCause": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "comparisonStatus": {
+      "enum": [
+        "not-executed",
+        "missing-right",
+        "comparable",
+        "incomparable"
+      ]
+    },
+    "comparisonWinner": {
+      "const": null
+    },
+    "gatesUnchanged": {
+      "const": true
+    },
+    "percentageGatesCalibrated": {
+      "const": false
+    },
+    "ungatedCanonicalAgreement": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "not-executed",
+        "agree",
+        "disagree",
+        null
+      ]
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/metric"
+      }
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/gate"
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/capability"
+      }
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "dependencyClosureDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "dynamicLinkPrecheckDigest": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "const": "not-executed"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "recordKind": {
+            "const": "run"
+          }
+        },
+        "required": [
+          "recordKind"
+        ]
+      },
+      "then": {
+        "required": [
+          "caseId",
+          "exitClassification",
+          "networkResult",
+          "outputDigest",
+          "processCleanup",
+          "repetition",
+          "requestDigest",
+          "stopCause"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "recordKind": {
+            "const": "summary"
+          }
+        },
+        "required": [
+          "recordKind"
+        ]
+      },
+      "then": {
+        "required": [
+          "capabilities",
+          "comparisonStatus",
+          "comparisonWinner",
+          "gates",
+          "gatesUnchanged",
+          "metrics",
+          "percentageGatesCalibrated",
+          "ungatedCanonicalAgreement"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "denominator",
+        "name",
+        "numerator",
+        "status"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "numerator": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "denominator": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "status": {
+          "enum": [
+            "measured",
+            "unmeasured"
+          ]
+        }
+      }
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "denominator",
+        "kind",
+        "name",
+        "numerator",
+        "status"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "kind": {
+          "enum": [
+            "invariant",
+            "proposed-percentage"
+          ]
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "fail",
+            "unmeasured"
+          ]
+        },
+        "numerator": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "denominator": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capabilityId",
+        "priorEvidence",
+        "result"
+      ],
+      "properties": {
+        "capabilityId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "priorEvidence": {
+          "enum": [
+            "empirical",
+            "in-principle"
+          ]
+        },
+        "result": {
+          "enum": [
+            "pass",
+            "fail",
+            "unmeasured",
+            "not-reached"
+          ]
+        }
+      }
+    }
+  }
+}

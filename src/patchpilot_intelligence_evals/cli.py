@@ -89,6 +89,10 @@ from patchpilot_intelligence_evals.hardened_execution import (
 )
 from patchpilot_intelligence_evals.hardened_load_proof import LoadProofError
 from patchpilot_intelligence_evals.implementation_review import ReviewError, load_review
+from patchpilot_intelligence_evals.inference_retry_cli import EXECUTE as INFERENCE_EXECUTE
+from patchpilot_intelligence_evals.inference_retry_cli import VALIDATION as INFERENCE_VALIDATION
+from patchpilot_intelligence_evals.inference_retry_cli import handle as handle_inference
+from patchpilot_intelligence_evals.inference_retry_cli import register as register_inference
 from patchpilot_intelligence_evals.isolation_profile import IsolationError, load_profile
 from patchpilot_intelligence_evals.measurement_authorization import (
     MeasurementAuthorizationError,
@@ -321,6 +325,7 @@ def _parser() -> argparse.ArgumentParser:
     calibration.add_argument("--output-dir", required=True)
     register_measurement(commands)
     register_retry(commands)
+    register_inference(commands)
     return parser
 
 
@@ -376,11 +381,17 @@ def main(argv: list[str] | None = None) -> int:
             payload = handle_retry(args.command, args)
             _summary(payload)
             return 0 if payload.get("status") == "ok" else 1
+        if args.command in INFERENCE_EXECUTE:
+            payload = handle_inference(args.command, args)
+            _summary(payload)
+            return 0 if payload.get("status") == "ok" else 1
         with network_guard():
             if args.command in MEASUREMENT_VALIDATION:
                 return _summary(handle_measurement(args.command, args))
             if args.command in RETRY_VALIDATION:
                 return _summary(handle_retry(args.command, args))
+            if args.command in INFERENCE_VALIDATION:
+                return _summary(handle_inference(args.command, args))
             if args.command == "corpus-validation":
                 return _summary(validate_corpus())
             if args.command == "baseline-evaluation":

@@ -416,6 +416,9 @@ def test_validation_jobs_keep_existing_coverage() -> None:
         "measurement-retry-plan-validation"
     )
     assert contracts.index("retry-track9-readiness-validation") < contracts.index(
+        "inference-retry-plan-validation"
+    )
+    assert contracts.index("inference-retry-track9-readiness-validation") < contracts.index(
         "workflow-policy-validation"
     )
     for name in (
@@ -435,6 +438,24 @@ def test_validation_jobs_keep_existing_coverage() -> None:
         "track8b-r1-plan-disposition-validation",
         "track8b-r1-stopped-track9-validation",
         "track8b-r1-review-validation",
+        "inference-retry-plan-validation",
+        "inference-retry-approval-validation",
+        "inference-retry-preflight-validation",
+        "dynamic-link-precheck-validation",
+        "inference-retry-smoke-validation",
+        "inference-retry-context-memory-validation",
+        "inference-retry-behavioral-run-validation",
+        "inference-retry-closeout-validation",
+        "inference-retry-track9-readiness-validation",
+        "track8b-r2-stopped-attempt-validation",
+        "track8b-r2-cgroup-sampling-defect-validation",
+        "track8b-r2-schema-forensics-validation",
+        "track8b-r2-behavioral-interpretation-validation",
+        "track8b-r2-memory-conclusion-validation",
+        "track8b-r2-plan-disposition-validation",
+        "track8b-r2-proportionality-review-validation",
+        "track8b-r2-stopped-track9-validation",
+        "track8b-r2-review-validation",
     ):
         assert name in contracts
     workflow_commands = [
@@ -449,6 +470,13 @@ def test_validation_jobs_keep_existing_coverage() -> None:
         "measurement-retry-short-generation",
         "measurement-retry-context",
         "measurement-retry-corpus",
+        "inference-retry-preflight",
+        "inference-retry-precheck",
+        "inference-retry-execute",
+        "inference-retry-smoke",
+        "inference-retry-short-generation",
+        "inference-retry-context",
+        "inference-retry-corpus",
     ):
         assert name not in workflow_commands
     assert "measurement-preflight" not in text
