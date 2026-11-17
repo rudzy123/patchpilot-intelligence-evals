@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track9a-telemetry-finalization-defect:v1",
+  "title": "track9a-telemetry-finalization-defect",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "aggregatedWindowTelemetry",
+    "calibrationStatus",
+    "cgroupCurrentBytes",
+    "cgroupPeakBytes",
+    "childState",
+    "cleanup",
+    "comparisonWinner",
+    "correctedDisposition",
+    "defect",
+    "downgradeRequiresContradiction",
+    "identityDigest",
+    "incompleteTelemetryFailClosed",
+    "installationAuthorized",
+    "networkResult",
+    "observedExitClassification",
+    "oomEvents",
+    "planDigest",
+    "postExitScope",
+    "productionReady",
+    "replacementPlanDigest",
+    "schemaVersion",
+    "sealedLaunchOmission",
+    "selectionOutcome",
+    "sessionId",
+    "track9AuthorizationDigest"
+  ],
+  "properties": {
+    "aggregatedWindowTelemetry": {
+      "const": "complete"
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "cgroupCurrentBytes": {
+      "const": 3129344
+    },
+    "cgroupPeakBytes": {
+      "const": 5709541376
+    },
+    "childState": {
+      "const": "exited"
+    },
+    "cleanup": {
+      "const": "reaped"
+    },
+    "comparisonWinner": {
+      "type": "null"
+    },
+    "correctedDisposition": {
+      "const": "sealed-complete-window"
+    },
+    "defect": {
+      "const": "post-exit-read-downgrade"
+    },
+    "downgradeRequiresContradiction": {
+      "const": true
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "incompleteTelemetryFailClosed": {
+      "const": true
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "networkResult": {
+      "const": "denied"
+    },
+    "observedExitClassification": {
+      "const": "telemetry-unresolved"
+    },
+    "oomEvents": {
+      "const": 0
+    },
+    "planDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "postExitScope": {
+      "const": "retained"
+    },
+    "productionReady": {
+      "const": false
+    },
+    "replacementPlanDigest": {
+      "const": "not-issued"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "sealedLaunchOmission": {
+      "const": false
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "sessionId": {
+      "const": "intelligence-track-9a"
+    },
+    "track9AuthorizationDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track9a-plan-disposition:v1",
+  "title": "track9a-plan-disposition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationStatus",
+    "comparisonWinner",
+    "executionStatus",
+    "furtherPlanAssumed",
+    "identityDigest",
+    "installationAuthorized",
+    "modelSessionCreated",
+    "planDigest",
+    "planDisposition",
+    "productionReady",
+    "realModelExecuted",
+    "replacementPlanDigest",
+    "reusable",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "track9AuthorizationDigest"
+  ],
+  "properties": {
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "comparisonWinner": {
+      "type": "null"
+    },
+    "executionStatus": {
+      "const": "stopped"
+    },
+    "furtherPlanAssumed": {
+      "const": false
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "modelSessionCreated": {
+      "const": true
+    },
+    "planDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "planDisposition": {
+      "const": "consumed"
+    },
+    "productionReady": {
+      "const": false
+    },
+    "realModelExecuted": {
+      "const": true
+    },
+    "replacementPlanDigest": {
+      "const": "not-issued"
+    },
+    "reusable": {
+      "const": false
+    },
+    "runInvoked": {
+      "const": true
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "sessionId": {
+      "const": "intelligence-track-9a"
+    },
+    "track9AuthorizationDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

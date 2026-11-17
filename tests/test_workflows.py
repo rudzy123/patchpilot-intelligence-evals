@@ -463,6 +463,23 @@ def test_validation_jobs_keep_existing_coverage() -> None:
         "corpus-continuation-authorization-validation",
         "candidate-disposition-validation",
         "track9-implementation-review-validation",
+        "corpus-continuation-plan-validation",
+        "corpus-continuation-approval-validation",
+        "corpus-continuation-preflight-validation",
+        "bounded-raw-output-validation",
+        "run-diagnostics-validation",
+        "corpus-continuation-run-validation",
+        "corpus-continuation-summary-validation",
+        "corpus-continuation-closeout-validation",
+        "track10-readiness-validation",
+        "track9a-stopped-attempt-validation",
+        "track9a-telemetry-finalization-defect-validation",
+        "track9a-schema-forensics-validation",
+        "track9a-corrected-interpretation-validation",
+        "track9a-plan-disposition-validation",
+        "track9a-proportionality-review-validation",
+        "track9a-track10-not-ready-validation",
+        "track9a-implementation-review-validation",
     ):
         assert name in contracts
     assert contracts.index("track8b-r2-review-validation") < contracts.index(
@@ -472,6 +489,18 @@ def test_validation_jobs_keep_existing_coverage() -> None:
         "track9-implementation-review-validation"
     )
     assert contracts.index("track9-implementation-review-validation") < contracts.index(
+        "corpus-continuation-plan-validation"
+    )
+    assert contracts.index("corpus-continuation-plan-validation") < contracts.index(
+        "track10-readiness-validation"
+    )
+    assert contracts.index("track10-readiness-validation") < contracts.index(
+        "track9a-stopped-attempt-validation"
+    )
+    assert contracts.index("track9a-stopped-attempt-validation") < contracts.index(
+        "track9a-implementation-review-validation"
+    )
+    assert contracts.index("track9a-implementation-review-validation") < contracts.index(
         "workflow-policy-validation"
     )
     workflow_commands = [
@@ -493,6 +522,8 @@ def test_validation_jobs_keep_existing_coverage() -> None:
         "inference-retry-short-generation",
         "inference-retry-context",
         "inference-retry-corpus",
+        "corpus-continuation-preflight",
+        "corpus-continuation-execute",
     ):
         assert name not in workflow_commands
     assert "measurement-preflight" not in text

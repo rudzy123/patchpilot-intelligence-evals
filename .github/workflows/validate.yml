@@ -290,6 +290,26 @@ jobs:
           uv run patchpilot-evals candidate-disposition-validation
           uv run patchpilot-evals track9-implementation-review-validation
 
+      - name: Validate the Track 9A corpus continuation
+        run: |
+          uv run patchpilot-evals corpus-continuation-plan-validation
+          uv run patchpilot-evals corpus-continuation-approval-validation
+          uv run patchpilot-evals corpus-continuation-preflight-validation
+          uv run patchpilot-evals bounded-raw-output-validation
+          uv run patchpilot-evals run-diagnostics-validation
+          uv run patchpilot-evals corpus-continuation-run-validation
+          uv run patchpilot-evals corpus-continuation-summary-validation
+          uv run patchpilot-evals corpus-continuation-closeout-validation
+          uv run patchpilot-evals track10-readiness-validation
+          uv run patchpilot-evals track9a-stopped-attempt-validation
+          uv run patchpilot-evals track9a-telemetry-finalization-defect-validation
+          uv run patchpilot-evals track9a-schema-forensics-validation
+          uv run patchpilot-evals track9a-corrected-interpretation-validation
+          uv run patchpilot-evals track9a-plan-disposition-validation
+          uv run patchpilot-evals track9a-proportionality-review-validation
+          uv run patchpilot-evals track9a-track10-not-ready-validation
+          uv run patchpilot-evals track9a-implementation-review-validation
+
       - name: Validate workflow policy
         run: uv run patchpilot-evals workflow-policy-validation
 

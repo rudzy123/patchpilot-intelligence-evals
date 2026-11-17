@@ -59,6 +59,8 @@ class ExecutionResult:
     attempts: int
     report: bytes
     argv: tuple[str, ...]
+    generation_diagnostic: bytes = b""
+    generated_text: bytes = b""
 
 
 def allowlisted_environment(
@@ -185,6 +187,8 @@ def execute_hardened(
     )
     cleanup = "failed"
     report = b""
+    diagnostic = b""
+    generated = b""
     try:
         cleanup = observe_then_reap(
             lambda: observer(0, unit, work / "results") if observer is not None else None,
@@ -200,6 +204,8 @@ def execute_hardened(
                 if isinstance(remaining, int) and remaining > 0:
                     cleanup = "failed"
         report = _read_report(work)
+        diagnostic = _read_named(work, "generation-diagnostic.json")
+        generated = _read_named(work, "generated.bin")
     finally:
         if cleanup != "reaped":
             cleanup = _reap(unit, proc)
@@ -213,6 +219,8 @@ def execute_hardened(
         attempts=1,
         report=report,
         argv=tuple(argv),
+        generation_diagnostic=diagnostic,
+        generated_text=generated,
     )
 
 
@@ -253,8 +261,12 @@ def _copy_optional(source: Path | None, destination: Path) -> None:
 
 
 def _read_report(work: Path) -> bytes:
-    path = work / "results" / "report.json"
-    if not path.is_file():
+    return _read_named(work, "report.json")
+
+
+def _read_named(work: Path, name: str) -> bytes:
+    path = work / "results" / name
+    if not path.is_file() or path.is_symlink():
         return b""
     return path.read_bytes()
 

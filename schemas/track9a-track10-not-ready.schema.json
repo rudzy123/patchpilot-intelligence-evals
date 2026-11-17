@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track9a-track10-not-ready:v1",
+  "title": "track9a-track10-not-ready",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationStatus",
+    "candidateMetricsProduced",
+    "comparisonWinner",
+    "completedRuns",
+    "identityDigest",
+    "installationAuthorized",
+    "missingRuns",
+    "planDigest",
+    "productionReady",
+    "readinessOutcome",
+    "reason",
+    "replacementPlanDigest",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "track9AuthorizationDigest",
+    "verdict"
+  ],
+  "properties": {
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "candidateMetricsProduced": {
+      "const": false
+    },
+    "comparisonWinner": {
+      "type": "null"
+    },
+    "completedRuns": {
+      "const": 1
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "missingRuns": {
+      "const": 71
+    },
+    "planDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "productionReady": {
+      "const": false
+    },
+    "readinessOutcome": {
+      "const": "not-ready"
+    },
+    "reason": {
+      "const": "telemetry-unresolved"
+    },
+    "replacementPlanDigest": {
+      "const": "not-issued"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "sessionId": {
+      "const": "intelligence-track-9a"
+    },
+    "track9AuthorizationDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "verdict": {
+      "const": "TRACK 10 CANDIDATE DISPOSITION REVIEW NOT READY"
+    }
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track9a-schema-forensics:v1",
+  "title": "track9a-schema-forensics",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "adapterAddedInnerFields",
+    "adapterFallback",
+    "adapterRemovedFields",
+    "adapterRenamedFields",
+    "adapterTruncated",
+    "adapterWrappedEnvelope",
+    "calibrationStatus",
+    "comparisonWinner",
+    "diagnosticIdentityDigest",
+    "executionStopAuthority",
+    "executionStopCause",
+    "extractedBytes",
+    "extractedDigest",
+    "extractionPreservedObject",
+    "fallbackShape",
+    "generationObserved",
+    "identityDigest",
+    "innerObjectUnchanged",
+    "installationAuthorized",
+    "jsonKeysPreserved",
+    "missingRequiredFields",
+    "outputLimitStatus",
+    "planDigest",
+    "productionReady",
+    "promptContainsFindingExplanation",
+    "promptContractPresent",
+    "rawContainsDeterministicFacts",
+    "rawContainsFindingExplanation",
+    "replacementPlanDigest",
+    "responseFailureAuthority",
+    "responseSchemaDigest",
+    "responseSchemaVersion",
+    "runId",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "stderrBytes",
+    "stderrDigest",
+    "stderrTruncated",
+    "stdoutBytes",
+    "stdoutDigest",
+    "stdoutTruncated",
+    "track9AuthorizationDigest",
+    "unexpectedFields"
+  ],
+  "properties": {
+    "adapterAddedInnerFields": {
+      "const": false
+    },
+    "adapterFallback": {
+      "const": false
+    },
+    "adapterRemovedFields": {
+      "const": false
+    },
+    "adapterRenamedFields": {
+      "const": false
+    },
+    "adapterTruncated": {
+      "const": false
+    },
+    "adapterWrappedEnvelope": {
+      "const": true
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "comparisonWinner": {
+      "type": "null"
+    },
+    "diagnosticIdentityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "executionStopAuthority": {
+      "const": "measurement-infrastructure"
+    },
+    "executionStopCause": {
+      "const": "telemetry-unresolved"
+    },
+    "extractedBytes": {
+      "const": 264
+    },
+    "extractedDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "extractionPreservedObject": {
+      "const": true
+    },
+    "fallbackShape": {
+      "const": false
+    },
+    "generationObserved": {
+      "const": true
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "innerObjectUnchanged": {
+      "const": true
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "jsonKeysPreserved": {
+      "const": true
+    },
+    "missingRequiredFields": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 15,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 80
+      }
+    },
+    "outputLimitStatus": {
+      "const": "within-limit"
+    },
+    "planDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "productionReady": {
+      "const": false
+    },
+    "promptContainsFindingExplanation": {
+      "const": false
+    },
+    "promptContractPresent": {
+      "const": true
+    },
+    "rawContainsDeterministicFacts": {
+      "const": true
+    },
+    "rawContainsFindingExplanation": {
+      "const": true
+    },
+    "replacementPlanDigest": {
+      "const": "not-issued"
+    },
+    "responseFailureAuthority": {
+      "const": "candidate-output"
+    },
+    "responseSchemaDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "responseSchemaVersion": {
+      "const": "1.0.0"
+    },
+    "runId": {
+      "const": "case-ground-001-r1"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "sessionId": {
+      "const": "intelligence-track-9a"
+    },
+    "stderrBytes": {
+      "const": 0
+    },
+    "stderrDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "stderrTruncated": {
+      "const": false
+    },
+    "stdoutBytes": {
+      "const": 542
+    },
+    "stdoutDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "stdoutTruncated": {
+      "const": false
+    },
+    "track9AuthorizationDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "unexpectedFields": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 80
+      }
+    }
+  }
+}

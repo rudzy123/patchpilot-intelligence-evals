@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track9a-implementation-review:v1",
+  "title": "track9a-implementation-review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "attemptOutcome",
+    "authorizedScope",
+    "behavioralConclusion",
+    "calibrationStatus",
+    "candidateMetrics",
+    "comparisonWinner",
+    "componentReviews",
+    "decision",
+    "installationAuthorized",
+    "measurementCompleted",
+    "measurementPerformed",
+    "modelSessionCreated",
+    "notAuthorized",
+    "planDigest",
+    "planDisposition",
+    "productionReady",
+    "realModelExecuted",
+    "replacementPlanDigest",
+    "reviewAuthority",
+    "reviewDate",
+    "reviewDigest",
+    "reviewStatus",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "stopCause",
+    "track10Readiness",
+    "track9AuthorizationDigest"
+  ],
+  "properties": {
+    "attemptOutcome": {
+      "const": "stopped"
+    },
+    "authorizedScope": {
+      "const": "This record accepts the stopped corpus as fail-closed evidence and records the telemetry and forensic corrections. It does not authorize another Run, a replacement plan, the remaining runs, candidate selection, calibration, or production use."
+    },
+    "behavioralConclusion": {
+      "const": "partial-inconclusive"
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "candidateMetrics": {
+      "const": "not-produced"
+    },
+    "comparisonWinner": {
+      "type": "null"
+    },
+    "componentReviews": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "componentId",
+          "disposition",
+          "statement"
+        ],
+        "properties": {
+          "componentId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 400
+          },
+          "disposition": {
+            "enum": [
+              "accepted",
+              "corrected-before-commit",
+              "recorded"
+            ]
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 400
+          }
+        }
+      }
+    },
+    "decision": {
+      "const": "stopped attempt accepted and bounded corrections recorded for review before commit"
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "measurementCompleted": {
+      "const": false
+    },
+    "measurementPerformed": {
+      "const": true
+    },
+    "modelSessionCreated": {
+      "const": true
+    },
+    "notAuthorized": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 80
+      }
+    },
+    "planDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "planDisposition": {
+      "const": "consumed"
+    },
+    "productionReady": {
+      "const": false
+    },
+    "realModelExecuted": {
+      "const": true
+    },
+    "replacementPlanDigest": {
+      "const": "not-issued"
+    },
+    "reviewAuthority": {
+      "const": "PatchPilot Principal Systems Architect"
+    },
+    "reviewDate": {
+      "const": "2026-11-17"
+    },
+    "reviewDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "reviewStatus": {
+      "const": "stopped-attempt-accepted-corrections-pending-commit"
+    },
+    "runInvoked": {
+      "const": true
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "sessionId": {
+      "const": "intelligence-track-9a"
+    },
+    "stopCause": {
+      "const": "telemetry-unresolved"
+    },
+    "track10Readiness": {
+      "const": "not-ready"
+    },
+    "track9AuthorizationDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

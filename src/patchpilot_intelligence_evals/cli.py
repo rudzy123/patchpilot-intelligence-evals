@@ -47,6 +47,12 @@ from patchpilot_intelligence_evals.candidate_staging import CandidateStagingErro
 from patchpilot_intelligence_evals.comparison import compare_results
 from patchpilot_intelligence_evals.conversion_plan import ConversionPlanError, load_conversion_plan
 from patchpilot_intelligence_evals.corpus import CorpusError, canonical_dumps, validate_corpus
+from patchpilot_intelligence_evals.corpus_continuation_cli import EXECUTE as CONTINUATION_EXECUTE
+from patchpilot_intelligence_evals.corpus_continuation_cli import (
+    VALIDATION as CONTINUATION_VALIDATION,
+)
+from patchpilot_intelligence_evals.corpus_continuation_cli import handle as handle_continuation
+from patchpilot_intelligence_evals.corpus_continuation_cli import register as register_continuation
 from patchpilot_intelligence_evals.dependency_architecture_policy import (
     DependencyPolicyError,
     validate_dependency_policy,
@@ -330,6 +336,7 @@ def _parser() -> argparse.ArgumentParser:
     register_retry(commands)
     register_inference(commands)
     register_track9(commands)
+    register_continuation(commands)
     return parser
 
 
@@ -389,6 +396,10 @@ def main(argv: list[str] | None = None) -> int:
             payload = handle_inference(args.command, args)
             _summary(payload)
             return 0 if payload.get("status") == "ok" else 1
+        if args.command in CONTINUATION_EXECUTE:
+            payload = handle_continuation(args.command, args)
+            _summary(payload)
+            return 0 if payload.get("status") == "ok" else 1
         with network_guard():
             if args.command in MEASUREMENT_VALIDATION:
                 return _summary(handle_measurement(args.command, args))
@@ -398,6 +409,8 @@ def main(argv: list[str] | None = None) -> int:
                 return _summary(handle_inference(args.command, args))
             if args.command in TRACK9_VALIDATION:
                 return _summary(handle_track9(args.command, args))
+            if args.command in CONTINUATION_VALIDATION:
+                return _summary(handle_continuation(args.command, args))
             if args.command == "corpus-validation":
                 return _summary(validate_corpus())
             if args.command == "baseline-evaluation":

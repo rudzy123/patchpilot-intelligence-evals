@@ -161,6 +161,19 @@ def sample_complete(sample: dict[str, Any] | None) -> bool:
     return current <= peak and oom >= 0
 
 
+def material_contradiction(sample: dict[str, Any] | None) -> bool:
+    """Return whether one sample disagrees with its own resident counters.
+
+    A missing peak, a missing scope, or an unavailable RSS value is not a
+    contradiction. Current above peak is.
+    """
+    if not isinstance(sample, dict):
+        return False
+    current = sample.get("cgroupCurrentBytes")
+    peak = sample.get("cgroupPeakBytes")
+    return isinstance(current, int) and isinstance(peak, int) and current > peak
+
+
 def resolve_scope_observation(
     *,
     child_state: str,
@@ -168,25 +181,43 @@ def resolve_scope_observation(
     sample: dict[str, Any] | None,
     last_complete: dict[str, Any] | None,
 ) -> dict[str, Any]:
-    """Classify one cgroup read against the child state and the last complete sample.
+    """Classify one cgroup read against the child state and the sealed window.
 
-    A scope that disappears after the child has exited keeps the last complete
-    sample. A scope that disappears while the child is active is an
-    infrastructure failure. A final read that returns incomplete or
-    contradictory counters stays unresolved.
+    After the child exits, the last complete noncontradictory window stays
+    sealed. A later ENXIO, ENOENT, missing scope, or incomplete read is a
+    post-exit diagnostic and does not downgrade that window.     A material
+    contradiction fails closed while the child is active and after it exits.
+    Scope loss while the child is active
+    remains an infrastructure failure.
     """
     if read_error is None and sample_complete(sample):
         return _decision("present", sample, sample, None)
+    if material_contradiction(sample):
+        return _decision("present", sample, last_complete, "telemetry-unresolved")
     if _scope_gone(read_error, sample):
         if child_state == "active" and (read_error is not None or sample_complete(last_complete)):
             return _decision(
                 "disappeared-while-active", None, last_complete, "infrastructure-failure"
             )
         if child_state == "exited" and sample_complete(last_complete):
-            return _decision("post-exit-scope-removed", None, last_complete, None)
+            return _decision(
+                "post-exit-scope-removed",
+                None,
+                last_complete,
+                None,
+                _post_exit_read(read_error or "unavailable"),
+            )
         if child_state == "exited":
             return _decision("unresolved", _unresolved_sample(), None, "telemetry-unresolved")
         return _decision("unresolved", sample or _unresolved_sample(), None, None)
+    if child_state == "exited" and sample_complete(last_complete):
+        return _decision(
+            "post-exit-diagnostic",
+            None,
+            last_complete,
+            None,
+            _post_exit_read("incomplete"),
+        )
     if child_state == "exited":
         return _decision("present", sample, last_complete, "telemetry-unresolved")
     return _decision("present", sample, last_complete, None)
@@ -204,16 +235,22 @@ def _unresolved_sample() -> dict[str, Any]:
     return memory
 
 
+def _post_exit_read(read_error: str) -> dict[str, str]:
+    return {"effect": "diagnostic", "readError": read_error}
+
+
 def _decision(
     disposition: str,
     appended: dict[str, Any] | None,
     retained: dict[str, Any] | None,
     classification: str | None,
+    post_exit_read: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     return {
         "append": appended,
         "classification": classification,
         "disposition": disposition,
+        "postExitRead": post_exit_read,
         "retain": retained,
     }
 
@@ -228,6 +265,7 @@ class ScopeSampler:
         self.last_complete: dict[str, Any] | None = None
         self.disposition = "pending"
         self.blocked_classification: str | None = None
+        self.post_exit_reads: list[dict[str, str]] = []
 
     def __call__(self, pid: int, unit: str, results: Path) -> None:
         self.child_state = "active" if pid > 0 else "exited"
@@ -246,7 +284,12 @@ class ScopeSampler:
             rss, tree, virtual = _process_memory(self.directory, pid)
             sample = read_cgroup_dir(self.directory, rss=rss, tree=tree, virtual=virtual)
         except OSError as exc:
-            read_error = "enxio" if exc.errno == 19 else "disappeared"
+            if exc.errno == 19:
+                read_error = "enxio"
+            elif exc.errno == 2:
+                read_error = "enoent"
+            else:
+                read_error = "disappeared"
         self._observe(read_error=read_error, sample=sample, results=results)
 
     def _observe(
@@ -274,6 +317,9 @@ class ScopeSampler:
         retained = decision["retain"]
         if isinstance(retained, dict):
             self.last_complete = retained
+        post_exit = decision.get("postExitRead")
+        if isinstance(post_exit, dict):
+            self.post_exit_reads.append(post_exit)
         appended = decision["append"]
         if isinstance(appended, dict):
             copied = dict(appended)
@@ -374,6 +420,12 @@ def window(samples: list[dict[str, Any]], phases: frozenset[str]) -> dict[str, A
         memory["virtualAddressBytes"] = last.get("virtualAddressBytes")
         return memory
     peak = max(peaks)
+    contradictory = any(
+        isinstance(item.get("cgroupCurrentBytes"), int)
+        and isinstance(item.get("cgroupPeakBytes"), int)
+        and int(item["cgroupCurrentBytes"]) > int(item["cgroupPeakBytes"])
+        for item in chosen
+    )
     memory.update(
         {
             "cgroupCurrentBytes": last.get("cgroupCurrentBytes"),
@@ -381,7 +433,7 @@ def window(samples: list[dict[str, Any]], phases: frozenset[str]) -> dict[str, A
             "oomEvents": oom,
             "processRssBytes": last.get("processRssBytes"),
             "processTreeRssBytes": last.get("processTreeRssBytes"),
-            "telemetry": classify_memory(peak, oom),
+            "telemetry": "unresolved" if contradictory else classify_memory(peak, oom),
             "virtualAddressBytes": last.get("virtualAddressBytes"),
         }
     )
