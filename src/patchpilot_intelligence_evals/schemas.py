@@ -209,6 +209,27 @@ TRACK9_SCHEMA_NAMES: tuple[str, ...] = (
     "track9-implementation-review",
 )
 
+# Track 9A corpus-continuation documents. Validators do not call Run.
+TRACK9A_SCHEMA_NAMES: tuple[str, ...] = (
+    "corpus-continuation-plan",
+    "corpus-continuation-approval",
+    "corpus-continuation-preflight",
+    "bounded-raw-output",
+    "run-diagnostics",
+    "corpus-continuation-run",
+    "corpus-continuation-summary",
+    "corpus-continuation-closeout",
+    "track10-readiness",
+    "track9a-stopped-attempt",
+    "track9a-telemetry-finalization-defect",
+    "track9a-schema-forensics",
+    "track9a-corrected-interpretation",
+    "track9a-plan-disposition",
+    "track9a-proportionality-review",
+    "track9a-track10-not-ready",
+    "track9a-implementation-review",
+)
+
 _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     SCHEMA_NAMES
     + CANDIDATE_SCHEMA_NAMES
@@ -225,6 +246,7 @@ _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     + TRACK8B_R1_SCHEMA_NAMES
     + TRACK8B_R2_SCHEMA_NAMES
     + TRACK9_SCHEMA_NAMES
+    + TRACK9A_SCHEMA_NAMES
 )
 
 

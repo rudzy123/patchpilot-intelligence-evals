@@ -8,6 +8,7 @@ from typing import Any
 import pytest
 
 from patchpilot_intelligence_evals.artifact_budget import MEMORY_CAP
+from patchpilot_intelligence_evals.candidate_inference import classify_execution
 from patchpilot_intelligence_evals.cgroup_memory import (
     ScopeSampler,
     classify_memory,
@@ -18,8 +19,10 @@ from patchpilot_intelligence_evals.cgroup_memory import (
     read_cgroup_dir,
     resolve_scope_observation,
     retry_window,
+    sample_complete,
     window,
 )
+from patchpilot_intelligence_evals.hardened_execution import ExecutionResult
 from patchpilot_intelligence_evals.measurement_plan import ADDRESS_SPACE_BYTES
 from patchpilot_intelligence_evals.measurement_retry_closeout import context_memory_conclusion
 
@@ -236,6 +239,25 @@ def test_scope_disappearance_while_child_is_active_is_infrastructure() -> None:
     assert decision["append"] is None
 
 
+def test_active_contradiction_stays_unresolved_after_a_later_read(tmp_path: Path) -> None:
+    sampler = ScopeSampler()
+    sampler.child_state = "active"
+    sampler._observe(read_error=None, sample=_complete(current=4, peak=8), results=tmp_path)
+    sampler._observe(read_error=None, sample=_complete(current=9, peak=8), results=tmp_path)
+    assert sampler.blocked_classification == "telemetry-unresolved"
+    sampler.child_state = "exited"
+    sampler._observe(read_error="enxio", sample=None, results=tmp_path)
+    assert sampler.blocked_classification == "telemetry-unresolved"
+    reduced = window(sampler.samples, frozenset({"cold", "unmarked"}))
+    assert reduced["telemetry"] == "unresolved"
+    assert reduced["cgroupCurrentBytes"] == 9
+    assert reduced["cgroupPeakBytes"] == 8
+    result = ExecutionResult("success", 0, b"{}", b"", "reaped", 1, b"", ())
+    assert classify_execution(result, sampler, cold_warm=False)["exitClassification"] == (
+        "telemetry-unresolved"
+    )
+
+
 def test_contradictory_final_telemetry_is_unresolved() -> None:
     sample = _complete(current=9, peak=8)
     decision = resolve_scope_observation(
@@ -293,3 +315,65 @@ def test_sampler_retains_the_last_complete_sample(
     assert len(sampler.samples) == 1
     assert sampler.last_complete is not None
     assert sampler.last_complete["cgroupPeakBytes"] == 8
+    assert sampler.post_exit_reads == [{"effect": "diagnostic", "readError": "enxio"}]
+
+
+def test_complete_window_keeps_a_successful_final_read() -> None:
+    sealed = _complete(current=3_129_344, peak=5_709_541_376)
+    sealed["phase"] = "cold"
+    final = _complete(current=3_129_344, peak=5_709_541_376)
+    final["phase"] = "cold"
+    decision = resolve_scope_observation(
+        child_state="exited", read_error=None, sample=final, last_complete=sealed
+    )
+    assert decision["classification"] is None
+    assert decision["retain"]["cgroupPeakBytes"] == 5_709_541_376
+    assert decision["retain"]["oomEvents"] == 0
+    reduced = window([sealed, final], frozenset({"cold", "unmarked"}))
+    assert reduced["telemetry"] == "complete"
+
+
+def test_complete_window_records_enoent_without_downgrade() -> None:
+    decision = resolve_scope_observation(
+        child_state="exited", read_error="enoent", sample=None, last_complete=_complete()
+    )
+    assert decision["classification"] is None
+    assert decision["disposition"] == "post-exit-scope-removed"
+    assert decision["postExitRead"] == {"effect": "diagnostic", "readError": "enoent"}
+    assert decision["retain"]["cgroupPeakBytes"] == 8
+
+
+def test_complete_window_records_scope_removal_without_downgrade() -> None:
+    decision = resolve_scope_observation(
+        child_state="exited", read_error="disappeared", sample=None, last_complete=_complete()
+    )
+    assert decision["classification"] is None
+    assert decision["retain"]["cgroupCurrentBytes"] == 4
+    assert decision["retain"]["oomEvents"] == 0
+
+
+def test_incomplete_post_exit_read_does_not_replace_a_sealed_window() -> None:
+    sample = _complete()
+    sample["cgroupPeakBytes"] = None
+    sample["telemetry"] = "unresolved"
+    sample["processRssBytes"] = None
+    decision = resolve_scope_observation(
+        child_state="exited", read_error=None, sample=sample, last_complete=_complete()
+    )
+    assert decision["classification"] is None
+    assert decision["append"] is None
+    assert decision["disposition"] == "post-exit-diagnostic"
+    assert decision["retain"]["telemetry"] == "complete"
+
+
+def test_rss_unavailable_does_not_make_cgroup_telemetry_incomplete() -> None:
+    sample = _complete()
+    sample["phase"] = "cold"
+    sample["processRssBytes"] = None
+    sample["processTreeRssBytes"] = None
+    sample["virtualAddressBytes"] = None
+    assert sample_complete(sample) is True
+    reduced = window([sample], frozenset({"cold"}))
+    assert reduced["telemetry"] == "complete"
+    assert reduced["cgroupPeakBytes"] == 8
+    assert reduced["processRssBytes"] is None

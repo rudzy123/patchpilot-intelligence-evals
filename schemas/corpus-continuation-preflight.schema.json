@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:corpus-continuation-preflight:v1",
+  "title": "Track 9A corpus continuation preflight",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifactIdentity",
+    "calibrationStatus",
+    "chatTemplateDigest",
+    "cleanupEvidence",
+    "comparisonWinner",
+    "consumedInferencePlanDigest",
+    "consumedRetryPlanDigest",
+    "corpusDigest",
+    "dynamicLinkStatus",
+    "failureAuthority",
+    "failureEvidence",
+    "identityDigest",
+    "installationAuthorized",
+    "measurementCompleted",
+    "measurementPerformed",
+    "memoryEvidence",
+    "modelSessionCreated",
+    "outputLimitStatus",
+    "planDigest",
+    "preflightStatus",
+    "priorPlanDigest",
+    "productionReady",
+    "profileId",
+    "promptTemplateDigest",
+    "r3Plan",
+    "realModelExecuted",
+    "recordKind",
+    "replacementPlanDigest",
+    "responseSchemaDigest",
+    "resultRootClass",
+    "resultRootValidated",
+    "runInvoked",
+    "runtimeArchiveSha256",
+    "runtimeLibrarySha256",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "stderrTruncated",
+    "stdoutTruncated",
+    "syntheticRenderedDigest",
+    "templateStatus",
+    "timestamp",
+    "tokenizerDigest",
+    "track9AuthorizationDigest"
+  ],
+  "properties": {
+    "artifactIdentity": {
+      "enum": [
+        "matched",
+        "mismatched",
+        "not-checked"
+      ]
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "chatTemplateDigest": {
+      "const": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176"
+    },
+    "cleanupEvidence": {
+      "const": "not-observed"
+    },
+    "comparisonWinner": {
+      "const": null
+    },
+    "consumedInferencePlanDigest": {
+      "const": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "corpusDigest": {
+      "const": "49fe79544a26de429afe865fbd2666828bf26a6da30efe6d87f3b0fdfbd0989c"
+    },
+    "dynamicLinkStatus": {
+      "enum": [
+        "failed",
+        "not-executed",
+        "passed",
+        "unavailable"
+      ]
+    },
+    "failureAuthority": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "adapter",
+            "candidate-output",
+            "evaluator",
+            "measurement-infrastructure",
+            "protocol",
+            "security-boundary",
+            "unresolved"
+          ]
+        }
+      ]
+    },
+    "failureEvidence": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{1,80}$"
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "measurementCompleted": {
+      "const": false
+    },
+    "measurementPerformed": {
+      "const": false
+    },
+    "memoryEvidence": {
+      "const": "not-observed"
+    },
+    "modelSessionCreated": {
+      "const": false
+    },
+    "outputLimitStatus": {
+      "const": "not-retained"
+    },
+    "planDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "preflightStatus": {
+      "enum": [
+        "failed",
+        "not-executed",
+        "passed"
+      ]
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "productionReady": {
+      "const": false
+    },
+    "profileId": {
+      "const": "linux-bwrap-systemd-v1"
+    },
+    "promptTemplateDigest": {
+      "const": "62774d0f8b65c959c5b038911af4293d3d774aae3933f0d7a24064691685250a"
+    },
+    "r3Plan": {
+      "const": "not-issued"
+    },
+    "realModelExecuted": {
+      "const": false
+    },
+    "recordKind": {
+      "const": "preflight"
+    },
+    "replacementPlanDigest": {
+      "const": "not-issued"
+    },
+    "responseSchemaDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "resultRootClass": {
+      "const": "corpus-continuation-result"
+    },
+    "resultRootValidated": {
+      "type": "boolean"
+    },
+    "runInvoked": {
+      "const": false
+    },
+    "runtimeArchiveSha256": {
+      "const": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9"
+    },
+    "runtimeLibrarySha256": {
+      "const": "a96f132e5eb5ca04e23a7d2fc1078fb95aa591e8d71d0f237702ece3a1e0f4ea"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "sessionId": {
+      "const": "intelligence-track-9a"
+    },
+    "stderrTruncated": {
+      "const": false
+    },
+    "stdoutTruncated": {
+      "const": false
+    },
+    "syntheticRenderedDigest": {
+      "const": "5c61ee0b595fa4c5b295feb233b312c38b779f7840f3f39c82aef51da9061e5d"
+    },
+    "templateStatus": {
+      "enum": [
+        "failed",
+        "not-executed",
+        "supported"
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "pattern": "^(not-executed|[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z)$"
+    },
+    "tokenizerDigest": {
+      "const": "0a1f2cb9fc2769030ca1f4207e81c1af493319373d41b8d3cf5be53860c13760"
+    },
+    "track9AuthorizationDigest": {
+      "const": "e7325c76745505e533afaf12b108470fb6a2a2c765e5f7335b3b1ce1ef6c7477"
+    }
+  }
+}

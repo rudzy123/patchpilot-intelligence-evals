@@ -1,0 +1,395 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:corpus-continuation-plan:v1",
+  "title": "Track 9A corpus-only plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "acceptedMemory",
+    "addressSpaceBytes",
+    "artifactsUnchanged",
+    "batchSize",
+    "calibrationStatus",
+    "candidateAttemptId",
+    "candidateModelId",
+    "candidatePrecision",
+    "caseCount",
+    "chatTemplateDigest",
+    "cleanup",
+    "comparisonWinner",
+    "consumedPlans",
+    "corpusDigest",
+    "cpuSeconds",
+    "currentExecutionAuthority",
+    "decoding",
+    "dependencyClosureDigest",
+    "diagnosticPolicy",
+    "dynamicLinkPrecheckDigest",
+    "eosTokenId",
+    "executionStatus",
+    "gatesUnchanged",
+    "generationBudgetSeconds",
+    "goldIsolation",
+    "harnessCandidateId",
+    "hostCapabilityClass",
+    "installationAuthorized",
+    "interOpThreads",
+    "intraOpThreads",
+    "maxNewTokens",
+    "measurementCompleted",
+    "measurementPerformed",
+    "memoryMaxBytes",
+    "memorySwapMaxBytes",
+    "metricsUnchanged",
+    "modelSessionCreated",
+    "networkDenial",
+    "omittedPhases",
+    "onnxRevision",
+    "operatorApproval",
+    "phases",
+    "plainSubprocessFallback",
+    "planDigest",
+    "plannedRuns",
+    "productionReady",
+    "profileId",
+    "profileVersion",
+    "promptTemplateDigest",
+    "promptsUnchanged",
+    "r3Plan",
+    "rawOutputRetention",
+    "realModelExecuted",
+    "replacementPlanDigest",
+    "repetitionsPerCase",
+    "responseSchema",
+    "responseSchemaUnchanged",
+    "resultRootClass",
+    "resultRootState",
+    "retries",
+    "runInvoked",
+    "runs",
+    "runtimeArchiveSha256",
+    "runtimeAttemptId",
+    "runtimeLibrarySha256",
+    "runtimeVersionTag",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "shell",
+    "sourceRevision",
+    "stderrBytes",
+    "stdoutBytes",
+    "stopConditions",
+    "syntheticRenderedDigest",
+    "tasksMax",
+    "tokenizerDigest",
+    "track9AuthorizationDigest",
+    "track9ReviewDigest",
+    "wallClockSeconds"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "sessionId": { "const": "intelligence-track-9a" },
+    "selectionOutcome": { "const": "no-selection" },
+    "calibrationStatus": { "const": "not-approved" },
+    "comparisonWinner": { "const": null },
+    "productionReady": { "const": false },
+    "installationAuthorized": { "const": false },
+    "currentExecutionAuthority": { "const": false },
+    "executionStatus": { "const": "not-executed" },
+    "measurementPerformed": { "const": false },
+    "measurementCompleted": { "const": false },
+    "modelSessionCreated": { "const": false },
+    "runInvoked": { "const": false },
+    "realModelExecuted": { "const": false },
+    "operatorApproval": { "const": "required" },
+    "resultRootClass": { "const": "corpus-continuation-result" },
+    "resultRootState": { "const": "not-created" },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "profileVersion": { "const": "1.0.0" },
+    "planDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "track9AuthorizationDigest": {
+      "const": "e7325c76745505e533afaf12b108470fb6a2a2c765e5f7335b3b1ce1ef6c7477"
+    },
+    "track9ReviewDigest": {
+      "const": "d9dcf838be1d90f05ef69e53ae86822b34ca9aa1a4681a752306defe4d2cd305"
+    },
+    "replacementPlanDigest": { "const": "not-issued" },
+    "r3Plan": { "const": "not-issued" },
+    "caseCount": { "const": 24 },
+    "repetitionsPerCase": { "const": 3 },
+    "plannedRuns": { "const": 72 },
+    "batchSize": { "const": 1 },
+    "retries": { "const": 0 },
+    "maxNewTokens": { "const": 256 },
+    "generationBudgetSeconds": { "const": 15 },
+    "wallClockSeconds": { "const": 900 },
+    "cpuSeconds": { "const": 600 },
+    "stdoutBytes": { "const": 65536 },
+    "stderrBytes": { "const": 16384 },
+    "memoryMaxBytes": { "const": 12884901888 },
+    "memorySwapMaxBytes": { "const": 0 },
+    "tasksMax": { "const": 32 },
+    "addressSpaceBytes": { "const": 25769803776 },
+    "eosTokenId": { "const": 7 },
+    "interOpThreads": { "const": 1 },
+    "intraOpThreads": { "const": 8 },
+    "shell": { "const": false },
+    "plainSubprocessFallback": { "const": false },
+    "artifactsUnchanged": { "const": true },
+    "promptsUnchanged": { "const": true },
+    "responseSchemaUnchanged": { "const": true },
+    "metricsUnchanged": { "const": true },
+    "gatesUnchanged": { "const": true },
+    "goldIsolation": { "const": "mandatory" },
+    "networkDenial": { "const": "os-level" },
+    "cleanup": { "const": "process-tree" },
+    "hostCapabilityClass": { "const": "linux-cgroup-v2-user-scope" },
+    "candidateModelId": { "const": "LiquidAI/LFM2.5-1.2B-Instruct" },
+    "candidatePrecision": { "const": "FP32" },
+    "candidateAttemptId": { "const": "cd-20b7ceee37a62cba" },
+    "runtimeAttemptId": { "const": "rp-c2fe1c88f694fc1e" },
+    "runtimeVersionTag": { "const": "v1.31.1" },
+    "harnessCandidateId": { "const": "fixture-lfm25-instruct" },
+    "sourceRevision": { "const": "b9d816ab510f9a28dca37cb182e9da8b0226e13c" },
+    "onnxRevision": { "const": "10f72e70abf67ac0fd7ebf15bc5854726891d864" },
+    "runtimeArchiveSha256": {
+      "const": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9"
+    },
+    "runtimeLibrarySha256": {
+      "const": "a96f132e5eb5ca04e23a7d2fc1078fb95aa591e8d71d0f237702ece3a1e0f4ea"
+    },
+    "tokenizerDigest": {
+      "const": "0a1f2cb9fc2769030ca1f4207e81c1af493319373d41b8d3cf5be53860c13760"
+    },
+    "chatTemplateDigest": {
+      "const": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176"
+    },
+    "syntheticRenderedDigest": {
+      "const": "5c61ee0b595fa4c5b295feb233b312c38b779f7840f3f39c82aef51da9061e5d"
+    },
+    "corpusDigest": {
+      "const": "49fe79544a26de429afe865fbd2666828bf26a6da30efe6d87f3b0fdfbd0989c"
+    },
+    "promptTemplateDigest": {
+      "const": "62774d0f8b65c959c5b038911af4293d3d774aae3933f0d7a24064691685250a"
+    },
+    "dependencyClosureDigest": {
+      "const": "7e86fd24935ac651811ab4ae7d00e471369109843fb947a2dfa9f5a5905b82dd"
+    },
+    "dynamicLinkPrecheckDigest": { "const": "not-executed" },
+    "omittedPhases": {
+      "const": ["context-4096", "context-8192", "one-token-smoke", "short-generation"]
+    },
+    "stopConditions": {
+      "const": [
+        "approval-required",
+        "cleanup-failure",
+        "compatibility-failure",
+        "corpus-mismatch",
+        "digest-mismatch",
+        "evaluator-failure",
+        "excessive-output",
+        "gold-visible",
+        "isolation-failure",
+        "memory-ceiling",
+        "network-violation",
+        "oom",
+        "plan-consumed",
+        "precheck-failed",
+        "prompt-mismatch",
+        "raw-output-unretained",
+        "response-schema-mismatch",
+        "result-root-reuse",
+        "telemetry-unresolved",
+        "unclassified-launch",
+        "unverified-dependency"
+      ]
+    },
+    "consumedPlans": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["planDigest", "reusable", "track"],
+        "properties": {
+          "planDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "reusable": { "const": false },
+          "track": { "enum": ["track-8b", "track-8b-r1", "track-8b-r2"] }
+        }
+      }
+    },
+    "phases": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["order", "phase", "prerequisite"],
+        "properties": {
+          "order": { "type": "integer", "minimum": 1, "maximum": 4 },
+          "phase": {
+            "enum": [
+              "preflight",
+              "template-compatibility",
+              "dynamic-link-precheck",
+              "corpus-evaluation"
+            ]
+          },
+          "prerequisite": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "runs": {
+      "type": "array",
+      "minItems": 72,
+      "maxItems": 72,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["caseId", "repetition", "runId"],
+        "properties": {
+          "caseId": {
+            "type": "string",
+            "pattern": "^case-(contra|ground|inject|refuse|stale|tenant)-[0-9]{3}$"
+          },
+          "repetition": { "type": "integer", "minimum": 1, "maximum": 3 },
+          "runId": {
+            "type": "string",
+            "pattern": "^case-(contra|ground|inject|refuse|stale|tenant)-[0-9]{3}-r[123]$"
+          }
+        }
+      }
+    },
+    "decoding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "repetitionPenalty",
+        "seed",
+        "seedControl",
+        "seedSupport",
+        "temperature",
+        "topK",
+        "topP"
+      ],
+      "properties": {
+        "method": { "const": "greedy-argmax" },
+        "temperature": { "const": 0 },
+        "topP": { "const": 1 },
+        "topK": { "const": 1 },
+        "repetitionPenalty": { "const": 1 },
+        "seed": { "const": 0 },
+        "seedSupport": { "const": false },
+        "seedControl": { "const": "unused" }
+      }
+    },
+    "acceptedMemory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ceilingBytes",
+        "cold4096PeakBytes",
+        "cold8192PeakBytes",
+        "conclusion",
+        "minimumHeadroomBytes",
+        "remeasured",
+        "reviewDigest",
+        "sourceDigest",
+        "warm4096PeakBytes",
+        "warm8192PeakBytes"
+      ],
+      "properties": {
+        "ceilingBytes": { "const": 12884901888 },
+        "cold4096PeakBytes": { "const": 7284371456 },
+        "warm4096PeakBytes": { "const": 8511131648 },
+        "cold8192PeakBytes": { "const": 9816231936 },
+        "warm8192PeakBytes": { "const": 12271669248 },
+        "minimumHeadroomBytes": { "const": 613232640 },
+        "conclusion": { "const": "within-ceiling-with-limited-headroom" },
+        "remeasured": { "const": false },
+        "reviewDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "sourceDigest": {
+          "const": "400b520b6d6c404415143ba8f9dbac31a2788f5d2864622281d213d7b24f328b"
+        }
+      }
+    },
+    "responseSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "digest",
+        "envelopeId",
+        "explanationId",
+        "promptIdentity",
+        "protocolVersion",
+        "schemaVersion"
+      ],
+      "properties": {
+        "digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "envelopeId": {
+          "const": "urn:patchpilot-intelligence-evals:schema:candidate-response:v1"
+        },
+        "explanationId": {
+          "const": "urn:patchpilot-intelligence-evals:schema:finding-explanation-output:v1"
+        },
+        "promptIdentity": { "const": "candidate-protocol-1.0.0" },
+        "protocolVersion": { "const": "1.0.0" },
+        "schemaVersion": { "const": "1.0.0" }
+      }
+    },
+    "rawOutputRetention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "availableToCandidate",
+        "availableToLaterRuns",
+        "boundedByStdoutLimit",
+        "freeOfGold",
+        "hostIdentityExcluded",
+        "immutable",
+        "redaction",
+        "status"
+      ],
+      "properties": {
+        "availableToCandidate": { "const": false },
+        "availableToLaterRuns": { "const": false },
+        "boundedByStdoutLimit": { "const": true },
+        "freeOfGold": { "const": true },
+        "hostIdentityExcluded": { "const": true },
+        "immutable": { "const": true },
+        "redaction": { "const": "synthetic-data-rules" },
+        "status": { "const": "required" }
+      }
+    },
+    "diagnosticPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "distinctStages",
+        "erasePriorStageOnFailure",
+        "failureAuthorities",
+        "retainBeforeExtraction"
+      ],
+      "properties": {
+        "distinctStages": { "const": true },
+        "erasePriorStageOnFailure": { "const": false },
+        "retainBeforeExtraction": { "const": true },
+        "failureAuthorities": {
+          "const": [
+            "adapter",
+            "candidate-output",
+            "evaluator",
+            "measurement-infrastructure",
+            "protocol",
+            "security-boundary",
+            "unresolved"
+          ]
+        }
+      }
+    }
+  }
+}

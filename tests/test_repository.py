@@ -321,6 +321,23 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals corpus-continuation-authorization-validation",
         "uv run patchpilot-evals candidate-disposition-validation",
         "uv run patchpilot-evals track9-implementation-review-validation",
+        "uv run patchpilot-evals corpus-continuation-plan-validation",
+        "uv run patchpilot-evals corpus-continuation-approval-validation",
+        "uv run patchpilot-evals corpus-continuation-preflight-validation",
+        "uv run patchpilot-evals bounded-raw-output-validation",
+        "uv run patchpilot-evals run-diagnostics-validation",
+        "uv run patchpilot-evals corpus-continuation-run-validation",
+        "uv run patchpilot-evals corpus-continuation-summary-validation",
+        "uv run patchpilot-evals corpus-continuation-closeout-validation",
+        "uv run patchpilot-evals track10-readiness-validation",
+        "uv run patchpilot-evals track9a-stopped-attempt-validation",
+        "uv run patchpilot-evals track9a-telemetry-finalization-defect-validation",
+        "uv run patchpilot-evals track9a-schema-forensics-validation",
+        "uv run patchpilot-evals track9a-corrected-interpretation-validation",
+        "uv run patchpilot-evals track9a-plan-disposition-validation",
+        "uv run patchpilot-evals track9a-proportionality-review-validation",
+        "uv run patchpilot-evals track9a-track10-not-ready-validation",
+        "uv run patchpilot-evals track9a-implementation-review-validation",
         "uv run patchpilot-evals workflow-policy-validation",
         "uv run patchpilot-evals dependency-architecture-policy-validation",
     ):
@@ -466,6 +483,25 @@ def test_help_lists_commands() -> None:
     assert "corpus-continuation-authorization-validation" in text
     assert "candidate-disposition-validation" in text
     assert "track9-implementation-review-validation" in text
+    assert "corpus-continuation-plan-validation" in text
+    assert "corpus-continuation-approval-validation" in text
+    assert "corpus-continuation-preflight-validation" in text
+    assert "bounded-raw-output-validation" in text
+    assert "run-diagnostics-validation" in text
+    assert "corpus-continuation-run-validation" in text
+    assert "corpus-continuation-summary-validation" in text
+    assert "corpus-continuation-closeout-validation" in text
+    assert "track10-readiness-validation" in text
+    assert "track9a-stopped-attempt-validation" in text
+    assert "track9a-telemetry-finalization-defect-validation" in text
+    assert "track9a-schema-forensics-validation" in text
+    assert "track9a-corrected-interpretation-validation" in text
+    assert "track9a-plan-disposition-validation" in text
+    assert "track9a-proportionality-review-validation" in text
+    assert "track9a-track10-not-ready-validation" in text
+    assert "track9a-implementation-review-validation" in text
+    assert "corpus-continuation-preflight" in text
+    assert "corpus-continuation-execute" in text
     assert "inference-retry-preflight" in text
     assert "inference-retry-precheck" in text
     assert "inference-retry-execute" in text

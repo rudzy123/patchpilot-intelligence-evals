@@ -734,6 +734,7 @@ def _emit(config: dict[str, Any], generated: dict[str, Any]) -> None:
         sys_stdout(payload)
         return
     text = _decode_text(generated["textTokens"])
+    _write_generation_side(text)
     request = config["request"]
     try:
         parsed, end = json.JSONDecoder().raw_decode(text.strip())
@@ -751,6 +752,56 @@ def _emit(config: dict[str, Any], generated: dict[str, Any]) -> None:
         "status": "success",
     }
     sys_stdout(envelope)
+
+
+def _write_generation_side(text: str) -> None:
+    """Record pre-rewrite generation facts. The protocol envelope stays unchanged."""
+    try:
+        encoded = text.encode("utf-8")
+        utf8 = True
+    except UnicodeEncodeError:
+        encoded = text.encode("utf-8", errors="replace")
+        utf8 = False
+    retained = encoded[:65536]
+    stripped = text.strip()
+    facts: dict[str, Any] = {
+        "adapterFallback": False,
+        "adapterTruncated": False,
+        "byteLength": len(encoded),
+        "parseCategory": "parsed",
+        "parseColumn": 0,
+        "parseLine": 1,
+        "parsePosition": 0,
+        "retainedBytes": len(retained),
+        "textDigest": hashlib.sha256(encoded).hexdigest(),
+        "trailingBytes": 0,
+        "utf8": utf8,
+    }
+    if stripped == "":
+        facts["parseCategory"] = "empty"
+    else:
+        try:
+            parsed, end = json.JSONDecoder().raw_decode(stripped)
+        except json.JSONDecodeError as exc:
+            facts["adapterFallback"] = True
+            facts["adapterTruncated"] = len(text) > 400
+            facts["parseCategory"] = "malformed-json"
+            facts["parseColumn"] = int(exc.colno)
+            facts["parseLine"] = int(exc.lineno)
+            facts["parsePosition"] = 0 if exc.pos is None else int(exc.pos)
+        else:
+            if not isinstance(parsed, dict):
+                facts["adapterFallback"] = True
+                facts["parseCategory"] = "not-object"
+            trailing = stripped[end:]
+            facts["trailingBytes"] = len(trailing.encode("utf-8", errors="replace"))
+            if trailing.strip():
+                facts["parseCategory"] = "trailing-text"
+    try:
+        Path("/results/generation-diagnostic.json").write_text(_canonical(facts), encoding="utf-8")
+        Path("/results/generated.bin").write_bytes(retained)
+    except OSError:
+        return
 
 
 def _decode_text(token_ids: list[int]) -> str:

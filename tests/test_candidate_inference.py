@@ -85,6 +85,28 @@ def test_missing_peak_and_ceiling_stop() -> None:
     assert classify_execution(_result(), oom, cold_warm=False)["exitClassification"] == "oom"
 
 
+def test_cleanup_does_not_downgrade_a_sealed_window() -> None:
+    sampler = ScopeSampler()
+    _sample(sampler, peak=5_709_541_376, oom=0, phase="cold")
+    sampler.samples[-1]["cgroupCurrentBytes"] = 3_129_344
+    sampler.samples[-1]["processRssBytes"] = None
+    sampler.child_state = "exited"
+    sampler.last_complete = dict(sampler.samples[-1])
+    sampler.post_exit_reads.append({"effect": "diagnostic", "readError": "enxio"})
+    classified = classify_execution(
+        _result({"network": {"dns": "gaierror", "ipv4": "OSError"}}),
+        sampler,
+        cold_warm=False,
+    )
+    assert classified["exitClassification"] == "success"
+    assert classified["cleanup"] == "reaped"
+    assert classified["networkResult"] == "denied"
+    assert classified["coldMemory"]["telemetry"] == "complete"
+    assert classified["coldMemory"]["cgroupCurrentBytes"] == 3_129_344
+    assert classified["coldMemory"]["oomEvents"] == 0
+    assert sampler.blocked_classification is None
+
+
 def test_virtual_size_does_not_set_the_resident_result() -> None:
     sampler = ScopeSampler()
     _sample(sampler, peak=10, oom=0, phase="cold")

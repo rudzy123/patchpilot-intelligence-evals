@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track9a-stopped-attempt:v1",
+  "title": "track9a-stopped-attempt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "attemptOutcome",
+    "behavioralConclusion",
+    "behavioralMeasurementAttempted",
+    "behavioralMeasurementCompleted",
+    "calibrationStatus",
+    "candidateEvaluatedCompletely",
+    "candidateMetricsProduced",
+    "comparisonWinner",
+    "completedRuns",
+    "corpusCompleted",
+    "executionStopAuthority",
+    "externalEvidenceRewritten",
+    "identityDigest",
+    "installationAuthorized",
+    "measurementCompleted",
+    "measurementPerformed",
+    "missingRuns",
+    "modelSessionCreated",
+    "planDigest",
+    "plannedRuns",
+    "productionReady",
+    "realModelExecuted",
+    "replacementPlanDigest",
+    "retainedFiles",
+    "runInvoked",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "stopCause",
+    "track9AuthorizationDigest"
+  ],
+  "properties": {
+    "attemptOutcome": {
+      "const": "stopped"
+    },
+    "behavioralConclusion": {
+      "const": "partial-inconclusive"
+    },
+    "behavioralMeasurementAttempted": {
+      "const": true
+    },
+    "behavioralMeasurementCompleted": {
+      "const": false
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "candidateEvaluatedCompletely": {
+      "const": false
+    },
+    "candidateMetricsProduced": {
+      "const": false
+    },
+    "comparisonWinner": {
+      "type": "null"
+    },
+    "completedRuns": {
+      "const": 1
+    },
+    "corpusCompleted": {
+      "const": false
+    },
+    "executionStopAuthority": {
+      "const": "measurement-infrastructure"
+    },
+    "externalEvidenceRewritten": {
+      "const": false
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "measurementCompleted": {
+      "const": false
+    },
+    "measurementPerformed": {
+      "const": true
+    },
+    "missingRuns": {
+      "const": 71
+    },
+    "modelSessionCreated": {
+      "const": true
+    },
+    "planDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "plannedRuns": {
+      "const": 72
+    },
+    "productionReady": {
+      "const": false
+    },
+    "realModelExecuted": {
+      "const": true
+    },
+    "replacementPlanDigest": {
+      "const": "not-issued"
+    },
+    "retainedFiles": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 400
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "runInvoked": {
+      "const": true
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "sessionId": {
+      "const": "intelligence-track-9a"
+    },
+    "stopCause": {
+      "const": "telemetry-unresolved"
+    },
+    "track9AuthorizationDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

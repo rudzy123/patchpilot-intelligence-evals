@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track9a-corrected-interpretation:v1",
+  "title": "track9a-corrected-interpretation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "behavioralConclusion",
+    "behavioralMeasurementAttempted",
+    "behavioralMeasurementCompleted",
+    "calibrationStatus",
+    "candidateEvaluatedCompletely",
+    "candidateMetricsProduced",
+    "comparisonStatus",
+    "comparisonWinner",
+    "completedRuns",
+    "identityDigest",
+    "installationAuthorized",
+    "missingRuns",
+    "percentageGatesCalibrated",
+    "planDigest",
+    "productionReady",
+    "replacementPlanDigest",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "summaryStop",
+    "track9AuthorizationDigest"
+  ],
+  "properties": {
+    "behavioralConclusion": {
+      "const": "partial-inconclusive"
+    },
+    "behavioralMeasurementAttempted": {
+      "const": true
+    },
+    "behavioralMeasurementCompleted": {
+      "const": false
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "candidateEvaluatedCompletely": {
+      "const": false
+    },
+    "candidateMetricsProduced": {
+      "const": false
+    },
+    "comparisonStatus": {
+      "const": "not-executed"
+    },
+    "comparisonWinner": {
+      "type": "null"
+    },
+    "completedRuns": {
+      "const": 1
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "missingRuns": {
+      "const": 71
+    },
+    "percentageGatesCalibrated": {
+      "const": false
+    },
+    "planDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "productionReady": {
+      "const": false
+    },
+    "replacementPlanDigest": {
+      "const": "not-issued"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "sessionId": {
+      "const": "intelligence-track-9a"
+    },
+    "summaryStop": {
+      "const": "telemetry-unresolved"
+    },
+    "track9AuthorizationDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

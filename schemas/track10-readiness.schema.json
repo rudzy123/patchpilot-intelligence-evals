@@ -1,0 +1,236 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:track10-readiness:v1",
+  "title": "Advisory Track 10 candidate disposition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationStatus",
+    "chatTemplateDigest",
+    "cleanup",
+    "closeoutState",
+    "comparisonWinner",
+    "completedRuns",
+    "consumedInferencePlanDigest",
+    "consumedRetryPlanDigest",
+    "corpusDigest",
+    "identityDigest",
+    "installationAuthorized",
+    "measurementPerformed",
+    "memoryResidual",
+    "missingRuns",
+    "planDigest",
+    "plannedRuns",
+    "priorPlanDigest",
+    "productionReady",
+    "promptTemplateDigest",
+    "r3Plan",
+    "readinessOutcome",
+    "realModelExecuted",
+    "reason",
+    "recordKind",
+    "replacementPlanDigest",
+    "responseSchemaDigest",
+    "resultRootClass",
+    "retention",
+    "runInvoked",
+    "runtimeArchiveSha256",
+    "runtimeLibrarySha256",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "stopCause",
+    "syntheticRenderedDigest",
+    "tokenizerDigest",
+    "track9AuthorizationDigest",
+    "verdict"
+  ],
+  "properties": {
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "chatTemplateDigest": {
+      "const": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176"
+    },
+    "cleanup": {
+      "enum": [
+        "failed",
+        "not-performed",
+        "reaped"
+      ]
+    },
+    "closeoutState": {
+      "enum": [
+        "closed",
+        "not-closed",
+        "stopped"
+      ]
+    },
+    "comparisonWinner": {
+      "const": null
+    },
+    "completedRuns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 72
+    },
+    "consumedInferencePlanDigest": {
+      "const": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "corpusDigest": {
+      "const": "49fe79544a26de429afe865fbd2666828bf26a6da30efe6d87f3b0fdfbd0989c"
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "measurementPerformed": {
+      "type": "boolean"
+    },
+    "memoryResidual": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ceilingBytes",
+        "conclusion",
+        "minimumHeadroomBytes",
+        "remeasured",
+        "reviewDigest",
+        "sourceDigest"
+      ],
+      "properties": {
+        "ceilingBytes": {
+          "const": 12884901888
+        },
+        "conclusion": {
+          "const": "within-ceiling-with-limited-headroom"
+        },
+        "minimumHeadroomBytes": {
+          "const": 613232640
+        },
+        "remeasured": {
+          "const": false
+        },
+        "reviewDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceDigest": {
+          "const": "400b520b6d6c404415143ba8f9dbac31a2788f5d2864622281d213d7b24f328b"
+        }
+      }
+    },
+    "missingRuns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 72
+    },
+    "planDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "plannedRuns": {
+      "const": 72
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "productionReady": {
+      "const": false
+    },
+    "promptTemplateDigest": {
+      "const": "62774d0f8b65c959c5b038911af4293d3d774aae3933f0d7a24064691685250a"
+    },
+    "r3Plan": {
+      "const": "not-issued"
+    },
+    "readinessOutcome": {
+      "enum": [
+        "blocked",
+        "not-ready",
+        "ready",
+        "ready-with-documented-residuals"
+      ]
+    },
+    "realModelExecuted": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "recordKind": {
+      "const": "readiness"
+    },
+    "replacementPlanDigest": {
+      "const": "not-issued"
+    },
+    "responseSchemaDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "resultRootClass": {
+      "const": "corpus-continuation-result"
+    },
+    "retention": {
+      "enum": [
+        "failed",
+        "not-performed",
+        "retained"
+      ]
+    },
+    "runInvoked": {
+      "type": "boolean"
+    },
+    "runtimeArchiveSha256": {
+      "const": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9"
+    },
+    "runtimeLibrarySha256": {
+      "const": "a96f132e5eb5ca04e23a7d2fc1078fb95aa591e8d71d0f237702ece3a1e0f4ea"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "sessionId": {
+      "const": "intelligence-track-9a"
+    },
+    "stopCause": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^[a-z0-9-]{1,80}$"
+        }
+      ]
+    },
+    "syntheticRenderedDigest": {
+      "const": "5c61ee0b595fa4c5b295feb233b312c38b779f7840f3f39c82aef51da9061e5d"
+    },
+    "tokenizerDigest": {
+      "const": "0a1f2cb9fc2769030ca1f4207e81c1af493319373d41b8d3cf5be53860c13760"
+    },
+    "track9AuthorizationDigest": {
+      "const": "e7325c76745505e533afaf12b108470fb6a2a2c765e5f7335b3b1ce1ef6c7477"
+    },
+    "verdict": {
+      "enum": [
+        "BLOCKED BY UNRESOLVED AUTHORITY",
+        "TRACK 10 CANDIDATE DISPOSITION REVIEW NOT READY",
+        "TRACK 10 CANDIDATE DISPOSITION REVIEW READY",
+        "TRACK 10 CANDIDATE DISPOSITION REVIEW READY WITH DOCUMENTED RESIDUALS"
+      ]
+    }
+  }
+}

@@ -1,0 +1,396 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:corpus-continuation-summary:v1",
+  "title": "Corpus continuation metric summary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibrationInterpretation",
+    "calibrationStatus",
+    "capabilities",
+    "chatTemplateDigest",
+    "comparisonReason",
+    "comparisonStatus",
+    "comparisonWinner",
+    "completedRuns",
+    "completeness",
+    "consumedInferencePlanDigest",
+    "consumedRetryPlanDigest",
+    "corpusDigest",
+    "failureAuthorityCounts",
+    "gates",
+    "gatesUnchanged",
+    "identityDigest",
+    "installationAuthorized",
+    "measurementPerformed",
+    "metrics",
+    "missingRuns",
+    "percentageGatesCalibrated",
+    "planDigest",
+    "plannedRuns",
+    "priorPlanDigest",
+    "productionReady",
+    "promptTemplateDigest",
+    "r3Plan",
+    "realModelExecuted",
+    "recordKind",
+    "repetitionConsistency",
+    "replacementPlanDigest",
+    "responseSchemaDigest",
+    "resultRootClass",
+    "runInvoked",
+    "runtimeArchiveSha256",
+    "runtimeLibrarySha256",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "syntheticRenderedDigest",
+    "tokenizerDigest",
+    "track9AuthorizationDigest"
+  ],
+  "properties": {
+    "calibrationInterpretation": {
+      "const": "not-approved"
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "capabilityId",
+          "priorEvidence",
+          "result"
+        ],
+        "properties": {
+          "capabilityId": {
+            "enum": [
+              "bounded-generation",
+              "cross-tenant-nondisclosure",
+              "deterministic-fact-separation",
+              "embedded-instruction-resistance",
+              "evidence-id-reproduction",
+              "missing-evidence-reporting",
+              "schema-compatibility",
+              "state-mutation-avoidance",
+              "uncertainty-expression",
+              "unsupported-request-refusal"
+            ]
+          },
+          "priorEvidence": {
+            "const": "empirical"
+          },
+          "result": {
+            "enum": [
+              "fail",
+              "not-reached",
+              "pass",
+              "unmeasured"
+            ]
+          }
+        }
+      }
+    },
+    "chatTemplateDigest": {
+      "const": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176"
+    },
+    "comparisonReason": {
+      "enum": [
+        "corpus-digest",
+        "corpus-version",
+        "incomparable",
+        "incomplete-result",
+        "missing-both",
+        "missing-left",
+        "missing-right",
+        "not-executed",
+        "protocol-version"
+      ]
+    },
+    "comparisonStatus": {
+      "enum": [
+        "comparable",
+        "incomparable",
+        "missing-result",
+        "not-executed"
+      ]
+    },
+    "comparisonWinner": {
+      "const": null
+    },
+    "completedRuns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 72
+    },
+    "completeness": {
+      "enum": [
+        "complete",
+        "incomplete",
+        "not-executed"
+      ]
+    },
+    "consumedInferencePlanDigest": {
+      "const": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "corpusDigest": {
+      "const": "49fe79544a26de429afe865fbd2666828bf26a6da30efe6d87f3b0fdfbd0989c"
+    },
+    "failureAuthorityCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adapter",
+        "candidate-output",
+        "evaluator",
+        "measurement-infrastructure",
+        "protocol",
+        "security-boundary",
+        "unresolved"
+      ],
+      "properties": {
+        "adapter": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "candidate-output": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evaluator": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "measurement-infrastructure": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "protocol": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "security-boundary": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unresolved": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "denominator",
+          "gate",
+          "kind",
+          "numerator",
+          "status"
+        ],
+        "properties": {
+          "denominator": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "gate": {
+            "enum": [
+              "affectednessOrPriorityChange",
+              "citationValidity",
+              "correctRefusal",
+              "crossTenantDisclosure",
+              "evidenceAttributionAccuracy",
+              "outputSchemaValidity",
+              "promptInjectionResistance",
+              "secretDisclosure",
+              "unauthorizedStateMutation",
+              "unsupportedFactualClaims"
+            ]
+          },
+          "kind": {
+            "enum": [
+              "invariant",
+              "proposed-percentage"
+            ]
+          },
+          "numerator": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "status": {
+            "enum": [
+              "fail",
+              "pass",
+              "unmeasured"
+            ]
+          }
+        }
+      }
+    },
+    "gatesUnchanged": {
+      "const": true
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "measurementPerformed": {
+      "type": "boolean"
+    },
+    "metrics": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 15,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "denominator",
+          "name",
+          "numerator",
+          "status",
+          "value"
+        ],
+        "properties": {
+          "denominator": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "name": {
+            "enum": [
+              "affectednessOrPriorityChange",
+              "citationValidity",
+              "correctRefusal",
+              "correctUncertainty",
+              "crossTenantDisclosure",
+              "decisiveEvidenceOmission",
+              "deterministicReplayConsistency",
+              "evidenceAttributionAccuracy",
+              "latency",
+              "outputSchemaValidity",
+              "peakProcessMemory",
+              "promptInjectionResistance",
+              "secretDisclosure",
+              "unauthorizedStateMutation",
+              "unsupportedFactualClaims"
+            ]
+          },
+          "numerator": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "status": {
+            "enum": [
+              "measured",
+              "unmeasured"
+            ]
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "missingRuns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 72
+    },
+    "percentageGatesCalibrated": {
+      "const": false
+    },
+    "planDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "plannedRuns": {
+      "const": 72
+    },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "productionReady": {
+      "const": false
+    },
+    "promptTemplateDigest": {
+      "const": "62774d0f8b65c959c5b038911af4293d3d774aae3933f0d7a24064691685250a"
+    },
+    "r3Plan": {
+      "const": "not-issued"
+    },
+    "realModelExecuted": {
+      "type": "boolean"
+    },
+    "recordKind": {
+      "const": "summary"
+    },
+    "repetitionConsistency": {
+      "enum": [
+        "consistent",
+        "inconsistent",
+        "not-executed",
+        "unmeasured"
+      ]
+    },
+    "replacementPlanDigest": {
+      "const": "not-issued"
+    },
+    "responseSchemaDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "resultRootClass": {
+      "const": "corpus-continuation-result"
+    },
+    "runInvoked": {
+      "type": "boolean"
+    },
+    "runtimeArchiveSha256": {
+      "const": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9"
+    },
+    "runtimeLibrarySha256": {
+      "const": "a96f132e5eb5ca04e23a7d2fc1078fb95aa591e8d71d0f237702ece3a1e0f4ea"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "sessionId": {
+      "const": "intelligence-track-9a"
+    },
+    "syntheticRenderedDigest": {
+      "const": "5c61ee0b595fa4c5b295feb233b312c38b779f7840f3f39c82aef51da9061e5d"
+    },
+    "tokenizerDigest": {
+      "const": "0a1f2cb9fc2769030ca1f4207e81c1af493319373d41b8d3cf5be53860c13760"
+    },
+    "track9AuthorizationDigest": {
+      "const": "e7325c76745505e533afaf12b108470fb6a2a2c765e5f7335b3b1ce1ef6c7477"
+    }
+  }
+}
