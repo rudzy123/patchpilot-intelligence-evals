@@ -722,6 +722,23 @@ def _value_dims(slots: Any, config: dict[str, Any], value: ctypes.c_void_p) -> l
     return [int(item) for item in dims]
 
 
+def pre_wrap_field_names(text: str) -> list[str] | None:
+    """Return sorted keys from one pre-wrap JSON object. Values are dropped."""
+    stripped = text.strip()
+    if stripped == "":
+        return None
+    try:
+        parsed, end = json.JSONDecoder().raw_decode(stripped)
+    except json.JSONDecodeError:
+        return None
+    if not isinstance(parsed, dict) or stripped[end:].strip():
+        return None
+    keys = [str(key) for key in parsed]
+    if any(not key.isidentifier() or len(key) > 64 for key in keys):
+        return None
+    return sorted(set(keys))
+
+
 def _emit(config: dict[str, Any], generated: dict[str, Any]) -> None:
     if str(config.get("promptConstruction")) != "protocol-request":
         payload = {
@@ -797,6 +814,10 @@ def _write_generation_side(text: str) -> None:
             facts["trailingBytes"] = len(trailing.encode("utf-8", errors="replace"))
             if trailing.strip():
                 facts["parseCategory"] = "trailing-text"
+            elif isinstance(parsed, dict):
+                names = pre_wrap_field_names(text)
+                if names is not None:
+                    facts["innerFieldNames"] = names
     try:
         Path("/results/generation-diagnostic.json").write_text(_canonical(facts), encoding="utf-8")
         Path("/results/generated.bin").write_bytes(retained)

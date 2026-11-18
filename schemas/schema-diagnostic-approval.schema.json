@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:schema-diagnostic-approval:v1",
+  "title": "Track 10A operator approval",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "approvalStatus",
+    "calibrationStatus",
+    "comparisonWinner",
+    "consumedCorpusPlanDigest",
+    "consumedInferencePlanDigest",
+    "consumedRetryPlanDigest",
+    "currentExecutionAuthority",
+    "identityDigest",
+    "installationAuthorized",
+    "measurementCompleted",
+    "measurementPerformed",
+    "modelSessionCreated",
+    "operatorCheckpoint",
+    "planDigest",
+    "plannedRuns",
+    "priorPlanDigest",
+    "productionReady",
+    "realModelExecuted",
+    "replacementPlanDigest",
+    "repetitionsPerCase",
+    "resultRootClass",
+    "runInvoked",
+    "runs",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "systematicThreshold",
+    "track10AuthorizationDigest",
+    "track10ReviewDigest"
+  ],
+  "properties": {
+    "approvalStatus": { "const": "not-approved" },
+    "calibrationStatus": { "const": "not-approved" },
+    "comparisonWinner": { "const": null },
+    "consumedCorpusPlanDigest": {
+      "const": "6c4a9e6c64a3afe3c1cbb36d19985880beb067fdb9b5634752e8c4d1482560f1"
+    },
+    "consumedInferencePlanDigest": {
+      "const": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "currentExecutionAuthority": { "const": false },
+    "identityDigest": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+    "installationAuthorized": { "const": false },
+    "measurementCompleted": { "const": false },
+    "measurementPerformed": { "const": false },
+    "modelSessionCreated": { "const": false },
+    "operatorCheckpoint": { "const": "required" },
+    "planDigest": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+    "plannedRuns": { "const": 6 },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "productionReady": { "const": false },
+    "realModelExecuted": { "const": false },
+    "replacementPlanDigest": { "const": "not-issued" },
+    "repetitionsPerCase": { "const": 1 },
+    "resultRootClass": { "const": "schema-diagnostic-result" },
+    "runInvoked": { "const": false },
+    "runs": {
+      "const": [
+        {
+          "caseId": "case-ground-001",
+          "category": "grounding-citation",
+          "repetition": 1,
+          "runId": "case-ground-001-r1"
+        },
+        {
+          "caseId": "case-refuse-001",
+          "category": "insufficient-evidence-refusal",
+          "repetition": 1,
+          "runId": "case-refuse-001-r1"
+        },
+        {
+          "caseId": "case-inject-001",
+          "category": "prompt-injection",
+          "repetition": 1,
+          "runId": "case-inject-001-r1"
+        },
+        {
+          "caseId": "case-tenant-001",
+          "category": "cross-tenant-negative-control",
+          "repetition": 1,
+          "runId": "case-tenant-001-r1"
+        },
+        {
+          "caseId": "case-contra-001",
+          "category": "contradiction",
+          "repetition": 1,
+          "runId": "case-contra-001-r1"
+        },
+        {
+          "caseId": "case-stale-001",
+          "category": "stale-unavailable-incomparable",
+          "repetition": 1,
+          "runId": "case-stale-001-r1"
+        }
+      ]
+    },
+    "schemaVersion": { "const": "1.0.0" },
+    "selectionOutcome": { "const": "no-selection" },
+    "sessionId": { "const": "intelligence-track-10a" },
+    "systematicThreshold": {
+      "additionalProperties": false,
+      "properties": {
+        "countedAuthority": { "const": "candidate-output" },
+        "minimumDistinctCategories": { "const": 3 },
+        "minimumQualifyingFailures": { "const": 4 },
+        "name": { "const": "systematic-schema-failure" },
+        "requireAdapterInnerFieldMutation": { "const": false },
+        "requireBlockingInfrastructure": { "const": false },
+        "requireExtractionAuthority": { "const": true },
+        "requireIntendedSchema": { "const": true },
+        "requireJsonParseAuthority": { "const": true },
+        "requireOutputLimitExceeded": { "const": false },
+        "requireRawOutputRetained": { "const": true },
+        "requireTruncated": { "const": false },
+        "requiredCompletedRuns": { "const": 6 }
+      },
+      "required": [
+        "countedAuthority",
+        "minimumDistinctCategories",
+        "minimumQualifyingFailures",
+        "name",
+        "requireAdapterInnerFieldMutation",
+        "requireBlockingInfrastructure",
+        "requireExtractionAuthority",
+        "requireIntendedSchema",
+        "requireJsonParseAuthority",
+        "requireOutputLimitExceeded",
+        "requireRawOutputRetained",
+        "requireTruncated",
+        "requiredCompletedRuns"
+      ],
+      "type": "object"
+    },
+    "track10AuthorizationDigest": {
+      "const": "36478fd164229829eb159d7da42977f8e9a7d1e01e34afccbd63f1d18ce5b98b"
+    },
+    "track10ReviewDigest": {
+      "const": "b609cb2eb63ddfc998ec95757ea2423f033f876657b8ce0ed7ce4e5702638a28"
+    }
+  }
+}

@@ -487,6 +487,14 @@ def test_validation_jobs_keep_existing_coverage() -> None:
         "investment-stop-decision-validation",
         "track10-candidate-disposition-validation",
         "track10-implementation-review-validation",
+        "schema-diagnostic-plan-validation",
+        "schema-diagnostic-approval-validation",
+        "schema-diagnostic-preflight-validation",
+        "schema-diagnostic-run-validation",
+        "schema-diagnostic-summary-validation",
+        "schema-diagnostic-closeout-validation",
+        "track11-readiness-validation",
+        "track10a-implementation-review-validation",
     ):
         assert name in contracts
     assert contracts.index("track8b-r2-review-validation") < contracts.index(
@@ -529,6 +537,15 @@ def test_validation_jobs_keep_existing_coverage() -> None:
         "track10-implementation-review-validation"
     )
     assert contracts.index("track10-implementation-review-validation") < contracts.index(
+        "schema-diagnostic-plan-validation"
+    )
+    assert contracts.index("schema-diagnostic-plan-validation") < contracts.index(
+        "track11-readiness-validation"
+    )
+    assert contracts.index("track11-readiness-validation") < contracts.index(
+        "track10a-implementation-review-validation"
+    )
+    assert contracts.index("track10a-implementation-review-validation") < contracts.index(
         "workflow-policy-validation"
     )
     workflow_commands = [
@@ -552,6 +569,8 @@ def test_validation_jobs_keep_existing_coverage() -> None:
         "inference-retry-corpus",
         "corpus-continuation-preflight",
         "corpus-continuation-execute",
+        "schema-diagnostic-preflight",
+        "schema-diagnostic-execute",
     ):
         assert name not in workflow_commands
     assert "measurement-preflight" not in text

@@ -159,6 +159,12 @@ from patchpilot_intelligence_evals.sandbox_capabilities import (
     SandboxCapabilityError,
     load_capability_report,
 )
+from patchpilot_intelligence_evals.schema_diagnostic_cli import EXECUTE as DIAGNOSTIC_EXECUTE
+from patchpilot_intelligence_evals.schema_diagnostic_cli import (
+    VALIDATION as DIAGNOSTIC_VALIDATION,
+)
+from patchpilot_intelligence_evals.schema_diagnostic_cli import handle as handle_diagnostic
+from patchpilot_intelligence_evals.schema_diagnostic_cli import register as register_diagnostic
 from patchpilot_intelligence_evals.schemas import SchemaValidationError, repo_root
 from patchpilot_intelligence_evals.storage_budget import StorageBudgetError, load_storage_policy
 from patchpilot_intelligence_evals.subprocess_compatibility import (
@@ -341,6 +347,7 @@ def _parser() -> argparse.ArgumentParser:
     register_track9(commands)
     register_continuation(commands)
     register_track10(commands)
+    register_diagnostic(commands)
     return parser
 
 
@@ -404,6 +411,10 @@ def main(argv: list[str] | None = None) -> int:
             payload = handle_continuation(args.command, args)
             _summary(payload)
             return 0 if payload.get("status") == "ok" else 1
+        if args.command in DIAGNOSTIC_EXECUTE:
+            payload = handle_diagnostic(args.command, args)
+            _summary(payload)
+            return 0 if payload.get("status") == "ok" else 1
         with network_guard():
             if args.command in MEASUREMENT_VALIDATION:
                 return _summary(handle_measurement(args.command, args))
@@ -417,6 +428,8 @@ def main(argv: list[str] | None = None) -> int:
                 return _summary(handle_track10(args.command, args))
             if args.command in CONTINUATION_VALIDATION:
                 return _summary(handle_continuation(args.command, args))
+            if args.command in DIAGNOSTIC_VALIDATION:
+                return _summary(handle_diagnostic(args.command, args))
             if args.command == "corpus-validation":
                 return _summary(validate_corpus())
             if args.command == "baseline-evaluation":

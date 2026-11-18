@@ -241,6 +241,18 @@ TRACK10_SCHEMA_NAMES: tuple[str, ...] = (
     "track10-implementation-review",
 )
 
+# Track 10A diagnostic documents. Validators do not call Run.
+TRACK10A_SCHEMA_NAMES: tuple[str, ...] = (
+    "schema-diagnostic-plan",
+    "schema-diagnostic-approval",
+    "schema-diagnostic-preflight",
+    "schema-diagnostic-run",
+    "schema-diagnostic-summary",
+    "schema-diagnostic-closeout",
+    "track11-readiness",
+    "track10a-implementation-review",
+)
+
 _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     SCHEMA_NAMES
     + CANDIDATE_SCHEMA_NAMES
@@ -259,6 +271,7 @@ _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     + TRACK9_SCHEMA_NAMES
     + TRACK9A_SCHEMA_NAMES
     + TRACK10_SCHEMA_NAMES
+    + TRACK10A_SCHEMA_NAMES
 )
 
 

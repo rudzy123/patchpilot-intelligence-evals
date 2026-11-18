@@ -139,14 +139,26 @@ def launch_child(
     retry_approval: str | None = None,
     inference_retry_approval: str | None = None,
     continuation_approval: str | None = None,
+    schema_diagnostic_approval: str | None = None,
 ) -> tuple[ExecutionResult, ScopeSampler]:
     """Stage one child. The callable is replaceable in synthetic tests."""
     dependency_mounts: tuple[Mount, ...] = ()
     if launcher is execute_hardened:
-        supplied = (retry_approval, inference_retry_approval, continuation_approval)
+        supplied = (
+            retry_approval,
+            inference_retry_approval,
+            continuation_approval,
+            schema_diagnostic_approval,
+        )
         if sum(item is not None for item in supplied) > 1:
             raise MeasurementError("approval-required")
-        if continuation_approval is not None:
+        if schema_diagnostic_approval is not None:
+            from patchpilot_intelligence_evals.schema_diagnostic_plan import (
+                require_schema_diagnostic_approval,
+            )
+
+            require_schema_diagnostic_approval(schema_diagnostic_approval)
+        elif continuation_approval is not None:
             from patchpilot_intelligence_evals.corpus_continuation_plan import (
                 require_corpus_approval,
             )

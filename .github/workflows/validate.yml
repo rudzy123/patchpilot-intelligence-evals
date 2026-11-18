@@ -320,6 +320,17 @@ jobs:
           uv run patchpilot-evals track10-candidate-disposition-validation
           uv run patchpilot-evals track10-implementation-review-validation
 
+      - name: Validate the Track 10A schema diagnostic
+        run: |
+          uv run patchpilot-evals schema-diagnostic-plan-validation
+          uv run patchpilot-evals schema-diagnostic-approval-validation
+          uv run patchpilot-evals schema-diagnostic-preflight-validation
+          uv run patchpilot-evals schema-diagnostic-run-validation
+          uv run patchpilot-evals schema-diagnostic-summary-validation
+          uv run patchpilot-evals schema-diagnostic-closeout-validation
+          uv run patchpilot-evals track11-readiness-validation
+          uv run patchpilot-evals track10a-implementation-review-validation
+
       - name: Validate workflow policy
         run: uv run patchpilot-evals workflow-policy-validation
 
