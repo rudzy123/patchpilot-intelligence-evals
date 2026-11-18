@@ -480,6 +480,13 @@ def test_validation_jobs_keep_existing_coverage() -> None:
         "track9a-proportionality-review-validation",
         "track9a-track10-not-ready-validation",
         "track9a-implementation-review-validation",
+        "attributed-response-evidence-validation",
+        "schema-invariant-review-validation",
+        "diagnostic-proportionality-validation",
+        "six-run-diagnostic-authorization-validation",
+        "investment-stop-decision-validation",
+        "track10-candidate-disposition-validation",
+        "track10-implementation-review-validation",
     ):
         assert name in contracts
     assert contracts.index("track8b-r2-review-validation") < contracts.index(
@@ -501,6 +508,27 @@ def test_validation_jobs_keep_existing_coverage() -> None:
         "track9a-implementation-review-validation"
     )
     assert contracts.index("track9a-implementation-review-validation") < contracts.index(
+        "attributed-response-evidence-validation"
+    )
+    assert contracts.index("attributed-response-evidence-validation") < contracts.index(
+        "schema-invariant-review-validation"
+    )
+    assert contracts.index("schema-invariant-review-validation") < contracts.index(
+        "diagnostic-proportionality-validation"
+    )
+    assert contracts.index("diagnostic-proportionality-validation") < contracts.index(
+        "six-run-diagnostic-authorization-validation"
+    )
+    assert contracts.index("six-run-diagnostic-authorization-validation") < contracts.index(
+        "investment-stop-decision-validation"
+    )
+    assert contracts.index("investment-stop-decision-validation") < contracts.index(
+        "track10-candidate-disposition-validation"
+    )
+    assert contracts.index("track10-candidate-disposition-validation") < contracts.index(
+        "track10-implementation-review-validation"
+    )
+    assert contracts.index("track10-implementation-review-validation") < contracts.index(
         "workflow-policy-validation"
     )
     workflow_commands = [

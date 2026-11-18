@@ -146,6 +146,12 @@ _DOCUMENTS = (
     "docs/provenance/track9-evidence-review.md",
     "docs/provenance/track9-implementation-review.md",
     "docs/operations/corpus-only-continuation-prerequisites.md",
+    "docs/architecture/attributed-schema-failure-review.md",
+    "docs/architecture/six-run-diagnostic-boundary.md",
+    "docs/architecture/candidate-investment-proportionality.md",
+    "docs/operations/future-schema-diagnostic-prerequisites.md",
+    "docs/provenance/track10-candidate-disposition-review.md",
+    "docs/provenance/track10-implementation-review.md",
 )
 
 
@@ -338,6 +344,13 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals track9a-proportionality-review-validation",
         "uv run patchpilot-evals track9a-track10-not-ready-validation",
         "uv run patchpilot-evals track9a-implementation-review-validation",
+        "uv run patchpilot-evals attributed-response-evidence-validation",
+        "uv run patchpilot-evals schema-invariant-review-validation",
+        "uv run patchpilot-evals diagnostic-proportionality-validation",
+        "uv run patchpilot-evals six-run-diagnostic-authorization-validation",
+        "uv run patchpilot-evals investment-stop-decision-validation",
+        "uv run patchpilot-evals track10-candidate-disposition-validation",
+        "uv run patchpilot-evals track10-implementation-review-validation",
         "uv run patchpilot-evals workflow-policy-validation",
         "uv run patchpilot-evals dependency-architecture-policy-validation",
     ):
@@ -500,6 +513,13 @@ def test_help_lists_commands() -> None:
     assert "track9a-proportionality-review-validation" in text
     assert "track9a-track10-not-ready-validation" in text
     assert "track9a-implementation-review-validation" in text
+    assert "attributed-response-evidence-validation" in text
+    assert "schema-invariant-review-validation" in text
+    assert "diagnostic-proportionality-validation" in text
+    assert "six-run-diagnostic-authorization-validation" in text
+    assert "investment-stop-decision-validation" in text
+    assert "track10-candidate-disposition-validation" in text
+    assert "track10-implementation-review-validation" in text
     assert "corpus-continuation-preflight" in text
     assert "corpus-continuation-execute" in text
     assert "inference-retry-preflight" in text

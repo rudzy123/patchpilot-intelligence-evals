@@ -230,6 +230,17 @@ TRACK9A_SCHEMA_NAMES: tuple[str, ...] = (
     "track9a-implementation-review",
 )
 
+# Track 10 disposition documents. Validators do not call Run.
+TRACK10_SCHEMA_NAMES: tuple[str, ...] = (
+    "attributed-response-evidence",
+    "schema-invariant-review",
+    "diagnostic-proportionality",
+    "six-run-diagnostic-authorization",
+    "investment-stop-decision",
+    "track10-candidate-disposition",
+    "track10-implementation-review",
+)
+
 _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     SCHEMA_NAMES
     + CANDIDATE_SCHEMA_NAMES
@@ -247,6 +258,7 @@ _ALL_SCHEMA_NAMES: tuple[str, ...] = (
     + TRACK8B_R2_SCHEMA_NAMES
     + TRACK9_SCHEMA_NAMES
     + TRACK9A_SCHEMA_NAMES
+    + TRACK10_SCHEMA_NAMES
 )
 
 
