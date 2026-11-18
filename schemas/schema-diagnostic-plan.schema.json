@@ -1,0 +1,501 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:schema-diagnostic-plan:v1",
+  "title": "Track 10A six-run schema diagnostic plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "acceptedMemory",
+    "addressSpaceBytes",
+    "artifactsUnchanged",
+    "automaticCandidateRejection",
+    "automaticCandidateSelection",
+    "batchSize",
+    "calibrationStatus",
+    "candidateAttemptId",
+    "candidateModelId",
+    "candidatePrecision",
+    "caseCount",
+    "chatTemplateDigest",
+    "cleanup",
+    "comparisonWinner",
+    "consumedPlans",
+    "contextMemoryRerun",
+    "corpusDigest",
+    "cpuSeconds",
+    "currentExecutionAuthority",
+    "decoding",
+    "dependencyClosureDigest",
+    "diagnosticPolicy",
+    "dynamicLinkPrecheckDigest",
+    "eosTokenId",
+    "executionStatus",
+    "fullCorpusExecuted",
+    "generationBudgetSeconds",
+    "goldIsolation",
+    "harnessCandidateId",
+    "historicalResponse",
+    "hostCapabilityClass",
+    "installationAuthorized",
+    "interOpThreads",
+    "intraOpThreads",
+    "maxNewTokens",
+    "measurementCompleted",
+    "measurementPerformed",
+    "memoryMaxBytes",
+    "memoryRerun",
+    "memorySwapMaxBytes",
+    "modelSessionCreated",
+    "networkDenial",
+    "omittedPhases",
+    "onnxRevision",
+    "operationalCaseSelection",
+    "operatorApproval",
+    "percentageMetrics",
+    "phases",
+    "plainSubprocessFallback",
+    "planDigest",
+    "plannedRuns",
+    "productionReady",
+    "profileId",
+    "profileVersion",
+    "promptTemplateDigest",
+    "promptsUnchanged",
+    "promotionGateAttempt",
+    "rawOutputRetention",
+    "realModelExecuted",
+    "replacementPlanDigest",
+    "repetitionsPerCase",
+    "representsCompleteCorpus",
+    "responseSchema",
+    "responseSchemaUnchanged",
+    "resultRootClass",
+    "resultRootState",
+    "retries",
+    "runInvoked",
+    "runs",
+    "runtimeArchiveSha256",
+    "runtimeAttemptId",
+    "runtimeLibrarySha256",
+    "runtimeVersionTag",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "shell",
+    "sourceRevision",
+    "stderrBytes",
+    "stdoutBytes",
+    "stopConditions",
+    "syntheticRenderedDigest",
+    "systematicThreshold",
+    "tasksMax",
+    "tokenizerDigest",
+    "track10AuthorizationDigest",
+    "track10ReviewDigest",
+    "wallClockSeconds"
+  ],
+  "properties": {
+    "acceptedMemory": {
+      "additionalProperties": false,
+      "properties": {
+        "ceilingBytes": { "const": 12884901888 },
+        "cold4096PeakBytes": { "const": 7284371456 },
+        "cold8192PeakBytes": { "const": 9816231936 },
+        "conclusion": { "const": "within-ceiling-with-limited-headroom" },
+        "minimumHeadroomBytes": { "const": 613232640 },
+        "remeasured": { "const": false },
+        "reviewDigest": {
+          "const": "47d8dc74f738d043a3fa58c40f936e3c9148ba88c45bb9e2cf1b23c0172796f2"
+        },
+        "sourceDigest": {
+          "const": "400b520b6d6c404415143ba8f9dbac31a2788f5d2864622281d213d7b24f328b"
+        },
+        "warm4096PeakBytes": { "const": 8511131648 },
+        "warm8192PeakBytes": { "const": 12271669248 }
+      },
+      "required": [
+        "ceilingBytes",
+        "cold4096PeakBytes",
+        "cold8192PeakBytes",
+        "conclusion",
+        "minimumHeadroomBytes",
+        "remeasured",
+        "reviewDigest",
+        "sourceDigest",
+        "warm4096PeakBytes",
+        "warm8192PeakBytes"
+      ],
+      "type": "object"
+    },
+    "addressSpaceBytes": { "const": 25769803776 },
+    "artifactsUnchanged": { "const": true },
+    "automaticCandidateRejection": { "const": false },
+    "automaticCandidateSelection": { "const": false },
+    "batchSize": { "const": 1 },
+    "calibrationStatus": { "const": "not-approved" },
+    "candidateAttemptId": { "const": "cd-20b7ceee37a62cba" },
+    "candidateModelId": { "const": "LiquidAI/LFM2.5-1.2B-Instruct" },
+    "candidatePrecision": { "const": "FP32" },
+    "caseCount": { "const": 6 },
+    "chatTemplateDigest": {
+      "const": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176"
+    },
+    "cleanup": { "const": "process-tree" },
+    "comparisonWinner": { "const": null },
+    "consumedPlans": {
+      "const": [
+        {
+          "planDigest": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2",
+          "reusable": false,
+          "track": "track-8b"
+        },
+        {
+          "planDigest": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b",
+          "reusable": false,
+          "track": "track-8b-r1"
+        },
+        {
+          "planDigest": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350",
+          "reusable": false,
+          "track": "track-8b-r2"
+        },
+        {
+          "planDigest": "6c4a9e6c64a3afe3c1cbb36d19985880beb067fdb9b5634752e8c4d1482560f1",
+          "reusable": false,
+          "track": "track-9a"
+        }
+      ]
+    },
+    "contextMemoryRerun": { "const": false },
+    "corpusDigest": {
+      "const": "49fe79544a26de429afe865fbd2666828bf26a6da30efe6d87f3b0fdfbd0989c"
+    },
+    "cpuSeconds": { "const": 600 },
+    "currentExecutionAuthority": { "const": false },
+    "decoding": {
+      "additionalProperties": false,
+      "properties": {
+        "method": { "const": "greedy-argmax" },
+        "repetitionPenalty": { "const": 1 },
+        "seed": { "const": 0 },
+        "seedControl": { "const": "unused" },
+        "seedSupport": { "const": false },
+        "temperature": { "const": 0 },
+        "topK": { "const": 1 },
+        "topP": { "const": 1 }
+      },
+      "required": [
+        "method",
+        "repetitionPenalty",
+        "seed",
+        "seedControl",
+        "seedSupport",
+        "temperature",
+        "topK",
+        "topP"
+      ],
+      "type": "object"
+    },
+    "dependencyClosureDigest": {
+      "const": "7e86fd24935ac651811ab4ae7d00e471369109843fb947a2dfa9f5a5905b82dd"
+    },
+    "diagnosticPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "distinctStages": { "const": true },
+        "erasePriorStageOnFailure": { "const": false },
+        "failureAuthorities": {
+          "const": [
+            "adapter",
+            "candidate-output",
+            "evaluator",
+            "measurement-infrastructure",
+            "protocol",
+            "security-boundary",
+            "unresolved"
+          ]
+        },
+        "retainBeforeExtraction": { "const": true }
+      },
+      "required": [
+        "distinctStages",
+        "erasePriorStageOnFailure",
+        "failureAuthorities",
+        "retainBeforeExtraction"
+      ],
+      "type": "object"
+    },
+    "dynamicLinkPrecheckDigest": { "const": "not-executed" },
+    "eosTokenId": { "const": 7 },
+    "executionStatus": { "const": "not-executed" },
+    "fullCorpusExecuted": { "const": false },
+    "generationBudgetSeconds": { "const": 15 },
+    "goldIsolation": { "const": "mandatory" },
+    "harnessCandidateId": { "const": "fixture-lfm25-instruct" },
+    "historicalResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "countedInDiagnostic": { "const": false },
+        "executionStopAuthority": { "const": "measurement-infrastructure" },
+        "executionStopCause": { "const": "telemetry-unresolved" },
+        "extractedBytes": { "const": 264 },
+        "extractedDigest": {
+          "const": "8d5acd633059fd19ea765c0ce415bb37d4f53cc02ed848fcf6df490d55ab9d5d"
+        },
+        "responseFailureAuthority": { "const": "candidate-output" },
+        "runId": { "const": "case-ground-001-r1" },
+        "stdoutBytes": { "const": 542 },
+        "stdoutDigest": {
+          "const": "b28e9aa7f5db74d23040d9b3045b5fc927bc2289378bb6bf676e4568ec20b0b9"
+        }
+      },
+      "required": [
+        "countedInDiagnostic",
+        "executionStopAuthority",
+        "executionStopCause",
+        "extractedBytes",
+        "extractedDigest",
+        "responseFailureAuthority",
+        "runId",
+        "stdoutBytes",
+        "stdoutDigest"
+      ],
+      "type": "object"
+    },
+    "hostCapabilityClass": { "const": "linux-cgroup-v2-user-scope" },
+    "installationAuthorized": { "const": false },
+    "interOpThreads": { "const": 1 },
+    "intraOpThreads": { "const": 8 },
+    "maxNewTokens": { "const": 256 },
+    "measurementCompleted": { "const": false },
+    "measurementPerformed": { "const": false },
+    "memoryMaxBytes": { "const": 12884901888 },
+    "memoryRerun": { "const": false },
+    "memorySwapMaxBytes": { "const": 0 },
+    "modelSessionCreated": { "const": false },
+    "networkDenial": { "const": "os-level" },
+    "omittedPhases": {
+      "const": [
+        "context-4096",
+        "context-8192",
+        "one-token-smoke",
+        "short-generation",
+        "full-corpus"
+      ]
+    },
+    "onnxRevision": { "const": "10f72e70abf67ac0fd7ebf15bc5854726891d864" },
+    "operationalCaseSelection": { "const": "minimum-case-id-within-committed-category" },
+    "operatorApproval": { "const": "required" },
+    "percentageMetrics": { "const": false },
+    "phases": {
+      "const": [
+        { "order": 1, "phase": "preflight", "prerequisite": null },
+        { "order": 2, "phase": "template-compatibility", "prerequisite": "preflight" },
+        {
+          "order": 3,
+          "phase": "dynamic-link-precheck",
+          "prerequisite": "template-compatibility"
+        },
+        { "order": 4, "phase": "schema-diagnostic", "prerequisite": "dynamic-link-precheck" }
+      ]
+    },
+    "plainSubprocessFallback": { "const": false },
+    "planDigest": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+    "plannedRuns": { "const": 6 },
+    "productionReady": { "const": false },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "profileVersion": { "const": "1.0.0" },
+    "promptTemplateDigest": {
+      "const": "62774d0f8b65c959c5b038911af4293d3d774aae3933f0d7a24064691685250a"
+    },
+    "promptsUnchanged": { "const": true },
+    "promotionGateAttempt": { "const": false },
+    "rawOutputRetention": {
+      "additionalProperties": false,
+      "properties": {
+        "availableToCandidate": { "const": false },
+        "availableToLaterRuns": { "const": false },
+        "boundedByStdoutLimit": { "const": true },
+        "freeOfGold": { "const": true },
+        "hostIdentityExcluded": { "const": true },
+        "immutable": { "const": true },
+        "redaction": { "const": "synthetic-data-rules" },
+        "status": { "const": "required" }
+      },
+      "required": [
+        "availableToCandidate",
+        "availableToLaterRuns",
+        "boundedByStdoutLimit",
+        "freeOfGold",
+        "hostIdentityExcluded",
+        "immutable",
+        "redaction",
+        "status"
+      ],
+      "type": "object"
+    },
+    "realModelExecuted": { "const": false },
+    "replacementPlanDigest": { "const": "not-issued" },
+    "repetitionsPerCase": { "const": 1 },
+    "representsCompleteCorpus": { "const": false },
+    "responseSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "const": "15955301d2cd0e2f835b851e19d7f48a2664eb9df6f1f7f99d658926e8b46b91"
+        },
+        "envelopeId": {
+          "const": "urn:patchpilot-intelligence-evals:schema:candidate-response:v1"
+        },
+        "explanationId": {
+          "const": "urn:patchpilot-intelligence-evals:schema:finding-explanation-output:v1"
+        },
+        "promptIdentity": { "const": "candidate-protocol-1.0.0" },
+        "protocolVersion": { "const": "1.0.0" },
+        "schemaVersion": { "const": "1.0.0" }
+      },
+      "required": [
+        "digest",
+        "envelopeId",
+        "explanationId",
+        "promptIdentity",
+        "protocolVersion",
+        "schemaVersion"
+      ],
+      "type": "object"
+    },
+    "responseSchemaUnchanged": { "const": true },
+    "resultRootClass": { "const": "schema-diagnostic-result" },
+    "resultRootState": { "const": "not-created" },
+    "retries": { "const": 0 },
+    "runInvoked": { "const": false },
+    "runs": {
+      "const": [
+        {
+          "caseId": "case-ground-001",
+          "category": "grounding-citation",
+          "repetition": 1,
+          "runId": "case-ground-001-r1"
+        },
+        {
+          "caseId": "case-refuse-001",
+          "category": "insufficient-evidence-refusal",
+          "repetition": 1,
+          "runId": "case-refuse-001-r1"
+        },
+        {
+          "caseId": "case-inject-001",
+          "category": "prompt-injection",
+          "repetition": 1,
+          "runId": "case-inject-001-r1"
+        },
+        {
+          "caseId": "case-tenant-001",
+          "category": "cross-tenant-negative-control",
+          "repetition": 1,
+          "runId": "case-tenant-001-r1"
+        },
+        {
+          "caseId": "case-contra-001",
+          "category": "contradiction",
+          "repetition": 1,
+          "runId": "case-contra-001-r1"
+        },
+        {
+          "caseId": "case-stale-001",
+          "category": "stale-unavailable-incomparable",
+          "repetition": 1,
+          "runId": "case-stale-001-r1"
+        }
+      ]
+    },
+    "runtimeArchiveSha256": {
+      "const": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9"
+    },
+    "runtimeAttemptId": { "const": "rp-c2fe1c88f694fc1e" },
+    "runtimeLibrarySha256": {
+      "const": "a96f132e5eb5ca04e23a7d2fc1078fb95aa591e8d71d0f237702ece3a1e0f4ea"
+    },
+    "runtimeVersionTag": { "const": "v1.31.1" },
+    "schemaVersion": { "const": "1.0.0" },
+    "selectionOutcome": { "const": "no-selection" },
+    "sessionId": { "const": "intelligence-track-10a" },
+    "shell": { "const": false },
+    "sourceRevision": { "const": "b9d816ab510f9a28dca37cb182e9da8b0226e13c" },
+    "stderrBytes": { "const": 16384 },
+    "stdoutBytes": { "const": 65536 },
+    "stopConditions": {
+      "const": [
+        "approval-required",
+        "cleanup-failure",
+        "compatibility-failure",
+        "corpus-mismatch",
+        "digest-mismatch",
+        "evaluator-failure",
+        "excessive-output",
+        "gold-visible",
+        "isolation-failure",
+        "memory-ceiling",
+        "network-violation",
+        "oom",
+        "plan-consumed",
+        "precheck-failed",
+        "prompt-mismatch",
+        "raw-output-unretained",
+        "response-schema-mismatch",
+        "result-root-reuse",
+        "telemetry-unresolved",
+        "unclassified-launch",
+        "unverified-dependency"
+      ]
+    },
+    "syntheticRenderedDigest": {
+      "const": "5c61ee0b595fa4c5b295feb233b312c38b779f7840f3f39c82aef51da9061e5d"
+    },
+    "systematicThreshold": {
+      "additionalProperties": false,
+      "properties": {
+        "countedAuthority": { "const": "candidate-output" },
+        "minimumDistinctCategories": { "const": 3 },
+        "minimumQualifyingFailures": { "const": 4 },
+        "name": { "const": "systematic-schema-failure" },
+        "requireAdapterInnerFieldMutation": { "const": false },
+        "requireBlockingInfrastructure": { "const": false },
+        "requireExtractionAuthority": { "const": true },
+        "requireIntendedSchema": { "const": true },
+        "requireJsonParseAuthority": { "const": true },
+        "requireOutputLimitExceeded": { "const": false },
+        "requireRawOutputRetained": { "const": true },
+        "requireTruncated": { "const": false },
+        "requiredCompletedRuns": { "const": 6 }
+      },
+      "required": [
+        "countedAuthority",
+        "minimumDistinctCategories",
+        "minimumQualifyingFailures",
+        "name",
+        "requireAdapterInnerFieldMutation",
+        "requireBlockingInfrastructure",
+        "requireExtractionAuthority",
+        "requireIntendedSchema",
+        "requireJsonParseAuthority",
+        "requireOutputLimitExceeded",
+        "requireRawOutputRetained",
+        "requireTruncated",
+        "requiredCompletedRuns"
+      ],
+      "type": "object"
+    },
+    "tasksMax": { "const": 32 },
+    "tokenizerDigest": {
+      "const": "0a1f2cb9fc2769030ca1f4207e81c1af493319373d41b8d3cf5be53860c13760"
+    },
+    "track10AuthorizationDigest": {
+      "const": "36478fd164229829eb159d7da42977f8e9a7d1e01e34afccbd63f1d18ce5b98b"
+    },
+    "track10ReviewDigest": {
+      "const": "b609cb2eb63ddfc998ec95757ea2423f033f876657b8ce0ed7ce4e5702638a28"
+    },
+    "wallClockSeconds": { "const": 900 }
+  }
+}

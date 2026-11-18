@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:schema-diagnostic-preflight:v1",
+  "title": "Track 10A diagnostic preflight",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifactIdentity",
+    "calibrationStatus",
+    "chatTemplateDigest",
+    "cleanupEvidence",
+    "comparisonWinner",
+    "consumedCorpusPlanDigest",
+    "consumedInferencePlanDigest",
+    "consumedRetryPlanDigest",
+    "corpusDigest",
+    "dynamicLinkStatus",
+    "failureAuthority",
+    "failureEvidence",
+    "identityDigest",
+    "installationAuthorized",
+    "measurementCompleted",
+    "measurementPerformed",
+    "memoryEvidence",
+    "modelSessionCreated",
+    "outputLimitStatus",
+    "planDigest",
+    "preflightStatus",
+    "priorPlanDigest",
+    "productionReady",
+    "profileId",
+    "promptTemplateDigest",
+    "realModelExecuted",
+    "recordKind",
+    "replacementPlanDigest",
+    "responseSchemaDigest",
+    "resultRootClass",
+    "resultRootValidated",
+    "runInvoked",
+    "runs",
+    "runtimeArchiveSha256",
+    "runtimeLibrarySha256",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "stderrTruncated",
+    "stdoutTruncated",
+    "syntheticRenderedDigest",
+    "systematicThreshold",
+    "templateStatus",
+    "timestamp",
+    "tokenizerDigest",
+    "track10AuthorizationDigest",
+    "track10ReviewDigest"
+  ],
+  "properties": {
+    "artifactIdentity": { "enum": ["failed", "matched", "not-checked"] },
+    "calibrationStatus": { "const": "not-approved" },
+    "chatTemplateDigest": {
+      "const": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176"
+    },
+    "cleanupEvidence": { "const": "not-observed" },
+    "comparisonWinner": { "const": null },
+    "consumedCorpusPlanDigest": {
+      "const": "6c4a9e6c64a3afe3c1cbb36d19985880beb067fdb9b5634752e8c4d1482560f1"
+    },
+    "consumedInferencePlanDigest": {
+      "const": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "corpusDigest": {
+      "const": "49fe79544a26de429afe865fbd2666828bf26a6da30efe6d87f3b0fdfbd0989c"
+    },
+    "dynamicLinkStatus": { "enum": ["failed", "not-executed", "passed", "unavailable"] },
+    "failureAuthority": { "const": null },
+    "failureEvidence": {
+      "enum": ["compatibility-failure", "not-executed", "precheck-failed", "preflight"]
+    },
+    "identityDigest": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+    "installationAuthorized": { "const": false },
+    "measurementCompleted": { "const": false },
+    "measurementPerformed": { "const": false },
+    "memoryEvidence": { "const": "not-observed" },
+    "modelSessionCreated": { "const": false },
+    "outputLimitStatus": { "const": "not-retained" },
+    "planDigest": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+    "preflightStatus": { "enum": ["failed", "not-executed", "passed"] },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "productionReady": { "const": false },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "promptTemplateDigest": {
+      "const": "62774d0f8b65c959c5b038911af4293d3d774aae3933f0d7a24064691685250a"
+    },
+    "realModelExecuted": { "const": false },
+    "recordKind": { "const": "preflight" },
+    "replacementPlanDigest": { "const": "not-issued" },
+    "responseSchemaDigest": {
+      "const": "15955301d2cd0e2f835b851e19d7f48a2664eb9df6f1f7f99d658926e8b46b91"
+    },
+    "resultRootClass": { "const": "schema-diagnostic-result" },
+    "resultRootValidated": { "type": "boolean" },
+    "runInvoked": { "const": false },
+    "runs": {
+      "const": [
+        {
+          "caseId": "case-ground-001",
+          "category": "grounding-citation",
+          "repetition": 1,
+          "runId": "case-ground-001-r1"
+        },
+        {
+          "caseId": "case-refuse-001",
+          "category": "insufficient-evidence-refusal",
+          "repetition": 1,
+          "runId": "case-refuse-001-r1"
+        },
+        {
+          "caseId": "case-inject-001",
+          "category": "prompt-injection",
+          "repetition": 1,
+          "runId": "case-inject-001-r1"
+        },
+        {
+          "caseId": "case-tenant-001",
+          "category": "cross-tenant-negative-control",
+          "repetition": 1,
+          "runId": "case-tenant-001-r1"
+        },
+        {
+          "caseId": "case-contra-001",
+          "category": "contradiction",
+          "repetition": 1,
+          "runId": "case-contra-001-r1"
+        },
+        {
+          "caseId": "case-stale-001",
+          "category": "stale-unavailable-incomparable",
+          "repetition": 1,
+          "runId": "case-stale-001-r1"
+        }
+      ]
+    },
+    "runtimeArchiveSha256": {
+      "const": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9"
+    },
+    "runtimeLibrarySha256": {
+      "const": "a96f132e5eb5ca04e23a7d2fc1078fb95aa591e8d71d0f237702ece3a1e0f4ea"
+    },
+    "schemaVersion": { "const": "1.0.0" },
+    "selectionOutcome": { "const": "no-selection" },
+    "sessionId": { "const": "intelligence-track-10a" },
+    "stderrTruncated": { "const": false },
+    "stdoutTruncated": { "const": false },
+    "syntheticRenderedDigest": {
+      "const": "5c61ee0b595fa4c5b295feb233b312c38b779f7840f3f39c82aef51da9061e5d"
+    },
+    "systematicThreshold": {
+      "additionalProperties": false,
+      "properties": {
+        "countedAuthority": { "const": "candidate-output" },
+        "minimumDistinctCategories": { "const": 3 },
+        "minimumQualifyingFailures": { "const": 4 },
+        "name": { "const": "systematic-schema-failure" },
+        "requireAdapterInnerFieldMutation": { "const": false },
+        "requireBlockingInfrastructure": { "const": false },
+        "requireExtractionAuthority": { "const": true },
+        "requireIntendedSchema": { "const": true },
+        "requireJsonParseAuthority": { "const": true },
+        "requireOutputLimitExceeded": { "const": false },
+        "requireRawOutputRetained": { "const": true },
+        "requireTruncated": { "const": false },
+        "requiredCompletedRuns": { "const": 6 }
+      },
+      "required": [
+        "countedAuthority",
+        "minimumDistinctCategories",
+        "minimumQualifyingFailures",
+        "name",
+        "requireAdapterInnerFieldMutation",
+        "requireBlockingInfrastructure",
+        "requireExtractionAuthority",
+        "requireIntendedSchema",
+        "requireJsonParseAuthority",
+        "requireOutputLimitExceeded",
+        "requireRawOutputRetained",
+        "requireTruncated",
+        "requiredCompletedRuns"
+      ],
+      "type": "object"
+    },
+    "templateStatus": { "enum": ["failed", "not-executed", "supported"] },
+    "timestamp": {
+      "pattern": "^(not-executed|[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z)$",
+      "type": "string"
+    },
+    "tokenizerDigest": {
+      "const": "0a1f2cb9fc2769030ca1f4207e81c1af493319373d41b8d3cf5be53860c13760"
+    },
+    "track10AuthorizationDigest": {
+      "const": "36478fd164229829eb159d7da42977f8e9a7d1e01e34afccbd63f1d18ce5b98b"
+    },
+    "track10ReviewDigest": {
+      "const": "b609cb2eb63ddfc998ec95757ea2423f033f876657b8ce0ed7ce4e5702638a28"
+    }
+  }
+}

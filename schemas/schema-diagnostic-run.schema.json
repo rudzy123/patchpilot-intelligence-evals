@@ -1,0 +1,376 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:schema-diagnostic-run:v1",
+  "title": "One Track 10A diagnostic run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "adapterFallback",
+    "adapterInnerFieldComparison",
+    "adapterInnerFieldMutation",
+    "adapterTruncated",
+    "addressSpaceBytes",
+    "blockingInfrastructureExplanation",
+    "blockingSecurityExplanation",
+    "calibrationStatus",
+    "caseId",
+    "category",
+    "cgroupCurrentBytes",
+    "cgroupPeakBytes",
+    "chatTemplateDigest",
+    "childState",
+    "cleanupStatus",
+    "comparisonWinner",
+    "consumedCorpusPlanDigest",
+    "consumedInferencePlanDigest",
+    "consumedRetryPlanDigest",
+    "corpusDigest",
+    "cpuSeconds",
+    "decoding",
+    "evidenceIdFindings",
+    "exitClassification",
+    "extractedBytes",
+    "extractedDigest",
+    "extractionAuthorityEstablished",
+    "extractionStatus",
+    "failureAuthority",
+    "generationBudgetSeconds",
+    "generationObserved",
+    "generationSeconds",
+    "identityDigest",
+    "inputDigest",
+    "installationAuthorized",
+    "intendedResponseSchemaApplied",
+    "jsonParseAuthorityEstablished",
+    "loadSeconds",
+    "maxNewTokens",
+    "measurementCompleted",
+    "measurementPerformed",
+    "memoryMaxBytes",
+    "memorySwapMaxBytes",
+    "missingRequired",
+    "modelSessionCreated",
+    "networkResult",
+    "oomEvents",
+    "outputLimitExceeded",
+    "outputLimitStatus",
+    "parseStatus",
+    "planDigest",
+    "postExitScope",
+    "priorPlanDigest",
+    "processCleanup",
+    "processRssBytes",
+    "processTreeRssBytes",
+    "productionReady",
+    "profileId",
+    "promptTemplateDigest",
+    "qualifyingCandidateOutputSchemaFailure",
+    "rawOutputRetained",
+    "realModelExecuted",
+    "recordKind",
+    "repetition",
+    "replacementPlanDigest",
+    "repositoryCommit",
+    "responseFailureAuthority",
+    "responseSchemaDigest",
+    "resultRootClass",
+    "runId",
+    "runInvoked",
+    "runtimeArchiveSha256",
+    "runtimeLibrarySha256",
+    "schemaStatus",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "stderrBytes",
+    "stderrDigest",
+    "stderrLimitBytes",
+    "stderrTruncated",
+    "stdoutBytes",
+    "stdoutDigest",
+    "stdoutLimitBytes",
+    "stdoutTruncated",
+    "stopCause",
+    "syntheticRenderedDigest",
+    "tasksMax",
+    "telemetryStatus",
+    "thresholdEligibility",
+    "timestamp",
+    "tokenizerDigest",
+    "track10AuthorizationDigest",
+    "track10ReviewDigest",
+    "trailingBytes",
+    "truncated",
+    "unexpectedFields",
+    "utf8",
+    "virtualAddressBytes",
+    "wallClockSeconds",
+    "wallSeconds"
+  ],
+  "properties": {
+    "adapterFallback": { "type": "boolean" },
+    "adapterInnerFieldComparison": {
+      "enum": ["matched", "mutated", "not-performed", "unresolved"]
+    },
+    "adapterInnerFieldMutation": { "type": ["boolean", "null"] },
+    "adapterTruncated": { "type": "boolean" },
+    "addressSpaceBytes": { "const": 25769803776 },
+    "blockingInfrastructureExplanation": { "type": "boolean" },
+    "blockingSecurityExplanation": { "type": "boolean" },
+    "calibrationStatus": { "const": "not-approved" },
+    "caseId": {
+      "pattern": "^(not-executed|case-(contra|ground|inject|refuse|stale|tenant)-[0-9]{3})$",
+      "type": "string"
+    },
+    "category": {
+      "enum": [
+        "not-executed",
+        "grounding-citation",
+        "insufficient-evidence-refusal",
+        "prompt-injection",
+        "cross-tenant-negative-control",
+        "contradiction",
+        "stale-unavailable-incomparable"
+      ]
+    },
+    "cgroupCurrentBytes": { "type": ["integer", "null"], "minimum": 0 },
+    "cgroupPeakBytes": { "type": ["integer", "null"], "minimum": 0 },
+    "chatTemplateDigest": {
+      "const": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176"
+    },
+    "childState": { "enum": ["active", "exited", "not-observed"] },
+    "cleanupStatus": { "enum": ["failed", "not-performed", "reaped"] },
+    "comparisonWinner": { "const": null },
+    "consumedCorpusPlanDigest": {
+      "const": "6c4a9e6c64a3afe3c1cbb36d19985880beb067fdb9b5634752e8c4d1482560f1"
+    },
+    "consumedInferencePlanDigest": {
+      "const": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "corpusDigest": {
+      "const": "49fe79544a26de429afe865fbd2666828bf26a6da30efe6d87f3b0fdfbd0989c"
+    },
+    "cpuSeconds": { "const": 600 },
+    "decoding": {
+      "additionalProperties": false,
+      "properties": {
+        "method": { "const": "greedy-argmax" },
+        "repetitionPenalty": { "const": 1 },
+        "seed": { "const": 0 },
+        "seedControl": { "const": "unused" },
+        "seedSupport": { "const": false },
+        "temperature": { "const": 0 },
+        "topK": { "const": 1 },
+        "topP": { "const": 1 }
+      },
+      "required": [
+        "method",
+        "repetitionPenalty",
+        "seed",
+        "seedControl",
+        "seedSupport",
+        "temperature",
+        "topK",
+        "topP"
+      ],
+      "type": "object"
+    },
+    "evidenceIdFindings": {
+      "items": { "maxLength": 120, "minLength": 1, "type": "string" },
+      "maxItems": 40,
+      "type": "array"
+    },
+    "exitClassification": {
+      "enum": [
+        "cleanup-failure",
+        "excessive-output",
+        "inference-failure",
+        "isolation-failure",
+        "malformed-response",
+        "memory-ceiling",
+        "model-load-failure",
+        "network-violation",
+        "nonzero-exit",
+        "not-executed",
+        "oom",
+        "runtime-startup-failure",
+        "schema-failure",
+        "success",
+        "telemetry-unresolved",
+        "timeout",
+        "tokenizer-failure",
+        "unclassified-launch"
+      ]
+    },
+    "extractedBytes": { "maximum": 65536, "minimum": 0, "type": "integer" },
+    "extractedDigest": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+    "extractionAuthorityEstablished": { "type": "boolean" },
+    "extractionStatus": {
+      "enum": [
+        "empty",
+        "encoding-failure",
+        "extracted",
+        "malformed-output",
+        "multiple-outputs",
+        "not-performed"
+      ]
+    },
+    "failureAuthority": {
+      "enum": [
+        null,
+        "adapter",
+        "candidate-output",
+        "evaluator",
+        "measurement-infrastructure",
+        "protocol",
+        "security-boundary",
+        "unresolved"
+      ]
+    },
+    "generationBudgetSeconds": { "const": 15 },
+    "generationObserved": { "type": "boolean" },
+    "generationSeconds": { "type": ["number", "null"], "minimum": 0 },
+    "identityDigest": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+    "inputDigest": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+    "installationAuthorized": { "const": false },
+    "intendedResponseSchemaApplied": { "type": "boolean" },
+    "jsonParseAuthorityEstablished": { "type": "boolean" },
+    "loadSeconds": { "type": ["number", "null"], "minimum": 0 },
+    "maxNewTokens": { "const": 256 },
+    "measurementCompleted": { "type": "boolean" },
+    "measurementPerformed": { "type": "boolean" },
+    "memoryMaxBytes": { "const": 12884901888 },
+    "memorySwapMaxBytes": { "const": 0 },
+    "missingRequired": {
+      "items": { "maxLength": 120, "minLength": 1, "type": "string" },
+      "maxItems": 40,
+      "type": "array"
+    },
+    "modelSessionCreated": { "type": "boolean" },
+    "networkResult": { "enum": ["denied", "failed", "not-performed"] },
+    "oomEvents": { "type": ["integer", "null"], "minimum": 0 },
+    "outputLimitExceeded": { "type": "boolean" },
+    "outputLimitStatus": {
+      "enum": ["not-retained", "stderr-limit-exceeded", "stdout-limit-exceeded", "within-limit"]
+    },
+    "parseStatus": { "enum": ["empty", "malformed-json", "not-object", "not-performed", "parsed"] },
+    "planDigest": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+    "postExitScope": { "enum": ["not-observed", "removed", "retained"] },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "processCleanup": { "enum": ["failed", "not-performed", "reaped"] },
+    "processRssBytes": { "type": ["integer", "null"], "minimum": 0 },
+    "processTreeRssBytes": { "type": ["integer", "null"], "minimum": 0 },
+    "productionReady": { "const": false },
+    "profileId": { "const": "linux-bwrap-systemd-v1" },
+    "promptTemplateDigest": {
+      "const": "62774d0f8b65c959c5b038911af4293d3d774aae3933f0d7a24064691685250a"
+    },
+    "qualifyingCandidateOutputSchemaFailure": { "type": "boolean" },
+    "rawOutputRetained": { "type": "boolean" },
+    "realModelExecuted": { "type": "boolean" },
+    "recordKind": { "enum": ["run", "unclassified-launch"] },
+    "repetition": { "const": 1 },
+    "replacementPlanDigest": { "const": "not-issued" },
+    "repositoryCommit": {
+      "pattern": "^(not-executed|unknown|[0-9a-f]{40})$",
+      "type": "string"
+    },
+    "responseFailureAuthority": {
+      "enum": [
+        null,
+        "adapter",
+        "candidate-output",
+        "evaluator",
+        "measurement-infrastructure",
+        "protocol",
+        "security-boundary",
+        "unresolved"
+      ]
+    },
+    "responseSchemaDigest": {
+      "const": "15955301d2cd0e2f835b851e19d7f48a2664eb9df6f1f7f99d658926e8b46b91"
+    },
+    "resultRootClass": { "const": "schema-diagnostic-result" },
+    "runId": {
+      "pattern": "^(not-executed|case-(contra|ground|inject|refuse|stale|tenant)-[0-9]{3}-r1)$",
+      "type": "string"
+    },
+    "runInvoked": { "type": "boolean" },
+    "runtimeArchiveSha256": {
+      "const": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9"
+    },
+    "runtimeLibrarySha256": {
+      "const": "a96f132e5eb5ca04e23a7d2fc1078fb95aa591e8d71d0f237702ece3a1e0f4ea"
+    },
+    "schemaStatus": { "enum": ["invalid", "not-performed", "valid"] },
+    "schemaVersion": { "const": "1.0.0" },
+    "selectionOutcome": { "const": "no-selection" },
+    "sessionId": { "const": "intelligence-track-10a" },
+    "stderrBytes": { "maximum": 16384, "minimum": 0, "type": "integer" },
+    "stderrDigest": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+    "stderrLimitBytes": { "const": 16384 },
+    "stderrTruncated": { "type": "boolean" },
+    "stdoutBytes": { "maximum": 65536, "minimum": 0, "type": "integer" },
+    "stdoutDigest": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+    "stdoutLimitBytes": { "const": 65536 },
+    "stdoutTruncated": { "type": "boolean" },
+    "stopCause": {
+      "enum": [
+        null,
+        "cleanup-failure",
+        "excessive-output",
+        "inference-failure",
+        "isolation-failure",
+        "malformed-response",
+        "memory-ceiling",
+        "model-load-failure",
+        "network-violation",
+        "nonzero-exit",
+        "oom",
+        "runtime-startup-failure",
+        "schema-failure",
+        "telemetry-unresolved",
+        "timeout",
+        "tokenizer-failure",
+        "unclassified-launch"
+      ]
+    },
+    "syntheticRenderedDigest": {
+      "const": "5c61ee0b595fa4c5b295feb233b312c38b779f7840f3f39c82aef51da9061e5d"
+    },
+    "tasksMax": { "const": 32 },
+    "telemetryStatus": {
+      "enum": ["complete", "exceeded", "not-executed", "not-observed", "oom", "unresolved"]
+    },
+    "thresholdEligibility": { "enum": ["not-executed", "not-qualifying", "qualifying"] },
+    "timestamp": {
+      "pattern": "^(not-executed|[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z)$",
+      "type": "string"
+    },
+    "tokenizerDigest": {
+      "const": "0a1f2cb9fc2769030ca1f4207e81c1af493319373d41b8d3cf5be53860c13760"
+    },
+    "track10AuthorizationDigest": {
+      "const": "36478fd164229829eb159d7da42977f8e9a7d1e01e34afccbd63f1d18ce5b98b"
+    },
+    "track10ReviewDigest": {
+      "const": "b609cb2eb63ddfc998ec95757ea2423f033f876657b8ce0ed7ce4e5702638a28"
+    },
+    "trailingBytes": { "maximum": 65536, "minimum": 0, "type": "integer" },
+    "truncated": { "type": "boolean" },
+    "unexpectedFields": {
+      "items": { "maxLength": 120, "minLength": 1, "type": "string" },
+      "maxItems": 40,
+      "type": "array"
+    },
+    "utf8": { "type": "boolean" },
+    "virtualAddressBytes": { "type": ["integer", "null"], "minimum": 0 },
+    "wallClockSeconds": { "const": 900 },
+    "wallSeconds": { "type": ["number", "null"], "minimum": 0 }
+  }
+}

@@ -152,6 +152,14 @@ _DOCUMENTS = (
     "docs/operations/future-schema-diagnostic-prerequisites.md",
     "docs/provenance/track10-candidate-disposition-review.md",
     "docs/provenance/track10-implementation-review.md",
+    "docs/architecture/six-run-schema-diagnostic.md",
+    "docs/architecture/diagnostic-case-selection.md",
+    "docs/architecture/systematic-schema-failure.md",
+    "docs/operations/schema-diagnostic-runbook.md",
+    "docs/operations/schema-diagnostic-recovery.md",
+    "docs/operations/schema-diagnostic-retention.md",
+    "docs/provenance/track10a-schema-diagnostic-evidence.md",
+    "docs/provenance/track10a-implementation-review.md",
 )
 
 
@@ -351,6 +359,14 @@ def test_validation_workflow_is_pinned_and_has_no_secrets() -> None:
         "uv run patchpilot-evals investment-stop-decision-validation",
         "uv run patchpilot-evals track10-candidate-disposition-validation",
         "uv run patchpilot-evals track10-implementation-review-validation",
+        "uv run patchpilot-evals schema-diagnostic-plan-validation",
+        "uv run patchpilot-evals schema-diagnostic-approval-validation",
+        "uv run patchpilot-evals schema-diagnostic-preflight-validation",
+        "uv run patchpilot-evals schema-diagnostic-run-validation",
+        "uv run patchpilot-evals schema-diagnostic-summary-validation",
+        "uv run patchpilot-evals schema-diagnostic-closeout-validation",
+        "uv run patchpilot-evals track11-readiness-validation",
+        "uv run patchpilot-evals track10a-implementation-review-validation",
         "uv run patchpilot-evals workflow-policy-validation",
         "uv run patchpilot-evals dependency-architecture-policy-validation",
     ):
@@ -520,6 +536,16 @@ def test_help_lists_commands() -> None:
     assert "investment-stop-decision-validation" in text
     assert "track10-candidate-disposition-validation" in text
     assert "track10-implementation-review-validation" in text
+    assert "schema-diagnostic-plan-validation" in text
+    assert "schema-diagnostic-approval-validation" in text
+    assert "schema-diagnostic-preflight-validation" in text
+    assert "schema-diagnostic-run-validation" in text
+    assert "schema-diagnostic-summary-validation" in text
+    assert "schema-diagnostic-closeout-validation" in text
+    assert "track11-readiness-validation" in text
+    assert "track10a-implementation-review-validation" in text
+    assert "schema-diagnostic-preflight" in text
+    assert "schema-diagnostic-execute" in text
     assert "corpus-continuation-preflight" in text
     assert "corpus-continuation-execute" in text
     assert "inference-retry-preflight" in text

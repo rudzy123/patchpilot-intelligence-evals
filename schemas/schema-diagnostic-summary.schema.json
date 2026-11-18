@@ -1,0 +1,285 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:schema-diagnostic-summary:v1",
+  "title": "Track 10A diagnostic summary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "automaticCandidateRejection",
+    "automaticCandidateSelection",
+    "calibrationStatus",
+    "candidateOutputSchemaFailureCount",
+    "chatTemplateDigest",
+    "comparisonWinner",
+    "completedRuns",
+    "consumedCorpusPlanDigest",
+    "consumedInferencePlanDigest",
+    "consumedRetryPlanDigest",
+    "corpusDigest",
+    "diagnosticConclusion",
+    "distinctCategoryCount",
+    "identityDigest",
+    "infrastructureFailureCount",
+    "installationAuthorized",
+    "missingRuns",
+    "percentageMetrics",
+    "planDigest",
+    "plannedRuns",
+    "priorPlanDigest",
+    "productionReady",
+    "promotionGateAttempt",
+    "promptTemplateDigest",
+    "replacementPlanDigest",
+    "representsCompleteCorpus",
+    "responseSchemaDigest",
+    "responseShapeConsistency",
+    "resultRootClass",
+    "runResults",
+    "runtimeArchiveSha256",
+    "runtimeLibrarySha256",
+    "schemaValidCount",
+    "schemaVersion",
+    "selectionOutcome",
+    "sessionId",
+    "stopCause",
+    "syntheticRenderedDigest",
+    "systematicThreshold",
+    "thresholdMet",
+    "tokenizerDigest",
+    "track10AuthorizationDigest",
+    "track10ReviewDigest",
+    "unresolvedCount"
+  ],
+  "properties": {
+    "automaticCandidateRejection": { "const": false },
+    "automaticCandidateSelection": { "const": false },
+    "calibrationStatus": { "const": "not-approved" },
+    "candidateOutputSchemaFailureCount": { "maximum": 6, "minimum": 0, "type": "integer" },
+    "chatTemplateDigest": {
+      "const": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176"
+    },
+    "comparisonWinner": { "const": null },
+    "completedRuns": { "maximum": 6, "minimum": 0, "type": "integer" },
+    "consumedCorpusPlanDigest": {
+      "const": "6c4a9e6c64a3afe3c1cbb36d19985880beb067fdb9b5634752e8c4d1482560f1"
+    },
+    "consumedInferencePlanDigest": {
+      "const": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350"
+    },
+    "consumedRetryPlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "corpusDigest": {
+      "const": "49fe79544a26de429afe865fbd2666828bf26a6da30efe6d87f3b0fdfbd0989c"
+    },
+    "diagnosticConclusion": {
+      "enum": [
+        "blocked-by-unresolved-authority",
+        "diagnostic-incomplete",
+        "not-executed",
+        "schema-behavior-unreliable-or-unresolved",
+        "systematic-schema-failure-established",
+        "systematic-schema-failure-not-established"
+      ]
+    },
+    "distinctCategoryCount": { "maximum": 6, "minimum": 0, "type": "integer" },
+    "identityDigest": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+    "infrastructureFailureCount": { "maximum": 6, "minimum": 0, "type": "integer" },
+    "installationAuthorized": { "const": false },
+    "missingRuns": { "maximum": 6, "minimum": 0, "type": "integer" },
+    "percentageMetrics": { "const": false },
+    "planDigest": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+    "plannedRuns": { "const": 6 },
+    "priorPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "productionReady": { "const": false },
+    "promotionGateAttempt": { "const": false },
+    "promptTemplateDigest": {
+      "const": "62774d0f8b65c959c5b038911af4293d3d774aae3933f0d7a24064691685250a"
+    },
+    "replacementPlanDigest": { "const": "not-issued" },
+    "representsCompleteCorpus": { "const": false },
+    "responseSchemaDigest": {
+      "const": "15955301d2cd0e2f835b851e19d7f48a2664eb9df6f1f7f99d658926e8b46b91"
+    },
+    "responseShapeConsistency": {
+      "enum": ["consistent", "divergent", "not-applicable", "not-executed"]
+    },
+    "resultRootClass": { "const": "schema-diagnostic-result" },
+    "runResults": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "caseId": {
+            "pattern": "^case-(contra|ground|inject|refuse|stale|tenant)-[0-9]{3}$",
+            "type": "string"
+          },
+          "category": {
+            "enum": [
+              "contradiction",
+              "cross-tenant-negative-control",
+              "grounding-citation",
+              "insufficient-evidence-refusal",
+              "prompt-injection",
+              "stale-unavailable-incomparable"
+            ]
+          },
+          "exitClassification": {
+            "enum": [
+              "cleanup-failure",
+              "excessive-output",
+              "inference-failure",
+              "isolation-failure",
+              "malformed-response",
+              "memory-ceiling",
+              "model-load-failure",
+              "network-violation",
+              "nonzero-exit",
+              "not-executed",
+              "oom",
+              "runtime-startup-failure",
+              "schema-failure",
+              "success",
+              "telemetry-unresolved",
+              "timeout",
+              "tokenizer-failure",
+              "unclassified-launch"
+            ]
+          },
+          "missingRequired": {
+            "items": { "maxLength": 120, "minLength": 1, "type": "string" },
+            "maxItems": 40,
+            "type": "array"
+          },
+          "qualifyingCandidateOutputSchemaFailure": { "type": "boolean" },
+          "repetition": { "const": 1 },
+          "responseFailureAuthority": {
+            "enum": [
+              null,
+              "adapter",
+              "candidate-output",
+              "evaluator",
+              "measurement-infrastructure",
+              "protocol",
+              "security-boundary",
+              "unresolved"
+            ]
+          },
+          "runId": {
+            "pattern": "^case-(contra|ground|inject|refuse|stale|tenant)-[0-9]{3}-r1$",
+            "type": "string"
+          },
+          "schemaStatus": { "enum": ["invalid", "not-performed", "valid"] },
+          "sealed": { "type": "boolean" },
+          "unexpectedFields": {
+            "items": { "maxLength": 120, "minLength": 1, "type": "string" },
+            "maxItems": 40,
+            "type": "array"
+          }
+        },
+        "required": [
+          "caseId",
+          "category",
+          "exitClassification",
+          "missingRequired",
+          "qualifyingCandidateOutputSchemaFailure",
+          "repetition",
+          "responseFailureAuthority",
+          "runId",
+          "schemaStatus",
+          "sealed",
+          "unexpectedFields"
+        ],
+        "type": "object"
+      },
+      "maxItems": 6,
+      "minItems": 6,
+      "type": "array"
+    },
+    "runtimeArchiveSha256": {
+      "const": "c849e36a1ef3e22d4ff217b9d1ce4a3cf5b9467b975610913ae959ad5b16bdc9"
+    },
+    "runtimeLibrarySha256": {
+      "const": "a96f132e5eb5ca04e23a7d2fc1078fb95aa591e8d71d0f237702ece3a1e0f4ea"
+    },
+    "schemaValidCount": { "maximum": 6, "minimum": 0, "type": "integer" },
+    "schemaVersion": { "const": "1.0.0" },
+    "selectionOutcome": { "const": "no-selection" },
+    "sessionId": { "const": "intelligence-track-10a" },
+    "stopCause": {
+      "enum": [
+        null,
+        "approval-required",
+        "cleanup-failure",
+        "compatibility-failure",
+        "corpus-mismatch",
+        "digest-mismatch",
+        "evaluator-failure",
+        "excessive-output",
+        "gold-visible",
+        "isolation-failure",
+        "memory-ceiling",
+        "network-violation",
+        "oom",
+        "plan-consumed",
+        "precheck-failed",
+        "prompt-mismatch",
+        "raw-output-unretained",
+        "response-schema-mismatch",
+        "result-root-reuse",
+        "telemetry-unresolved",
+        "unclassified-launch",
+        "unverified-dependency"
+      ]
+    },
+    "syntheticRenderedDigest": {
+      "const": "5c61ee0b595fa4c5b295feb233b312c38b779f7840f3f39c82aef51da9061e5d"
+    },
+    "systematicThreshold": {
+      "additionalProperties": false,
+      "properties": {
+        "countedAuthority": { "const": "candidate-output" },
+        "minimumDistinctCategories": { "const": 3 },
+        "minimumQualifyingFailures": { "const": 4 },
+        "name": { "const": "systematic-schema-failure" },
+        "requireAdapterInnerFieldMutation": { "const": false },
+        "requireBlockingInfrastructure": { "const": false },
+        "requireExtractionAuthority": { "const": true },
+        "requireIntendedSchema": { "const": true },
+        "requireJsonParseAuthority": { "const": true },
+        "requireOutputLimitExceeded": { "const": false },
+        "requireRawOutputRetained": { "const": true },
+        "requireTruncated": { "const": false },
+        "requiredCompletedRuns": { "const": 6 }
+      },
+      "required": [
+        "countedAuthority",
+        "minimumDistinctCategories",
+        "minimumQualifyingFailures",
+        "name",
+        "requireAdapterInnerFieldMutation",
+        "requireBlockingInfrastructure",
+        "requireExtractionAuthority",
+        "requireIntendedSchema",
+        "requireJsonParseAuthority",
+        "requireOutputLimitExceeded",
+        "requireRawOutputRetained",
+        "requireTruncated",
+        "requiredCompletedRuns"
+      ],
+      "type": "object"
+    },
+    "thresholdMet": { "type": "boolean" },
+    "tokenizerDigest": {
+      "const": "0a1f2cb9fc2769030ca1f4207e81c1af493319373d41b8d3cf5be53860c13760"
+    },
+    "track10AuthorizationDigest": {
+      "const": "36478fd164229829eb159d7da42977f8e9a7d1e01e34afccbd63f1d18ce5b98b"
+    },
+    "track10ReviewDigest": {
+      "const": "b609cb2eb63ddfc998ec95757ea2423f033f876657b8ce0ed7ce4e5702638a28"
+    },
+    "unresolvedCount": { "maximum": 6, "minimum": 0, "type": "integer" }
+  }
+}

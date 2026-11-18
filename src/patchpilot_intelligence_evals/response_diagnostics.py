@@ -22,7 +22,7 @@ def generation_facts(payload: bytes) -> dict[str, Any]:
         return _absent()
     if not isinstance(loaded, dict):
         return _absent()
-    return {
+    facts = {
         "adapterFallback": bool(loaded.get("adapterFallback")),
         "adapterTruncated": bool(loaded.get("adapterTruncated")),
         "generationObserved": True,
@@ -33,6 +33,10 @@ def generation_facts(payload: bytes) -> dict[str, Any]:
         "trailingBytes": _int(loaded.get("trailingBytes")),
         "utf8": bool(loaded.get("utf8")),
     }
+    names = _field_names(loaded.get("innerFieldNames"))
+    if names is not None:
+        facts["innerFieldNames"] = names
+    return facts
 
 
 def diagnose_response(
@@ -154,3 +158,17 @@ def _unique(values: list[str]) -> list[str]:
 
 def _safe(value: str) -> bool:
     return 0 < len(value) <= 120 and all(char.isalnum() or char in "._/-" for char in value)
+
+
+def _field_names(value: object) -> list[str] | None:
+    """Accept a sorted list of pre-wrap key names. Values are never stored."""
+    if not isinstance(value, list) or len(value) > 40:
+        return None
+    names: list[str] = []
+    for item in value:
+        if not isinstance(item, str) or not item.isidentifier() or len(item) > 64:
+            return None
+        names.append(item)
+    if names != sorted(names) or len(set(names)) != len(names):
+        return None
+    return names
