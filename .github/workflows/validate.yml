@@ -310,6 +310,16 @@ jobs:
           uv run patchpilot-evals track9a-track10-not-ready-validation
           uv run patchpilot-evals track9a-implementation-review-validation
 
+      - name: Validate the Track 10 candidate disposition
+        run: |
+          uv run patchpilot-evals attributed-response-evidence-validation
+          uv run patchpilot-evals schema-invariant-review-validation
+          uv run patchpilot-evals diagnostic-proportionality-validation
+          uv run patchpilot-evals six-run-diagnostic-authorization-validation
+          uv run patchpilot-evals investment-stop-decision-validation
+          uv run patchpilot-evals track10-candidate-disposition-validation
+          uv run patchpilot-evals track10-implementation-review-validation
+
       - name: Validate workflow policy
         run: uv run patchpilot-evals workflow-policy-validation
 

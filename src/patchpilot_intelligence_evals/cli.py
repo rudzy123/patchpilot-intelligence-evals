@@ -212,6 +212,9 @@ from patchpilot_intelligence_evals.track8b_readiness import (
 from patchpilot_intelligence_evals.track9_review_cli import VALIDATION as TRACK9_VALIDATION
 from patchpilot_intelligence_evals.track9_review_cli import handle as handle_track9
 from patchpilot_intelligence_evals.track9_review_cli import register as register_track9
+from patchpilot_intelligence_evals.track10_review_cli import VALIDATION as TRACK10_VALIDATION
+from patchpilot_intelligence_evals.track10_review_cli import handle as handle_track10
+from patchpilot_intelligence_evals.track10_review_cli import register as register_track10
 from patchpilot_intelligence_evals.verification_seal import SealError, load_seal_template
 from patchpilot_intelligence_evals.workflow_policy import (
     WorkflowPolicyError,
@@ -337,6 +340,7 @@ def _parser() -> argparse.ArgumentParser:
     register_inference(commands)
     register_track9(commands)
     register_continuation(commands)
+    register_track10(commands)
     return parser
 
 
@@ -409,6 +413,8 @@ def main(argv: list[str] | None = None) -> int:
                 return _summary(handle_inference(args.command, args))
             if args.command in TRACK9_VALIDATION:
                 return _summary(handle_track9(args.command, args))
+            if args.command in TRACK10_VALIDATION:
+                return _summary(handle_track10(args.command, args))
             if args.command in CONTINUATION_VALIDATION:
                 return _summary(handle_continuation(args.command, args))
             if args.command == "corpus-validation":

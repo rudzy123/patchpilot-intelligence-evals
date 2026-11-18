@@ -1,0 +1,341 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patchpilot-intelligence-evals:schema:investment-stop-decision:v1",
+  "title": "Investment stop decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "anotherInfrastructureFailureConsequence",
+    "authoritiesConflated",
+    "behavioralConclusion",
+    "calibrationStatus",
+    "candidateAttemptId",
+    "candidateDisposition",
+    "candidateFailureIndependentlyProven",
+    "candidateMetricsProduced",
+    "candidateModelId",
+    "candidatePrecision",
+    "candidateRole",
+    "chatTemplateDigest",
+    "comparisonWinner",
+    "completedRuns",
+    "containsExecutionInstructions",
+    "corpusDigest",
+    "currentExecutionAuthority",
+    "decisionAlternatives",
+    "diagnosticIdentityDigest",
+    "evidenceCompleteness",
+    "executionStopAuthority",
+    "executionStopCause",
+    "expectedSixRunEvidenceValue",
+    "extractedBytes",
+    "extractedDigest",
+    "forensicsIdentityDigest",
+    "fullCorpusResourceCost",
+    "futurePlanDigest",
+    "historicalPlansReusable",
+    "identityDigest",
+    "infrastructureMaturity",
+    "installationAuthorized",
+    "memoryConclusion",
+    "memoryHeadroom",
+    "memoryIsRejectionBasis",
+    "memoryReviewDigest",
+    "memorySourceDigest",
+    "minimumHeadroomBytes",
+    "missingRuns",
+    "notExecutedReadinessDigest",
+    "operatorApproval",
+    "opportunityCostOfStopping",
+    "outputLimitStatus",
+    "parseStatus",
+    "plannedCorpusRuns",
+    "productionReady",
+    "promptIdentity",
+    "promptTemplateDigest",
+    "promptTemplateId",
+    "recommendation",
+    "replacementPlanDigest",
+    "responseFailureAuthority",
+    "responseSchemaDigest",
+    "responseSchemaVersion",
+    "resultRootState",
+    "runId",
+    "runtimeAttemptId",
+    "runtimeVersionTag",
+    "schemaStatus",
+    "schemaVersion",
+    "selectedAlternative",
+    "selectionOutcome",
+    "sessionId",
+    "sixRunResourceCost",
+    "stdoutBytes",
+    "stdoutDigest",
+    "stdoutTruncated",
+    "stopIsQualityVerdict",
+    "stopSelected",
+    "stoppedAttemptDigest",
+    "stoppedReadinessDigest",
+    "track10Disposition",
+    "track8bPlanDigest",
+    "track8bR1PlanDigest",
+    "track8bR2PlanDigest",
+    "track9aPlanDigest"
+  ],
+  "properties": {
+    "anotherInfrastructureFailureConsequence": {
+      "const": "little-new-candidate-evidence"
+    },
+    "authoritiesConflated": {
+      "const": false
+    },
+    "behavioralConclusion": {
+      "const": "partial-inconclusive"
+    },
+    "calibrationStatus": {
+      "const": "not-approved"
+    },
+    "candidateAttemptId": {
+      "const": "cd-20b7ceee37a62cba"
+    },
+    "candidateDisposition": {
+      "enum": [
+        "candidate-rejected",
+        "evaluation-incomplete-six-run-diagnostic-authorized-in-principle",
+        "full-corpus-continuation-authorized-in-principle",
+        "further-investment-stopped",
+        "blocked-by-unresolved-authority"
+      ]
+    },
+    "candidateFailureIndependentlyProven": {
+      "const": false
+    },
+    "candidateMetricsProduced": {
+      "const": false
+    },
+    "candidateModelId": {
+      "const": "LiquidAI/LFM2.5-1.2B-Instruct"
+    },
+    "candidatePrecision": {
+      "const": "FP32"
+    },
+    "candidateRole": {
+      "const": "non-authoritative-explanation-assistant"
+    },
+    "chatTemplateDigest": {
+      "const": "f05bf4b967dc993bdc7a2fe6e43759ee218eb0eb340d68b063e1c4f8ad148176"
+    },
+    "comparisonWinner": {
+      "const": null
+    },
+    "completedRuns": {
+      "const": 1
+    },
+    "containsExecutionInstructions": {
+      "const": false
+    },
+    "corpusDigest": {
+      "const": "49fe79544a26de429afe865fbd2666828bf26a6da30efe6d87f3b0fdfbd0989c"
+    },
+    "currentExecutionAuthority": {
+      "const": false
+    },
+    "decisionAlternatives": {
+      "const": [
+        "reject-now",
+        "six-run-diagnostic",
+        "full-72-run-continuation",
+        "protocol-forensics",
+        "stop-investment"
+      ]
+    },
+    "diagnosticIdentityDigest": {
+      "const": "f1aaa2a2288d04de90d5777e8fc5e87c1c74e8373d95f9a3b79202480233b6f9"
+    },
+    "evidenceCompleteness": {
+      "const": "single-run-attributed"
+    },
+    "executionStopAuthority": {
+      "const": "measurement-infrastructure"
+    },
+    "executionStopCause": {
+      "const": "telemetry-unresolved"
+    },
+    "expectedSixRunEvidenceValue": {
+      "const": "decision-grade-for-schema-behavior"
+    },
+    "extractedBytes": {
+      "const": 264
+    },
+    "extractedDigest": {
+      "const": "8d5acd633059fd19ea765c0ce415bb37d4f53cc02ed848fcf6df490d55ab9d5d"
+    },
+    "forensicsIdentityDigest": {
+      "const": "19786bdcfc186d665ee72e865d55652639da2aae47fb418e0ff46c4aa7e72021"
+    },
+    "fullCorpusResourceCost": {
+      "const": "full-corpus"
+    },
+    "futurePlanDigest": {
+      "const": "not-issued"
+    },
+    "historicalPlansReusable": {
+      "const": false
+    },
+    "identityDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "infrastructureMaturity": {
+      "const": "telemetry-corrected-with-historical-stops"
+    },
+    "installationAuthorized": {
+      "const": false
+    },
+    "memoryConclusion": {
+      "const": "within-ceiling-with-limited-headroom"
+    },
+    "memoryHeadroom": {
+      "const": "limited-ceiling-passed"
+    },
+    "memoryIsRejectionBasis": {
+      "const": false
+    },
+    "memoryReviewDigest": {
+      "const": "47d8dc74f738d043a3fa58c40f936e3c9148ba88c45bb9e2cf1b23c0172796f2"
+    },
+    "memorySourceDigest": {
+      "const": "400b520b6d6c404415143ba8f9dbac31a2788f5d2864622281d213d7b24f328b"
+    },
+    "minimumHeadroomBytes": {
+      "const": 613232640
+    },
+    "missingRuns": {
+      "const": 71
+    },
+    "notExecutedReadinessDigest": {
+      "const": "80a24b19a39312de8dc82a973c7e79024dfdd32571e2662c42bd38724de491e0"
+    },
+    "operatorApproval": {
+      "const": "not-issued"
+    },
+    "opportunityCostOfStopping": {
+      "const": "forgoes-narrow-schema-question"
+    },
+    "outputLimitStatus": {
+      "const": "within-limit"
+    },
+    "parseStatus": {
+      "const": "parsed"
+    },
+    "plannedCorpusRuns": {
+      "const": 72
+    },
+    "productionReady": {
+      "const": false
+    },
+    "promptIdentity": {
+      "const": "candidate-protocol-1.0.0"
+    },
+    "promptTemplateDigest": {
+      "const": "62774d0f8b65c959c5b038911af4293d3d774aae3933f0d7a24064691685250a"
+    },
+    "promptTemplateId": {
+      "const": "finding-explanation-1.0.0"
+    },
+    "recommendation": {
+      "const": "continue-only-six-run-in-principle"
+    },
+    "replacementPlanDigest": {
+      "const": "not-issued"
+    },
+    "responseFailureAuthority": {
+      "const": "candidate-output"
+    },
+    "responseSchemaDigest": {
+      "const": "15955301d2cd0e2f835b851e19d7f48a2664eb9df6f1f7f99d658926e8b46b91"
+    },
+    "responseSchemaVersion": {
+      "const": "1.0.0"
+    },
+    "resultRootState": {
+      "const": "not-created"
+    },
+    "runId": {
+      "const": "case-ground-001-r1"
+    },
+    "runtimeAttemptId": {
+      "const": "rp-c2fe1c88f694fc1e"
+    },
+    "runtimeVersionTag": {
+      "const": "v1.31.1"
+    },
+    "schemaStatus": {
+      "const": "invalid"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "selectedAlternative": {
+      "enum": [
+        "reject-now",
+        "six-run-diagnostic",
+        "full-72-run-continuation",
+        "protocol-forensics",
+        "stop-investment",
+        "none"
+      ]
+    },
+    "selectionOutcome": {
+      "const": "no-selection"
+    },
+    "sessionId": {
+      "const": "intelligence-track-10"
+    },
+    "sixRunResourceCost": {
+      "const": "six-run"
+    },
+    "stdoutBytes": {
+      "const": 542
+    },
+    "stdoutDigest": {
+      "const": "b28e9aa7f5db74d23040d9b3045b5fc927bc2289378bb6bf676e4568ec20b0b9"
+    },
+    "stdoutTruncated": {
+      "const": false
+    },
+    "stopIsQualityVerdict": {
+      "const": false
+    },
+    "stopSelected": {
+      "const": false
+    },
+    "stoppedAttemptDigest": {
+      "const": "9b24636d16d8fbe27a05982f76be39eab109f62fe3e921317efccffdc801d6e9"
+    },
+    "stoppedReadinessDigest": {
+      "const": "03e0795f15a8eac36c72218fc74da36363743aa4a4b4db46187c89e7356b172f"
+    },
+    "track10Disposition": {
+      "enum": [
+        "candidate-rejected",
+        "six-run-diagnostic-authorized-in-principle",
+        "full-corpus-continuation-authorized-in-principle",
+        "further-investment-stopped",
+        "blocked-by-unresolved-authority"
+      ]
+    },
+    "track8bPlanDigest": {
+      "const": "8280ec639abd60edad7d49c1129d691822c17be06d7ef15aa2fcb5425bdbf0a2"
+    },
+    "track8bR1PlanDigest": {
+      "const": "572fc9da2bf5c3d378a56764672617849d317df293fdbc29d85b40e70ae27d2b"
+    },
+    "track8bR2PlanDigest": {
+      "const": "2133054bea8db11822cc65f6ea9c45f1ba1500f1aef67d314fbccca764155350"
+    },
+    "track9aPlanDigest": {
+      "const": "6c4a9e6c64a3afe3c1cbb36d19985880beb067fdb9b5634752e8c4d1482560f1"
+    }
+  }
+}
